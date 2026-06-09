@@ -2,9 +2,9 @@
   <rect x="96" y="96" width="832" height="832" rx="216" fill="#0f141b"/>
   <path d="M512 218c137 0 252 93 286 220" fill="none" stroke="#3278b8" stroke-width="64" stroke-linecap="round"/>
   <path d="M790 356l36 120-122-28" fill="none" stroke="#3278b8" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M512 806c-137 0-252-93-286-220" fill="none" stroke="#18a66a" stroke-width="64" stroke-linecap="round"/>
-  <path d="M234 668l-36-120 122 28" fill="none" stroke="#18a66a" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M512 806c-137 0-252-93-286-220" fill="none" stroke="#3278B8" stroke-width="64" stroke-linecap="round"/>
+  <path d="M234 668l-36-120 122 28" fill="none" stroke="#3278B8" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
   <rect x="280" y="330" width="464" height="364" rx="42" fill="#0a0f15"/>
-  <path d="M352 444l78 68-78 68" fill="none" stroke="#45d18c" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M486 586h166" fill="none" stroke="#d8fff0" stroke-width="42" stroke-linecap="round"/>
+  <path d="M352 444l78 68-78 68" fill="none" stroke="#7BC4FF" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M486 586h166" fill="none" stroke="#D9ECFF" stroke-width="42" stroke-linecap="round"/>
 </svg>

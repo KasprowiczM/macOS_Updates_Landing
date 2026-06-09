@@ -38,7 +38,7 @@ const PHASES = [
   {
     key: 'apply',
     icon: PackageCheck,
-    color: '#18A66A',
+    color: '#3278B8',
     terminal: [
       '  ▸ step 3   update_npm_cli.sh',
       '  ▸ native   Node.js, Bun, npm global CLIs',
@@ -51,7 +51,7 @@ const PHASES = [
   {
     key: 'verify',
     icon: FileCheck,
-    color: '#18A66A',
+    color: '#4AA3FF',
     terminal: [
       '  ▸ step 5   update_internet_apps.sh',
       '  ▸ methods  keystone · github_dmg · msupdate · docker_cli',
@@ -95,13 +95,13 @@ export function UpdatePipeline() {
         className="absolute inset-0 pointer-events-none -z-10 rounded-xl"
         style={{
           background:
-            'radial-gradient(60% 60% at 50% 0%, rgba(24,166,106,0.08), transparent 70%)',
+            'radial-gradient(60% 60% at 50% 0%, rgba(74,163,255,0.10), transparent 70%)',
         }}
         aria-hidden="true"
       />
 
       <SectionReveal>
-        <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-4">
+        <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
           {t('pipeline.eyebrow')}
         </div>
         <h2
@@ -126,7 +126,7 @@ export function UpdatePipeline() {
               <div key={p.key} className="flex items-center shrink-0">
                 <button
                   onClick={() => handlePhaseClick(i)}
-                  className={`relative flex items-center gap-2 px-4 py-3 rounded-md font-mono text-[12px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 border ${
+                  className={`relative flex items-center gap-2 px-4 py-3 rounded-md font-mono text-[12px] font-semibold uppercase tracking-normal transition-all duration-300 border ${
                     isActive
                       ? 'bg-(--bg-inverse) text-(--fg-inverse) border-transparent shadow-lg'
                       : isPast

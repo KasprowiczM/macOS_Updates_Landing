@@ -79,8 +79,8 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(24,166,106,0.045) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(24,166,106,0.045) 1px, transparent 1px)
+            linear-gradient(rgba(50,120,184,0.055) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(50,120,184,0.055) 1px, transparent 1px)
           `,
           backgroundSize: '64px 64px',
         }}
@@ -98,8 +98,8 @@ export function Hero() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="flex items-center gap-2.5 mb-6"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-(--accent-strong) shadow-[0_0_0_4px_rgba(24,166,106,0.18)]" />
-              <span className="font-mono text-[12px] tracking-[0.12em] uppercase text-(--fg-muted)">
+              <span className="w-1.5 h-1.5 rounded-full bg-(--accent-strong) shadow-[0_0_0_4px_rgba(74,163,255,0.18)]" />
+              <span className="font-mono text-[12px] tracking-normal uppercase text-(--fg-muted)">
                 {t('hero.eyebrow')}
               </span>
             </m.div>
@@ -109,7 +109,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-(--fg) font-bold leading-[0.95] tracking-[-0.04em] font-sans mb-0"
+              className="text-(--fg) font-bold leading-[0.95] tracking-normal font-sans mb-0"
               style={{ fontSize: 'clamp(2rem, 4.5vw + 0.5rem, 3.8rem)' }}
             >
               {t('hero.headline1')}{' '}
@@ -156,7 +156,7 @@ export function Hero() {
               className="mt-8 max-w-[560px]"
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint)">
+                <span className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint)">
                   {t('hero.oneLinerLabel')}
                 </span>
               </div>

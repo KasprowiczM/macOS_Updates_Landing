@@ -1,6 +1,6 @@
 /* ============================================================
-   MACOS_CLEANUP LANDING PAGE — Design Tokens + Tailwind v4
-   Ported from macOS Cleanup_Design_System/colors_and_type.css
+   MACOS UPDATES LANDING PAGE — Design Tokens + Tailwind v4
+   Blue update-orbit theme aligned with the product logo.
    ============================================================ */
 
 @import "tailwindcss";
@@ -24,19 +24,19 @@
   --color-paper-25: #F3F6F9;
   --color-paper-0: #F7F9FC;
 
-  --color-mint-700: #0D6F48;
-  --color-mint-600: #128A59;
-  --color-mint-500: #18A66A;
-  --color-mint-400: #35C987;
-  --color-mint-300: #6CE0AB;
-  --color-mint-200: #B7F0D4;
-  --color-mint-100: #DFF4EA;
+  --color-sky-700: #19527F;
+  --color-sky-600: #256EA8;
+  --color-sky-500: #3278B8;
+  --color-sky-400: #4AA3FF;
+  --color-sky-300: #7BC4FF;
+  --color-sky-200: #B9DFFF;
+  --color-sky-100: #E3EFF8;
 
   --color-danger-500: #DC4B43;
   --color-danger-300: #F0A39E;
 
-  --color-status-ok: #18A66A;
-  --color-status-ok-bg: #DFF4EA;
+  --color-status-ok: #3278B8;
+  --color-status-ok-bg: #E3EFF8;
   --color-status-warn: #E0A82E;
   --color-status-warn-bg: #FBF1DA;
   --color-status-err: #DC4B43;
@@ -95,29 +95,29 @@
 
   --border: #D8DEE6;
   --border-strong: #B7C0CC;
-  --border-focus: #18A66A;
+  --border-focus: #3278B8;
 
-  --accent: #18A66A;
-  --accent-hover: #35C987;
-  --accent-ink: #0F1115;
-  --accent-soft: #DFF4EA;
-  --accent-strong: #128A59;
-  --nav-tagline: #128A59;
+  --accent: #3278B8;
+  --accent-hover: #4AA3FF;
+  --accent-ink: #F7F9FC;
+  --accent-soft: #E3EFF8;
+  --accent-strong: #256EA8;
+  --nav-tagline: #256EA8;
 
-  --ok: #18A66A;
-  --ok-bg: #DFF4EA;
-  --warn: oklch(70% 0.14 78);
-  --warn-bg: oklch(95.5% 0.05 82);
-  --err: oklch(57% 0.19 28);
-  --err-bg: oklch(95.5% 0.045 28);
+  --ok: #3278B8;
+  --ok-bg: #E3EFF8;
+  --warn: #B98200;
+  --warn-bg: #FFF0C6;
+  --err: #DC4B43;
+  --err-bg: #FBE6E4;
   --info: #3278B8;
   --info-bg: #E3EFF8;
 
   --logo-tile: #F7F9FC;
   --logo-symbol: #1E2630;
   --logo-cut: #F7F9FC;
-  --logo-badge: #18A66A;
-  --logo-glyph: #0F1115;
+  --logo-badge: #3278B8;
+  --logo-glyph: #F7F9FC;
 
   --code-bg: var(--color-ink-900);
   --code-fg: var(--color-paper-0);
@@ -151,11 +151,11 @@
   --fw-bold: 700;
   --fw-black: 800;
 
-  --tr-tight: -0.03em;
-  --tr-snug: -0.015em;
+  --tr-tight: 0;
+  --tr-snug: 0;
   --tr-normal: 0;
-  --tr-wide: 0.04em;
-  --tr-wider: 0.12em;
+  --tr-wide: 0;
+  --tr-wider: 0;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -186,21 +186,21 @@
 
   --border: #2B333D;
   --border-strong: #3C4652;
-  --border-focus: #18A66A;
+  --border-focus: #4AA3FF;
 
-  --accent: #18A66A;
-  --accent-hover: #35C987;
-  --accent-soft: rgba(24, 166, 106, 0.16);
-  --accent-strong: #35C987;
-  --nav-tagline: #35C987;
+  --accent: #3278B8;
+  --accent-hover: #4AA3FF;
+  --accent-soft: rgba(74, 163, 255, 0.16);
+  --accent-strong: #7BC4FF;
+  --nav-tagline: #7BC4FF;
 
   --logo-tile: #0F1115;
   --logo-symbol: #F7F9FC;
   --logo-cut: #0F1115;
-  --logo-badge: #18A66A;
-  --logo-glyph: #0F1115;
+  --logo-badge: #4AA3FF;
+  --logo-glyph: #F7F9FC;
 
-  --ok-bg: rgba(24, 166, 106, 0.14);
+  --ok-bg: rgba(74, 163, 255, 0.14);
   --warn-bg: rgba(224, 168, 46, 0.14);
   --err-bg: rgba(220, 75, 67, 0.14);
   --info-bg: rgba(50, 120, 184, 0.14);
@@ -225,17 +225,17 @@
     --fg-inverse: #0F1115;
     --border: #2B333D;
     --border-strong: #3C4652;
-    --border-focus: #18A66A;
-    --accent: #18A66A;
-    --accent-hover: #35C987;
-    --accent-soft: rgba(24, 166, 106, 0.16);
-    --accent-strong: #35C987;
-    --nav-tagline: #35C987;
+    --border-focus: #4AA3FF;
+    --accent: #3278B8;
+    --accent-hover: #4AA3FF;
+    --accent-soft: rgba(74, 163, 255, 0.16);
+    --accent-strong: #7BC4FF;
+    --nav-tagline: #7BC4FF;
     --logo-tile: #0F1115;
     --logo-symbol: #F7F9FC;
     --logo-cut: #0F1115;
-    --logo-badge: #18A66A;
-    --logo-glyph: #0F1115;
+    --logo-badge: #4AA3FF;
+    --logo-glyph: #F7F9FC;
   }
 }
 

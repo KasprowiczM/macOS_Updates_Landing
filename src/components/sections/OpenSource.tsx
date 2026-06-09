@@ -73,7 +73,7 @@ export function OpenSource() {
         <SectionReveal delay={0.2}>
           <div className="p-8 border border-(--border) rounded-lg bg-(--bg-elev) h-full flex flex-col justify-between">
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint) mb-6">
+              <div className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint) mb-6">
                 GitHub stats
               </div>
 

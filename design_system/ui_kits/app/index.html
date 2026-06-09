@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>macOS Updates UI Kit</title>
+    <link rel="stylesheet" href="../../colors_and_type.css">
+    <style>
+      main { max-width: 1080px; margin: 48px auto; }
+      .layers { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top: 24px; }
+      .layer { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+      .layer strong { display: block; margin-bottom: 6px; }
+      .layer span { color: var(--fg-muted); font: 600 12px / 1.3 var(--font-mono); }
+    </style>
+  </head>
+  <body>
+    <main class="od-stage">
+      <span class="od-badge">v1.0.17</span>
+      <h1>Run center</h1>
+      <p>Local inventory is fresh. Dry-run available before applying update layers.</p>
+      <button class="od-button od-button-primary">Run dry-run</button>
+      <section class="layers" aria-label="Update layers">
+        <article class="layer"><strong>Prescan</strong><span>APPLICATIONS.md</span></article>
+        <article class="layer"><strong>System + Store</strong><span>softwareupdate · mas</span></article>
+        <article class="layer"><strong>CLI + Brew</strong><span>npm globals · casks</span></article>
+        <article class="layer"><strong>Internet + Report</strong><span>handlers · UPDATES.md</span></article>
+      </section>
+    </main>
+  </body>
+</html>

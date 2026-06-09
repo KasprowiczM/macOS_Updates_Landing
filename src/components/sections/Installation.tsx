@@ -29,7 +29,7 @@ export function Installation() {
         <div className="max-w-[720px] space-y-8">
           {/* Prominent one-liner */}
           <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-3">
+            <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-3">
               {t('installation.oneLiner')}
             </div>
             <TerminalBlock
@@ -40,7 +40,7 @@ export function Installation() {
 
           {/* Verify */}
           <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint) mb-3">
+            <div className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint) mb-3">
               {t('installation.verify')}
             </div>
             <TerminalBlock
@@ -51,7 +51,7 @@ export function Installation() {
 
           {/* Update */}
           <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint) mb-3">
+            <div className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint) mb-3">
               {t('installation.update')}
             </div>
             <TerminalBlock

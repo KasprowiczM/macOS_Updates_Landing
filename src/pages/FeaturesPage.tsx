@@ -190,7 +190,7 @@ export function FeaturesPage() {
               <ArrowLeft size={14} />
               {pl ? 'Wróć do strony głównej' : 'Back to home'}
             </Link>
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-4">
+            <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
               {t('nav.features')}
             </div>
             <h1
@@ -246,7 +246,7 @@ export function FeaturesPage() {
           {/* Roadmap */}
           <SectionReveal delay={0.1}>
             <section id="roadmap" className="mt-24">
-              <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-4">
+              <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
                 {t('roadmap.eyebrow')}
               </div>
               <h2

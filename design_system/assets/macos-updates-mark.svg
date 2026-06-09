@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="macOS Updates mark">
+  <defs>
+    <linearGradient id="shell" x1="160" y1="96" x2="864" y2="928" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17202b"/>
+      <stop offset="0.5" stop-color="#0f141b"/>
+      <stop offset="1" stop-color="#071017"/>
+    </linearGradient>
+    <linearGradient id="railA" x1="240" y1="180" x2="800" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4AA3FF"/>
+      <stop offset="1" stop-color="#3278B8"/>
+    </linearGradient>
+    <linearGradient id="railB" x1="256" y1="214" x2="780" y2="826" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7BC4FF"/>
+      <stop offset="1" stop-color="#3278B8"/>
+    </linearGradient>
+  </defs>
+  <rect x="96" y="96" width="832" height="832" rx="216" fill="url(#shell)"/>
+  <rect x="150" y="150" width="724" height="724" rx="174" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <path d="M512 218c137 0 252 93 286 220" fill="none" stroke="url(#railA)" stroke-width="64" stroke-linecap="round"/>
+  <path d="M790 356l36 120-122-28" fill="none" stroke="url(#railA)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M512 806c-137 0-252-93-286-220" fill="none" stroke="url(#railB)" stroke-width="64" stroke-linecap="round"/>
+  <path d="M234 668l-36-120 122 28" fill="none" stroke="url(#railB)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="280" y="330" width="464" height="364" rx="42" fill="#0a0f15" stroke="#ffffff" stroke-opacity="0.1" stroke-width="3"/>
+  <path d="M352 444l78 68-78 68" fill="none" stroke="#7BC4FF" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M486 586h166" fill="none" stroke="#D9ECFF" stroke-width="42" stroke-linecap="round"/>
+</svg>

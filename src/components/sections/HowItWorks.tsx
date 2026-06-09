@@ -86,7 +86,7 @@ export function HowItWorks() {
                       <span className="md:hidden w-8 h-8 rounded-full bg-(--accent) text-(--accent-ink) flex items-center justify-center font-mono font-bold text-[13px]">
                         {i + 1}
                       </span>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-muted) md:mb-3 md:block">
+                      <span className="font-mono text-[11px] uppercase tracking-normal text-(--fg-muted) md:mb-3 md:block">
                         {t(`howItWorks.${step.key}.label`)}
                       </span>
                     </div>

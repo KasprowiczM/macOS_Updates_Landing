@@ -74,7 +74,7 @@ function AnimatedTerminal({ lines, label, variant, timeLabel }: AnimatedTerminal
 
   return (
     <div ref={containerRef} className="min-w-0">
-      <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint) mb-3 flex items-center justify-between">
+      <div className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint) mb-3 flex items-center justify-between">
         <span className="flex items-center gap-2">
           <span className={`w-1.5 h-1.5 rounded-full ${variant === 'error' ? 'bg-(--err)' : 'bg-(--ok)'}`} />
           {label}

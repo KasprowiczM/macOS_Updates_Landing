@@ -52,7 +52,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             <span className="font-bold text-lg font-sans tracking-tight leading-none">
               macOS Updates
             </span>
-            <span className="font-mono text-[8px] tracking-[0.18em] uppercase text-(--nav-tagline) leading-none mt-0.5">
+            <span className="font-mono text-[8px] tracking-normal uppercase text-(--nav-tagline) leading-none mt-0.5">
               {t('nav.tagline')}
             </span>
           </div>

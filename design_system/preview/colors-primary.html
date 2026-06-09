@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>macOS Updates Colors</title>
+    <link rel="stylesheet" href="../colors_and_type.css">
+    <style>
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .swatch { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+      .chip { border-radius: 10px; height: 78px; margin-bottom: 12px; }
+      .name { font-weight: 800; }
+      .value { color: var(--fg-muted); font-family: var(--font-mono); font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <main class="od-stage">
+      <h1>macOS Updates blue palette</h1>
+      <p>Brand accents are folder-blue and sky-blue. Green is not part of the product identity.</p>
+      <section class="grid">
+        <article class="swatch"><div class="chip" style="background:#3278B8"></div><div class="name">Accent</div><div class="value">#3278B8</div></article>
+        <article class="swatch"><div class="chip" style="background:#4AA3FF"></div><div class="name">Hover</div><div class="value">#4AA3FF</div></article>
+        <article class="swatch"><div class="chip" style="background:#7BC4FF"></div><div class="name">Strong on dark</div><div class="value">#7BC4FF</div></article>
+        <article class="swatch"><div class="chip" style="background:#E3EFF8"></div><div class="name">Soft</div><div class="value">#E3EFF8</div></article>
+        <article class="swatch"><div class="chip" style="background:#0F1115"></div><div class="name">Terminal</div><div class="value">#0F1115</div></article>
+      </section>
+    </main>
+  </body>
+</html>

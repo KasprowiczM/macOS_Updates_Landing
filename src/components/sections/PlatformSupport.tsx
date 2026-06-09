@@ -47,7 +47,7 @@ export function PlatformSupport() {
                 {t(`platformSupport.macos.status`)}
               </p>
 
-              <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--fg-faint) mb-3">
+              <div className="font-mono text-[11px] uppercase tracking-normal text-(--fg-faint) mb-3">
                 Package managers covered
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -70,7 +70,7 @@ export function PlatformSupport() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="bg-(--bg-elev) border border-(--border) rounded-xl p-6 sm:p-8 md:p-10 shadow-(--shadow-md) min-w-0"
           >
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-6">
+            <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-6">
               Manager details
             </div>
 

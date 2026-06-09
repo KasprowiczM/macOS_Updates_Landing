@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>macOS Updates Terminal Proof</title>
+    <link rel="stylesheet" href="../colors_and_type.css">
+    <style>
+      main { max-width: 920px; margin: 48px auto; }
+      .line { display: grid; grid-template-columns: 44px 1fr auto; gap: 16px; }
+    </style>
+  </head>
+  <body>
+    <main class="od-stage">
+      <span class="od-badge">Update Orbit</span>
+      <h1>Seven update layers, one proof window.</h1>
+      <div class="od-terminal">
+        <div class="od-terminal-header">macOS Updates — zsh</div>
+        <div class="od-terminal-body">
+          <div class="line"><span>$</span><strong>bash update_all.sh --dry-run -y</strong><span>preview</span></div>
+          <div class="line"><span>0</span><strong>prescan APPLICATIONS.md</strong><span class="od-terminal-progress">ready</span></div>
+          <div class="line"><span>1</span><strong>softwareupdate -ia -R</strong><span class="od-terminal-progress">queued</span></div>
+          <div class="line"><span>2</span><strong>sudo mas upgrade</strong><span class="od-terminal-progress">queued</span></div>
+          <div class="line"><span>5</span><strong>internet app handlers</strong><span class="od-terminal-progress">40+</span></div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

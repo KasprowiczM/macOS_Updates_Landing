@@ -25,7 +25,7 @@ export function WhyUpdate() {
       
       <div className="relative max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <SectionReveal>
-          <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--accent-strong) mb-4">
+          <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
             {t('whyUpdate.eyebrow')}
           </div>
           <h2
