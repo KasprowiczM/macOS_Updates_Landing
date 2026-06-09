@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vite/
+.playwright-cli/
+output/
+
+.DS_Store
+*.log
+
+design_system/

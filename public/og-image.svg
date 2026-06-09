@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="macOS Updates social preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071017"/>
+      <stop offset="0.55" stop-color="#101823"/>
+      <stop offset="1" stop-color="#0b1320"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="190" y1="120" x2="520" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#45d18c"/>
+      <stop offset="1" stop-color="#18a66a"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="190" y1="90" x2="520" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4aa3ff"/>
+      <stop offset="1" stop-color="#3278b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <path d="M0 518C190 438 310 548 500 472C730 380 816 134 1200 168" fill="none" stroke="#45d18c" stroke-opacity="0.12" stroke-width="2"/>
+  <path d="M0 120C160 190 350 64 520 162C716 274 804 454 1200 392" fill="none" stroke="#4aa3ff" stroke-opacity="0.12" stroke-width="2"/>
+  <rect x="92" y="102" width="250" height="250" rx="66" fill="#0f141b" stroke="#ffffff" stroke-opacity="0.08"/>
+  <path d="M217 148c56 0 104 36 124 86" fill="none" stroke="url(#blue)" stroke-width="24" stroke-linecap="round"/>
+  <path d="M336 196l14 48-48-12" fill="none" stroke="url(#blue)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M217 306c-56 0-104-36-124-86" fill="none" stroke="url(#accent)" stroke-width="24" stroke-linecap="round"/>
+  <path d="M98 258l-14-48 48 12" fill="none" stroke="url(#accent)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="150" y="188" width="134" height="98" rx="16" fill="#080d12" stroke="#ffffff" stroke-opacity="0.1"/>
+  <path d="M172 220l22 17-22 17" fill="none" stroke="#45d18c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 258h52" fill="none" stroke="#d8fff0" stroke-width="12" stroke-linecap="round"/>
+  <text x="400" y="190" fill="#f4f7fb" font-family="Inter Tight, Inter, Arial, sans-serif" font-size="82" font-weight="800" letter-spacing="-2">macOS Updates</text>
+  <text x="404" y="254" fill="#8fa1b3" font-family="JetBrains Mono, monospace" font-size="25" font-weight="600" letter-spacing="3">UPDATE ORBIT FOR APPLE SILICON</text>
+  <text x="96" y="430" fill="#f4f7fb" font-family="Inter Tight, Inter, Arial, sans-serif" font-size="38" font-weight="700">One-command updater for macOS, App Store, Homebrew,</text>
+  <text x="96" y="480" fill="#f4f7fb" font-family="Inter Tight, Inter, Arial, sans-serif" font-size="38" font-weight="700">CLI/npm, and 40+ internet apps.</text>
+  <text x="98" y="544" fill="#45d18c" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">local inventory first · installed software only · dev_sync ready</text>
+</svg>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="alternate icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F7F9FC" media="(prefers-color-scheme: light)" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="KasprowiczM" />
+    <meta name="keywords" content="macos updates, apple silicon, homebrew, app store, mas, softwareupdate, bash, open source, cli updater" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <title>macOS Updates — One-command updater for Apple Silicon Macs</title>
+
+    <!--
+      Per-page <title>, description, canonical, Open Graph and Twitter tags are
+      owned at runtime by react-helmet-async (see src/components/Seo.tsx) so that
+      every route emits exactly one correct set. The block below is a no-JS /
+      GEO-crawler fallback only: when scripting is enabled the browser ignores
+      it, so there are no duplicate/conflicting head tags. A head <noscript>
+      may legally contain only link/style/meta elements.
+    -->
+    <noscript>
+      <meta name="description" content="macOS Updates keeps macOS, App Store, Homebrew, CLI/npm tooling, and 40+ internet apps current from a local inventory." />
+      <link rel="canonical" href="https://macosupdates.dev/" />
+      <meta property="og:title" content="macOS Updates — One-command updater for Apple Silicon Macs" />
+      <meta property="og:description" content="Production-ready updater for macOS, App Store, Homebrew, CLI/npm tools, and 40+ internet apps. Local inventory first." />
+      <meta property="og:image" content="https://macosupdates.dev/og-image.png" />
+      <meta property="og:image:alt" content="macOS Updates logo" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://macosupdates.dev/" />
+      <meta property="og:site_name" content="macOS Updates" />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:locale:alternate" content="pl_PL" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="macOS Updates — One-command updater for Apple Silicon Macs" />
+      <meta name="twitter:description" content="Local-inventory updater for Apple Silicon Macs: system, App Store, Homebrew, CLI/npm, and 40+ internet apps." />
+      <meta name="twitter:image" content="https://macosupdates.dev/og-image.png" />
+      <meta name="twitter:image:alt" content="macOS Updates logo" />
+    </noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://macosupdates.dev/#software",
+          "name": "macOS Updates",
+          "description": "Production-ready one-command updater for Apple Silicon Macs using a local inventory.",
+          "url": "https://macosupdates.dev",
+          "softwareVersion": "1.0.17",
+          "datePublished": "2026-06-09",
+          "operatingSystem": "macOS",
+          "applicationCategory": "DeveloperApplication",
+          "downloadUrl": "https://github.com/KasprowiczM/macOS_updates",
+          "installUrl": "https://github.com/KasprowiczM/macOS_updates",
+          "softwareHelp": "https://macosupdates.dev/docs",
+          "screenshot": "https://macosupdates.dev/og-image.png",
+          "license": "https://opensource.org/licenses/MIT",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "author": { "@id": "https://macosupdates.dev/#organization" },
+          "publisher": { "@id": "https://macosupdates.dev/#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://macosupdates.dev/#organization",
+          "name": "macOS Updates",
+          "url": "https://macosupdates.dev",
+          "logo": "https://macosupdates.dev/logo.svg",
+          "sameAs": ["https://github.com/KasprowiczM/macOS_updates"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://macosupdates.dev/#website",
+          "url": "https://macosupdates.dev",
+          "name": "macOS Updates",
+          "inLanguage": ["en", "pl"],
+          "publisher": { "@id": "https://macosupdates.dev/#organization" }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <h1>macOS Updates — One-command updater for Apple Silicon Macs</h1>
+      <p>
+        macOS Updates keeps macOS, App Store apps, Homebrew, native CLI/npm tooling, and 40+ internet-downloaded apps current.
+        It builds APPLICATIONS.md from the current Mac and updates only software already installed.
+      </p>
+      <p>Install in one line:</p>
+      <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasprowiczM/macOS_updates/main/install.sh)"</code></pre>
+      <ul>
+        <li>Seven-step update pipeline: prescan, macOS, App Store, CLI/npm, Homebrew, internet apps, postupdate.</li>
+        <li>Apple Silicon only, macOS 13+, Bash 3.2-compatible.</li>
+        <li>Optional dev_sync private overlay for inventory, history, preferences, and secrets.</li>
+        <li>Dry-run and coverage reporting before applying updates.</li>
+      </ul>
+      <p>
+        Learn more:
+        <a href="/docs">Documentation</a> &middot;
+        <a href="/features">Features &amp; roadmap</a> &middot;
+        <a href="https://github.com/KasprowiczM/macOS_updates">Source on GitHub</a>
+      </p>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

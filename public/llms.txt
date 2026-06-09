@@ -1,0 +1,46 @@
+# macOS Updates
+
+Production-ready one-command updater for Apple Silicon Macs. It keeps macOS,
+App Store apps, Homebrew, native CLI/npm tooling, and 40+ internet-downloaded
+apps current while updating only software already installed on the current Mac.
+
+## Install
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasprowiczM/macOS_updates/main/install.sh)"
+
+Manual setup:
+
+    git clone https://github.com/KasprowiczM/macOS_updates.git ~/Dev_Env/macOS_updates
+    cd ~/Dev_Env/macOS_updates
+    bash setup.sh
+    bash build_inventory.sh
+    bash update_all.sh --dry-run -y
+
+## What it does
+
+`update_all.sh` runs seven layers in order:
+
+1. Prescan installed apps into APPLICATIONS.md
+2. macOS system update via softwareupdate -ia -R --verbose
+3. App Store via sudo mas upgrade plus AppleScript fallback
+4. Native CLI/npm tooling: Node, Bun, npm globals, selected dev CLIs
+5. Homebrew upgrade, casks, cleanup, and doctor
+6. Internet apps through registered handlers
+7. Postupdate inventory version bumps and UPDATES.md history
+
+## Safety model
+
+- Apple Silicon only; macOS 13+.
+- The installer builds local inventory from this Mac.
+- Missing supported apps are reported, not installed.
+- Private files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and
+  dev_sync config stay out of public Git.
+- `softwareupdate` must keep `-R`.
+- `mas upgrade` must run with `sudo`.
+- Bash code stays compatible with Bash 3.2.
+
+## Links
+
+- Documentation: https://macosupdates.dev/docs
+- Features: https://macosupdates.dev/features
+- Source code: https://github.com/KasprowiczM/macOS_updates
