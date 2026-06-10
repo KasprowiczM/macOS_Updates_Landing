@@ -5,8 +5,8 @@ export function PlatformReference({ pl }: { pl: boolean }) {
     <>
       <WikiSection id="platform-status" title={pl ? 'Status platformy' : 'Platform Status'}>
         <p>{pl
-          ? 'macOS Updates v1.0.17 jest przeznaczony wyłącznie dla Apple Silicon i macOS 13+.'
-          : 'macOS Updates v1.0.17 is scoped to Apple Silicon and macOS 13+ only.'
+          ? 'macOS Updates v1.0.18 jest przeznaczony wyłącznie dla Apple Silicon i macOS 13+.'
+          : 'macOS Updates v1.0.18 is scoped to Apple Silicon and macOS 13+ only.'
         }</p>
         <DocTable
           headers={[pl ? 'Platforma' : 'Platform', 'Status']}

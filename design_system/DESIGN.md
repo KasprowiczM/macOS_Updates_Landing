@@ -90,6 +90,7 @@ background: var(--accent-hover);
 
 Use blue soft badges for product status. Examples:
 
+- `v1.0.18`
 - `v1.0.17`
 - `Apple Silicon`
 - `macOS 13+`

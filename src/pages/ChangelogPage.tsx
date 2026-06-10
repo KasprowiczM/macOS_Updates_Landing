@@ -14,6 +14,32 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.0.18',
+    date: '2026-06-10',
+    summary: {
+      en: 'Parser hardening, FABLE5 review fixes, and new static test coverage for library parsers.',
+      pl: 'Utwardzenie parserów, poprawki z przeglądu FABLE5 oraz nowe testy statyczne dla parserów bibliotecznych.',
+    },
+    added: [
+      {
+        en: 'InternetLibParserTests for lib/ config parsers covering missing config guards, comment skipping, and special-case apps.',
+        pl: 'InternetLibParserTests dla parserów konfiguracji lib/, pokrywające guardy brakującej konfiguracji, pomijanie komentarzy i przypadki specjalne aplikacji.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Registry loader validates field counts and skips malformed rows with a warning.',
+        pl: 'Registry loader weryfikuje liczbę pól i pomija wadliwe wiersze z ostrzeżeniem.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Defense-in-depth eval guard in internet_handler_set_status to prevent injection.',
+        pl: 'Guard obrony w głąb (defense-in-depth) dla eval w internet_handler_set_status zapobiegający wstrzyknięciom.',
+      },
+    ],
+  },
+  {
     version: 'v1.0.17',
     date: '2026-06-09',
     summary: {

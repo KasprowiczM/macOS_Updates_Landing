@@ -41,7 +41,7 @@ export function OpenSource() {
               <Badge variant="accent">MIT</Badge>
               <Badge>Open source</Badge>
               <Badge>{TEST_COUNT} safety checks</Badge>
-              <Badge>v1.0.17</Badge>
+              <Badge>v1.0.18</Badge>
             </div>
 
             <h3 className="font-semibold text-xl font-sans tracking-tight mb-3">

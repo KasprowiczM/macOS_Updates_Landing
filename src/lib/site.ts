@@ -8,7 +8,7 @@ export const SITE_URL = 'https://macosupdates.dev'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.0.17'
+export const APP_VERSION = 'v1.0.18'
 
 export const APP_VERSION_DATE = '2026-06-09'
 
