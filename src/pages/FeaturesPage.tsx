@@ -117,24 +117,24 @@ export function FeaturesPage() {
 
   const shippingToday = pl
     ? [
-        'Siedem kroków: prescan → system → App Store → CLI/npm → brew → internet → postupdate',
+        'Siedem kroków: prescan → App Store → CLI/npm → brew → internet → postupdate → system macOS',
         'Lokalny APPLICATIONS.md budowany z tego Maca',
-        '40+ obsługiwanych aplikacji internetowych',
-        'Dwutorowy App Store: sudo mas + fallback AppleScript',
-        'Wymuszone softwareupdate -R dla aktualizacji macOS',
-        'Prywatny overlay dev_sync dla inwentarza i historii',
-        'Siedem języków UI terminala',
-        'Testy statyczne, registry parity i scan sekretów',
+        '48 obsługiwanych aplikacji internetowych w 9 metodach',
+        'Dwutorowy App Store: sudo mas (CVE-2025-43411) + GUI iPada',
+        'Końcowa bezpieczna aktualizacja macOS z wymuszonym softwareupdate -R',
+        'Prywatny overlay dev_sync dla inwentarza i historii z wsparciem Proton Drive',
+        'Siedem języków UI terminala (EN, PL, DE, FR, ES, IT, PT)',
+        '94 testy statyczne, unit, registry parity i scan sekretów gitleaks',
       ]
     : [
-        'Seven steps: prescan → system → App Store → CLI/npm → brew → internet → postupdate',
+        'Seven steps: prescan → App Store → CLI/npm → brew → internet → postupdate → macOS system',
         'Local APPLICATIONS.md built from this Mac',
-        '40+ supported internet-downloaded apps',
-        'Two-track App Store: sudo mas + AppleScript fallback',
-        'Mandatory softwareupdate -R for macOS updates',
-        'Private dev_sync overlay for inventory and history',
-        'Seven terminal UI languages',
-        'Static safety tests, registry parity, and secret scanning',
+        '48 supported internet-downloaded apps across 9 methods',
+        'Two-track App Store: sudo mas (CVE-2025-43411 fix) + iPad AppleScript GUI',
+        'Restart-safe final macOS system update with mandatory softwareupdate -R',
+        'Private dev_sync overlay for inventory and history with Proton Drive support',
+        'Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT)',
+        '94 static, unit, registry parity, and gitleaks secret scanning tests',
       ]
 
   const breadcrumb = {

@@ -41,7 +41,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q7',
     q: 'How many apps are supported?',
-    a: 'The current registry covers 40+ internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling.',
+    a: 'The current registry covers 48 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling.',
   },
   {
     id: 'q8',

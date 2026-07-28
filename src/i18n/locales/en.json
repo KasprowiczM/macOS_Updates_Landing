@@ -13,7 +13,7 @@
     "headline1": "Update every layer",
     "headline2": "from one trusted run.",
     "headline3": "No borrowed inventories.",
-    "subheadline": "macOS Updates keeps system updates, App Store apps, Homebrew, native CLI tools, npm globals, and 40+ internet apps current while touching only software already installed on this Mac.",
+    "subheadline": "macOS Updates keeps system updates, App Store apps, Homebrew, native CLI tools, npm globals, and 48 internet apps current while touching only software already installed on this Mac.",
     "ctaPrimary": "Install macOS Updates",
     "ctaSecondary": "View source",
     "oneLinerLabel": "One-line install",
@@ -62,27 +62,27 @@
   "pipeline": {
     "eyebrow": "Seven-step updater",
     "title": "One orchestrator, seven update layers.",
-    "subtitle": "update_all.sh runs prescan, macOS, App Store, native CLI/npm, Homebrew, internet apps, and postupdate bookkeeping in order.",
+    "subtitle": "update_all.sh runs prescan, App Store, native CLI/npm, Homebrew, 48 internet apps, postupdate bookkeeping, and macOS system updates in order.",
     "phases": {
       "check": {
-        "name": "Prescan",
+        "name": "Prescan (Step 0)",
         "desc": "Scan /Applications, Homebrew, and App Store receipts into this Mac's APPLICATIONS.md.",
         "detail": "Public installs never import another user's inventory."
       },
       "plan": {
-        "name": "System + Store",
-        "desc": "Apply macOS updates with reboot metadata, then run the two-track App Store updater.",
-        "detail": "softwareupdate keeps -R; mas runs through sudo; iPad apps use GUI automation when needed."
+        "name": "App Store + CLI (Steps 1 & 2)",
+        "desc": "Run two-track App Store updater (sudo mas + iPad GUI) and update Node, Bun, and npm global CLIs.",
+        "detail": "mas runs through sudo (CVE-2025-43411 fix); iPad apps use AppleScript automation."
       },
       "apply": {
-        "name": "CLI + Brew",
-        "desc": "Update native Node/Bun, npm global CLIs, Homebrew formulae, casks, cleanup, and doctor.",
-        "detail": "The shell stays Bash 3.2-compatible for stock macOS."
+        "name": "Brew + Internet (Steps 3 & 4)",
+        "desc": "Update Homebrew formulae/casks (--greedy) and 48 internet apps across 9 update methods.",
+        "detail": "MAU deferral preflight, roll-back safe DMG swaps, and non-blocking soft failure gating."
       },
       "verify": {
-        "name": "Internet + Report",
-        "desc": "Update supported internet-downloaded apps only when installed, then write inventory and run history.",
-        "detail": "Coverage reports separate supported installed, supported missing, and unknown apps."
+        "name": "Postupdate + macOS (Steps 5 & 6)",
+        "desc": "Atomically refresh inventory and history, then run macOS system update (softwareupdate -ia -R) last.",
+        "detail": "macOS system updates run last to retain reboot safety and 94 safety checks pass."
       }
     }
   },

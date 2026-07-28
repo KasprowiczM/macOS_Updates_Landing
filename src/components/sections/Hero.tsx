@@ -19,14 +19,14 @@ const TERMINAL_LINES = [
   { text: '  ▸ step 0  prescan /Applications + brew + mas', delay: 700, color: 'text-(--code-fg)' },
   { text: '  ✓ inventory APPLICATIONS.md refreshed', delay: 1200, color: 'text-status-ok' },
   { text: '', delay: 1100 },
-  { text: '  ▸ step 1  softwareupdate -ia -R --verbose', delay: 1650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 2  sudo mas upgrade + iPad fallback', delay: 2150, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 3  Node, Bun, npm global CLIs', delay: 2650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 4  brew upgrade + cleanup + doctor', delay: 3150, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 5  40+ internet app handlers', delay: 3650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 6  postupdate history and versions', delay: 4150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 1  sudo mas upgrade + AppleScript GUI', delay: 1650, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 2  Node, Bun, npm global CLIs', delay: 2150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 3  brew upgrade + cleanup + doctor', delay: 2650, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 4  48 internet app handlers (keystone, dmg, mau)', delay: 3150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 5  postupdate history & version bump', delay: 3650, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 6  softwareupdate -ia -R (macOS final)', delay: 4150, color: 'text-(--code-fg)' },
   { text: '', delay: 4550 },
-  { text: '  ✓ dry-run complete · no mutations applied', delay: 4850, color: 'text-(--accent-strong)' },
+  { text: '  ✓ dry-run complete · 94 safety checks passed · no mutations applied', delay: 4850, color: 'text-(--accent-strong)' },
 ]
 
 function TypewriterTerminal() {

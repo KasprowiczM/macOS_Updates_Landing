@@ -5,8 +5,8 @@ export function GettingStarted({ pl }: { pl: boolean }) {
     <>
       <WikiSection id="overview" title={pl ? 'Przegląd' : 'Overview'}>
         <p>{pl
-          ? 'macOS Updates to jednopoleceniowy aktualizator dla Maców Apple Silicon. Aktualizuje macOS, App Store, Homebrew, natywne CLI/npm i ponad 40 aplikacji internetowych na podstawie lokalnego inwentarza.'
-          : 'macOS Updates is a one-command updater for Apple Silicon Macs. It updates macOS, App Store apps, Homebrew, native CLI/npm tooling, and 40+ internet-downloaded apps from a local inventory.'
+          ? 'macOS Updates to jednopoleceniowy aktualizator dla Maców Apple Silicon. Aktualizuje macOS, App Store, Homebrew, natywne CLI/npm i 48 aplikacji internetowych na podstawie lokalnego inwentarza.'
+          : 'macOS Updates is a one-command updater for Apple Silicon Macs. It updates macOS, App Store apps, Homebrew, native CLI/npm tooling, and 48 internet-downloaded apps from a local inventory.'
         }</p>
         <p className="text-[14px]">{pl
           ? 'Kluczowa zasada: aktualizowane jest tylko oprogramowanie już zainstalowane na tym Macu. Instalator nie importuje cudzych plików APPLICATIONS.md i nie instaluje brakujących aplikacji.'

@@ -14,6 +14,92 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.0.21',
+    date: '2026-07-28',
+    summary: {
+      en: 'Microsoft AutoUpdate (MAU) deferral preflight & quarantine persistence, non-blocking step severity contract, and configurable settle delays.',
+      pl: 'Preflight odroczeń Microsoft AutoUpdate (MAU) i trwała kwarantanna, nietamujący kontrakt błędów kroków i konfigurowalne opóźnienia osiadania.',
+    },
+    added: [
+      {
+        en: 'MAC_UPDATE_SETTLE_DELAY environment variable to tune internet app launch/close wait times.',
+        pl: 'Zmienna środowiskowa MAC_UPDATE_SETTLE_DELAY pozwalająca dostosować czas oczekiwania na uruchomienie/zamknięcie aplikacji.',
+      },
+      {
+        en: 'Non-blocking step severity contract: soft app-updater failures no longer suppress full macOS system updates.',
+        pl: 'Nietamujący kontrakt ważności kroków: miękkie błędy updaterów aplikacji nie blokują końcowej aktualizacji systemu macOS.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Preflight MAU deferrals quarantine broken Microsoft Office packages and stop loop oscillations.',
+        pl: 'Preflight odroczeń MAU poddaje kwarantannie uszkodzone pakiety Microsoft Office i eliminuje pętle prób.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Prevent retrying Office/Teams updates that provably cannot install on the target macOS version.',
+        pl: 'Zapobieganie ponownemu próbowaniu aktualizacji Office/Teams, które nie mogą zostać zainstalowane na danej wersji macOS.',
+      },
+    ],
+  },
+  {
+    version: 'v1.0.20',
+    date: '2026-07-13',
+    summary: {
+      en: 'Full macOS update pipeline hardening, MCP path discovery fixes, and atomic state write safety.',
+      pl: 'Utwardzenie pełnego pipeline aktualizacji macOS, poprawki wykrywania ścieżek MCP i bezpieczne atomowe zapisy stanu.',
+    },
+    added: [
+      {
+        en: 'Staged app swaps with Gatekeeper signature validation and unique per-session DMG mountpoints.',
+        pl: 'Etapowa zamiana aplikacji z weryfikacją podpisu Gatekeeper i unikalnymi punktami montowania DMG na sesję.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Hardened migration_setup.sh 16-step setup wizard and username migration logic.',
+        pl: 'Utwardzony 16-fazowy kreator migration_setup.sh i logika migracji nazwy użytkownika.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Ledger Live DMG/zip parsing bug fix, Docker status conflation fix, and non-atomic state write fixes.',
+        pl: 'Poprawka błędu parsowania DMG/zip Ledger Live, usunięcie konfliktu statusu Docker i poprawki nieatomowych zapisów.',
+      },
+    ],
+  },
+  {
+    version: 'v1.0.19',
+    date: '2026-06-27',
+    summary: {
+      en: 'Expansion to 48 supported internet applications, iOS/iPadOS version detection on Apple Silicon, and uninstall safety.',
+      pl: 'Rozszerzenie do 48 obsługiwanych aplikacji internetowych, wykrywanie wersji aplikacji iOS/iPadOS na Apple Silicon i bezpieczeństwo odinstalowania.',
+    },
+    added: [
+      {
+        en: 'Support for 48 internet applications across 9 update methods (keystone, github_dmg, silent_launch, msupdate, mau_fallback, docker_cli, brew_cask, appstore_gui, manual).',
+        pl: 'Obsługa 48 aplikacji internetowych poprzez 9 metod aktualizacji (keystone, github_dmg, silent_launch, msupdate, mau_fallback, docker_cli, brew_cask, appstore_gui, manual).',
+      },
+      {
+        en: 'iOS and iPadOS app version detection for App Store Track 2 updates on Apple Silicon Macs.',
+        pl: 'Wykrywanie wersji aplikacji iOS i iPadOS dla aktualizacji App Store Tor 2 na Macach Apple Silicon.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Refactored atomic JSON state writes for APPLICATIONS.md and UPDATES.md.',
+        pl: 'Zrefaktoryzowane atomowe zapisy stanu JSON dla APPLICATIONS.md i UPDATES.md.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Uninstall path safety guards to prevent accidental deletion of parent system paths.',
+        pl: 'Zabezpieczenia ścieżek uninstall.sh zapobiegające przypadkowemu usunięciu ścieżek systemowych.',
+      },
+    ],
+  },
+  {
     version: 'v1.0.18',
     date: '2026-06-10',
     summary: {
@@ -48,16 +134,12 @@ const RELEASES: Release[] = [
     },
     added: [
       {
-        en: 'update_all.sh orchestrates prescan, macOS, App Store, CLI/npm, Homebrew, internet apps, and postupdate.',
-        pl: 'update_all.sh orkiestruje prescan, macOS, App Store, CLI/npm, Homebrew, aplikacje internetowe i postupdate.',
+        en: 'update_all.sh orchestrates prescan, App Store, CLI/npm, Homebrew, 48 internet apps, postupdate, and macOS system updates.',
+        pl: 'update_all.sh orkiestruje prescan, App Store, CLI/npm, Homebrew, 48 aplikacji internetowych, postupdate i system macOS.',
       },
       {
         en: 'One-line installer builds APPLICATIONS.md from the current Mac instead of importing another user inventory.',
         pl: 'Instalator jedną linią buduje APPLICATIONS.md z bieżącego Maca zamiast importować cudzy inwentarz.',
-      },
-      {
-        en: '40+ internet-downloaded app handlers through keystone, github_dmg, silent_launch, msupdate, docker_cli, and manual methods.',
-        pl: '40+ handlerów aplikacji internetowych przez metody keystone, github_dmg, silent_launch, msupdate, docker_cli i manual.',
       },
       {
         en: 'Seven terminal UI languages: English, Polish, German, French, Spanish, Italian, and Portuguese.',
@@ -73,19 +155,11 @@ const RELEASES: Release[] = [
         en: 'Documented softwareupdate -R and sudo mas upgrade as non-negotiable update safety rules.',
         pl: 'Udokumentowano softwareupdate -R oraz sudo mas upgrade jako nienegocjowalne reguły bezpieczeństwa aktualizacji.',
       },
-      {
-        en: 'Public release docs clarify public GitHub code versus private cloud/local overlay files.',
-        pl: 'Dokumentacja public release wyjaśnia granicę między publicznym kodem GitHub a prywatnym overlay.',
-      },
     ],
     fixed: [
       {
         en: 'Static tests verify Bash 3.2 constraints, registry parity, and secret-deny rules.',
         pl: 'Testy statyczne weryfikują ograniczenia Bash 3.2, spójność registry i reguły blokowania sekretów.',
-      },
-      {
-        en: 'Child update scripts are expected to fail non-zero for failed critical operations.',
-        pl: 'Skrypty potomne mają zwracać niezerowy status dla nieudanych operacji krytycznych.',
       },
     ],
   },
@@ -101,14 +175,6 @@ const RELEASES: Release[] = [
       {
         en: 'install.sh, setup.sh, migration_setup.sh, build_inventory.sh, and update_all.sh entrypoints.',
         pl: 'Entrypointy install.sh, setup.sh, migration_setup.sh, build_inventory.sh i update_all.sh.',
-      },
-      {
-        en: 'Public config registry for internet app update methods and dispatch order.',
-        pl: 'Publiczny registry konfiguracji metod aktualizacji aplikacji internetowych i kolejności dispatch.',
-      },
-      {
-        en: 'User, operator, and agent documentation for installation, operations, architecture, and critical rules.',
-        pl: 'Dokumentacja użytkownika, operatora i agentów dla instalacji, operacji, architektury i reguł krytycznych.',
       },
     ],
   },

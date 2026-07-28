@@ -1,7 +1,7 @@
 # macOS Updates
 
-Production-ready one-command updater for Apple Silicon Macs. It keeps macOS,
-App Store apps, Homebrew, native CLI/npm tooling, and 40+ internet-downloaded
+Production-ready one-command updater for Apple Silicon Macs (v1.0.21). It keeps macOS,
+App Store apps, Homebrew, native CLI/npm tooling, and 48 internet-downloaded
 apps current while updating only software already installed on the current Mac.
 
 ## Install
@@ -20,13 +20,13 @@ Manual setup:
 
 `update_all.sh` runs seven layers in order:
 
-1. Prescan installed apps into APPLICATIONS.md
-2. macOS system update via softwareupdate -ia -R --verbose
-3. App Store via sudo mas upgrade plus AppleScript fallback
-4. Native CLI/npm tooling: Node, Bun, npm globals, selected dev CLIs
-5. Homebrew upgrade, casks, cleanup, and doctor
-6. Internet apps through registered handlers
-7. Postupdate inventory version bumps and UPDATES.md history
+1. Step 0: Prescan installed apps into APPLICATIONS.md for this Mac
+2. Step 1: App Store via sudo mas upgrade (CVE-2025-43411 fix) plus AppleScript GUI fallback
+3. Step 2: Native CLI/npm tooling: Node, Bun, npm globals
+4. Step 3: Homebrew upgrade (--greedy), casks, cleanup, and doctor
+5. Step 4: 48 Internet apps through 9 registered handler methods
+6. Step 5: Postupdate inventory version bumps and UPDATES.md history
+7. Step 6: macOS system update via softwareupdate -ia -R --verbose (restart-safe final step)
 
 ## Safety model
 
@@ -38,6 +38,7 @@ Manual setup:
 - `softwareupdate` must keep `-R`.
 - `mas upgrade` must run with `sudo`.
 - Bash code stays compatible with Bash 3.2.
+- All code changes pass 94 static and unit tests.
 
 ## Links
 

@@ -7,13 +7,12 @@
     "github": "GitHub",
     "starOnGitHub": "Gwiazdka na GitHub",
     "tagline": "UPDATE ORBIT"
-  },
-  "hero": {
+  },  "hero": {
     "eyebrow": "Kontrola aktualizacji na Apple Silicon",
     "headline1": "Aktualizuj każdą warstwę",
     "headline2": "jednym zaufanym uruchomieniem.",
     "headline3": "Bez cudzych inwentarzy.",
-    "subheadline": "macOS Updates utrzymuje aktualne macOS, App Store, Homebrew, narzędzia CLI, globalne pakiety npm i 40+ aplikacji internetowych, dotykając tylko oprogramowania już zainstalowanego na tym Macu.",
+    "subheadline": "macOS Updates utrzymuje aktualne macOS, App Store, Homebrew, narzędzia CLI, globalne pakiety npm i 48 aplikacji internetowych, dotykając tylko oprogramowania już zainstalowanego na tym Macu.",
     "ctaPrimary": "Zainstaluj macOS Updates",
     "ctaSecondary": "Zobacz kod",
     "oneLinerLabel": "Instalacja jedną komendą",
@@ -62,12 +61,12 @@
   "pipeline": {
     "eyebrow": "Siedem kroków",
     "title": "Jeden orkiestrator, siedem warstw aktualizacji.",
-    "subtitle": "update_all.sh uruchamia prescan, macOS, App Store, CLI/npm, Homebrew, aplikacje internetowe i zapis postupdate w stałej kolejności.",
+    "subtitle": "update_all.sh uruchamia prescan, App Store, CLI/npm, Homebrew, 48 aplikacji internetowych, zapis postupdate i aktualizacje macOS w stałej kolejności.",
     "phases": {
-      "check": { "name": "Prescan", "desc": "Skanuje /Applications, Homebrew i App Store do lokalnego APPLICATIONS.md.", "detail": "Publiczna instalacja nigdy nie importuje cudzej listy aplikacji." },
-      "plan": { "name": "System + Store", "desc": "Aktualizuje macOS z metadanymi restartu, potem uruchamia dwutorowy updater App Store.", "detail": "softwareupdate zachowuje -R; mas działa przez sudo; aplikacje iPada używają automatyzacji GUI." },
-      "apply": { "name": "CLI + Brew", "desc": "Aktualizuje Node/Bun, globalne CLI npm, Homebrew, caski, cleanup i doctor.", "detail": "Shell pozostaje zgodny z Bash 3.2 dostępnym w macOS." },
-      "verify": { "name": "Internet + Raport", "desc": "Aktualizuje obsługiwane aplikacje internetowe tylko jeśli są zainstalowane, potem zapisuje inwentarz i historię.", "detail": "Raport pokrycia rozdziela obsługiwane obecne, obsługiwane brakujące i nieznane aplikacje." }
+      "check": { "name": "Prescan (Krok 0)", "desc": "Skanuje /Applications, Homebrew i App Store do lokalnego APPLICATIONS.md dla tego Maca.", "detail": "Publiczna instalacja nigdy nie importuje cudzej listy aplikacji." },
+      "plan": { "name": "App Store + CLI (Kroki 1 & 2)", "desc": "Uruchamia dwutorowy updater App Store (sudo mas + GUI iPada) oraz aktualizuje Node, Bun i globalne CLI npm.", "detail": "mas używa sudo (poprawka CVE-2025-43411); aplikacje iPada korzystają z automatyzacji AppleScript." },
+      "apply": { "name": "Brew + Internet (Kroki 3 & 4)", "desc": "Aktualizuje Homebrew (--greedy) i 48 aplikacji internetowych poprzez 9 metod aktualizacji.", "detail": "Preflight odroczeń MAU, bezpieczne instalacje DMG z opcją rollbacku i miękkie bramkowanie błędów." },
+      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -ia -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu, przy zaliczeniu 94 testów." }
     }
   },
   "showcase": {
