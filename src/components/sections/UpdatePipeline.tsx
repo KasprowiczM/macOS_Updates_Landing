@@ -38,12 +38,13 @@ const PHASES = [
     color: '#3278B8',
     terminal: [
       '  ▸ step 3   update_brew.sh (casks --greedy, cleanup, doctor)',
-      '  ▸ step 4   update_internet_apps.sh (48 supported apps)',
+      '  ▸ step 4   update_internet_apps.sh (43 supported apps)',
       '             methods: keystone · github_dmg · silent_launch',
-      '             msupdate · mau_fallback · docker_cli · manual',
+      '             msupdate · mau_fallback · docker_cli · brew_cask',
+      '             sparkle_appcast · appstore_gui · manual',
       '             policy: missing supported apps are reported only',
       '',
-      '  ✓ developer tooling & 48 internet apps current',
+      '  ✓ developer tooling & 43 internet apps current',
     ],
   },
   {
@@ -56,7 +57,7 @@ const PHASES = [
       '  ▸ step 6   softwareupdate -ia -R --verbose (macOS final)',
       '             restart-safe final step (skipped if earlier failed)',
       '',
-      '  ✓ 94 safety checks passed · pipeline complete',
+      '  ✓ 170 safety checks passed · pipeline complete',
     ],
   },
 ] as const

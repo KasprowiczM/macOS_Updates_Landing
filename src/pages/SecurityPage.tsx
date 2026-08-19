@@ -80,8 +80,8 @@ export function SecurityPage() {
             {pl ? 'Wspierane wersje' : 'Supported Versions'}
           </h2>
           <p>{pl
-            ? 'Aktualne wydanie v1.0.x otrzymuje poprawki bezpieczeństwa. Starsze wersje mogą wymagać aktualizacji do najnowszego tagu.'
-            : 'The current v1.0.x line receives security fixes. Older versions may need to upgrade to the latest tag.'
+            ? 'Aktualne wydanie v1.4.x otrzymuje poprawki bezpieczeństwa. Starsze wersje mogą wymagać aktualizacji do najnowszego tagu.'
+            : 'The current v1.4.x line receives security fixes. Older versions may need to upgrade to the latest tag.'
           }</p>
         </section>
       </DocLayout>

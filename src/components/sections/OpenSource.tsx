@@ -13,7 +13,7 @@ import { useGitHubStats } from '../../hooks/useGitHubStats'
 import { SectionReveal } from '../ui/SectionReveal'
 import { Button } from '../ui/Button'
 import { Badge } from '../ui/Badge'
-import { TEST_COUNT, REPO_URL } from '../../lib/site'
+import { TEST_COUNT, REPO_URL, APP_VERSION } from '../../lib/site'
 
 export function OpenSource() {
   const { t } = useTranslation()
@@ -41,7 +41,7 @@ export function OpenSource() {
               <Badge variant="accent">MIT</Badge>
               <Badge>Open source</Badge>
               <Badge>{TEST_COUNT} safety checks</Badge>
-              <Badge>v1.0.18</Badge>
+              <Badge>{APP_VERSION}</Badge>
             </div>
 
             <h3 className="font-semibold text-xl font-sans tracking-tight mb-3">

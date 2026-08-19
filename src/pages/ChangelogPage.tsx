@@ -14,6 +14,150 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.4.1',
+    date: '2026-08-19',
+    summary: {
+      en: 'Resilient Homebrew query layer, toolchain isolation fix, and CaskLoader regression fallback.',
+      pl: 'Odporna warstwa zapytań Homebrew, izolacja toolchaina PATH i fallback na regresje CaskLoader.',
+    },
+    added: [
+      {
+        en: 'lib/brew.sh module with brew_cask_versions fallback to Caskroom layout when upstream CaskLoader fails.',
+        pl: 'Moduł lib/brew.sh z fallbackiem brew_cask_versions do układu Caskroom w razie awarii CaskLoader.',
+      },
+      {
+        en: 'Toolchain isolation: managed prefix ~/.local/share/mac-update/ wins PATH by default over ambient nvm shims.',
+        pl: 'Izolacja toolchaina: zarządzany prefiks ~/.local/share/mac-update/ domyślnie wygrywa w PATH nad shimami nvm.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Filtered stderr progress chatter from brew outdated so macOS security updates are not falsely deferred.',
+        pl: 'Filtrowanie szumu z stderr w brew outdated, eliminujące fałszywe odraczanie aktualizacji macOS.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Fixed Homebrew 4.4+ CaskLoader API incompatibility when parsing cask versions.',
+        pl: 'Naprawiono niekompatybilność API CaskLoader w Homebrew 4.4+ przy parsowaniu wersji casków.',
+      },
+    ],
+  },
+  {
+    version: 'v1.4.0',
+    date: '2026-08-14',
+    summary: {
+      en: 'Non-mutating --verify-only mode, structured JSON run summaries, LaunchAgent scheduler, and Touch ID sudo onboarding.',
+      pl: 'Tryb bezmutacyjnej weryfikacji --verify-only, strukturalne podsumowanie JSON, harmonogram LaunchAgent i onboarding Touch ID.',
+    },
+    added: [
+      {
+        en: '--verify-only flag to check version delta against logs/version_history.tsv without making any system changes.',
+        pl: 'Flaga --verify-only sprawdzająca delty wersji względem logs/version_history.tsv bez wprowadzania zmian w systemie.',
+      },
+      {
+        en: 'Structured JSON execution summary (logs/run_summary_latest.json) for monitoring and automated reporting.',
+        pl: 'Strukturalny plik JSON z podsumowaniem (logs/run_summary_latest.json) do monitoringu i raportowania.',
+      },
+      {
+        en: 'LaunchAgent automated scheduling installer (scripts/install_launchagent.sh) with desktop notifications.',
+        pl: 'Instalator harmonogramu LaunchAgent (scripts/install_launchagent.sh) z powiadomieniami na pulpicie.',
+      },
+      {
+        en: 'Touch ID sudo setup script (scripts/setup_touchid_sudo.sh) for biometric privilege escalation.',
+        pl: 'Skrypt konfiguracji Touch ID dla sudo (scripts/setup_touchid_sudo.sh) dla biometrycznej autoryzacji.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Native CLI self-updates (claude, codex, agy) now execute with npm_config_prefix pinned to toolchain.',
+        pl: 'Natywne self-update CLI (claude, codex, agy) wykonują się z npm_config_prefix przypiętym do toolchaina.',
+      },
+    ],
+  },
+  {
+    version: 'v1.3.1',
+    date: '2026-08-05',
+    summary: {
+      en: 'Inventory cleanup, ChatGPT Atlas browser deprecation removal, and Ascendo moved to exclusions.',
+      pl: 'Czyszczenie inwentarza, usunięcie wycofanej przeglądarki ChatGPT Atlas i przeniesienie Ascendo do wykluczeń.',
+    },
+    changed: [
+      {
+        en: 'Updated canonical internet apps list to 43 applications.',
+        pl: 'Zaktualizowano kanoniczną listę aplikacji internetowych do 43 pozycji.',
+      },
+      {
+        en: 'Added config/inventory_exclusions.txt for explicit app ignore rules (Ascendo).',
+        pl: 'Dodano config/inventory_exclusions.txt dla jawnych reguł ignorowania aplikacji (Ascendo).',
+      },
+    ],
+  },
+  {
+    version: 'v1.3.0',
+    date: '2026-08-05',
+    summary: {
+      en: 'Sparkle appcast feed update method, Cask downgrade prevention, and dry-run safety enhancements.',
+      pl: 'Metoda aktualizacji przez feed Sparkle appcast, blokada downgrade casków i ulepszenia dry-run.',
+    },
+    added: [
+      {
+        en: 'Support for sparkle_appcast update method directly parsing XML appcasts.',
+        pl: 'Obsługa metody sparkle_appcast bezpośrednio parsującej kanały XML appcast.',
+      },
+      {
+        en: 'Cask downgrade prevention guard comparing bundle semantic versions before upgrade.',
+        pl: 'Zabezpieczenie przed downgrade casków porównujące wersje semantyczne pakietu przed instalacją.',
+      },
+    ],
+  },
+  {
+    version: 'v1.2.0',
+    date: '2026-08-05',
+    summary: {
+      en: 'GitHub DMG direct updater, Keystone engine updates, and 10 distinct update methods.',
+      pl: 'Bezpośredni instalator GitHub DMG, aktualizacje silnika Keystone i 10 odrębnych metod aktualizacji.',
+    },
+    added: [
+      {
+        en: 'github_dmg automated release download and mount/install method.',
+        pl: 'Metoda github_dmg do automatycznego pobierania, montowania i instalacji wydań z GitHuba.',
+      },
+    ],
+  },
+  {
+    version: 'v1.1.1',
+    date: '2026-08-05',
+    summary: {
+      en: 'Extended test suite to 170 unit and safety tests, and automated Gitleaks verification.',
+      pl: 'Rozszerzenie zestawu testów do 170 testów jednostkowych i bezpieczeństwa oraz weryfikacja Gitleaks.',
+    },
+    added: [
+      {
+        en: 'Comprehensive test suite with 170 safety and unit tests covering all update handlers and shell constraints.',
+        pl: 'Kompleksowy zestaw 170 testów bezpieczeństwa i jednostkowych pokrywający wszystkie handlery i ograniczenia powłoki.',
+      },
+    ],
+  },
+  {
+    version: 'v1.1.0',
+    date: '2026-08-05',
+    summary: {
+      en: 'Multi-language support (7 languages) and multi-cloud private overlay sync via dev_sync.',
+      pl: 'Obsługa 7 języków oraz synchronizacja prywatnego overlayu z wieloma chmurami przez dev_sync.',
+    },
+    added: [
+      {
+        en: 'Complete localization for 7 languages (EN, PL, DE, FR, ES, IT, PT).',
+        pl: 'Pełna lokalizacja dla 7 języków (EN, PL, DE, FR, ES, IT, PT).',
+      },
+      {
+        en: 'dev_sync private overlay management supporting Proton Drive, iCloud, and local targets.',
+        pl: 'Zarządzanie prywatnym overlayem dev_sync ze wsparciem dla Proton Drive, iCloud i celów lokalnych.',
+      },
+    ],
+  },
+  {
     version: 'v1.0.21',
     date: '2026-07-28',
     summary: {

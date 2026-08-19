@@ -8,11 +8,11 @@ export const SITE_URL = 'https://macosupdates.dev'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.0.21'
+export const APP_VERSION = 'v1.4.1'
 
-export const APP_VERSION_DATE = '2026-07-28'
+export const APP_VERSION_DATE = '2026-08-19'
 
-export const TEST_COUNT = 94
+export const TEST_COUNT = 170
 
 /** Recommended Basic CLI install — macOS. */
 export const INSTALL_NIX =

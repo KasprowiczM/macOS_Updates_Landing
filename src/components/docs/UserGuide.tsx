@@ -37,16 +37,19 @@ bash dev_sync/dev-sync-import.sh
 bash dev_sync/dev-sync-verify-full.sh`}</CodeBlock>
       </WikiSection>
 
-      <WikiSection id="scheduling" title={pl ? 'Tryby i flagi' : 'Modes and Flags'}>
+      <WikiSection id="scheduling" title={pl ? 'Tryby, flagi i automatyzacja' : 'Modes, Flags & Automation'}>
         <p>{pl
-          ? 'update_all.sh obsługuje dry-run, automatyczne potwierdzenie i flagi skip dla selektywnego pomijania warstw.'
-          : 'update_all.sh supports dry-run, yes mode, and skip flags for selectively bypassing layers.'
+          ? 'update_all.sh obsługuje dry-run, weryfikację bez mutacji (--verify-only), automatyczne potwierdzenie (-y), onboarding Touch ID i harmonogram LaunchAgent.'
+          : 'update_all.sh supports dry-run, non-mutating verification (--verify-only), yes mode (-y), Touch ID onboarding, and LaunchAgent scheduling.'
         }</p>
         <CodeBlock title="bash">{`bash update_all.sh --dry-run -y
+bash update_all.sh --verify-only
 bash update_all.sh --skip-system
 bash update_all.sh --skip-appstore
 bash update_all.sh --skip-brew
-bash update_all.sh --skip-internet`}</CodeBlock>
+bash update_all.sh --skip-internet
+bash scripts/setup_touchid_sudo.sh
+bash scripts/install_launchagent.sh --day 6 --hour 10`}</CodeBlock>
       </WikiSection>
     </>
   )

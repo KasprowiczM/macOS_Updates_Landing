@@ -10,12 +10,15 @@ export function Architecture({ pl }: { pl: boolean }) {
         }</p>
         <CodeBlock title="macOS_updates/">{`update_all.sh                  # ${pl ? 'główny orkiestrator (kroki 0 do 6)' : 'main orchestrator (steps 0 to 6)'}
 update_appstore.sh             # step 1: sudo mas + AppleScript fallback
-update_npm_cli.sh              # step 2: Node, Bun, npm global CLIs
+update_npm_cli.sh              # step 2: Node, Bun, npm global CLIs (native self-update)
 update_brew.sh                 # step 3: brew upgrade + cleanup + doctor
-update_internet_apps.sh        # step 4: 48 internet app handlers
+update_internet_apps.sh        # step 4: 43 internet app handlers
 build_inventory.sh / postupdate # step 0 & 5: APPLICATIONS.md & UPDATES.md
 update_system.sh               # step 6: softwareupdate -ia -R (macOS final)
-config/internet_apps.txt       # public registry (48 apps)
+config/internet_apps.txt       # public registry (43 apps)
+config/inventory_exclusions.txt # discovery exclusions (Ascendo)
+lib/brew.sh                    # resilient Homebrew query layer
+lib/version.sh                 # shared version comparison logic
 dev_sync/                      # private overlay backend
 docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotiable rules'}`}</CodeBlock>
       </WikiSection>
@@ -30,9 +33,9 @@ docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotia
           rows={[
             ['0', 'prescan', pl ? 'Odświeża APPLICATIONS.md z tej maszyny.' : 'Refresh APPLICATIONS.md from this machine.'],
             ['1', 'update_appstore.sh', 'sudo mas upgrade + AppleScript GUI fallback'],
-            ['2', 'update_npm_cli.sh', pl ? 'Node, Bun i globalne CLI npm.' : 'Node, Bun, and npm global CLIs.'],
-            ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (--greedy), cleanup i doctor.' : 'Homebrew upgrade (--greedy), cleanup, and doctor.'],
-            ['4', 'update_internet_apps.sh', pl ? '48 obsługiwanych aplikacji internetowych (keystone, dmg, mau, etc.).' : '48 supported internet apps (keystone, dmg, mau, etc.).'],
+            ['2', 'update_npm_cli.sh', pl ? 'Node, Bun i globalne CLI npm (claude, codex, agy self-update).' : 'Node, Bun, and npm global CLIs (claude, codex, agy self-update).'],
+            ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (--greedy), cleanup i doctor przez lib/brew.sh.' : 'Homebrew upgrade (--greedy), cleanup, and doctor via lib/brew.sh.'],
+            ['4', 'update_internet_apps.sh', pl ? '43 obsługiwane aplikacje internetowe (keystone, dmg, mau, sparkle, etc.).' : '43 supported internet apps (keystone, dmg, mau, sparkle, etc.).'],
             ['5', 'postupdate', pl ? 'Atomowy zapis wersji w inwentarzu i historii UPDATES.md.' : 'Atomic write to inventory versions and UPDATES.md history.'],
             ['6', 'update_system.sh', pl ? 'softwareupdate -ia -R (końcowy krok bezpieczny dla restartu).' : 'softwareupdate -ia -R (final restart-safe step).'],
           ]}
@@ -41,8 +44,8 @@ docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotia
 
       <WikiSection id="native-bash" title={pl ? 'Ograniczenia runtime' : 'Runtime Constraints'}>
         <p>{pl
-          ? 'Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Wszystkie zmiany przechodzą 94 testy statyczne i unit.'
-          : 'The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. All changes pass 94 static and unit tests.'
+          ? 'Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Wszystkie zmiany przechodzą 170 testów statycznych i unit.'
+          : 'The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. All changes pass 170 static and unit tests.'
         }</p>
       </WikiSection>
     </>

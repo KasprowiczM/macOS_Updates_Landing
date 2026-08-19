@@ -13,7 +13,7 @@
     "headline1": "Update every layer",
     "headline2": "from one trusted run.",
     "headline3": "No borrowed inventories.",
-    "subheadline": "macOS Updates keeps system updates, App Store apps, Homebrew, native CLI tools, npm globals, and 48 internet apps current while touching only software already installed on this Mac.",
+    "subheadline": "macOS Updates keeps system updates, App Store apps, Homebrew, native CLI tools, npm globals, and 43 internet apps current while touching only software already installed on this Mac.",
     "ctaPrimary": "Install macOS Updates",
     "ctaSecondary": "View source",
     "oneLinerLabel": "One-line install",
@@ -62,7 +62,7 @@
   "pipeline": {
     "eyebrow": "Seven-step updater",
     "title": "One orchestrator, seven update layers.",
-    "subtitle": "update_all.sh runs prescan, App Store, native CLI/npm, Homebrew, 48 internet apps, postupdate bookkeeping, and macOS system updates in order.",
+    "subtitle": "update_all.sh runs prescan, App Store, native CLI/npm, Homebrew, 43 internet apps, postupdate bookkeeping, and macOS system updates in order.",
     "phases": {
       "check": {
         "name": "Prescan (Step 0)",
@@ -76,13 +76,13 @@
       },
       "apply": {
         "name": "Brew + Internet (Steps 3 & 4)",
-        "desc": "Update Homebrew formulae/casks (--greedy) and 48 internet apps across 9 update methods.",
+        "desc": "Update Homebrew formulae/casks (--greedy) and 43 internet apps across 10 update methods.",
         "detail": "MAU deferral preflight, roll-back safe DMG swaps, and non-blocking soft failure gating."
       },
       "verify": {
         "name": "Postupdate + macOS (Steps 5 & 6)",
         "desc": "Atomically refresh inventory and history, then run macOS system update (softwareupdate -ia -R) last.",
-        "detail": "macOS system updates run last to retain reboot safety and 94 safety checks pass."
+        "detail": "macOS system updates run last to retain reboot safety and 170 safety checks pass."
       }
     }
   },

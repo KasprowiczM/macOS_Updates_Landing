@@ -22,11 +22,11 @@ const TERMINAL_LINES = [
   { text: '  ▸ step 1  sudo mas upgrade + AppleScript GUI', delay: 1650, color: 'text-(--code-fg)' },
   { text: '  ▸ step 2  Node, Bun, npm global CLIs', delay: 2150, color: 'text-(--code-fg)' },
   { text: '  ▸ step 3  brew upgrade + cleanup + doctor', delay: 2650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 4  48 internet app handlers (keystone, dmg, mau)', delay: 3150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 4  43 internet app handlers (keystone, dmg, mau, sparkle)', delay: 3150, color: 'text-(--code-fg)' },
   { text: '  ▸ step 5  postupdate history & version bump', delay: 3650, color: 'text-(--code-fg)' },
   { text: '  ▸ step 6  softwareupdate -ia -R (macOS final)', delay: 4150, color: 'text-(--code-fg)' },
   { text: '', delay: 4550 },
-  { text: '  ✓ dry-run complete · 94 safety checks passed · no mutations applied', delay: 4850, color: 'text-(--accent-strong)' },
+  { text: '  ✓ dry-run complete · 170 safety checks passed · no mutations applied', delay: 4850, color: 'text-(--accent-strong)' },
 ]
 
 function TypewriterTerminal() {

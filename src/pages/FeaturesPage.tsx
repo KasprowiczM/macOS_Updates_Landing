@@ -118,23 +118,25 @@ export function FeaturesPage() {
   const shippingToday = pl
     ? [
         'Siedem kroków: prescan → App Store → CLI/npm → brew → internet → postupdate → system macOS',
-        'Lokalny APPLICATIONS.md budowany z tego Maca',
-        '48 obsługiwanych aplikacji internetowych w 9 metodach',
+        'Lokalny APPLICATIONS.md budowany z tego Maca z wykluczeniami w inventory_exclusions.txt',
+        '43 obsługiwane aplikacje internetowe w 10 metodach (w tym Sparkle appcast i GitHub DMG)',
         'Dwutorowy App Store: sudo mas (CVE-2025-43411) + GUI iPada',
-        'Końcowa bezpieczna aktualizacja macOS z wymuszonym softwareupdate -R',
-        'Prywatny overlay dev_sync dla inwentarza i historii z wsparciem Proton Drive',
+        'Końcowa bezpieczna aktualizacja macOS z wymuszonym softwareupdate -R i odporną warstwą Homebrew',
+        'Prywatny overlay dev_sync dla inwentarza i historii ze wsparciem Proton Drive',
+        'Tryb bezmutacyjnej weryfikacji --verify-only oraz automatyzacja LaunchAgent i Touch ID sudo',
         'Siedem języków UI terminala (EN, PL, DE, FR, ES, IT, PT)',
-        '94 testy statyczne, unit, registry parity i scan sekretów gitleaks',
+        '170 testów statycznych, unit, registry parity i skan sekretów gitleaks',
       ]
     : [
         'Seven steps: prescan → App Store → CLI/npm → brew → internet → postupdate → macOS system',
-        'Local APPLICATIONS.md built from this Mac',
-        '48 supported internet-downloaded apps across 9 methods',
+        'Local APPLICATIONS.md built from this Mac with inventory_exclusions.txt support',
+        '43 supported internet-downloaded apps across 10 methods (including Sparkle appcast and GitHub DMG)',
         'Two-track App Store: sudo mas (CVE-2025-43411 fix) + iPad AppleScript GUI',
-        'Restart-safe final macOS system update with mandatory softwareupdate -R',
+        'Restart-safe final macOS system update with mandatory softwareupdate -R and resilient Homebrew layer',
         'Private dev_sync overlay for inventory and history with Proton Drive support',
+        'Non-mutating --verify-only mode, LaunchAgent automation, and Touch ID sudo onboarding',
         'Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT)',
-        '94 static, unit, registry parity, and gitleaks secret scanning tests',
+        '170 static, unit, registry parity, and gitleaks secret scanning tests',
       ]
 
   const breadcrumb = {

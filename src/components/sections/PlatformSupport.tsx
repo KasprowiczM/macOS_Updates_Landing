@@ -14,27 +14,25 @@ interface AppItem {
 const SUPPORTED_APPS: AppItem[] = [
   { name: 'Google Chrome', method: 'keystone', category: 'prod' },
   { name: 'Firefox Developer Edition', method: 'github_dmg', category: 'dev' },
-  { name: 'Brave Browser', method: 'silent_launch', category: 'prod' },
-  { name: 'ChatGPT Atlas', method: 'github_dmg', category: 'ai' },
+  { name: 'Brave Browser', method: 'brew_cask', category: 'prod' },
   { name: 'ChatGPT / Codex', method: 'silent_launch', category: 'ai' },
   { name: 'Claude', method: 'silent_launch', category: 'ai' },
   { name: 'Comet', method: 'silent_launch', category: 'ai' },
   { name: 'Gemini', method: 'silent_launch', category: 'ai' },
-  { name: 'Perplexity', method: 'silent_launch', category: 'ai' },
+  { name: 'Perplexity', method: 'brew_cask', category: 'ai' },
   { name: 'Antigravity', method: 'silent_launch', category: 'ai' },
   { name: 'Antigravity IDE', method: 'silent_launch', category: 'dev' },
-  { name: 'LM Studio', method: 'silent_launch', category: 'ai' },
+  { name: 'LM Studio', method: 'brew_cask', category: 'ai' },
   { name: 'OpenCode', method: 'silent_launch', category: 'dev' },
   { name: 'Cursor', method: 'silent_launch', category: 'dev' },
-  { name: 'Ascendo', method: 'silent_launch', category: 'dev' },
-  { name: 'Obsidian', method: 'silent_launch', category: 'prod' },
-  { name: 'ProtonVPN', method: 'silent_launch', category: 'security' },
+  { name: 'Obsidian', method: 'brew_cask', category: 'prod' },
+  { name: 'ProtonVPN', method: 'brew_cask', category: 'security' },
   { name: 'KeePassXC', method: 'github_dmg', category: 'security' },
   { name: 'Proton Mail', method: 'silent_launch', category: 'prod' },
-  { name: 'zoom.us', method: 'silent_launch', category: 'prod' },
+  { name: 'zoom.us', method: 'brew_cask', category: 'prod' },
   { name: 'Google Drive', method: 'keystone', category: 'cloud_media' },
-  { name: 'MEGAsync', method: 'silent_launch', category: 'cloud_media' },
-  { name: 'Proton Drive', method: 'silent_launch', category: 'cloud_media' },
+  { name: 'MEGAsync', method: 'brew_cask', category: 'cloud_media' },
+  { name: 'Proton Drive', method: 'sparkle_appcast', category: 'cloud_media' },
   { name: 'Microsoft Excel', method: 'msupdate', category: 'prod' },
   { name: 'Microsoft Word', method: 'msupdate', category: 'prod' },
   { name: 'Microsoft Outlook', method: 'msupdate', category: 'prod' },
@@ -45,12 +43,12 @@ const SUPPORTED_APPS: AppItem[] = [
   { name: 'Warp', method: 'silent_launch', category: 'dev' },
   { name: 'CodeEdit', method: 'github_dmg', category: 'dev' },
   { name: 'Docker Desktop', method: 'docker_cli', category: 'dev' },
-  { name: 'AppCleaner', method: 'silent_launch', category: 'prod' },
-  { name: 'Spotify', method: 'silent_launch', category: 'cloud_media' },
-  { name: 'CapCut', method: 'silent_launch', category: 'cloud_media' },
+  { name: 'AppCleaner', method: 'brew_cask', category: 'prod' },
+  { name: 'Spotify', method: 'brew_cask', category: 'cloud_media' },
+  { name: 'CapCut', method: 'brew_cask', category: 'cloud_media' },
   { name: 'Ledger Live', method: 'github_dmg', category: 'security' },
   { name: 'Trezor Suite', method: 'github_dmg', category: 'security' },
-  { name: 'Remote Desktop Manager', method: 'silent_launch', category: 'dev' },
+  { name: 'Remote Desktop Manager', method: 'sparkle_appcast', category: 'dev' },
   { name: 'IPMIView', method: 'manual', category: 'dev' },
   { name: 'Inkscape', method: 'brew_cask', category: 'cloud_media' },
   { name: 'DJI Assistant 2', method: 'manual', category: 'prod' },
@@ -60,7 +58,7 @@ const SUPPORTED_APPS: AppItem[] = [
 ]
 
 const CATEGORIES = [
-  { id: 'all', label: 'All (48)', icon: Filter },
+  { id: 'all', label: 'All (43)', icon: Filter },
   { id: 'ai', label: 'AI & LLMs', icon: Sparkles },
   { id: 'dev', label: 'Developer', icon: Code2 },
   { id: 'prod', label: 'Productivity', icon: FolderKanban },
@@ -175,18 +173,18 @@ export function PlatformSupport() {
         </div>
       </SectionReveal>
 
-      {/* 48 Internet Apps Catalog Grid */}
+      {/* 43 Internet Apps Catalog Grid */}
       <SectionReveal delay={0.25}>
         <div className="bg-(--bg-elev) border border-(--border) rounded-xl p-6 sm:p-8 shadow-(--shadow-md)">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="font-bold text-xl font-sans tracking-tight text-(--fg)">
-                {pl ? 'Katalog 48 Aplikacji Internetowych' : 'Supported 48 Internet Apps Catalog'}
+                {pl ? 'Katalog 43 Aplikacji Internetowych' : 'Supported 43 Internet Apps Catalog'}
               </h3>
               <p className="text-(--fg-muted) text-[14px] font-sans mt-1">
                 {pl
-                  ? 'Faktyczny spis 48 aplikacji oraz 9 metod ich automatycznej aktualizacji.'
-                  : 'Complete registry of 48 applications and their 9 exact update methods.'}
+                  ? 'Faktyczny spis 43 aplikacji oraz 10 metod ich automatycznej aktualizacji.'
+                  : 'Complete registry of 43 applications and their 10 exact update methods.'}
               </p>
             </div>
 
@@ -254,6 +252,7 @@ export function PlatformSupport() {
                      app.method === 'mau_fallback_self_update' ? 'MAU' :
                      app.method === 'docker_cli' ? 'Docker' :
                      app.method === 'brew_cask' ? 'Cask' :
+                     app.method === 'sparkle_appcast' ? 'Sparkle' :
                      app.method === 'manual' ? 'Manual' : 'Launch'}
                   </span>
                 </motion.div>
