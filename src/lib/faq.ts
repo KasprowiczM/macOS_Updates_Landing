@@ -31,7 +31,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q5',
     q: 'What does dev_sync do?',
-    a: 'dev_sync handles optional private overlay files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and cloud sync configuration.',
+    a: 'dev_sync handles optional private overlay files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and cloud sync configuration. Import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails.',
   },
   {
     id: 'q6',
@@ -47,5 +47,10 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: 'q8',
     q: 'How do I add a new internet app?',
     a: 'Use scripts/scaffold_internet_app.sh, register the method and dispatch order, add i18n strings, then run bash run_tests.sh.',
+  },
+  {
+    id: 'q9',
+    q: 'How do I know an update actually landed?',
+    a: 'A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists.',
   },
 ]

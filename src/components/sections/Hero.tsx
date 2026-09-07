@@ -4,7 +4,7 @@ import { m } from 'framer-motion'
 import { BookOpen, ChevronDown, Apple } from 'lucide-react'
 import { Button } from '../ui/Button'
 import { TerminalBlock } from '../ui/TerminalBlock'
-import { INSTALL_NIX, REPO_URL } from '../../lib/site'
+import { INSTALL_NIX, INTERNET_APP_COUNT, REPO_URL, TEST_COUNT } from '../../lib/site'
 
 function GitHubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -20,13 +20,13 @@ const TERMINAL_LINES = [
   { text: '  ✓ inventory APPLICATIONS.md refreshed', delay: 1200, color: 'text-status-ok' },
   { text: '', delay: 1100 },
   { text: '  ▸ step 1  sudo mas upgrade + AppleScript GUI', delay: 1650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 2  Node, Bun, npm global CLIs', delay: 2150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 2  native vendor CLIs (claude, Codex, OpenCode, agy)', delay: 2150, color: 'text-(--code-fg)' },
   { text: '  ▸ step 3  brew upgrade + cleanup + doctor', delay: 2650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 4  43 internet app handlers (keystone, dmg, mau, sparkle)', delay: 3150, color: 'text-(--code-fg)' },
+  { text: `  ▸ step 4  ${INTERNET_APP_COUNT} internet app handlers (keystone, dmg, mau, sparkle)`, delay: 3150, color: 'text-(--code-fg)' },
   { text: '  ▸ step 5  postupdate history & version bump', delay: 3650, color: 'text-(--code-fg)' },
   { text: '  ▸ step 6  softwareupdate -ia -R (macOS final)', delay: 4150, color: 'text-(--code-fg)' },
   { text: '', delay: 4550 },
-  { text: '  ✓ dry-run complete · 170 safety checks passed · no mutations applied', delay: 4850, color: 'text-(--accent-strong)' },
+  { text: `  ✓ dry-run complete · ${TEST_COUNT} safety checks passed · no mutations applied`, delay: 4850, color: 'text-(--accent-strong)' },
 ]
 
 function TypewriterTerminal() {

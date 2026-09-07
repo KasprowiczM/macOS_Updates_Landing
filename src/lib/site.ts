@@ -8,11 +8,17 @@ export const SITE_URL = 'https://macosupdates.dev'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.4.1'
+export const APP_VERSION = 'v1.4.5'
 
-export const APP_VERSION_DATE = '2026-08-19'
+export const APP_VERSION_DATE = '2026-09-07'
 
-export const TEST_COUNT = 170
+export const TEST_COUNT = 270
+
+/** Canonical internet-app registry size (`config/internet_apps.txt`). */
+export const INTERNET_APP_COUNT = 43
+
+/** Distinct internet-app update methods in `config/internet_app_methods.txt`. */
+export const UPDATE_METHOD_COUNT = 10
 
 /** Recommended Basic CLI install — macOS. */
 export const INSTALL_NIX =

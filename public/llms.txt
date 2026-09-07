@@ -1,8 +1,9 @@
 # macOS Updates
 
-Production-ready one-command updater for Apple Silicon Macs (v1.4.1). It keeps macOS,
+Production-ready one-command updater for Apple Silicon Macs (v1.4.5). It keeps macOS,
 App Store apps, Homebrew, native CLI/npm tooling, and 43 internet-downloaded
 apps current while updating only software already installed on the current Mac.
+A mutation is reported only after the live Mac confirms it.
 
 ## Install
 
@@ -21,11 +22,11 @@ Manual setup:
 `update_all.sh` runs seven layers in order:
 
 1. Step 0: Prescan installed apps into APPLICATIONS.md for this Mac
-2. Step 1: App Store via sudo mas upgrade (CVE-2025-43411 fix) plus AppleScript GUI fallback
-3. Step 2: Native CLI/npm tooling: Node, Bun, npm globals
+2. Step 1: App Store via sudo mas upgrade of measured IDs, with a user-session retry, plus AppleScript GUI fallback
+3. Step 2: Native vendor CLIs (claude update, Codex installer, opencode upgrade, agy) plus Node, Bun, npm globals
 4. Step 3: Homebrew upgrade (--greedy), casks, cleanup, and doctor
 5. Step 4: 43 Internet apps through 10 registered handler methods
-6. Step 5: Postupdate inventory version bumps and UPDATES.md history
+6. Step 5: Postupdate that splits inventory field edits from observed package/CLI changes, then UPDATES.md history
 7. Step 6: macOS system update via softwareupdate -ia -R --verbose (restart-safe final step)
 
 ## Safety model
@@ -35,13 +36,18 @@ Manual setup:
 - Missing supported apps are reported, not installed.
 - Private files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and
   dev_sync config stay out of public Git.
+- Overlay import expands directory manifests, skips Git-tracked and excluded
+  files, refuses symlink escapes, and leaves a recovery path if a swap fails.
 - `softwareupdate` must keep `-R`.
-- `mas upgrade` must run with `sudo`.
+- `mas upgrade` must run with `sudo` and the IDs the pre-scan measured.
+- Vendor CLI success requires a working `--version`; unknown pending stays unknown.
+- Vendor TUIs that ignore SIGTERM are SIGKILL'd so the pipeline cannot hang.
 - Bash code stays compatible with Bash 3.2.
-- All code changes pass 170 static and unit tests.
+- All code changes pass 270 static and unit tests.
 
 ## Links
 
 - Documentation: https://macosupdates.dev/docs
 - Features: https://macosupdates.dev/features
+- Changelog: https://macosupdates.dev/changelog
 - Source code: https://github.com/KasprowiczM/macOS_updates

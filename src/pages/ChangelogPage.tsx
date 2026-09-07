@@ -14,6 +14,142 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.4.5',
+    date: '2026-09-07',
+    summary: {
+      en: 'Overlay import integrity, vendor CLI contracts that require a working binary, and honest run reporting.',
+      pl: 'Integralność importu overlay, kontrakty CLI vendorów wymagające działającego binarium oraz uczciwe raportowanie przebiegu.',
+    },
+    added: [
+      {
+        en: 'Process-group timeouts with SIGKILL for vendor TUIs that ignore SIGTERM, plus a per-repo run lock so parallel runs cannot collide.',
+        pl: 'Timeouty grupy procesów z SIGKILL dla TUI vendorów ignorujących SIGTERM oraz blokada przebiegu w repozytorium, żeby równoległe runy się nie zderzały.',
+      },
+      {
+        en: 'Run JSON format 2 (mode 0600) with run_id/run_status, and postupdate UI that splits inventory field edits from observed package/CLI changes in all seven languages.',
+        pl: 'JSON przebiegu w formacie 2 (tryb 0600) z run_id/run_status oraz UI postupdate, które rozdziela edycje pól inwentarza od zaobserwowanych zmian pakietów/CLI w siedmiu językach.',
+      },
+    ],
+    changed: [
+      {
+        en: 'rclone export writes an explicit overlay manifest; import uses that plan instead of a full remote listing. Ubuntu Python gate on push/PR; the full macOS suite remains manual/tag.',
+        pl: 'Eksport rclone zapisuje jawny manifest overlay; import korzysta z tego planu zamiast pełnego listingu zdalnego. Brama Pythona na Ubuntu przy push/PR; pełny zestaw macOS zostaje ręczny/tagowy.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Overlay import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a failed swap cannot restore.',
+        pl: 'Import overlay rozwija manifesty katalogów, pomija pliki śledzone przez Git i wykluczone, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy nieudana zamiana nie może przywrócić backupu.',
+      },
+      {
+        en: 'Codex/agy bootstrap downloads then execs (never curl|sh success); OpenCode repair is scoped to an existing managed stub with --allow-scripts=opencode-ai and never writes ~/.npmrc.',
+        pl: 'Bootstrap Codex/agy pobiera, potem uruchamia (nigdy sukces curl|sh); naprawa OpenCode dotyczy wyłącznie istniejącego stuba w zarządzanym prefiksie z --allow-scripts=opencode-ai i nigdy nie zapisuje ~/.npmrc.',
+      },
+      {
+        en: 'Unknown pending counts stay unknown instead of becoming zero; a vendor CLI is only reported updated when a working --version exists.',
+        pl: 'Nieznane pending nie zamienia się w zero; CLI vendora jest raportowane jako zaktualizowane tylko gdy istnieje działające --version.',
+      },
+    ],
+  },
+  {
+    version: 'v1.4.4',
+    date: '2026-09-03',
+    summary: {
+      en: 'Hang-proof Claude Code updates, native OpenCode self-updater, and after-run observability.',
+      pl: 'Aktualizacje Claude Code bez zawieszania pipeline, natywny self-updater OpenCode i obserwowalność po przebiegu.',
+    },
+    added: [
+      {
+        en: 'Chronic step-warning detector over dated run summaries, pending-after-run counts, and a three-way App Store diagnostic that always records before / GUI / after.',
+        pl: 'Detektor chronicznych ostrzeżeń kroków na datowanych podsumowaniach, liczniki pending po przebiegu oraz trójstronna diagnostyka App Store (przed / GUI / po).',
+      },
+    ],
+    changed: [
+      {
+        en: 'OpenCode updates through opencode upgrade --method npm. Existing Claude binaries call claude update instead of re-running install.sh.',
+        pl: 'OpenCode aktualizuje się przez opencode upgrade --method npm. Istniejące binaria Claude wywołują claude update zamiast ponownie uruchamiać install.sh.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Anthropic install.sh post-install TUI no longer hangs the whole pipeline: GNU timeout follows SIGTERM with SIGKILL after five seconds.',
+        pl: 'TUI post-install Anthropic install.sh nie wiesza już całego pipeline: GNU timeout po SIGTERM wysyła SIGKILL po pięciu sekundach.',
+      },
+      {
+        en: 'Firefox Developer Edition reports both bundle version and channel in current/updated messages.',
+        pl: 'Firefox Developer Edition raportuje zarówno wersję bundla, jak i kanał w komunikatach current/updated.',
+      },
+    ],
+  },
+  {
+    version: 'v1.4.3',
+    date: '2026-09-02',
+    summary: {
+      en: 'Office quarantine deadlock broken, App Store upgrades by measured IDs, and run summaries that actually carry counts.',
+      pl: 'Przerwany impas kwarantanny Office, aktualizacje App Store po zmierzonych ID oraz podsumowania przebiegu z rzeczywistymi licznikami.',
+    },
+    added: [
+      {
+        en: 'MAU quarantine expiry under MAC_UPDATE_MAU_QUARANTINE_MAX_DAYS (default 14). Past the window the guard releases itself so the next run can see the feed again.',
+        pl: 'Wygaśnięcie kwarantanny MAU pod MAC_UPDATE_MAU_QUARANTINE_MAX_DAYS (domyślnie 14). Po oknie strażnik sam się zwalnia, żeby kolejny przebieg znów widział feed.',
+      },
+    ],
+    changed: [
+      {
+        en: 'sudo mas upgrade receives the explicit IDs the pre-scan measured, with one per-ID retry in the invoking user session when root still leaves an app outdated.',
+        pl: 'sudo mas upgrade dostaje jawne ID zmierzone w pre-skanie, z jednym retry per-ID w sesji użytkownika, gdy root nadal zostawia aplikację nieaktualną.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Armed DeferralDays entries no longer hide Office upgrades forever: the quarantine had suppressed the evidence needed to release it, so a real 16.112.3 offer stayed invisible for seven weeks.',
+        pl: 'Uzbrojone wpisy DeferralDays nie ukrywają już aktualizacji Office w nieskończoność: kwarantanna tłumiła dowód potrzebny do jej zdjęcia, więc prawdziwa oferta 16.112.3 była niewidoczna przez siedem tygodni.',
+      },
+      {
+        en: 'DeferralVersions pins at the installed build (MAU bookkeeping, e.g. TEAMS21) are left alone; only a pin strictly older than installed is released.',
+        pl: 'Piny DeferralVersions na zainstalowanej wersji (księgowość MAU, np. TEAMS21) zostają w spokoju; zwalniany jest tylko pin ściśle starszy niż zainstalowana wersja.',
+      },
+      {
+        en: 'Every run_summary now reads the counts step 5 already computed instead of shipping an empty counts block.',
+        pl: 'Każde run_summary czyta liczniki, które krok 5 już wyliczył, zamiast wysyłać pusty blok counts.',
+      },
+    ],
+  },
+  {
+    version: 'v1.4.2',
+    date: '2026-08-26',
+    summary: {
+      en: 'Unblocked Codex, Ledger Live, Brave, and MAU deferral verification — four run-log warnings that were permanent update blocks.',
+      pl: 'Odblokowane Codex, Ledger Live, Brave i weryfikacja odroczeń MAU — cztery ostrzeżenia z logu, które były trwałymi blokadami aktualizacji.',
+    },
+    added: [
+      {
+        en: 'Scheme-aware app_vs_package_version_relation() so cask downgrade guards compare Homebrew records against bundle versions without inventing a downgrade.',
+        pl: 'Świadome schematu app_vs_package_version_relation(), żeby strażnik downgrade casków porównywał ewidencję Homebrew z wersją bundla bez wymyślania downgrade’u.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Standalone CLIs (Claude Code, Codex, OpenCode, agy, cursor-agent) update through native vendor installers, not npm -g @latest. Codex runs with CODEX_NON_INTERACTIVE=1 and a 360s timeout.',
+        pl: 'Samodzielne CLI (Claude Code, Codex, OpenCode, agy, cursor-agent) aktualizują się natywnymi instalatorami vendorów, nie npm -g @latest. Codex działa z CODEX_NON_INTERACTIVE=1 i timeoutem 360 s.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Ledger Live checksum reads the DMG url and digest from the same latest-mac.yml entry instead of comparing a ZIP digest to a DMG download.',
+        pl: 'Suma kontrolna Ledger Live czyta URL i digest DMG z tego samego wpisu latest-mac.yml zamiast porównywać digest ZIP-a z pobranym DMG.',
+      },
+      {
+        en: 'Brave was skipped forever because the guard compared Chromium-prefixed bundle 151.x with Homebrew 1.x. Removals of MAU deferrals are now measured against the live domain, not plutil exit codes on an export.',
+        pl: 'Brave był pomijany na stałe, bo strażnik porównywał bundel z prefiksem Chromium 151.x z Homebrew 1.x. Usunięcia odroczeń MAU są mierzone względem żywej domeny, nie kodu wyjścia plutil na eksporcie.',
+      },
+      {
+        en: 'Prescan no longer treats the toolkit’s own 🆕 inventory marker as a newly discovered application.',
+        pl: 'Prescan nie traktuje już własnego znacznika 🆕 w inwentarzu jako nowo odkrytej aplikacji.',
+      },
+    ],
+  },
+  {
     version: 'v1.4.1',
     date: '2026-08-19',
     summary: {

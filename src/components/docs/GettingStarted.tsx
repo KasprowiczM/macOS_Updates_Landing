@@ -1,12 +1,13 @@
 import { WikiSection, CodeBlock, InfoCard } from './WikiSection'
+import { INTERNET_APP_COUNT } from '../../lib/site'
 
 export function GettingStarted({ pl }: { pl: boolean }) {
   return (
     <>
       <WikiSection id="overview" title={pl ? 'Przegląd' : 'Overview'}>
         <p>{pl
-          ? 'macOS Updates to jednopoleceniowy aktualizator dla Maców Apple Silicon. Aktualizuje macOS, App Store, Homebrew, natywne CLI/npm i 43 aplikacje internetowe na podstawie lokalnego inwentarza.'
-          : 'macOS Updates is a one-command updater for Apple Silicon Macs. It updates macOS, App Store apps, Homebrew, native CLI/npm tooling, and 43 internet-downloaded apps from a local inventory.'
+          ? `macOS Updates to jednopoleceniowy aktualizator dla Maców Apple Silicon. Aktualizuje macOS, App Store, Homebrew, natywne CLI/npm i ${INTERNET_APP_COUNT} aplikacje internetowe na podstawie lokalnego inwentarza. Mutacja jest raportowana dopiero po potwierdzeniu przez żywy Mac.`
+          : `macOS Updates is a one-command updater for Apple Silicon Macs. It updates macOS, App Store apps, Homebrew, native CLI/npm tooling, and ${INTERNET_APP_COUNT} internet-downloaded apps from a local inventory. A mutation is reported only after the live Mac confirms it.`
         }</p>
         <p className="text-[14px]">{pl
           ? 'Kluczowa zasada: aktualizowane jest tylko oprogramowanie już zainstalowane na tym Macu. Instalator nie importuje cudzych plików APPLICATIONS.md i nie instaluje brakujących aplikacji.'

@@ -25,11 +25,11 @@ const WITH_LINES = [
   { text: '  ▸ Coverage    supported installed: 42 handlers', delay: 1200, color: 'text-(--code-fg)' },
   { text: '  ▸ Policy      missing apps reported, not installed', delay: 1600, color: 'text-(--code-dim)' },
   { text: '$ bash update_all.sh', delay: 2400, color: 'text-(--code-fg)' },
-  { text: '  ▸ Apply       system, store, cli, brew, internet', delay: 3000, color: 'text-status-ok' },
+  { text: '  ▸ Apply       store, cli, brew, internet, then macOS last', delay: 3000, color: 'text-status-ok' },
   { text: '  ▸ Postupdate  UPDATES.md appended', delay: 3600, color: 'text-status-ok' },
   { text: '', delay: 4000 },
-  { text: '  ✓ one run · local inventory · auditable log', delay: 4400, color: 'text-(--accent-strong)' },
-  { text: '  ✓ logs/session-20260609/update_all.log', delay: 4800, color: 'text-(--accent-strong)' },
+  { text: '  ✓ one run · live-system verified · auditable log', delay: 4400, color: 'text-(--accent-strong)' },
+  { text: '  ✓ inventory edits ≠ package changes', delay: 4800, color: 'text-(--accent-strong)' },
 ]
 
 interface AnimatedTerminalProps {

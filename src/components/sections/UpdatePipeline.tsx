@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Store, PackageCheck, FileCheck, ChevronRight } from 'lucide-react'
 import { SectionReveal } from '../ui/SectionReveal'
+import { INTERNET_APP_COUNT, TEST_COUNT } from '../../lib/site'
 
 const PHASES = [
   {
@@ -24,10 +25,10 @@ const PHASES = [
     icon: Store,
     color: '#E0A82E',
     terminal: [
-      '  ▸ step 1   update_appstore.sh (sudo mas upgrade)',
-      '             Track 1: native macOS apps (CVE-2025-43411 fix)',
+      '  ▸ step 1   update_appstore.sh (sudo mas, measured IDs)',
+      '             Track 1: explicit IDs + user-session retry',
       '             Track 2: iPad apps via AppleScript GUI',
-      '  ▸ step 2   update_npm_cli.sh (Node, Bun, npm globals)',
+      '  ▸ step 2   native vendor CLIs (claude, Codex, OpenCode, agy)',
       '',
       '  ✓ App Store & CLI tooling layers complete',
     ],
@@ -38,13 +39,13 @@ const PHASES = [
     color: '#3278B8',
     terminal: [
       '  ▸ step 3   update_brew.sh (casks --greedy, cleanup, doctor)',
-      '  ▸ step 4   update_internet_apps.sh (43 supported apps)',
+      '  ▸ step 4   update_internet_apps.sh (' + INTERNET_APP_COUNT + ' supported apps)',
       '             methods: keystone · github_dmg · silent_launch',
       '             msupdate · mau_fallback · docker_cli · brew_cask',
       '             sparkle_appcast · appstore_gui · manual',
       '             policy: missing supported apps are reported only',
       '',
-      '  ✓ developer tooling & 43 internet apps current',
+      '  ✓ developer tooling & ' + INTERNET_APP_COUNT + ' internet apps current',
     ],
   },
   {
@@ -53,11 +54,11 @@ const PHASES = [
     color: '#4AA3FF',
     terminal: [
       '  ▸ step 5   postupdate history & version bump',
-      '             atomic write to APPLICATIONS.md & UPDATES.md',
+      '             observed package changes vs inventory field edits',
       '  ▸ step 6   softwareupdate -ia -R --verbose (macOS final)',
       '             restart-safe final step (skipped if earlier failed)',
       '',
-      '  ✓ 170 safety checks passed · pipeline complete',
+      '  ✓ ' + TEST_COUNT + ' safety checks passed · pipeline complete',
     ],
   },
 ] as const

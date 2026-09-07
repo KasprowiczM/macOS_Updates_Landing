@@ -20,7 +20,7 @@ bash update_all.sh`}</CodeBlock>
           rows={[
             [pl ? 'Tylko zainstalowane' : 'Installed only', pl ? 'Brakujące obsługiwane aplikacje są raportowane, nie instalowane.' : 'Supported missing apps are reported, not installed.'],
             ['softwareupdate -R', pl ? 'Aktualizacje macOS zachowują metadane restartu wymagane do zastosowania update.' : 'macOS updates preserve reboot metadata needed to apply the update.'],
-            ['sudo mas upgrade', pl ? 'App Store CLI działa przez sudo zgodnie z aktualnym zachowaniem macOS.' : 'The App Store CLI runs through sudo for current macOS behavior.'],
+            ['sudo mas upgrade', pl ? 'App Store CLI działa przez sudo ze zmierzonymi ID i retry w sesji użytkownika.' : 'The App Store CLI runs through sudo with measured IDs and a user-session retry.'],
             [pl ? 'Prywatny overlay' : 'Private overlay', pl ? 'APPLICATIONS.md, UPDATES.md i sekrety pozostają poza publicznym Git.' : 'APPLICATIONS.md, UPDATES.md, and secrets stay outside public Git.'],
           ]}
         />
@@ -28,8 +28,8 @@ bash update_all.sh`}</CodeBlock>
 
       <WikiSection id="private-overlay" title={pl ? 'Prywatny overlay dev_sync' : 'Private dev_sync Overlay'}>
         <p>{pl
-          ? 'dev_sync rozdziela publiczny kod od plików konkretnej maszyny: inwentarza, historii, preferencji, .env i konfiguracji chmury.'
-          : 'dev_sync separates public code from machine-specific files: inventory, history, preferences, .env, and cloud configuration.'
+          ? 'dev_sync rozdziela publiczny kod od plików konkretnej maszyny: inwentarza, historii, preferencji, .env i konfiguracji chmury. Import rozwija manifesty katalogów, pomija pliki śledzone przez Git i wykluczone, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy zamiana się nie uda.'
+          : 'dev_sync separates public code from machine-specific files: inventory, history, preferences, .env, and cloud configuration. Import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails.'
         }</p>
         <CodeBlock title="bash">{`bash dev_sync/provider_setup.sh
 bash dev_sync/dev-sync-export.sh
@@ -39,11 +39,12 @@ bash dev_sync/dev-sync-verify-full.sh`}</CodeBlock>
 
       <WikiSection id="scheduling" title={pl ? 'Tryby, flagi i automatyzacja' : 'Modes, Flags & Automation'}>
         <p>{pl
-          ? 'update_all.sh obsługuje dry-run, weryfikację bez mutacji (--verify-only), automatyczne potwierdzenie (-y), onboarding Touch ID i harmonogram LaunchAgent.'
-          : 'update_all.sh supports dry-run, non-mutating verification (--verify-only), yes mode (-y), Touch ID onboarding, and LaunchAgent scheduling.'
+          ? 'update_all.sh obsługuje dry-run, weryfikację bez mutacji (--verify-only), automatyczne potwierdzenie (-y), onboarding Touch ID, harmonogram LaunchAgent oraz --json-summary z uczciwym rozdzieleniem edycji inwentarza od zmian pakietów.'
+          : 'update_all.sh supports dry-run, non-mutating verification (--verify-only), yes mode (-y), Touch ID onboarding, LaunchAgent scheduling, and --json-summary that splits inventory edits from observed package changes.'
         }</p>
         <CodeBlock title="bash">{`bash update_all.sh --dry-run -y
 bash update_all.sh --verify-only
+bash update_all.sh --json-summary
 bash update_all.sh --skip-system
 bash update_all.sh --skip-appstore
 bash update_all.sh --skip-brew

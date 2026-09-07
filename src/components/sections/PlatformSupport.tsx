@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Apple, CheckCircle2, Search, Filter, Sparkles, Code2, FolderKanban, Lock, Cloud, AppWindow } from 'lucide-react'
 import { SectionReveal } from '../ui/SectionReveal'
 import { Badge } from '../ui/Badge'
+import { INTERNET_APP_COUNT, UPDATE_METHOD_COUNT } from '../../lib/site'
 
 interface AppItem {
   name: string
@@ -58,7 +59,7 @@ const SUPPORTED_APPS: AppItem[] = [
 ]
 
 const CATEGORIES = [
-  { id: 'all', label: 'All (43)', icon: Filter },
+  { id: 'all', label: `All (${INTERNET_APP_COUNT})`, icon: Filter },
   { id: 'ai', label: 'AI & LLMs', icon: Sparkles },
   { id: 'dev', label: 'Developer', icon: Code2 },
   { id: 'prod', label: 'Productivity', icon: FolderKanban },
@@ -179,12 +180,12 @@ export function PlatformSupport() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="font-bold text-xl font-sans tracking-tight text-(--fg)">
-                {pl ? 'Katalog 43 Aplikacji Internetowych' : 'Supported 43 Internet Apps Catalog'}
+                {pl ? `Katalog ${INTERNET_APP_COUNT} Aplikacji Internetowych` : `Supported ${INTERNET_APP_COUNT} Internet Apps Catalog`}
               </h3>
               <p className="text-(--fg-muted) text-[14px] font-sans mt-1">
                 {pl
-                  ? 'Faktyczny spis 43 aplikacji oraz 10 metod ich automatycznej aktualizacji.'
-                  : 'Complete registry of 43 applications and their 10 exact update methods.'}
+                  ? `Faktyczny spis ${INTERNET_APP_COUNT} aplikacji oraz ${UPDATE_METHOD_COUNT} metod ich automatycznej aktualizacji.`
+                  : `Complete registry of ${INTERNET_APP_COUNT} applications and their ${UPDATE_METHOD_COUNT} exact update methods.`}
               </p>
             </div>
 
