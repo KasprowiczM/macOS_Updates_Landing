@@ -45,11 +45,11 @@
     "reasons": {
       "security": {
         "title": "Poprawne wywołania uprzywilejowane",
-        "desc": "Aktualizacje macOS używają softwareupdate -ia -R, App Store korzysta z sudo mas upgrade, a mutacja jest raportowana dopiero po potwierdzeniu przez żywy system."
+        "desc": "Aktualizacje macOS instalują etykiety przez softwareupdate -i <label> -R, App Store używa sudo mas ze zmierzonymi ID, a mutacja jest raportowana dopiero po potwierdzeniu przez żywy system."
       },
       "compatibility": {
         "title": "Polityka tylko-zainstalowane",
-        "desc": "Obsługiwane, ale brakujące aplikacje są raportowane, nie instalowane. Nieznane aplikacje trafiają do pracy nad pokryciem."
+        "desc": "Obsługiwane, ale brakujące aplikacje są raportowane, nie instalowane. Aplikacje, które masz otwarte, nigdy nie są zamykane — skrypt zamyka tylko to, co sam uruchomił."
       },
       "automation": {
         "title": "Gotowe na prywatny overlay",
@@ -65,8 +65,8 @@
     "phases": {
       "check": { "name": "Prescan (Krok 0)", "desc": "Skanuje /Applications, Homebrew i App Store do lokalnego APPLICATIONS.md dla tego Maca.", "detail": "Publiczna instalacja nigdy nie importuje cudzej listy aplikacji." },
       "plan": { "name": "App Store + CLI (Kroki 1 & 2)", "desc": "Uruchamia dwutorowy updater App Store (sudo mas ze zmierzonymi ID + GUI iPada) oraz natywne CLI vendorów (claude, Codex, OpenCode, agy).", "detail": "mas aktualizuje ID zmierzone w pre-skanie, z retry w sesji użytkownika; TUI vendorów ignorujące SIGTERM dostają SIGKILL, żeby pipeline nie mógł się zawiesić." },
-      "apply": { "name": "Brew + Internet (Kroki 3 & 4)", "desc": "Aktualizuje Homebrew (--greedy) i 43 aplikacji internetowych poprzez 10 metod aktualizacji.", "detail": "Kwarantanna MAU z własnym wygaśnięciem, świadome schematu strażniki casków, bezpieczne instalacje DMG z opcją rollbacku i miękkie bramkowanie błędów." },
-      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -ia -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu. Postupdate rozdziela edycje inwentarza od zaobserwowanych zmian pakietów. 270 testów przechodzi." }
+      "apply": { "name": "Brew + Internet (Kroki 3 & 4)", "desc": "Aktualizuje formuły i caski Homebrew (selektywne cele, pomijanie orphan casks) oraz 43 aplikacje internetowe w 11 metodach aktualizacji.", "detail": "Prawda feedu vendora, host allowlist i weryfikacja podpisu, kwarantanna MAU z własnym wygaśnięciem, bezpieczne instalacje DMG z rollbackiem i miękkie bramkowanie błędów." },
+      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -i <label> -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu. Postupdate rozdziela edycje inwentarza od zaobserwowanych zmian pakietów. 477 testów przechodzi." }
     }
   },
   "showcase": {
@@ -96,7 +96,7 @@
     "scheduler": { "title": "Krytyczne reguły", "desc": "softwareupdate zawsze ma -R; mas upgrade używa sudo ze zmierzonymi ID; TUI vendorów nie mogą zawiesić przebiegu." },
     "aiTools": { "title": "Handlery przyjazne agentom", "desc": "Szkieletuj handlery aplikacji internetowych i aktualizuj Claude, Codex, OpenCode i agy ich własnymi natywnymi instalatorami." },
     "suggestionsAi": { "title": "Prywatny dev_sync", "desc": "Synchronizuj inwentarz, historię, preferencje i sekrety poza Git. Import odmawia nadpisania plików śledzonych i zostawia ścieżkę odzyskania." },
-    "plugins": { "title": "Testy i scan sekretów", "desc": "run_tests.sh uruchamia 270 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie." },
+    "plugins": { "title": "Testy i scan sekretów", "desc": "run_tests.sh uruchamia 477 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie." },
     "multihost": { "title": "UI w 7 językach", "desc": "EN, PL, DE, FR, ES, IT i PT w komunikatach shell." },
     "editions": { "title": "Fokus Apple Silicon", "desc": "Projekt dla Maców arm64 z macOS 13 lub nowszym." },
     "vanillaJs": { "title": "Zgodność Bash 3.2", "desc": "Bez declare -A, mapfile, readarray i założeń z nowszego Basha." }
@@ -107,7 +107,7 @@
     "note": "Aplikacje internetowe są aktualizowane tylko gdy są już zainstalowane. Brakujące są raportowane, a nieznane trafiają do pracy nad handlerami.",
     "macos": { "name": "Apple Silicon macOS", "status": "Production-ready · macOS 13+ · tylko arm64 · lokalny inwentarz · 43 aplikacji · 7 języków", "managers": ["system", "appstore", "cli-npm", "homebrew", "internet", "dev-sync"] },
     "managerDetail": {
-      "system": "Aktualizacje macOS przez softwareupdate -ia -R --verbose.",
+      "system": "Aktualizacje macOS przez softwareupdate -i <label> -R --verbose.",
       "appstore": "App Store przez sudo mas upgrade zmierzonych ID, retry w sesji użytkownika oraz fallback AppleScript dla aplikacji iPada.",
       "cli-npm": "Node, Bun, globalne npm i natywne CLI vendorów (claude update, instalator Codex, opencode upgrade, agy).",
       "homebrew": "Formuły, caski, cleanup i doctor.",

@@ -14,6 +14,92 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.5.0',
+    date: '2026-09-25',
+    summary: {
+      en: 'Vendor truth feeds, only-installed software updates, orphan cask protection, and drift-free inventory sync.',
+      pl: 'Prawda z feedów producentów, aktualizacja tylko zainstalowanego oprogramowania, ochrona przed osieroconymi caskami i bezbłędna synchronizacja inwentarza.',
+    },
+    added: [
+      {
+        en: 'Vendor feed comparison (Sparkle, JSON, YAML, Key-Value) with Gatekeeper signature and Team ID verification for direct updates.',
+        pl: 'Porównywanie wersji z oficjalnymi feedami producentów (Sparkle, JSON, YAML, Key-Value) z weryfikacją podpisu Gatekeeper i Team ID przy instalacjach bezpośrednich.',
+      },
+      {
+        en: 'Live Omaha updater status tracking for Google Chrome, Gemini, and Comet; staged rollout detection via VersionHistory.',
+        pl: 'Śledzenie statusu na żywo przez logi Omaha dla Google Chrome, Gemini i Comet; wykrywanie rolloutu etapowego przez VersionHistory.',
+      },
+      {
+        en: 'Orphan Homebrew cask detection: casks whose apps were manually removed are skipped and never reinstalled.',
+        pl: 'Wykrywanie osieroconych casków Homebrew: caski, których aplikacje usunięto ręcznie, są pomijane i nigdy nie wracają.',
+      },
+      {
+        en: 'iTunes Lookup API gate for iPad apps to skip Track 2 AppleScript GUI automation when everything is already up to date.',
+        pl: 'Weryfikacja przez iTunes Lookup API dla aplikacji z iPada — omija automatyzację GUI AppleScript, gdy wszystko jest aktualne.',
+      },
+      {
+        en: 'Diagnostic tool scripts/check_vendor_feeds.sh for inspecting vendor feed truths, versions, and live Omaha updater logs.',
+        pl: 'Narzędzie diagnostyczne scripts/check_vendor_feeds.sh do podglądu prawdy z feedów producentów, wersji i logów Omaha.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Only installed applications and CLI toolchains are updated; missing tools are never installed without explicit --bootstrap-cli.',
+        pl: 'Aktualizowane jest tylko to, co jest faktycznie zainstalowane; brakujące narzędzia CLI wymagają jawnej flagi --bootstrap-cli.',
+      },
+      {
+        en: 'Apps you have open are never closed: the toolkit only quits applications it launched itself to trigger background updates.',
+        pl: 'Otwarte aplikacje nigdy nie są zamykane: skrypt zamyka wyłącznie te programy, które sam uruchomił w celu wywołania updatera.',
+      },
+      {
+        en: 'System updates split into non-restart labels (installed per-label) and restart-required labels (installed in one batch with -R).',
+        pl: 'Aktualizacje systemowe rozdzielone na etykiety bez restartu (pojedynczo) oraz wymagające restartu (zbiorczo z opcją -R).',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Drift-free inventory synchronization (inventory_sync.py) updating all groups in APPLICATIONS.md without accidental wipes.',
+        pl: 'Bezbłędna synchronizacja inwentarza (inventory_sync.py) aktualizująca wszystkie grupy w APPLICATIONS.md bez ryzyka przypadkowego skasowania.',
+      },
+    ],
+  },
+  {
+    version: 'v1.4.6',
+    date: '2026-09-16',
+    summary: {
+      en: 'macOS 27 Golden Gate adaptation: Xcode license gate, major upgrade isolation, and architecture awareness.',
+      pl: 'Adaptacja do macOS 27 Golden Gate: brama licencji Xcode, izolacja wydań major macOS i świadomość architektury binarnej.',
+    },
+    added: [
+      {
+        en: 'Pre-emptive Xcode license check in Homebrew step (xcodebuild -checkFirstLaunchStatus) to prevent license acceptance failures.',
+        pl: 'Prewencyjne sprawdzanie licencji Xcode przed krokiem Homebrew, zapobiegające błędom po aktualizacji Xcode w App Store.',
+      },
+      {
+        en: 'Binary architecture scanner (app_architecture) alerting on Intel x86_64 apps affected by macOS 27 Rosetta changes.',
+        pl: 'Skaner architektury binarnej ostrzegający o aplikacjach Intel x86_64 po zmianach w Rosetta w macOS 27.',
+      },
+      {
+        en: 'Homebrew Cask oracle (config/cask_oracles.txt) verifying installed versions for background auto-updating apps.',
+        pl: 'Oracle Homebrew Cask (config/cask_oracles.txt) weryfikujący zainstalowane wersje dla aplikacji z automatycznymi updaterami.',
+      },
+      {
+        en: 'LaunchAgent modernized for macOS 27 launchd bootstrap and quarantine attribute stripping.',
+        pl: 'Modernizacja LaunchAgent pod launchd macOS 27 z usuwaniem atrybutów kwarantanny.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Major macOS upgrades isolated from security patches: canceling a major upgrade cleanly reports pending state without losing updates.',
+        pl: 'Izolacja wydań major macOS od łatek bezpieczeństwa: rezygnacja z dużej wersji zapisuje stan pending bez ukrywania aktualizacji.',
+      },
+      {
+        en: 'Platform metadata updated to macOS 13–27 across documentation and agent context files.',
+        pl: 'Zaktualizowano metadane wspieranych platform do macOS 13–27 w dokumentacji i profilach agentów.',
+      },
+    ],
+  },
+  {
     version: 'v1.4.5',
     date: '2026-09-07',
     summary: {

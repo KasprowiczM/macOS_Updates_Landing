@@ -17,7 +17,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { SectionReveal } from '../components/ui/SectionReveal'
-import { SITE_URL } from '../lib/site'
+import { SITE_URL, INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
 
 interface FeatureItem {
   icon: LucideIcon
@@ -119,7 +119,8 @@ export function FeaturesPage() {
     ? [
         'Siedem kroków: prescan → App Store → CLI/npm → brew → internet → postupdate → system macOS',
         'Lokalny APPLICATIONS.md budowany z tego Maca z wykluczeniami w inventory_exclusions.txt',
-        '43 obsługiwane aplikacje internetowe w 10 metodach (w tym Sparkle appcast i GitHub DMG)',
+        `${INTERNET_APP_COUNT} obsługiwane aplikacje internetowe w ${UPDATE_METHOD_COUNT} metodach (w tym Sparkle appcast, GitHub DMG i vendor feed truth)`,
+        'Aplikacje otwarte przez Ciebie nigdy nie są zamykane — toolkit zamyka tylko to, co sam uruchomił',
         'Dwutorowy App Store: sudo mas ze zmierzonymi ID + retry w sesji użytkownika; GUI iPada',
         'Natywne CLI vendorów (claude, Codex, OpenCode, agy) — timeout z SIGKILL, kontrakt działającego binarium',
         'Uczciwe raporty: edycje inwentarza vs zaobserwowane zmiany pakietów/CLI; nieznane pending zostaje nieznane',
@@ -129,12 +130,13 @@ export function FeaturesPage() {
         'Prywatny overlay dev_sync dla inwentarza i historii ze wsparciem Proton Drive',
         'Tryb bezmutacyjnej weryfikacji --verify-only oraz automatyzacja LaunchAgent i Touch ID sudo',
         'Siedem języków UI terminala (EN, PL, DE, FR, ES, IT, PT)',
-        '270 testów statycznych, unit, registry parity i skan sekretów gitleaks',
+        `${TEST_COUNT} testów statycznych, unit, registry parity i skan sekretów gitleaks`,
       ]
     : [
         'Seven steps: prescan → App Store → CLI/npm → brew → internet → postupdate → macOS system',
         'Local APPLICATIONS.md built from this Mac with inventory_exclusions.txt support',
-        '43 supported internet-downloaded apps across 10 methods (including Sparkle appcast and GitHub DMG)',
+        `${INTERNET_APP_COUNT} supported internet-downloaded apps across ${UPDATE_METHOD_COUNT} methods (including Sparkle appcast, GitHub DMG, and vendor feed truth)`,
+        'Apps you have open are never closed — the toolkit only quits what it launched itself',
         'Two-track App Store: sudo mas with measured IDs + user-session retry; iPad AppleScript GUI',
         'Native vendor CLIs (claude, Codex, OpenCode, agy) — hang-proof timeouts, working-binary contract',
         'Honest reports: inventory field edits vs observed package/CLI changes; unknown pending stays unknown',
@@ -144,7 +146,7 @@ export function FeaturesPage() {
         'Private dev_sync overlay for inventory and history with Proton Drive support',
         'Non-mutating --verify-only mode, LaunchAgent automation, and Touch ID sudo onboarding',
         'Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT)',
-        '270 static, unit, registry parity, and gitleaks secret scanning tests',
+        `${TEST_COUNT} static, unit, registry parity, and gitleaks secret scanning tests`,
       ]
 
   const breadcrumb = {

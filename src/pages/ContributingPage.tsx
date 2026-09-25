@@ -76,7 +76,7 @@ setup.sh                      # public setup without cloud overlay
 migration_setup.sh            # owner setup + cloud wizard
 build_inventory.sh            # builds APPLICATIONS.md from this Mac
 update_all.sh                 # seven-step orchestrator
-update_system.sh              # softwareupdate -ia -R
+update_system.sh              # softwareupdate -i <label> -R
 update_appstore.sh            # sudo mas + AppleScript fallback
 update_npm_cli.sh             # Node, Bun, npm global CLIs
 update_brew.sh                # Homebrew layer

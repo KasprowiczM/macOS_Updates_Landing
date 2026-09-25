@@ -38,11 +38,11 @@ const PHASES = [
     icon: PackageCheck,
     color: '#3278B8',
     terminal: [
-      '  ▸ step 3   update_brew.sh (casks --greedy, cleanup, doctor)',
+      '  ▸ step 3   update_brew.sh (formulae + casks, orphan skip, cleanup, doctor)',
       '  ▸ step 4   update_internet_apps.sh (' + INTERNET_APP_COUNT + ' supported apps)',
       '             methods: keystone · github_dmg · silent_launch',
       '             msupdate · mau_fallback · docker_cli · brew_cask',
-      '             sparkle_appcast · appstore_gui · manual',
+      '             sparkle_appcast · chromium_updater · appstore_gui · manual',
       '             policy: missing supported apps are reported only',
       '',
       '  ✓ developer tooling & ' + INTERNET_APP_COUNT + ' internet apps current',
@@ -55,7 +55,7 @@ const PHASES = [
     terminal: [
       '  ▸ step 5   postupdate history & version bump',
       '             observed package changes vs inventory field edits',
-      '  ▸ step 6   softwareupdate -ia -R --verbose (macOS final)',
+      '  ▸ step 6   softwareupdate -i <label> -R --verbose (macOS final)',
       '             restart-safe final step (skipped if earlier failed)',
       '',
       '  ✓ ' + TEST_COUNT + ' safety checks passed · pipeline complete',

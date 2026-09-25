@@ -47,8 +47,8 @@ bash run_tests.sh`}</CodeBlock>
           ? 'Te reguły pochodzą z docs/agents/critical_rules.md i są częścią publicznego kontraktu projektu.'
           : 'These rules come from docs/agents/critical_rules.md and are part of the project contract.'
         }</p>
-        <CodeBlock title="bash">{`sudo softwareupdate -ia -R --verbose
-sudo env MAS_NO_AUTO_INDEX=1 mas upgrade`}</CodeBlock>
+        <CodeBlock title="bash">{`softwareupdate -i <label> -R
+sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="contributing-plugins" title={pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}>
