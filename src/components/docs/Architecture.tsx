@@ -15,7 +15,7 @@ update_npm_cli.sh              # step 2: native vendor CLIs + Node/Bun/npm
 update_brew.sh                 # step 3: brew upgrade + cleanup + doctor
 update_internet_apps.sh        # step 4: ${INTERNET_APP_COUNT} internet app handlers
 build_inventory.sh / postupdate # step 0 & 5: APPLICATIONS.md & UPDATES.md
-update_system.sh               # step 6: softwareupdate -ia -R (macOS final)
+update_system.sh               # step 6: softwareupdate -i <label> -R (macOS final)
 config/internet_apps.txt       # public registry (${INTERNET_APP_COUNT} apps)
 config/inventory_exclusions.txt # discovery exclusions (Ascendo)
 lib/brew.sh                    # resilient Homebrew query layer
@@ -38,10 +38,10 @@ docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotia
             ['0', 'prescan', pl ? 'Odświeża APPLICATIONS.md z tej maszyny.' : 'Refresh APPLICATIONS.md from this machine.'],
             ['1', 'update_appstore.sh', pl ? 'sudo mas ze zmierzonymi ID + retry w sesji użytkownika + GUI iPada.' : 'sudo mas with measured IDs + user-session retry + iPad GUI'],
             ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI vendorów (claude, Codex, OpenCode, agy) oraz Node/Bun/npm.' : 'Native vendor CLIs (claude, Codex, OpenCode, agy) plus Node/Bun/npm.'],
-            ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (--greedy), cleanup i doctor przez lib/brew.sh.' : 'Homebrew upgrade (--greedy), cleanup, and doctor via lib/brew.sh.'],
+            ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (selektywne caski, pomijanie orphan casks), cleanup i doctor przez lib/brew.sh.' : 'Homebrew upgrade (selective cask targets, skips orphan casks), cleanup, and doctor via lib/brew.sh.'],
             ['4', 'update_internet_apps.sh', pl ? `${INTERNET_APP_COUNT} obsługiwane aplikacje internetowe (keystone, dmg, mau, sparkle, etc.).` : `${INTERNET_APP_COUNT} supported internet apps (keystone, dmg, mau, sparkle, etc.).`],
             ['5', 'postupdate', pl ? 'Rozdziela edycje inwentarza od zaobserwowanych zmian pakietów; zapis UPDATES.md.' : 'Splits inventory field edits from observed package changes; writes UPDATES.md.'],
-            ['6', 'update_system.sh', pl ? 'softwareupdate -ia -R (końcowy krok bezpieczny dla restartu).' : 'softwareupdate -ia -R (final restart-safe step).'],
+            ['6', 'update_system.sh', pl ? 'softwareupdate -i <label> -R (końcowy krok bezpieczny dla restartu).' : 'softwareupdate -i <label> -R (final restart-safe step).'],
           ]}
         />
       </WikiSection>

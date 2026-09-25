@@ -24,7 +24,7 @@ const TERMINAL_LINES = [
   { text: '  ▸ step 3  brew upgrade + cleanup + doctor', delay: 2650, color: 'text-(--code-fg)' },
   { text: `  ▸ step 4  ${INTERNET_APP_COUNT} internet app handlers (keystone, dmg, mau, sparkle)`, delay: 3150, color: 'text-(--code-fg)' },
   { text: '  ▸ step 5  postupdate history & version bump', delay: 3650, color: 'text-(--code-fg)' },
-  { text: '  ▸ step 6  softwareupdate -ia -R (macOS final)', delay: 4150, color: 'text-(--code-fg)' },
+  { text: '  ▸ step 6  softwareupdate -i <label> -R (per-label, macOS final)', delay: 4150, color: 'text-(--code-fg)' },
   { text: '', delay: 4550 },
   { text: `  ✓ dry-run complete · ${TEST_COUNT} safety checks passed · no mutations applied`, delay: 4850, color: 'text-(--accent-strong)' },
 ]

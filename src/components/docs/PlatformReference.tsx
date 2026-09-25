@@ -23,11 +23,11 @@ export function PlatformReference({ pl }: { pl: boolean }) {
         <DocTable
           headers={[pl ? 'Kategoria' : 'Category', pl ? 'Metoda / Narzędzie' : 'Method / Tool']}
           rows={[
-            ['macOS (Step 6)', 'softwareupdate -ia -R --verbose'],
+            ['macOS (Step 6)', 'softwareupdate -i <label> -R (per-label + batch restart)'],
             ['App Store (Step 1)', 'sudo mas upgrade + AppleScript GUI fallback (Track 2)'],
             ['Native CLI/npm (Step 2)', 'Node, Bun, npm globals, claude update, Codex installer, opencode upgrade, agy'],
-            ['Homebrew (Step 3)', 'brew upgrade (--greedy) + cleanup + doctor (lib/brew.sh)'],
-            [pl ? 'Aplikacje internetowe (Step 4)' : 'Internet apps (Step 4)', 'keystone, github_dmg, silent_launch, msupdate, mau_fallback_self_update, docker_cli, brew_cask, sparkle_appcast, appstore_gui, manual'],
+            ['Homebrew (Step 3)', pl ? 'brew upgrade (formuły + wyznaczone caski, pomijanie sierot) + cleanup + doctor' : 'brew upgrade (formulae + designated casks, orphan skip) + cleanup + doctor'],
+            [pl ? 'Aplikacje internetowe (Step 4)' : 'Internet apps (Step 4)', 'keystone, github_dmg, silent_launch, msupdate, mau_fallback_self_update, docker_cli, brew_cask, sparkle_appcast, chromium_updater, appstore_gui, manual'],
             ['dev_sync', pl ? 'Prywatny overlay dla inwentarza i historii.' : 'Private overlay for inventory and history.'],
           ]}
         />
