@@ -14,6 +14,26 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.5.1',
+    date: '2026-09-25',
+    summary: {
+      en: 'Chrome during Google staged rollouts now reports an informative hold status instead of an unverified missing response. Toolkit documentation and static safety guards are fully synchronized.',
+      pl: 'Google Chrome w trakcie etapowego rolloutu pokazuje czytelny stan informacyjny zamiast braku odpowiedzi z serwera Omaha. Dokumentacja toolkita i strażniki statyczne zostały w pełni zsynchronizowane.',
+    },
+    fixed: [
+      {
+        en: 'Report staged vendor rollout (⏸) for Chrome when VersionHistory shows a newer public release not yet served to the local machine, preventing misleading unverified warnings.',
+        pl: 'Raportowanie etapowego rolloutu (⏸) dla Chrome, gdy VersionHistory wskazuje nowszą wersję publiczną jeszcze nieudostępnioną lokalnej maszynie, zapobiegając mylnym ostrzeżeniom.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Synchronized documentation across all agent guides, multi-language READMEs, and added a static guard test enforcing living library documentation.',
+        pl: 'Zsynchronizowano dokumentację we wszystkich przewodnikach agentów i wielojęzycznych README oraz dodano test-strażnik wymagający dokumentacji każdego modułu biblioteki.',
+      },
+    ],
+  },
+  {
     version: 'v1.5.0',
     date: '2026-09-25',
     summary: {

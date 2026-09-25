@@ -8,11 +8,11 @@ export const SITE_URL = 'https://macosupdates.dev'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.5.0'
+export const APP_VERSION = 'v1.5.1'
 
 export const APP_VERSION_DATE = '2026-09-25'
 
-export const TEST_COUNT = 477
+export const TEST_COUNT = 480
 
 /** Canonical internet-app registry size (`config/internet_apps.txt`). */
 export const INTERNET_APP_COUNT = 43

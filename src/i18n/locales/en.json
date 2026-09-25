@@ -82,7 +82,7 @@
       "verify": {
         "name": "Postupdate + macOS (Steps 5 & 6)",
         "desc": "Atomically refresh inventory and history, then run macOS system update (softwareupdate -i <label> -R) last.",
-        "detail": "macOS system updates run last to retain reboot safety. Postupdate splits inventory edits from observed package changes. 477 safety checks pass."
+        "detail": "macOS system updates run last to retain reboot safety. Postupdate splits inventory edits from observed package changes. 480 safety checks pass."
       }
     }
   },
@@ -141,7 +141,7 @@
     },
     "plugins": {
       "title": "Run tests and secret scans",
-      "desc": "run_tests.sh runs 477 static, unit, registry-parity, and gitleaks checks before a change ships."
+      "desc": "run_tests.sh runs 480 static, unit, registry-parity, and gitleaks checks before a change ships."
     },
     "multihost": {
       "title": "Seven-language UI",

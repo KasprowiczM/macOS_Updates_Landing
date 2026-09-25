@@ -66,7 +66,7 @@
       "check": { "name": "Prescan (Krok 0)", "desc": "Skanuje /Applications, Homebrew i App Store do lokalnego APPLICATIONS.md dla tego Maca.", "detail": "Publiczna instalacja nigdy nie importuje cudzej listy aplikacji." },
       "plan": { "name": "App Store + CLI (Kroki 1 & 2)", "desc": "Uruchamia dwutorowy updater App Store (sudo mas ze zmierzonymi ID + GUI iPada) oraz natywne CLI vendorów (claude, Codex, OpenCode, agy).", "detail": "mas aktualizuje ID zmierzone w pre-skanie, z retry w sesji użytkownika; TUI vendorów ignorujące SIGTERM dostają SIGKILL, żeby pipeline nie mógł się zawiesić." },
       "apply": { "name": "Brew + Internet (Kroki 3 & 4)", "desc": "Aktualizuje formuły i caski Homebrew (selektywne cele, pomijanie orphan casks) oraz 43 aplikacje internetowe w 11 metodach aktualizacji.", "detail": "Prawda feedu vendora, host allowlist i weryfikacja podpisu, kwarantanna MAU z własnym wygaśnięciem, bezpieczne instalacje DMG z rollbackiem i miękkie bramkowanie błędów." },
-      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -i <label> -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu. Postupdate rozdziela edycje inwentarza od zaobserwowanych zmian pakietów. 477 testów przechodzi." }
+      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -i <label> -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu. Postupdate rozdziela edycje inwentarza od zaobserwowanych zmian pakietów. 480 testów przechodzi." }
     }
   },
   "showcase": {
@@ -96,7 +96,7 @@
     "scheduler": { "title": "Krytyczne reguły", "desc": "softwareupdate zawsze ma -R; mas upgrade używa sudo ze zmierzonymi ID; TUI vendorów nie mogą zawiesić przebiegu." },
     "aiTools": { "title": "Handlery przyjazne agentom", "desc": "Szkieletuj handlery aplikacji internetowych i aktualizuj Claude, Codex, OpenCode i agy ich własnymi natywnymi instalatorami." },
     "suggestionsAi": { "title": "Prywatny dev_sync", "desc": "Synchronizuj inwentarz, historię, preferencje i sekrety poza Git. Import odmawia nadpisania plików śledzonych i zostawia ścieżkę odzyskania." },
-    "plugins": { "title": "Testy i scan sekretów", "desc": "run_tests.sh uruchamia 477 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie." },
+    "plugins": { "title": "Testy i scan sekretów", "desc": "run_tests.sh uruchamia 480 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie." },
     "multihost": { "title": "UI w 7 językach", "desc": "EN, PL, DE, FR, ES, IT i PT w komunikatach shell." },
     "editions": { "title": "Fokus Apple Silicon", "desc": "Projekt dla Maców arm64 z macOS 13 lub nowszym." },
     "vanillaJs": { "title": "Zgodność Bash 3.2", "desc": "Bez declare -A, mapfile, readarray i założeń z nowszego Basha." }
