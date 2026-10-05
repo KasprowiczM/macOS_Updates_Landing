@@ -1,0 +1,66 @@
+# Changelog — macOS Updates Landing Page
+
+All notable changes to the **macOS Updates Landing Page** (`macosupdates.dev`) are documented here.
+Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+---
+
+## [1.5.4] — 2026-10-05
+
+### Added
+- **Full v1.5.2, v1.5.3, and v1.5.4 Release History:** Integrated comprehensive bilingual release notes (EN/PL) into `ChangelogPage.tsx`.
+- **Route-Level Code-Splitting:** Converted static page imports in `src/App.tsx` to `React.lazy()` with `<Suspense>` fallback, drastically reducing entry bundle size from 610 kB to 42 kB (gzip: 14 kB).
+- **Fine-Grained Vendor Chunking:** Configured `manualChunks` in `vite.config.ts` separating `vendor-react`, `vendor-motion`, `vendor-icons`, and `vendor-i18n`.
+- **Architecture Wiki Modules:** Added `lib/python/vendor_feeds.py`, `lib/vendor_direct.sh`, `lib/python/cli_duplicates.py`, `config/vendor_feeds.txt`, and `config/vendor_direct_first.txt` to the architecture reference.
+- **Production README:** Added comprehensive `README.md` documenting tech stack, architecture, accessibility, and build instructions.
+
+### Changed
+- **Synchronized Ground Truth Constants:**
+  - Upgraded `APP_VERSION` to `v1.5.4` (`2026-10-05`).
+  - Updated `TEST_COUNT` to **532** passing tests in `src/lib/site.ts`, `en.json`, and `pl.json`.
+  - Updated structured JSON-LD in `index.html` to version `1.5.4` (date: `2026-10-05`).
+- **Platform Support Registry Alignment:**
+  - `Comet` mapped to canonical `chromium_updater`.
+  - `Gemini` mapped to canonical `keystone`.
+  - `Remote Desktop Manager` mapped to `silent_launch` (KV feed).
+- **Features Page Roadmap & Today Section:**
+  - Added vendor feed truth, Omaha history proof, idle Docker Desktop verified DMG, ChatGPT direct downloads, and stale feed warning decoupling to `shippingToday`.
+
+### Fixed (Ultra-Review, Taste-Skill & Impeccable Audit)
+- **WCAG Tap Target Sizing (Min 44px):**
+  - `Button.tsx`: Added `min-h-[44px]`, `items-center justify-center`.
+  - `ThemeToggle.tsx`: Expanded hit box to `min-w-[44px] min-h-[44px]`.
+  - `LanguageToggle.tsx`: Added `min-h-[44px] px-3`.
+  - `TerminalBlock.tsx` and `WikiSection.tsx`: Increased copy button to `min-w-[44px] min-h-[44px]`.
+  - `Navbar.tsx`: Expanded mobile menu trigger to 44px × 44px and navigation links to `py-3`.
+- **Keyboard Accessibility (WCAG 2.4.7 Focus Visible):**
+  - Terminal copy buttons now show `focus-visible:opacity-100` and `focus-visible:ring-2`, ensuring full visibility for keyboard navigation.
+  - Added standardized `focus-visible:ring-2 focus-visible:ring-(--border-focus)` across buttons, toggles, search input, and links.
+  - Added `aria-label` to the application search input in `PlatformSupport.tsx`.
+  - Added `aria-expanded` and `aria-controls` to the mobile navigation toggle.
+- **Taste & Motion Restraint:**
+  - Removed infinite bounce loop on scroll indicator in `Hero.tsx`, replacing it with a quiet, engineering-grade indicator.
+  - Stabilized typewriter terminal height (`min-h-[340px] sm:min-h-[300px] md:min-h-[280px]`) to eliminate Cumulative Layout Shift (CLS).
+
+---
+
+## [1.5.1] — 2026-09-25
+
+### Changed
+- Synchronized landing page with macOS Updates v1.5.1 release.
+- Added Chrome staged rollout status documentation and 480 test safety verification count.
+
+---
+
+## [1.5.0] — 2026-09-24
+
+### Added
+- Vendor truth feeds section, three-way version comparison showcase, and orphan Homebrew cask protection overview.
+- Added drift-free inventory synchronization details.
+
+---
+
+## [1.4.6] — 2026-09-16
+
+### Added
+- macOS 27 Golden Gate adaptation coverage: Xcode license pre-check, major upgrade isolation, and Apple Silicon binary architecture detection.

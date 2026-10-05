@@ -102,9 +102,11 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 text-(--fg-muted) hover:text-(--fg)"
+          className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-sm text-(--fg-muted) hover:text-(--fg) hover:bg-(--bg-sunk) transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--border-focus)"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -112,13 +114,13 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-(--bg-elev) border-b border-(--border) px-6 py-4 space-y-3">
+        <div id="mobile-navigation" className="md:hidden bg-(--bg-elev) border-b border-(--border) px-6 py-4 space-y-2">
           {navLinks.map(link => (
             link.isHash ? (
               <a
                 key={link.href}
                 href={link.href}
-                className="block text-(--fg-muted) hover:text-(--fg) text-[14px] font-medium no-underline py-1.5"
+                className="block text-(--fg-muted) hover:text-(--fg) text-[15px] font-medium no-underline py-3 px-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--border-focus)"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -127,7 +129,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
               <Link
                 key={link.href}
                 to={link.href}
-                className="block text-(--fg-muted) hover:text-(--fg) text-[14px] font-medium no-underline py-1.5"
+                className="block text-(--fg-muted) hover:text-(--fg) text-[15px] font-medium no-underline py-3 px-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--border-focus)"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}

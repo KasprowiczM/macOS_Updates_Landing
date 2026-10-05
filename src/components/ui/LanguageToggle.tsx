@@ -13,7 +13,7 @@ export function LanguageToggle() {
   return (
     <button
       onClick={toggle}
-      className="flex items-center gap-1.5 px-2 py-1.5 rounded-sm text-(--fg-muted) hover:text-(--fg) hover:bg-(--bg-sunk) transition-colors duration-(--dur-2) font-mono text-[12px] uppercase tracking-wide"
+      className="flex items-center justify-center gap-1.5 px-3 min-h-[44px] rounded-sm text-(--fg-muted) hover:text-(--fg) hover:bg-(--bg-sunk) transition-colors duration-(--dur-2) font-mono text-[12px] uppercase tracking-wide cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--border-focus)"
       aria-label={`Switch language to ${i18n.language === 'en' ? 'Polish' : 'English'}`}
     >
       <Globe size={14} />

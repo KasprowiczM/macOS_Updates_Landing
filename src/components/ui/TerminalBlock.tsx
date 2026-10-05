@@ -42,7 +42,7 @@ export function TerminalBlock({ lines, showCopy = true, copyText, className }: T
       {showCopy && (
         <button
           onClick={handleCopy}
-          className="absolute top-2.5 right-3 p-1.5 rounded-sm bg-[rgba(255,255,255,0.06)] text-(--code-dim) hover:text-(--code-fg) hover:bg-[rgba(255,255,255,0.1)] transition-all duration-(--dur-2) opacity-0 group-hover:opacity-100 cursor-pointer border-0"
+          className="absolute top-2 right-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-sm bg-[rgba(255,255,255,0.06)] text-(--code-dim) hover:text-(--code-fg) hover:bg-[rgba(255,255,255,0.1)] transition-all duration-(--dur-2) opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-strong) cursor-pointer border-0"
           aria-label={copied ? t('installation.copied') : t('installation.copyToClipboard')}
         >
           {copied ? <Check size={14} className="text-(--ok)" /> : <Copy size={14} />}

@@ -54,7 +54,7 @@ function TypewriterTerminal() {
         </span>
       </div>
 
-      <div className="px-5 py-4 font-mono text-[13px] leading-[1.7] min-h-[260px] overflow-x-auto whitespace-pre">
+      <div className="px-5 py-4 font-mono text-[13px] leading-[1.7] min-h-[340px] sm:min-h-[300px] md:min-h-[280px] overflow-x-auto whitespace-pre">
         {TERMINAL_LINES.slice(0, visibleLines).map((line, i) => (
           <div key={i} className={`${line.color || 'text-(--code-fg)'} ${line.text === '' ? 'h-3' : ''}`}>
             {line.text}
@@ -195,16 +195,12 @@ export function Hero() {
       {/* Scroll indicator */}
       <m.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ opacity: 0.7 }}
+        transition={{ delay: 2.5, duration: 0.8 }}
+        className="hidden md:flex flex-col items-center gap-1 absolute bottom-6 left-1/2 -translate-x-1/2 text-(--fg-faint) text-[11px] font-mono tracking-wider uppercase pointer-events-none"
       >
-        <m.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={20} className="text-(--fg-faint)" />
-        </m.div>
+        <span>Scroll</span>
+        <ChevronDown size={14} className="text-(--fg-faint)" />
       </m.div>
     </section>
   )
