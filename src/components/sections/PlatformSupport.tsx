@@ -18,8 +18,8 @@ const SUPPORTED_APPS: AppItem[] = [
   { name: 'Brave Browser', method: 'brew_cask', category: 'prod' },
   { name: 'ChatGPT / Codex', method: 'silent_launch', category: 'ai' },
   { name: 'Claude', method: 'silent_launch', category: 'ai' },
-  { name: 'Comet', method: 'silent_launch', category: 'ai' },
-  { name: 'Gemini', method: 'silent_launch', category: 'ai' },
+  { name: 'Comet', method: 'chromium_updater', category: 'ai' },
+  { name: 'Gemini', method: 'keystone', category: 'ai' },
   { name: 'Perplexity', method: 'brew_cask', category: 'ai' },
   { name: 'Antigravity', method: 'silent_launch', category: 'ai' },
   { name: 'Antigravity IDE', method: 'silent_launch', category: 'dev' },
@@ -49,7 +49,7 @@ const SUPPORTED_APPS: AppItem[] = [
   { name: 'CapCut', method: 'brew_cask', category: 'cloud_media' },
   { name: 'Ledger Live', method: 'github_dmg', category: 'security' },
   { name: 'Trezor Suite', method: 'github_dmg', category: 'security' },
-  { name: 'Remote Desktop Manager', method: 'sparkle_appcast', category: 'dev' },
+  { name: 'Remote Desktop Manager', method: 'silent_launch', category: 'dev' },
   { name: 'IPMIView', method: 'manual', category: 'dev' },
   { name: 'Inkscape', method: 'brew_cask', category: 'cloud_media' },
   { name: 'DJI Assistant 2', method: 'manual', category: 'prod' },
@@ -194,10 +194,11 @@ export function PlatformSupport() {
               <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-(--fg-faint)" />
               <input
                 type="text"
+                aria-label={pl ? 'Szukaj aplikacji lub metody' : 'Search app or method'}
                 placeholder={pl ? 'Szukaj aplikacji lub metody...' : 'Search app or method...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-[13px] font-mono rounded-md border border-(--border) bg-(--bg-sunk) text-(--fg) placeholder:(text-(--fg-faint)) focus:outline-none focus:border-(--accent)"
+                className="w-full pl-9 pr-4 py-2 text-[13px] font-mono rounded-md border border-(--border) bg-(--bg-sunk) text-(--fg) placeholder:(text-(--fg-faint)) focus:outline-none focus:border-(--accent) focus-visible:ring-2 focus-visible:ring-(--border-focus)"
               />
             </div>
           </div>
@@ -211,7 +212,7 @@ export function PlatformSupport() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-mono text-[12px] whitespace-nowrap transition-colors border ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[40px] rounded-md font-mono text-[12px] whitespace-nowrap transition-colors border cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--border-focus) ${
                     isSelected
                       ? 'bg-(--accent-soft) text-(--accent-strong) border-(--accent)'
                       : 'text-(--fg-muted) border-transparent hover:bg-(--bg-sunk) hover:text-(--fg)'

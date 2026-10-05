@@ -17,10 +17,15 @@ update_internet_apps.sh        # step 4: ${INTERNET_APP_COUNT} internet app hand
 build_inventory.sh / postupdate # step 0 & 5: APPLICATIONS.md & UPDATES.md
 update_system.sh               # step 6: softwareupdate -i <label> -R (macOS final)
 config/internet_apps.txt       # public registry (${INTERNET_APP_COUNT} apps)
+config/vendor_feeds.txt        # official vendor feeds (Sparkle RSS, JSON, YAML, KV)
+config/vendor_direct_first.txt # direct-download-first apps (ChatGPT, Cursor, OpenCode)
 config/inventory_exclusions.txt # discovery exclusions (Ascendo)
 lib/brew.sh                    # resilient Homebrew query layer
 lib/proc.sh                    # process-group timeout + SIGKILL
 lib/native_installers.sh       # vendor CLI download-then-exec
+lib/vendor_direct.sh           # Gatekeeper & Team ID verified atomic app swap
+lib/python/vendor_feeds.py     # multi-format vendor feed parsing & Omaha history proof
+lib/python/cli_duplicates.py   # native vs npm duplicate binary detector
 lib/run_lock.sh                # per-repo run lock
 lib/version.sh                 # shared version comparison logic
 dev_sync/overlay_import.py     # overlay import boundaries + recovery

@@ -14,6 +14,120 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v1.5.4',
+    date: '2026-10-05',
+    summary: {
+      en: 'Manufacturer feed warnings are decoupled from update targets, duplicate unconfirmed updater items are eliminated, and warning summaries are localized across seven languages.',
+      pl: 'Ostrzeżenia o feedach producentów zostały oddzielone od celów instalacji, wyeliminowano duplikaty niepotwierdzonych updaterów, a podsumowania ostrzeżeń przetłumaczono na siedem języków.',
+    },
+    fixed: [
+      {
+        en: 'A stale manufacturer feed is treated as an informative warning with separate installed and vendor version evidence, never as a pending downgrade.',
+        pl: 'Nieaktualny feed producenta jest traktowany jako informacyjne ostrzeżenie z osobnymi wersjami zainstalowaną i dostępną, nigdy jako oczekujący downgrade.',
+      },
+      {
+        en: 'Per-app manufacturer warnings no longer emit duplicate generic unconfirmed updater items claiming an updater was launched.',
+        pl: 'Ostrzeżenia producenta dla pojedynczych aplikacji nie generują już zduplikowanych ogólnych wpisów sugerujących uruchomienie updatera.',
+      },
+      {
+        en: 'Run summary warning and unconfirmed operation labels are fully localized across all seven supported languages.',
+        pl: 'Etykiety ostrzeżeń i niepotwierdzonych operacji w podsumowaniu zostały w pełni zlokalizowane w siedmiu językach.',
+      },
+      {
+        en: 'Proton Mail informational message describes its native updater generically without misidentifying it as Sparkle.',
+        pl: 'Komunikat informacyjny Proton Mail opisuje natywny updater bez błędnego kwalifikowania go jako Sparkle.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Verified live run completed in 108 seconds with 25 verified internet applications and zero unverified app updaters (532 passing tests).',
+        pl: 'Zweryfikowany bieg na żywo zakończył się w 108 sekund przy 25 zweryfikowanych aplikacjach internetowych i zero niepotwierdzonych updaterach (532 testy).',
+      },
+    ],
+  },
+  {
+    version: 'v1.5.3',
+    date: '2026-10-05',
+    summary: {
+      en: 'Direct vendor downloads for ChatGPT, Proton release map parsing, native CLI precedence, running application bundle protection, and unattended sudo safety.',
+      pl: 'Bezpośrednie pobieranie wydań ChatGPT, parsowanie mapy wydań Proton, pierwszeństwo natywnych CLI, ochrona otwartych aplikacji i bezpieczeństwo nieinteraktywnego sudo.',
+    },
+    added: [
+      {
+        en: 'ChatGPT uses verified vendor downloads before GUI launch when an update is available, saving up to 150 seconds per run.',
+        pl: 'ChatGPT pobiera zweryfikowany pakiet producenta przed próbą uruchomienia GUI, oszczędzając do 150 sekund na bieg.',
+      },
+      {
+        en: 'Proton release JSON support with vendor release mapping, minimum macOS requirements, and staged rollout detection.',
+        pl: 'Obsługa formatu JSON wydań Proton z mapowaniem wersji, wymaganiami minimalnymi macOS i detekcją etapowych rolloutów.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Native CLI toolchains update before Node/npm; redundant npm packages are pruned only after validating working native binaries.',
+        pl: 'Natywne łańcuchy CLI aktualizują się przed Node/npm; zbędne pakiety npm są usuwane dopiero po walidacji natywnych binariów.',
+      },
+      {
+        en: 'Bundle replacements strictly verify running process state; running applications are never terminated and are deferred to restart.',
+        pl: 'Podmiana aplikacji ściśle weryfikuje procesy w tle; działające aplikacje nigdy nie są zamykane i zostają odroczone do restartu.',
+      },
+      {
+        en: 'Settle sleep delay is skipped when no application was launched; absent DJI software is omitted from inventory.',
+        pl: 'Pauza oczekiwania jest pomijana, gdy nie uruchomiono żadnej aplikacji; brakujące oprogramowanie DJI nie trafia do inwentarza.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Unattended system updates use non-interactive sudo (sudo -n) and propagate warnings cleanly into the final degraded summary.',
+        pl: 'Nienadzorowane aktualizacje systemu używają nieinteraktywnego sudo (-n) i poprawnie przekazują ostrzeżenia do podsumowania.',
+      },
+      {
+        en: 'App Store queue parser prevents falling back to unconstrained mas upgrade when update IDs cannot be resolved.',
+        pl: 'Parser kolejki App Store zapobiega wywołaniu nieograniczonego mas upgrade w przypadku braku odczytania identyfikatorów.',
+      },
+    ],
+  },
+  {
+    version: 'v1.5.2',
+    date: '2026-09-28',
+    summary: {
+      en: 'Chromium updater verification via updater_history.jsonl, idle Docker Desktop verified DMG upgrade, OpenCode direct fallback, and hermetic CI testing.',
+      pl: 'Weryfikacja updaterów Chromium przez updater_history.jsonl, aktualizacja bezczynnego Dockera z DMG, instalacja direct OpenCode i hermetyczne testy CI.',
+    },
+    added: [
+      {
+        en: 'Pre-action Omaha history proof from updater_history.jsonl for Chrome, Gemini, and Comet, eliminating redundant 45s wait cycles.',
+        pl: 'Sprawdzanie historii Omaha z pliku updater_history.jsonl przed wybudzeniem updaterów dla Chrome, Gemini i Comet, oszczędzające 45 s na aplikację.',
+      },
+      {
+        en: 'Docker Desktop updates from verified appcast DMG when idle; active containers are protected by deferring running instances.',
+        pl: 'Docker Desktop aktualizuje się ze zweryfikowanego DMG z appcastu w stanie spoczynku; kontenery są chronione przez odroczenie uruchomionego Dockera.',
+      },
+      {
+        en: 'OpenCode added to vendor_direct_first.txt for instantaneous direct installation.',
+        pl: 'OpenCode dodany do vendor_direct_first.txt w celu natychmiastowej instalacji bezpośredniej ze zweryfikowanego archiwum.',
+      },
+    ],
+    fixed: [
+      {
+        en: 'Suppressed false TEAMS21 quarantine release messages by maintaining MAU DeferralVersions pins.',
+        pl: 'Wyeliminowano fałszywe komunikaty zwalniania kwarantanny TEAMS21 poprzez zachowanie reguł DeferralVersions w MAU.',
+      },
+      {
+        en: 'App Store Track 2 skips user prompts and Accessibility checks when no native App Store updates are pending.',
+        pl: 'Tor 2 App Store pomija pytania i sprawdzanie uprawnień Accessibility, gdy nie ma oczekujących aplikacji.',
+      },
+      {
+        en: 'Run summary attributes unverified internet apps by specific application name instead of generic step headers.',
+        pl: 'Podsumowanie biegu wymienia niepotwierdzone aplikacje z nazwy zamiast ogólnego nagłówka kroku.',
+      },
+      {
+        en: 'Hermetic test suite eliminating host /Applications and architecture dependencies across 496 automated tests.',
+        pl: 'Hermetyczny zestaw testów eliminujący zależności od lokalnego katalogu /Applications i architektury w 496 testach.',
+      },
+    ],
+  },
+  {
     version: 'v1.5.1',
     date: '2026-09-25',
     summary: {
