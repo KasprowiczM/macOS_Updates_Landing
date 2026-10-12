@@ -634,6 +634,8 @@ const StationRow: FC<{
         <span
           style={{
             ...PLACARD,
+            // Product names keep their casing (macOS, not MACOS); the rest are already caps.
+            textTransform: 'none',
             fontSize: m.name,
             color: started ? C.fg : C.dim,
             whiteSpace: 'nowrap',

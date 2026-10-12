@@ -35,7 +35,6 @@ const EN = {
   'wall.intro':
     'Each update layer reports GO only after the live Mac confirms it. A stale vendor feed reports HOLD, and the warning stays on the board. macOS goes last, because it can restart.',
   'wall.caption': 'Readouts from real runs on 2026-10-05 and 2026-10-11.',
-  'wall.scrollHint': 'Scroll to advance the poll',
   'wall.listLabel': 'Update stations in run order',
 
   'wall.screen.title': 'Flight director poll',
@@ -108,7 +107,6 @@ export const WALL_LABELS_PL: WallLabels = {
   'wall.intro':
     'Każda warstwa aktualizacji zgłasza GO dopiero po potwierdzeniu przez działającego Maca. Nieświeży kanał producenta zgłasza HOLD, a ostrzeżenie zostaje na tablicy. macOS idzie ostatni, bo może się zrestartować.',
   'wall.caption': 'Odczyty z prawdziwych uruchomień z 2026-10-05 i 2026-10-11.',
-  'wall.scrollHint': 'Przewiń, aby przesunąć odpytywanie',
   'wall.listLabel': 'Stacje aktualizacji w kolejności uruchamiania',
 
   'wall.screen.title': 'Odpytanie dyrektora lotu',

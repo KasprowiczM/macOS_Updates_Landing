@@ -21,7 +21,7 @@
   --color-ink-700: #15212F;
   --color-ink-600: #1F3347;
   --color-ink-500: #34506B;
-  --color-ink-400: #5B6B80;
+  --color-ink-400: #536377;
   --color-ink-300: #7E92A6;
   --color-ink-200: #9FB1C3;
   --color-ink-100: #C9D5E0;
@@ -95,7 +95,7 @@
   --bg-sunk: #E3E9EF;
   --fg: #0D1B2A;
   --fg-muted: #42536A;
-  --fg-faint: #5B6B80;
+  --fg-faint: #536377;
   --rule: #C9D5E0;
   --rule-strong: #8FA5BA;
 
@@ -111,7 +111,7 @@
   --hold-soft: #F6ECD3;
   --nogo: #B23A33;
   --nogo-soft: #F4DEDC;
-  --standby: #5B6B80;
+  --standby: #536377;
   --selection: #CFE0F3;
 
   /* Dark instrument insets (same in both themes) */

@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactElement, type ReactNode } from 'react'
+import { createElement, lazy, Suspense, type ReactNode } from 'react'
 import { LazyMotion, domAnimation } from 'motion/react'
 import { Route, Routes } from 'react-router-dom'
 import { I18nextProvider } from 'react-i18next'
@@ -8,23 +8,19 @@ import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { getI18n } from './i18n'
 import { LANGS, localizedPath, useLang } from './lib/routes'
-import { pageLoaders, type PagePath } from './lib/pageLoaders'
+import { getLoadedPage, pageLoaders, preloadPage, type PagePath } from './lib/pageLoaders'
 import { NotFoundPage } from './pages/NotFoundPage'
 
-const LandingPage = lazy(pageLoaders['/'])
-const FeaturesPage = lazy(pageLoaders['/features'])
-const DocsPage = lazy(pageLoaders['/docs'])
-const SecurityPage = lazy(pageLoaders['/security'])
-const ChangelogPage = lazy(pageLoaders['/changelog'])
-const ContributingPage = lazy(pageLoaders['/contributing'])
+// React.lazy creates a fresh pending promise on first render even when main.tsx
+// already loaded the chunk, which made hydration drop the prerendered HTML for the
+// Suspense fallback (a large layout shift). Render the cached module directly when
+// it is available and fall back to lazy loading only for routes not loaded yet.
+const LAZY_PAGES = Object.fromEntries(
+  (Object.keys(pageLoaders) as PagePath[]).map((path) => [path, lazy(() => preloadPage(path))]),
+) as Record<PagePath, ReturnType<typeof lazy>>
 
-const PAGES: Record<PagePath, ReactElement> = {
-  '/': <LandingPage />,
-  '/features': <FeaturesPage />,
-  '/docs': <DocsPage />,
-  '/security': <SecurityPage />,
-  '/changelog': <ChangelogPage />,
-  '/contributing': <ContributingPage />,
+function RoutePage({ path }: { path: PagePath }) {
+  return createElement(getLoadedPage(path) ?? LAZY_PAGES[path])
 }
 
 function PageLoadingFallback() {
@@ -54,8 +50,8 @@ function Shell() {
       <Suspense fallback={<PageLoadingFallback />}>
         <Routes>
           {LANGS.flatMap((lang) =>
-            (Object.keys(PAGES) as PagePath[]).map((path) => (
-              <Route key={`${lang}:${path}`} path={localizedPath(path, lang)} element={PAGES[path]} />
+            (Object.keys(pageLoaders) as PagePath[]).map((path) => (
+              <Route key={`${lang}:${path}`} path={localizedPath(path, lang)} element={<RoutePage path={path} />} />
             )),
           )}
           <Route path="*" element={<NotFoundPage />} />

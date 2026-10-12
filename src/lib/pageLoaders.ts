@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react'
+
 /**
  * Dynamic importers for the route components. Shared by App (React.lazy) and
  * main.tsx, which awaits the current route's chunk before hydrating so the
@@ -13,6 +15,22 @@ export const pageLoaders = {
 } as const
 
 export type PagePath = keyof typeof pageLoaders
+
+type PageComponent = ComponentType<object>
+
+/** Modules already loaded, readable synchronously so hydration never suspends on them. */
+const loadedPages: Partial<Record<PagePath, PageComponent>> = {}
+
+/** Loads a route chunk once and remembers its component. */
+export async function preloadPage(path: PagePath): Promise<{ default: PageComponent }> {
+  const mod = await pageLoaders[path]()
+  loadedPages[path] = mod.default as PageComponent
+  return { default: mod.default as PageComponent }
+}
+
+export function getLoadedPage(path: PagePath): PageComponent | undefined {
+  return loadedPages[path]
+}
 
 export function isPagePath(path: string): path is PagePath {
   return Object.prototype.hasOwnProperty.call(pageLoaders, path)

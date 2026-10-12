@@ -6,7 +6,7 @@ import './index.css'
 import './i18n'
 import App from './App'
 import { normalizePath, stripLangPrefix } from './lib/routes'
-import { isPagePath, pageLoaders } from './lib/pageLoaders'
+import { isPagePath, preloadPage } from './lib/pageLoaders'
 
 const container = document.getElementById('root')!
 
@@ -38,7 +38,7 @@ async function start() {
   const base = stripLangPrefix(here)
   if (isPagePath(base)) {
     try {
-      await pageLoaders[base]()
+      await preloadPage(base)
     } catch { /* hydrate anyway; Suspense handles a late chunk */ }
   }
   hydrateRoot(container, tree)

@@ -107,10 +107,10 @@ export function Footer() {
           <p className="m-0 text-[13px] text-(--fg-muted)">{t('chrome.footer.rights')} · MIT</p>
           <Link
             to={localize('/changelog')}
-            aria-label={`${t('chrome.footer.releaseLink')} ${APP_VERSION}`}
             className="screen readout inline-flex min-h-[44px] items-center gap-2.5 px-3 text-[12px] no-underline hover:border-(--screen-go)"
           >
             <span className="lamp lamp-go" aria-hidden="true" />
+            <span className="sr-only">{t('chrome.footer.releaseLink')} </span>
             <span className="text-(--screen-fg)">{APP_VERSION}</span>
             <span className="text-(--screen-dim)">{APP_VERSION_DATE}</span>
           </Link>

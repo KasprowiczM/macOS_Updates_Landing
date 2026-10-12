@@ -12,7 +12,7 @@ This file is the long-form companion to https://macosupdates.dev/llms.txt. All s
 - Scope: 43 internet-downloaded apps handled through 11 update methods, plus macOS, the Mac App Store, Homebrew, native CLIs and npm.
 - Quality gate: {{TEST_COUNT}} automated tests (shell syntax, Python compilation, static safety contracts, unit and registry-parity tests, secret scan).
 - Terminal UI languages: English, Polish, German, French, Spanish, Italian, Portuguese.
-- Source code: https://github.com/KasprowiczM/macOS_updates
+- [Source code](https://github.com/KasprowiczM/macOS_updates)
 - Documentation: https://macosupdates.dev/docs, features: https://macosupdates.dev/features, security policy: https://macosupdates.dev/security, changelog: https://macosupdates.dev/changelog, contributing: https://macosupdates.dev/contributing
 
 ## Who it is for
@@ -211,11 +211,11 @@ A: No. Apple Silicon and macOS 13 or later only.
 ## Links
 
 - Website: https://macosupdates.dev (English), https://macosupdates.dev/pl (Polish)
-- Documentation: https://macosupdates.dev/docs
-- Features: https://macosupdates.dev/features
-- Security policy: https://macosupdates.dev/security
-- Changelog: https://macosupdates.dev/changelog
-- Contributing: https://macosupdates.dev/contributing
-- Short summary for LLMs: https://macosupdates.dev/llms.txt
-- Sitemap: https://macosupdates.dev/sitemap.xml
-- Source code and issues: https://github.com/KasprowiczM/macOS_updates
+- [Documentation](https://macosupdates.dev/docs)
+- [Features](https://macosupdates.dev/features)
+- [Security policy](https://macosupdates.dev/security)
+- [Changelog](https://macosupdates.dev/changelog)
+- [Contributing](https://macosupdates.dev/contributing)
+- [Short summary for LLMs](https://macosupdates.dev/llms.txt)
+- [Sitemap](https://macosupdates.dev/sitemap.xml)
+- [Source code and issues](https://github.com/KasprowiczM/macOS_updates)

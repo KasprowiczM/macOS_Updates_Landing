@@ -360,7 +360,6 @@
     "heading": "Watch one run, station by station.",
     "intro": "Each update layer reports GO only after the live Mac confirms it. A stale vendor feed reports HOLD, and the warning stays on the board. macOS goes last, because it can restart.",
     "caption": "Readouts from real runs on 2026-10-05 and 2026-10-11.",
-    "scrollHint": "Scroll to advance the poll",
     "listLabel": "Update stations in run order",
     "screen": {
       "title": "Flight director poll",

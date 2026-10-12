@@ -57,10 +57,12 @@ Manual setup:
 
 ## Links
 
-- Home: https://macosupdates.dev/
-- Documentation: https://macosupdates.dev/docs
-- Features: https://macosupdates.dev/features
-- Security: https://macosupdates.dev/security
-- Changelog: https://macosupdates.dev/changelog
-- Contributing: https://macosupdates.dev/contributing
-- Source code: https://github.com/KasprowiczM/macOS_updates
+- [Home](https://macosupdates.dev/)
+- [Documentation](https://macosupdates.dev/docs)
+- [Features](https://macosupdates.dev/features)
+- [Security](https://macosupdates.dev/security)
+- [Changelog](https://macosupdates.dev/changelog)
+- [Contributing](https://macosupdates.dev/contributing)
+- [Source code](https://github.com/KasprowiczM/macOS_updates)
+- [Full knowledge file (llms-full.txt)](https://macosupdates.dev/llms-full.txt)
+- [Polski](https://macosupdates.dev/pl)

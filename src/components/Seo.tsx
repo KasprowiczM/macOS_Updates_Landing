@@ -66,7 +66,25 @@ export function Seo({ title, description, path, lang, jsonLd, noindex = false }:
   // Browser: React 19 inserts its own head tags during hydration instead of adopting the
   // prerendered ones, so drop the prerendered copies once <Seo> has mounted.
   useEffect(() => {
-    document.head.querySelectorAll(`[${SSR_HEAD_ATTR}]`).forEach((node) => node.remove())
+    // Remove a prerendered tag only when React has inserted its own copy. When hydration
+    // adopts the server HTML, React does not re-insert hoisted head tags, so the
+    // prerendered ones must stay (removing them unconditionally left the page untitled).
+    const keyOf = (el: Element) =>
+      [
+        el.tagName,
+        el.getAttribute('name'),
+        el.getAttribute('property'),
+        el.getAttribute('rel'),
+        el.getAttribute('hreflang'),
+      ].join('|')
+    const live = new Set(
+      Array.from(document.head.querySelectorAll(`title, meta, link`))
+        .filter((el) => !el.hasAttribute(SSR_HEAD_ATTR))
+        .map(keyOf),
+    )
+    document.head.querySelectorAll(`[${SSR_HEAD_ATTR}]`).forEach((node) => {
+      if (live.has(keyOf(node))) node.remove()
+    })
   }, [])
 
   // Browser: keep exactly one set of JSON-LD tags in <head>, replacing the prerendered ones.

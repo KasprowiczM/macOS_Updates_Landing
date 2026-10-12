@@ -22,8 +22,7 @@ import {
 } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 import type { PlayerRef } from '@remotion/player'
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react'
-import { ChevronDown } from 'lucide-react'
+import { useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react'
 import {
   WALL_DURATION,
   WALL_STATIONS,
@@ -249,7 +248,6 @@ export function WallDisplay() {
   const lastFrame = useRef(-1)
 
   const { scrollYProgress } = useScroll({ target: trackRef, offset: ['start start', 'end end'] })
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0])
 
   // Scroll position becomes the Remotion frame. No scroll listener, no React state per frame.
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
@@ -347,16 +345,6 @@ export function WallDisplay() {
             <p className="m-0" style={{ color: 'var(--fg-muted, inherit)' }}>
               {labels['wall.caption']}
             </p>
-            {scrub ? (
-              <motion.span
-                aria-hidden="true"
-                className="hidden items-center gap-1.5 sm:inline-flex"
-                style={{ opacity: hintOpacity, color: 'var(--fg-muted, inherit)' }}
-              >
-                {labels['wall.scrollHint']}
-                <ChevronDown size={14} strokeWidth={1.75} />
-              </motion.span>
-            ) : null}
           </div>
         </div>
       </div>
