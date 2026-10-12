@@ -25,7 +25,7 @@ export function CoverageRoster() {
         </h2>
         <p className="mt-5 max-w-[40rem] text-(--fg-muted)">{t('coverage.lead')}</p>
 
-        <div className="mt-14 gap-x-12 sm:columns-2 lg:columns-3 md:mt-16">
+        <div className="-mb-10 mt-14 gap-x-12 sm:columns-2 lg:columns-3 md:mt-16">
           {METHOD_GROUPS.map((group) => (
             <div
               key={group.method}
@@ -68,9 +68,11 @@ export function CoverageRoster() {
           </div>
         </div>
 
-        <p className="mt-6 flex max-w-[52rem] flex-wrap items-center gap-x-2 gap-y-2 text-[15px] text-(--fg-muted)">
-          <span>{t('coverage.report')}</span>
+        <p className="mt-12 flex max-w-[52rem] flex-wrap items-center gap-x-2 gap-y-2 text-[15px] text-(--fg-muted)">
           <Code>bash scripts/report_update_coverage.sh</Code>
+          <span>
+            {t('coverage.reportCmd')} {t('coverage.report')}
+          </span>
         </p>
       </div>
     </section>

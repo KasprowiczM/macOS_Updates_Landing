@@ -5,7 +5,7 @@ import { alternateLangPath, saveLangPreference, useLang, useLocalizedPath, type 
 import { Lockup } from '../ui/Logo'
 
 const LINK =
-  'inline-flex items-center min-h-[44px] text-[14px] text-(--fg-muted) no-underline hover:text-(--fg) hover:underline underline-offset-[0.2em] decoration-1'
+  'inline-flex items-center min-h-[44px] min-w-[44px] text-[14px] text-(--fg-muted) no-underline hover:text-(--fg) hover:underline underline-offset-[0.2em] decoration-1'
 
 export function Footer() {
   const { t } = useTranslation()

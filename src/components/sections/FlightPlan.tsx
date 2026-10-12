@@ -64,7 +64,7 @@ export function FlightPlan() {
                     className="px-5 py-5 align-top font-normal max-md:block max-md:p-0"
                   >
                     <span className="flex items-baseline gap-3">
-                      <span className="readout w-4 text-[13px] text-(--fg-faint)">{step}</span>
+                      <span className="readout w-5 text-[13px] text-(--fg-faint)">{String(step + 1).padStart(2, '0')}</span>
                       <span className={`placard text-(--fg) ${id === 'macos' ? 'normal-case' : ''}`}>{t(`wall.station.${id}.name`)}</span>
                     </span>
                   </th>

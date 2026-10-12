@@ -2,27 +2,9 @@ import { useId } from 'react'
 import type { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { INTERNET_APP_COUNT, UPDATE_METHOD_COUNT } from '../../lib/site'
+import { STATIONS } from './pollData'
+import type { PollState } from './pollData'
 import './poll.css'
-
-type PollState = 'go' | 'hold' | 'standby'
-
-interface Station {
-  id: 'prescan' | 'appstore' | 'cli' | 'brew' | 'internet' | 'post' | 'macos'
-  lamp: PollState
-  /** Which readout text the state shows. */
-  text: 'go' | 'goHold' | 'standbyRestart'
-}
-
-/** Final state of each station after a poll. macOS stays on STANDBY: it runs last. */
-const STATIONS: readonly Station[] = [
-  { id: 'prescan', lamp: 'go', text: 'go' },
-  { id: 'appstore', lamp: 'go', text: 'go' },
-  { id: 'cli', lamp: 'go', text: 'go' },
-  { id: 'brew', lamp: 'go', text: 'go' },
-  { id: 'internet', lamp: 'hold', text: 'goHold' },
-  { id: 'post', lamp: 'go', text: 'go' },
-  { id: 'macos', lamp: 'standby', text: 'standbyRestart' },
-]
 
 const LAMP_CLASS: Record<PollState, string> = {
   go: 'lamp lamp-go',
@@ -41,14 +23,14 @@ export function PollConsole() {
   const titleId = useId()
 
   return (
-    <div className="screen" role="group" aria-labelledby={titleId}>
-      <div className="flex items-center justify-between gap-4 border-b border-(--screen-rule) px-4 py-3.5">
-        <p id={titleId} className="placard m-0 text-(--screen-fg)">
+    <div id="poll-console" className="screen scroll-mt-24" role="group" aria-labelledby={titleId}>
+      <div className="flex items-center justify-between gap-3 border-b border-(--screen-rule) px-4 py-3.5">
+        <p id={titleId} className="placard m-0 min-w-0 text-[10.5px] tracking-[0.05em] text-(--screen-fg) sm:text-[11.5px] sm:tracking-[0.07em]">
           {t('wall.screen.title')}
         </p>
-        <p className="m-0 flex shrink-0 items-baseline gap-2.5 whitespace-nowrap" aria-hidden="true">
+        <p className="m-0 flex shrink-0 items-baseline gap-2 whitespace-nowrap" aria-hidden="true">
           <span className="placard">{t('wall.screen.tMinus')}</span>
-          <span className="poll-count readout text-[15px] text-(--screen-go)" />
+          <span className="poll-count readout text-[14px] text-(--screen-go) sm:text-[15px]" />
         </p>
       </div>
 
@@ -60,7 +42,7 @@ export function PollConsole() {
             <li
               key={station.id}
               style={style}
-              className={`${animated ? 'poll-row ' : ''}grid grid-cols-[10px_minmax(0,1fr)] items-center gap-x-3.5 border-b border-(--screen-rule) px-4 py-3 sm:grid-cols-[10px_minmax(0,1fr)_auto]`}
+              className={`${animated ? 'poll-row ' : ''}grid grid-cols-[10px_minmax(0,1fr)] items-center gap-x-3.5 border-b border-(--screen-rule) px-4 py-3.5 sm:grid-cols-[10px_minmax(0,1fr)_auto]`}
             >
               <span className={LAMP_CLASS[station.lamp]} aria-hidden="true" />
               <div className="min-w-0">

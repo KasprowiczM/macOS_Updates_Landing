@@ -2,10 +2,10 @@ import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowUpRight, Check, Copy } from 'lucide-react'
 import { Button } from '../ui/Button'
-import { useLang } from '../../lib/routes'
 import { INSTALL_NIX, INTERNET_APP_COUNT, REPO_URL } from '../../lib/site'
 import { CommandReadout } from './CommandReadout'
 import { PollConsole } from './PollConsole'
+import { POLL_GO, POLL_HOLD, POLL_LAMPS } from './pollData'
 import { CONTAINER } from './layout'
 import { useCopy } from './useCopy'
 
@@ -15,7 +15,6 @@ import { useCopy } from './useCopy'
  */
 export function Hero() {
   const { t } = useTranslation()
-  const lang = useLang()
   const commandRef = useRef<HTMLElement | null>(null)
   const { status, copy } = useCopy(INSTALL_NIX, commandRef)
   const copied = status === 'copied'
@@ -24,13 +23,13 @@ export function Hero() {
     <section
       id="poll"
       aria-labelledby="hero-title"
-      className="pb-16 pt-[calc(var(--nav-h)+clamp(1.5rem,5vh,3.5rem))] md:pb-24"
+      className="pb-16 pt-[calc(var(--nav-h)+2rem)] md:pb-20"
     >
       <div className={`${CONTAINER} grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-12`}>
         <div className="min-w-0 lg:col-span-7">
           <h1
             id="hero-title"
-            className={`m-0 ${lang === 'pl' ? 'text-[clamp(2.1rem,2.55vw+0.9rem,3.05rem)]' : 'text-[clamp(2.25rem,3.2vw+0.9rem,3.5rem)]'}`}
+            className="m-0 text-[clamp(2.25rem,5.2vw-4px,4rem)] tracking-[-0.03em] [word-spacing:0.07em] [font-stretch:90%]"
           >
             <span className="block">{t('hero.titleA')}</span>
             <span className="block">
@@ -63,7 +62,20 @@ export function Hero() {
             </span>
           </div>
 
-          <div className="mt-8 max-w-[40rem]">
+          <a
+            href="#poll-console"
+            aria-label={t('hero.strip.aria', { go: POLL_GO, hold: POLL_HOLD })}
+            className="mt-5 inline-flex min-h-[44px] items-center gap-3 text-[13px] font-medium text-(--fg) no-underline md:hidden"
+          >
+            <span className="flex gap-1" aria-hidden="true">
+              {POLL_LAMPS.map((lamp, i) => (
+                <span key={i} className={`lamp lamp-${lamp}`} />
+              ))}
+            </span>
+            <span className="readout text-[12px]">{t('hero.strip.text', { go: POLL_GO, hold: POLL_HOLD })}</span>
+          </a>
+
+          <div className="mt-3 max-w-[40rem] md:mt-8">
             <CommandReadout command={INSTALL_NIX} label={t('hero.commandLabel')} codeRef={commandRef} />
           </div>
         </div>

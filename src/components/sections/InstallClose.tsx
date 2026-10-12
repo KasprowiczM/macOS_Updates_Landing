@@ -16,7 +16,7 @@ export function InstallClose() {
     <section
       id="install"
       aria-labelledby="install-title"
-      className="border-t border-(--rule) bg-(--bg-sunk) pb-28 pt-24 md:pb-36 md:pt-32"
+      className="border-t border-(--rule) bg-(--bg-sunk) pb-20 pt-20 md:pb-24 md:pt-28"
     >
       <div className={`${CONTAINER} text-center`}>
         <h2 id="install-title" className="m-0 mx-auto max-w-[20ch]">

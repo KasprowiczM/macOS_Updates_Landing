@@ -25,7 +25,9 @@ import type { PlayerRef } from '@remotion/player'
 import { useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react'
 import {
   WALL_DURATION,
+  WALL_SIZE,
   WALL_STATIONS,
+  rowIsInformative,
   rowReadout,
   stationFinalLabel,
   stationOutcome,
@@ -118,7 +120,7 @@ function StationItem({
   labels: WallLabels
   compact: boolean
 }) {
-  const hold = stationOutcome(station) === 'hold'
+  const outcome = stationOutcome(station)
   const detail = compact ? 'sr-only' : undefined
   return (
     <li
@@ -135,7 +137,7 @@ function StationItem({
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="min-w-0">
-        <p className="text-sm md:text-base" style={{ ...PLACARD, color: SCREEN.fg }}>
+        <p className="text-sm md:text-base" style={{ ...PLACARD, textTransform: 'none', color: SCREEN.fg }}>
           {labels[station.name]}
         </p>
         <p
@@ -145,6 +147,7 @@ function StationItem({
           {labels[station.desc]}
         </p>
         {station.rows.map((row) => {
+          if (!rowIsInformative(station, row)) return null
           const text = rowReadout(row, labels)
           return text ? (
             <p
@@ -170,8 +173,9 @@ function StationItem({
         style={{
           ...PLACARD,
           borderRadius: 2,
-          background: hold ? SCREEN.hold : SCREEN.go,
-          color: SCREEN.bg,
+          background: outcome === 'hold' ? SCREEN.hold : outcome === 'standby' ? 'transparent' : SCREEN.go,
+          border: outcome === 'standby' ? `1px solid ${SCREEN.dim}` : undefined,
+          color: outcome === 'standby' ? SCREEN.fg : SCREEN.bg,
         }}
       >
         {stationFinalLabel(station, labels)}
@@ -285,17 +289,19 @@ export function WallDisplay() {
   }, [scrub, near])
 
   const portrait = layout === 'portrait'
-  const aspect = portrait ? 900 / 1400 : 16 / 9
+  const aspect = portrait ? WALL_SIZE.portrait.width / WALL_SIZE.portrait.height : 16 / 9
   const stageStyle: CSSProperties = scrub
     ? {
-        aspectRatio: portrait ? '900 / 1400' : '1600 / 900',
+        aspectRatio: portrait
+          ? `${WALL_SIZE.portrait.width} / ${WALL_SIZE.portrait.height}`
+          : `${WALL_SIZE.landscape.width} / ${WALL_SIZE.landscape.height}`,
         width: `min(100%, calc((100svh - ${RESERVED_PX}px) * ${aspect}))`,
       }
     : {}
 
   return (
     <section id="wall" aria-labelledby={headingId} className="border-t border-(--rule)">
-      <header className="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 md:pb-14 md:pt-32 lg:px-8">
+      <header className="mx-auto max-w-7xl px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-28 lg:px-8">
         <h2 id={headingId} className="m-0 max-w-[20ch]">
           {labels['wall.heading']}
         </h2>
@@ -313,7 +319,7 @@ export function WallDisplay() {
           }
         >
           <div
-            className={`relative mx-auto w-full ${scrub ? '' : 'max-w-[1100px]'}`}
+            className="relative mx-auto w-full"
             style={stageStyle}
           >
             {scrub && near ? (

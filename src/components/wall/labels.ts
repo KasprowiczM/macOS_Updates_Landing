@@ -1,16 +1,16 @@
 /**
  * Flight-director wall display: labels, i18n hook and the shared run model.
  *
- * - `WALL_LABELS_EN` / `WALL_LABELS_PL` are flat dotted keys under `wall.*`.
- *   They are meant to be merged (nested) into en.json / pl.json by the
- *   orchestrator. Until then `useWallLabels()` falls back to the English
- *   defaults through `t(key, { defaultValue })`.
+ * - `WALL_LABELS_EN` holds the flat dotted `wall.*` defaults (and the key type).
+ *   The real copy lives nested under `wall` in en.json / pl.json;
+ *   `useWallLabels()` reads it through i18n and falls back to these defaults.
  * - `WALL_STATIONS` is the single source of truth for the run: station order,
  *   readouts, version numbers and the frame at which each readout is polled and
  *   confirmed. The Remotion composition, the static board and the plotter all
  *   read it, so the three views can never disagree.
  *
  * Readouts are replays of real runs (2026-10-05 and 2026-10-11).
+ * macOS did not install an update in either run, so it ends on STANDBY.
  */
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +25,7 @@ export const WALL_DURATION = 420
 
 export const WALL_SIZE = {
   landscape: { width: 1600, height: 900 },
-  portrait: { width: 900, height: 1400 },
+  portrait: { width: 900, height: 1560 },
 } as const satisfies Record<WallLayout, { width: number; height: number }>
 
 /* ── Labels ───────────────────────────────────────────────── */
@@ -50,9 +50,9 @@ const EN = {
   'wall.state.hold': 'HOLD',
   'wall.state.standby': 'STANDBY',
   'wall.state.polling': 'POLLING',
-  'wall.state.restart': '(restart)',
 
   'wall.line.pending': 'pending',
+  'wall.line.standby': 'standby',
   'wall.line.confirmed': 'confirmed',
   'wall.line.hold': 'hold',
 
@@ -89,7 +89,7 @@ const EN = {
   'wall.row.post.pending': 'APPLICATIONS.md, UPDATES.md',
   'wall.row.post.done': 'history written only after the step succeeded',
   'wall.row.macos.pending': 'softwareupdate -i <label> -R',
-  'wall.row.macos.done': 'runs last because it may restart',
+  'wall.row.macos.done': 'restart last, none offered in these runs',
 
   'wall.note.openApps':
     'Open apps are never closed. Only what the toolkit launched is asked to quit.',
@@ -100,74 +100,6 @@ export type WallLabels = Readonly<Record<WallLabelKey, string>>
 
 /** English defaults (merge into en.json under `wall`). Contains `{{apps}}` and `{{methods}}` tokens. */
 export const WALL_LABELS_EN: WallLabels = EN
-
-/** Polish copy (merge into pl.json under `wall`). */
-export const WALL_LABELS_PL: WallLabels = {
-  'wall.heading': 'Zobacz jeden przebieg, stacja po stacji.',
-  'wall.intro':
-    'Każda warstwa aktualizacji zgłasza GO dopiero po potwierdzeniu przez działającego Maca. Nieświeży kanał producenta zgłasza HOLD, a ostrzeżenie zostaje na tablicy. macOS idzie ostatni, bo może się zrestartować.',
-  'wall.caption': 'Odczyty z prawdziwych uruchomień z 2026-10-05 i 2026-10-11.',
-  'wall.listLabel': 'Stacje aktualizacji w kolejności uruchamiania',
-
-  'wall.screen.title': 'Odpytanie dyrektora lotu',
-  'wall.screen.running': 'Powtórka: odpytanie w toku',
-  'wall.screen.complete': 'Powtórka: odpytanie zakończone',
-  'wall.screen.tMinus': 'T-minus',
-  'wall.screen.dryRun': 'Próba (dry-run)',
-  'wall.screen.confirmed': 'Potwierdzone przez Maca',
-  'wall.screen.plotTitle': 'Stacje do końca',
-  'wall.screen.result': 'Wynik odpytania',
-
-  'wall.state.go': 'GO',
-  'wall.state.hold': 'HOLD',
-  'wall.state.standby': 'GOTOWOŚĆ',
-  'wall.state.polling': 'ODPYTANIE',
-  'wall.state.restart': '(restart)',
-
-  'wall.line.pending': 'oczekuje',
-  'wall.line.confirmed': 'gotowe',
-  'wall.line.hold': 'wstrzymane',
-
-  'wall.station.prescan.name': 'PRESCAN',
-  'wall.station.prescan.desc':
-    'Inwentarz tego Maca do APPLICATIONS.md. Tylko zainstalowane oprogramowanie.',
-  'wall.station.appstore.name': 'APP STORE',
-  'wall.station.appstore.desc':
-    'sudo mas ze zmierzonymi identyfikatorami, potem AppleScript Track 2.',
-  'wall.station.cli.name': 'CLI + NPM',
-  'wall.station.cli.desc':
-    'Najpierw natywne CLI producentów (claude update, codex, opencode, agy), potem globalne pakiety Node/npm.',
-  'wall.station.brew.name': 'HOMEBREW',
-  'wall.station.brew.desc':
-    'brew upgrade --greedy, pominięte osierocone caski, czyszczenie, doctor.',
-  'wall.station.internet.name': 'INTERNET APPS',
-  'wall.station.internet.desc':
-    '{{apps}} aplikacji, {{methods}} metod aktualizacji. Każda wersja jest najpierw sprawdzana w kanale samego producenta.',
-  'wall.station.post.name': 'POSTUPDATE',
-  'wall.station.post.desc':
-    'Historia APPLICATIONS.md i UPDATES.md zapisywana dopiero po udanym kroku.',
-  'wall.station.macos.name': 'macOS',
-  'wall.station.macos.desc':
-    'softwareupdate -i <label> -R. Idzie na końcu, bo może zrestartować Maca.',
-
-  'wall.row.prescan.pending': 'inwentarz tego Maca',
-  'wall.row.prescan.done': 'APPLICATIONS.md, tylko zainstalowane',
-  'wall.row.cli.pending': 'claude, codex, opencode, agy, potem npm',
-  'wall.row.cli.done': 'najpierw natywne, potem npm',
-  'wall.row.brew.pending': 'brew upgrade --greedy',
-  'wall.row.brew.done': 'osierocone caski pominięte, cleanup, doctor',
-  'wall.row.opencode.done':
-    'zweryfikowana instalacja od producenta: Gatekeeper, bundle ID, Apple Team ID',
-  'wall.row.proton.pending': 'sprawdzanie kanału producenta',
-  'wall.row.proton.done': 'kanał producenta starszy niż zainstalowana wersja, nic nie zainstalowano',
-  'wall.row.post.pending': 'APPLICATIONS.md, UPDATES.md',
-  'wall.row.post.done': 'historia zapisana dopiero po udanym kroku',
-  'wall.row.macos.pending': 'softwareupdate -i <label> -R',
-  'wall.row.macos.done': 'idzie na końcu, bo może zrestartować',
-
-  'wall.note.openApps':
-    'Otwarte aplikacje nigdy nie są zamykane. Zamknięcie jest zlecane tylko temu, co uruchomił sam toolkit.',
-}
 
 const WALL_LABEL_KEYS = Object.keys(EN) as WallLabelKey[]
 
@@ -193,7 +125,7 @@ export function useWallLabels(): WallLabels {
 /* ── Run model (shared by composition, plotter and static board) ── */
 
 export type StationId = 'prescan' | 'appstore' | 'cli' | 'brew' | 'internet' | 'post' | 'macos'
-export type Outcome = 'go' | 'hold'
+export type Outcome = 'go' | 'hold' | 'standby'
 
 export interface WallRow {
   readonly id: string
@@ -216,7 +148,7 @@ export interface WallStation {
   readonly id: StationId
   readonly name: WallLabelKey
   readonly desc: WallLabelKey
-  /** macOS: lit state reads GO (restart). */
+  /** macOS: runs last and may restart, so it settles on STANDBY, never lit GO. */
   readonly restart?: boolean
   readonly rows: readonly WallRow[]
   readonly note?: WallLabelKey
@@ -339,7 +271,7 @@ export const WALL_STATIONS: readonly WallStation[] = [
         id: 'macos',
         pending: 'wall.row.macos.pending',
         done: 'wall.row.macos.done',
-        outcome: 'go',
+        outcome: 'standby',
         start: 334,
         confirm: 386,
       },
@@ -357,7 +289,14 @@ export function stationConfirm(station: WallStation): number {
 
 /** Worst-of: any HOLD row holds the whole station, and it stays that way. */
 export function stationOutcome(station: WallStation): Outcome {
-  return station.rows.some((row) => row.outcome === 'hold') ? 'hold' : 'go'
+  if (station.rows.some((row) => row.outcome === 'hold')) return 'hold'
+  if (station.restart) return 'standby'
+  return 'go'
+}
+
+/** Rows worth showing in the static board: versions and warnings, plus the STANDBY note. The rest repeats the station description. */
+export function rowIsInformative(station: WallStation, row: WallRow): boolean {
+  return Boolean(row.subject) || station.restart === true
 }
 
 /** Plain-text readout of a row, used by the static board and screen readers. */
@@ -369,10 +308,10 @@ export function rowReadout(row: WallRow, labels: WallLabels): string {
   return parts.join(' · ')
 }
 
-/** Final state label of a station: GO, HOLD or GO (restart). */
+/** Final state label of a station: GO, HOLD or STANDBY. */
 export function stationFinalLabel(station: WallStation, labels: WallLabels): string {
-  if (stationOutcome(station) === 'hold') return labels['wall.state.hold']
-  return station.restart
-    ? `${labels['wall.state.go']} ${labels['wall.state.restart']}`
-    : labels['wall.state.go']
+  const outcome = stationOutcome(station)
+  if (outcome === 'hold') return labels['wall.state.hold']
+  if (outcome === 'standby') return labels['wall.state.standby']
+  return labels['wall.state.go']
 }

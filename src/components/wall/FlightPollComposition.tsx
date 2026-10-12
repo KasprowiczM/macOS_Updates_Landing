@@ -16,7 +16,7 @@ import {
   stationOutcome,
   stationStart,
 } from './labels'
-import type { WallLabels, WallLayout, WallRow, WallStation } from './labels'
+import type { Outcome, WallLabels, WallLayout, WallRow, WallStation } from './labels'
 
 export type FlightPollProps = {
   labels: WallLabels
@@ -69,10 +69,11 @@ interface Metrics {
   tag: number
   tileH: number
   tileFont: number
-  tileSuffix: number
   tileW: number
-  tileWideW: number
   rowH: number
+  /** Reserved height of a row with a subject line (name, tag, version + one body line). */
+  subjectH: number
+  noteH: number
   rowPadY: number
   rowPadX: number
   marker: number
@@ -98,10 +99,10 @@ const METRICS: Record<WallLayout, Metrics> = {
     tag: 13,
     tileH: 30,
     tileFont: 16,
-    tileSuffix: 12,
     tileW: 150,
-    tileWideW: 172,
     rowH: 72,
+    subjectH: 64,
+    noteH: 28,
     rowPadY: 5,
     rowPadX: 18,
     marker: 12,
@@ -110,10 +111,10 @@ const METRICS: Record<WallLayout, Metrics> = {
   },
   portrait: {
     pad: 36,
-    title: 28,
+    title: 25,
     status: 22,
     clockLabel: 22,
-    clock: 76,
+    clock: 66,
     headerH: 130,
     stripH: 12,
     stripGap: 8,
@@ -125,10 +126,10 @@ const METRICS: Record<WallLayout, Metrics> = {
     tag: 20,
     tileH: 42,
     tileFont: 24,
-    tileSuffix: 18,
     tileW: 232,
-    tileWideW: 262,
     rowH: 96,
+    subjectH: 92,
+    noteH: 40,
     rowPadY: 6,
     rowPadX: 18,
     marker: 18,
@@ -163,7 +164,8 @@ const RUN_START = stationStart(WALL_STATIONS[0])
 const RUN_END = stationConfirm(LAST)
 const STATION_COUNT = WALL_STATIONS.length
 
-function outcomeColor(outcome: 'go' | 'hold'): string {
+function outcomeColor(outcome: Outcome): string {
+  if (outcome === 'standby') return C.dim
   return outcome === 'hold' ? C.hold : C.go
 }
 
@@ -176,8 +178,8 @@ const RollText: FC<{ from: string; to: string; at: number; duration?: number }> 
   duration = 9,
 }) => {
   const frame = useCurrentFrame()
-  if (from === to) return <span style={{ whiteSpace: 'pre' }}>{to}</span>
-  const p = ramp(frame, at, at + duration)
+  const same = from === to
+  const p = same ? 1 : ramp(frame, at, at + duration)
   const width = from.length + (to.length - from.length) * p
   const slot: CSSProperties = { position: 'absolute', left: 0, top: 0, whiteSpace: 'pre' }
   return (
@@ -192,7 +194,7 @@ const RollText: FC<{ from: string; to: string; at: number; duration?: number }> 
         width: `${width}ch`,
       }}
     >
-      <span style={{ ...slot, translate: `0 ${-p * 100}%` }}>{from}</span>
+      {same ? null : <span style={{ ...slot, translate: `0 ${-p * 100}%` }}>{from}</span>}
       <span style={{ ...slot, translate: `0 ${(1 - p) * 100}%` }}>{to}</span>
     </span>
   )
@@ -240,7 +242,8 @@ const Backdrop: FC<{ width: number; height: number }> = ({ width, height }) => (
 /* ── Header: title, status, T-minus ───────────────────────── */
 
 function clockState(frame: number): { sec: number; prev: number; at: number } {
-  const marks = [...WALL_STATIONS.slice(1).map(stationStart), RUN_END]
+  // macOS settles on STANDBY, so the clock stops at one station to go.
+  const marks = WALL_STATIONS.slice(1).map(stationStart)
   const passed = marks.filter((mark) => frame >= mark).length
   const sec = Math.max(0, STATION_COUNT - passed)
   return { sec, prev: Math.min(STATION_COUNT, sec + 1), at: passed > 0 ? marks[passed - 1] : 0 }
@@ -372,8 +375,9 @@ const Tile: FC<{ m: Metrics; labels: WallLabels; station: WallStation; frame: nu
   const confirm = stationConfirm(station)
   const outcome = stationOutcome(station)
   const started = frame >= start
-  const lit = frame >= confirm
-  const p = spring({ frame: frame - confirm, fps, config: { damping: 200 }, durationInFrames: 14 })
+  // A STANDBY station is never lit: it waits for its turn and stays on STANDBY.
+  const lit = frame >= confirm && outcome !== 'standby'
+  const p = lit ? spring({ frame: frame - confirm, fps, config: { damping: 200 }, durationInFrames: 14 }) : 0
   const pollP = linear(frame, start, confirm)
   const waiting = station.restart === true
   const baseLabel = !started
@@ -383,7 +387,7 @@ const Tile: FC<{ m: Metrics; labels: WallLabels; station: WallStation; frame: nu
       : labels['wall.state.polling']
   const baseColor = !started ? C.dim : C.fg
   const litLabel = outcome === 'hold' ? labels['wall.state.hold'] : labels['wall.state.go']
-  const width = station.restart ? m.tileWideW : m.tileW
+  const width = m.tileW
   const centered: CSSProperties = {
     position: 'absolute',
     inset: 0,
@@ -432,11 +436,6 @@ const Tile: FC<{ m: Metrics; labels: WallLabels; station: WallStation; frame: nu
         }}
       >
         <span>{litLabel}</span>
-        {outcome === 'go' && station.restart ? (
-          <span style={{ fontSize: m.tileSuffix, letterSpacing: '0.04em' }}>
-            {labels['wall.state.restart']}
-          </span>
-        ) : null}
       </div>
     </div>
   )
@@ -450,16 +449,19 @@ const RowReadout: FC<{ m: Metrics; labels: WallLabels; row: WallRow }> = ({ m, l
   const lc = row.confirm - row.start
   const confirmed = f >= lc
   const isHold = confirmed && row.outcome === 'hold'
+  const isStandby = confirmed && row.outcome === 'standby'
   const enter = ramp(f, 0, 10)
   const settle = ramp(f, lc - 2, lc + 8)
-  const tagColor = isHold ? C.hold : confirmed ? C.go : C.dim
+  const tagColor = isHold ? C.hold : isStandby ? C.fg : confirmed ? C.go : C.dim
   const textColor = isHold ? C.hold : confirmed ? C.fg : C.dim
   const opacity = enter * (confirmed ? 0.72 + 0.28 * settle : 0.72)
   const prefix = !confirmed
     ? labels['wall.line.pending']
     : isHold
       ? labels['wall.line.hold']
-      : labels['wall.line.confirmed']
+      : isStandby
+        ? labels['wall.line.standby']
+        : labels['wall.line.confirmed']
   const text = confirmed
     ? row.done
       ? labels[row.done]
@@ -584,8 +586,10 @@ const StationRow: FC<{
   const start = stationStart(station)
   const confirm = stationConfirm(station)
   const outcome = stationOutcome(station)
+  // Rows that carry a subject line (versions, a HOLD) or a note reserve their final height
+  // from the first frame, so nothing below them moves and nothing is left as an empty slab.
+  const reserved = station.rows.some((row) => row.subject !== undefined) || station.note !== undefined
   const multi = station.rows.length > 1
-  const tall = station.rows.some((row) => row.subject !== undefined)
   const active = Math.max(0, ramp(frame, start, start + 6) - ramp(frame, confirm, confirm + 10))
   const holdBar = outcome === 'hold' ? ramp(frame, confirm, confirm + 10) : 0
   const bar = Math.max(active, holdBar)
@@ -597,16 +601,15 @@ const StationRow: FC<{
     <div
       style={{
         position: 'relative',
-        flex: multi ? '1 1 0' : 'none',
-        height: multi || tall ? undefined : m.rowH,
-        minHeight: multi ? 0 : m.rowH,
+        flex: reserved ? '0 0 auto' : '1 1 0',
+        minHeight: reserved ? undefined : m.rowH * 0.78,
         boxSizing: 'border-box',
         overflow: 'hidden',
-        padding: `${m.rowPadY}px ${m.rowPadX}px`,
+        padding: `${m.rowPadY}px ${m.rowPadX}px ${m.rowPadY + (station.note ? 14 : 0)}px`,
         borderTop: index === 0 ? 'none' : `1px solid ${C.rule}`,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: multi ? 'flex-start' : 'center',
+        justifyContent: reserved ? 'flex-start' : 'center',
         gap: 4,
       }}
     >
@@ -657,19 +660,41 @@ const StationRow: FC<{
         }}
       >
         {station.rows.map((row) => (
-          <Sequence key={row.id} from={row.start} layout="none">
-            <RowReadout m={m} labels={labels} row={row} />
-          </Sequence>
+          <div
+            key={row.id}
+            style={{ position: 'relative', minHeight: row.subject ? m.subjectH : undefined }}
+          >
+            {row.subject && frame < row.start ? <Skeleton m={m} /> : null}
+            <Sequence from={row.start} layout="none">
+              <RowReadout m={m} labels={labels} row={row} />
+            </Sequence>
+          </div>
         ))}
         {station.note && noteAt !== undefined ? (
-          <Sequence from={noteAt} layout="none">
-            <Note m={m} text={labels[station.note]} />
-          </Sequence>
+          <div style={{ minHeight: m.noteH }}>
+            <Sequence from={noteAt} layout="none">
+              <Note m={m} text={labels[station.note]} />
+            </Sequence>
+          </div>
         ) : null}
       </div>
     </div>
   )
 }
+
+/** Dim placeholder for a row that has not been polled yet. */
+const Skeleton: FC<{ m: Metrics }> = ({ m }) => (
+  <div
+    aria-hidden="true"
+    style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', gap: 10, opacity: 0.55 }}
+  >
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, height: m.line * 1.4 }}>
+      <span style={{ width: m.marker, height: m.marker, border: `2px solid ${C.rule}`, borderRadius: 1, flex: 'none' }} />
+      <span style={{ height: 6, width: '18%', background: C.rule, borderRadius: 1 }} />
+    </div>
+    <span style={{ height: 6, width: '46%', background: C.rule, borderRadius: 1, marginLeft: m.marker + 16 }} />
+  </div>
+)
 
 const Note: FC<{ m: Metrics; text: string }> = ({ m, text }) => {
   const f = useCurrentFrame()
@@ -706,11 +731,16 @@ function plotY(remaining: number): number {
   return PLOT.y1 - (remaining / STATION_COUNT) * (PLOT.y1 - PLOT.y0)
 }
 
+/** Stations still to go once station k has answered. A STANDBY station keeps counting. */
+function remainingAfter(station: WallStation, k: number): number {
+  return station.restart ? STATION_COUNT - k : STATION_COUNT - k - 1
+}
+
 const STAIR_PATH = (() => {
   let d = `M ${plotX(RUN_START)} ${plotY(STATION_COUNT)}`
   WALL_STATIONS.forEach((station, k) => {
     const x = plotX(stationConfirm(station))
-    d += ` H ${x} V ${plotY(STATION_COUNT - k - 1)}`
+    d += ` H ${x} V ${plotY(remainingAfter(station, k))}`
   })
   return d
 })()
@@ -832,17 +862,25 @@ const Plotter: FC<{ labels: WallLabels; frame: number }> = ({ labels, frame }) =
         if (frame < confirm) return null
         const p = spring({ frame: frame - confirm, fps, config: { damping: 200 }, durationInFrames: 12 })
         const cx = plotX(confirm)
-        const cy = plotY(STATION_COUNT - k - 1)
-        const hold = stationOutcome(station) === 'hold'
+        const cy = plotY(remainingAfter(station, k))
+        const outcome = stationOutcome(station)
         return (
           <g key={`node-${station.id}`} style={{ transformOrigin: `${cx}px ${cy}px`, scale: `${p}` }}>
-            {hold ? (
+            {outcome === 'hold' ? (
               <>
                 <rect x={cx - 8} y={cy - 8} width="16" height="16" rx="1" style={{ fill: C.hold, stroke: C.bg }} strokeWidth="2" />
-                <text x={cx + 14} y={cy + 5} style={{ ...PLACARD, fontSize: 13, fill: C.hold }}>
+                <text
+                  x={cx + 12}
+                  y={cy - 14}
+                  style={{ ...PLACARD, fontSize: 13, fill: C.hold, stroke: C.bg, paintOrder: 'stroke' }}
+                  strokeWidth="5"
+                  strokeLinejoin="round"
+                >
                   {labels['wall.state.hold']}
                 </text>
               </>
+            ) : outcome === 'standby' ? (
+              <rect x={cx - 7} y={cy - 7} width="14" height="14" rx="1" fill="none" strokeWidth="2" style={{ stroke: C.fg }} />
             ) : (
               <circle cx={cx} cy={cy} r="7" style={{ fill: C.go, stroke: C.bg }} strokeWidth="2" />
             )}
@@ -869,8 +907,8 @@ const Counter: FC<{ m: Metrics; label: string; color: string; n: number; at: num
   n,
   at,
 }) => (
-  <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
-    <span style={{ ...PLACARD, fontSize: m.countLabel, color }}>{label}</span>
+  <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14 }}>
+    <span style={{ ...PLACARD, fontSize: m.countLabel, color, paddingBottom: m.count * 0.2 }}>{label}</span>
     <span style={{ ...MONO, fontSize: m.count, fontWeight: 500, color: n > 0 ? color : C.dim, lineHeight: 1.1 }}>
       <RollText from={String(Math.max(0, n - 1))} to={String(n)} at={at} duration={9} />
     </span>

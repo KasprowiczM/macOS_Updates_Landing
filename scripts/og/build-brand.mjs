@@ -63,11 +63,11 @@ write(join(root, 'design_system/assets/macos-updates-mark.svg'), markLight)
 write(join(root, 'design_system/assets/macos-updates-mark-dark.svg'), markDark)
 
 // 2. Favicon: simplified silhouette (no screws/rim), adapts to the browser's color scheme.
-const fav = (c) => `<rect width="32" height="32" rx="5" fill="${c.bezel}"/><rect x="4.25" y="4.25" width="23.5" height="23.5" rx="1.5" fill="${c.lens}"/><path d="M16 8.7L24.3 17.1V22.9L16 14.6L7.7 22.9V17.1Z" fill="${c.legend}"/>`
+const fav = (c) => `<rect width="32" height="32" rx="2" fill="${c.bezel}"/><rect x="4.25" y="4.25" width="23.5" height="23.5" rx="1.5" fill="${c.lens}"/><path d="M16 8.7L24.3 17.1V22.9L16 14.6L7.7 22.9V17.1Z" fill="${c.legend}"/>`
 const L = PALETTE.light, D = PALETTE.dark
 write(
   pub('favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="macOS Updates"><style>.b{fill:${L.bezel}}.l{fill:${L.lens}}.g{fill:${L.legend}}@media (prefers-color-scheme:dark){.b{fill:${D.bezel}}.l{fill:${D.lens}}.g{fill:${D.legend}}}</style><rect class="b" width="32" height="32" rx="5"/><rect class="l" x="4.25" y="4.25" width="23.5" height="23.5" rx="1.5"/><path class="g" d="M16 8.7L24.3 17.1V22.9L16 14.6L7.7 22.9V17.1Z"/></svg>\n`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="macOS Updates"><style>.b{fill:${L.bezel}}.l{fill:${L.lens}}.g{fill:${L.legend}}@media (prefers-color-scheme:dark){.b{fill:${D.bezel}}.l{fill:${D.lens}}.g{fill:${D.legend}}}</style><rect class="b" width="32" height="32" rx="2"/><rect class="l" x="4.25" y="4.25" width="23.5" height="23.5" rx="1.5"/><path class="g" d="M16 8.7L24.3 17.1V22.9L16 14.6L7.7 22.9V17.1Z"/></svg>\n`,
 )
 write(pub('favicon-light.svg'), svg('0 0 32 32', fav(L)))
 write(pub('favicon-dark.svg'), svg('0 0 32 32', fav(D)))

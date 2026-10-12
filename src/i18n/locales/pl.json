@@ -75,17 +75,17 @@
   },
   "seo": {
     "homeTitle": "macOS Updates: aktualizator Apple Silicon jedną komendą",
-    "homeDesc": "Otwartoźródłowy aktualizator dla Maców z Apple Silicon: App Store, Homebrew, CLI, 43 aplikacje internetowe i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
+    "homeDesc": "Aktualizator Maców z Apple Silicon: App Store, Homebrew, CLI, 43 aplikacje i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
     "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
-    "featuresDesc": "Siedmiokrokowy pipeline, uczciwe raporty przebiegu, integralność prywatnego overlay i reguły bezpieczeństwa Apple Silicon.",
+    "featuresDesc": "Siedem kroków w stałej kolejności, sprawdzanie kanałów producentów, brak zamykania otwartych aplikacji i raporty tylko z tego, co potwierdzi Mac.",
     "docsTitle": "Dokumentacja macOS Updates: Instalacja i obsługa",
-    "docsDesc": "Instaluj, uruchamiaj dry-run, poznaj pipeline i dodawaj handlery aplikacji.",
+    "docsDesc": "Zainstaluj macOS Updates na Apple Silicon, podejrzyj przebieg próbnym uruchomieniem, poznaj flagi oraz działanie siedmiu kroków i handlerów.",
     "securityTitle": "Polityka bezpieczeństwa macOS Updates",
-    "securityDesc": "Ochrona lokalnego inwentarza, prywatnego overlay i uprzywilejowanych operacji aktualizacji.",
+    "securityDesc": "Jak macOS Updates obsługuje sudo, zweryfikowane pobrania, kontrole Gatekeeper i Team ID oraz chroni prywatny inwentarz i pliki overlay.",
     "changelogTitle": "Historia zmian macOS Updates",
-    "changelogDesc": "Historia wydań orkiestratora aktualizacji macOS Apple Silicon.",
+    "changelogDesc": "Historia wydań macOS Updates dla Apple Silicon: co zmieniło się w każdej wersji od v1.4 do v1.5.5, z poprawkami i nowymi funkcjami.",
     "contributingTitle": "Współtwórz macOS Updates",
-    "contributingDesc": "Dodawaj handlery, ulepszaj dokumentację i utrzymuj zgodność Bash 3.2."
+    "contributingDesc": "Współtwórz macOS Updates: dodaj handler aplikacji internetowej, popraw dokumentację i utrzymuj testowane skrypty zgodne z Bash 3.2."
   },
   "faq": {
     "items": {
@@ -152,7 +152,7 @@
   "hero": {
     "titleA": "Każda warstwa Maca.",
     "titleGo": "GO",
-    "titleB": "tylko po potwierdzeniu.",
+    "titleB": "po potwierdzeniu.",
     "sub": "Jedno polecenie aktualizuje App Store, CLI, Homebrew, {{apps}} aplikacji internetowych i macOS w bezpiecznej kolejności.",
     "copy": "Skopiuj polecenie instalacji",
     "copied": "Skopiowano",
@@ -179,6 +179,10 @@
         "hold": "ostrzeżenie, które zostaje widoczne",
         "standby": "czeka na swoją kolej"
       }
+    },
+    "strip": {
+      "text": "{{go}} GO · {{hold}} HOLD · macOS na końcu",
+      "aria": "Wynik odpytania: {{go}} stacji GO, {{hold}} na HOLD, macOS na STANDBY i idzie na końcu. Przejdź do konsoli odpytania."
     }
   },
   "rules": {
@@ -312,7 +316,8 @@
         "note": "Aktualizacje systemu według etykiet, zawsze na końcu."
       }
     },
-    "report": "Nieznane zainstalowane aplikacje są wypisywane, żeby można było dodać handler. Pokrycie na własnym Macu sprawdzisz poleceniem"
+    "report": "Nieznane zainstalowane aplikacje są wypisywane, żeby można było dodać handler.",
+    "reportCmd": "wypisuje pokrycie na Twoim Macu."
   },
   "log": {
     "title": "Co toolkit faktycznie zrobił.",
@@ -375,13 +380,13 @@
       "go": "GO",
       "hold": "HOLD",
       "standby": "STANDBY",
-      "polling": "ODPYTANIE",
-      "restart": "(restart)"
+      "polling": "ODPYTANIE"
     },
     "line": {
       "pending": "oczekuje",
       "confirmed": "gotowe",
-      "hold": "wstrzymane"
+      "hold": "wstrzymane",
+      "standby": "standby"
     },
     "station": {
       "prescan": {
@@ -439,7 +444,7 @@
       },
       "macos": {
         "pending": "softwareupdate -i <label> -R",
-        "done": "idzie na końcu, bo może zrestartować"
+        "done": "restart na końcu, brak oferty w tych przebiegach"
       }
     },
     "note": {

@@ -27,7 +27,7 @@ interface NavItem {
 }
 
 const LINK_BASE =
-  'inline-flex items-center min-h-[44px] px-3 text-[14px] font-medium no-underline whitespace-nowrap rounded-sm ' +
+  'inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 text-[14px] font-medium no-underline whitespace-nowrap rounded-sm ' +
   'transition-colors duration-(--dur-2) ease-(--ease-out) hover:text-(--fg) hover:bg-(--bg-sunk)'
 
 export function Navbar({ theme, toggleTheme }: NavbarProps) {

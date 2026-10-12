@@ -44,7 +44,7 @@
   animation: poll-count 720ms steps(6, end) 380ms both;
 }
 .poll-count::before {
-  content: "T-" counter(poll-n, decimal-leading-zero);
+  content: "00:" counter(poll-n, decimal-leading-zero);
 }
 
 @keyframes poll-lamp {

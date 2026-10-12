@@ -77,15 +77,15 @@
     "homeTitle": "macOS Updates: one-command updater for Apple Silicon Macs",
     "homeDesc": "Open-source updater for Apple Silicon Macs: App Store, Homebrew, CLIs, 43 internet apps and macOS in a safe order. Reports only what your Mac confirms.",
     "featuresTitle": "macOS Updates features: Update coverage and local inventory",
-    "featuresDesc": "Explore the seven-step update pipeline, honest run reports, private overlay integrity, and Apple Silicon safety rules.",
+    "featuresDesc": "See how macOS Updates runs seven ordered steps, checks vendor feeds first, never closes open apps and reports only what your Mac confirms.",
     "docsTitle": "macOS Updates docs: Install, operate, and extend",
-    "docsDesc": "Install macOS Updates, run dry-runs, understand the update pipeline, and add internet app handlers.",
+    "docsDesc": "Install macOS Updates on Apple Silicon, preview with a dry run, read the flags and learn how the seven update steps and handlers work.",
     "securityTitle": "macOS Updates security policy",
-    "securityDesc": "How macOS Updates protects local inventory, private overlay files, and privileged update operations.",
+    "securityDesc": "How macOS Updates handles sudo, verified vendor downloads, Gatekeeper and Team ID checks, and keeps your inventory and overlay files private.",
     "changelogTitle": "macOS Updates changelog",
-    "changelogDesc": "Release history for the Apple Silicon macOS update orchestrator.",
+    "changelogDesc": "Release history of macOS Updates for Apple Silicon: what changed in each version from v1.4 to v1.5.5, with fixes and added features.",
     "contributingTitle": "Contributing to macOS Updates",
-    "contributingDesc": "Add internet app handlers, improve docs, and keep Bash 3.2-compatible update scripts tested."
+    "contributingDesc": "Contribute to macOS Updates: add an internet app handler, improve the docs and keep Bash 3.2 compatible update scripts covered by tests."
   },
   "faq": {
     "items": {
@@ -179,6 +179,10 @@
         "hold": "a warning that stays visible",
         "standby": "waiting its turn"
       }
+    },
+    "strip": {
+      "text": "{{go}} GO · {{hold}} HOLD · macOS last",
+      "aria": "Poll result: {{go}} stations GO, {{hold}} on HOLD, macOS on STANDBY and run last. Jump to the poll console."
     }
   },
   "rules": {
@@ -312,7 +316,8 @@
         "note": "System updates by label, always last."
       }
     },
-    "report": "Unknown installed apps are listed so a handler can be added. See your own Mac's coverage with"
+    "report": "Unknown installed apps are listed so a handler can be added.",
+    "reportCmd": "prints the coverage for your own Mac."
   },
   "log": {
     "title": "What the toolkit has actually done.",
@@ -375,13 +380,13 @@
       "go": "GO",
       "hold": "HOLD",
       "standby": "STANDBY",
-      "polling": "POLLING",
-      "restart": "(restart)"
+      "polling": "POLLING"
     },
     "line": {
       "pending": "pending",
       "confirmed": "confirmed",
-      "hold": "hold"
+      "hold": "hold",
+      "standby": "standby"
     },
     "station": {
       "prescan": {
@@ -439,7 +444,7 @@
       },
       "macos": {
         "pending": "softwareupdate -i <label> -R",
-        "done": "runs last because it may restart"
+        "done": "restart last, none offered in these runs"
       }
     },
     "note": {

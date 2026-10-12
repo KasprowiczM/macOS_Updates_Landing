@@ -73,12 +73,12 @@ export function TocPanel({ sections, title }: TocPanelProps) {
         aria-current={isActive ? 'location' : undefined}
         onClick={() => setOpen(false)}
         className={cn(
-          'flex min-h-[36px] items-center gap-2.5 py-1.5 pr-3 text-[13.5px] leading-[1.3] no-underline lg:min-h-[32px] lg:py-1',
+          'flex min-h-[44px] items-center gap-2.5 py-1.5 pr-3 text-[13.5px] leading-[1.3] no-underline focus-visible:outline-offset-[-2px]',
           nested ? 'pl-5' : 'pl-3',
           isActive ? 'font-semibold text-(--fg) bg-(--accent-soft)' : 'text-(--fg-muted) hover:text-(--fg) hover:bg-(--bg-sunk)',
         )}
       >
-        <span aria-hidden="true" className={cn('lamp', isActive ? 'lamp-go' : 'lamp-standby')} />
+        <span aria-hidden="true" className={cn('lamp', isActive ? 'lamp-go' : 'invisible')} />
         <span className="min-w-0 flex-1">{item.label}</span>
         {item.detail && <span className="readout shrink-0 text-[11.5px] text-(--fg-faint)">{item.detail}</span>}
       </a>
