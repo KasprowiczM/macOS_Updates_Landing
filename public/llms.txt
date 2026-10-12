@@ -1,9 +1,8 @@
 # macOS Updates
 
-Production-ready one-command updater for Apple Silicon Macs (v1.4.5). It keeps macOS,
-App Store apps, Homebrew, native CLI/npm tooling, and 43 internet-downloaded
-apps current while updating only software already installed on the current Mac.
-A mutation is reported only after the live Mac confirms it.
+> Production-ready one-command updater for Apple Silicon Macs running macOS 13 to 27 (v1.5.5, released 2026-10-12). It keeps macOS, App Store apps, Homebrew, native CLI and npm tooling, and 43 internet-downloaded apps current, updating only software already installed on the current Mac. A mutation is reported only after the live Mac confirms it.
+
+Supported platform: Apple Silicon (arm64) only, macOS 13 to 27. The suite has 561 automated tests.
 
 ## Install
 
@@ -19,35 +18,49 @@ Manual setup:
 
 ## What it does
 
-`update_all.sh` runs seven layers in order:
+`update_all.sh` runs seven steps in order (step 0 to step 6):
 
 1. Step 0: Prescan installed apps into APPLICATIONS.md for this Mac
-2. Step 1: App Store via sudo mas upgrade of measured IDs, with a user-session retry, plus AppleScript GUI fallback
-3. Step 2: Native vendor CLIs (claude update, Codex installer, opencode upgrade, agy) plus Node, Bun, npm globals
-4. Step 3: Homebrew upgrade (--greedy), casks, cleanup, and doctor
-5. Step 4: 43 Internet apps through 10 registered handler methods
-6. Step 5: Postupdate that splits inventory field edits from observed package/CLI changes, then UPDATES.md history
-7. Step 6: macOS system update via softwareupdate -ia -R --verbose (restart-safe final step)
+2. Step 1: App Store. Track 1 runs `sudo mas upgrade` for the IDs the pre-scan measured. Track 2 uses AppleScript GUI automation for iPad apps such as UniFi.
+3. Step 2: Native CLI and npm. Node, Bun, native vendor CLIs, and global npm CLIs.
+4. Step 3: Homebrew formulae and casks with downgrade protection. Orphan casks whose apps were removed by hand are skipped, followed by cleanup and a health check.
+5. Step 4: 43 internet apps through 11 update methods. Each installed vendor version is checked against the vendor feed first. Direct installs use verified vendor downloads (Gatekeeper signature, bundle ID, Apple Team ID, staged swap with rollback).
+6. Step 5: Postupdate refreshes APPLICATIONS.md and appends UPDATES.md atomically. A failed reporting step does not block macOS updates.
+7. Step 6: macOS system updates, one `softwareupdate -i <label> -R` per label. This runs last because it may restart the Mac.
 
 ## Safety model
 
-- Apple Silicon only; macOS 13+.
+- Apple Silicon only; macOS 13 to 27.
 - The installer builds local inventory from this Mac.
-- Missing supported apps are reported, not installed.
-- Private files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and
-  dev_sync config stay out of public Git.
-- Overlay import expands directory manifests, skips Git-tracked and excluded
-  files, refuses symlink escapes, and leaves a recovery path if a swap fails.
+- Only installed software is updated. Supported but missing apps are reported, not installed. Missing CLI toolchains are installed only with an explicit `--bootstrap-cli`.
+- Open applications are never closed. The toolkit quits only the applications it launched itself to trigger a vendor updater. It asks repeatedly (MAC_UPDATE_QUIT_RESEND) within a wait window (MAC_UPDATE_QUIT_WAIT) and never force-kills an app.
+- Running application bundles are never replaced. Their update is deferred to restart.
+- Verified vendor downloads check the Gatekeeper signature, bundle ID, and Apple Team ID before a staged swap, with rollback if the swap fails.
+- Private files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and dev_sync config stay out of public Git.
+- Overlay import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails.
 - `softwareupdate` must keep `-R`.
 - `mas upgrade` must run with `sudo` and the IDs the pre-scan measured.
 - Vendor CLI success requires a working `--version`; unknown pending stays unknown.
 - Vendor TUIs that ignore SIGTERM are SIGKILL'd so the pipeline cannot hang.
 - Bash code stays compatible with Bash 3.2.
-- All code changes pass 270 static and unit tests.
+- Automated tests: 561 static, unit, and registry checks.
+
+## What changed in v1.5.5
+
+- Stale command hash after a Homebrew upgrade is fixed. Orchestrators enable `checkhash`, and `update_all.sh` runs `hash -r` before steps 2 to 5, so removing python3 mid-run no longer breaks the inventory or run-summary step.
+- Reporting failures no longer defer macOS updates. The closing "files updated" message appears only when the inventory step succeeded.
+- Run-summary failures name their cause. A summary left at "started" after a failed final write is relabelled "failed".
+- Toolkit-launched apps receive a repeated graceful quit every 10 seconds within the wait window. They are never force-killed. New settings: MAC_UPDATE_QUIT_WAIT (default 60, range 0 to 300) and MAC_UPDATE_QUIT_RESEND (default 10, range 1 to 60).
+- Soft warnings, such as a stale manufacturer feed or a launched app that did not quit, are worded honestly. They do not claim an unverified update, and the exit code stays 10.
+- New regression tests cover checkhash, the non-blocking inventory step, summary failures, repeated quit, and warning wording.
+- Live evidence from 2026-10-11: App Store Track 2 (UniFi 10.38.1 to 11.0.0) and a verified vendor install (OpenCode Desktop 1.18.35 to 1.19.0) succeeded. The macOS system step was skipped by the bug, so the system and restart path is not yet accepted.
 
 ## Links
 
+- Home: https://macosupdates.dev/
 - Documentation: https://macosupdates.dev/docs
 - Features: https://macosupdates.dev/features
+- Security: https://macosupdates.dev/security
 - Changelog: https://macosupdates.dev/changelog
+- Contributing: https://macosupdates.dev/contributing
 - Source code: https://github.com/KasprowiczM/macOS_updates

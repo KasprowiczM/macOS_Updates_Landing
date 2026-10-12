@@ -1,3 +1,5 @@
+import type { TFunction } from 'i18next'
+
 export interface FaqItem {
   id: string
   q: string
@@ -54,3 +56,18 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: 'A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists.',
   },
 ]
+
+/**
+ * Localised FAQ items for the given translation function.
+ *
+ * `faq.items.<id>.{q,a}` exists in both en.json and pl.json, so the visible
+ * FAQ and the FAQPage JSON-LD share one source per language. The English text
+ * above is only the fallback if a key is ever missing.
+ */
+export function getFaqItems(t: TFunction): FaqItem[] {
+  return FAQ_ITEMS.map((item) => ({
+    id: item.id,
+    q: t(`faq.items.${item.id}.q`, { defaultValue: item.q }) as string,
+    a: t(`faq.items.${item.id}.a`, { defaultValue: item.a }) as string,
+  }))
+}

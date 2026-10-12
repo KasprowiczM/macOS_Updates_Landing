@@ -7,6 +7,7 @@ import { ThemeToggle } from '../ui/ThemeToggle'
 import { LanguageToggle } from '../ui/LanguageToggle'
 import { useGitHubStats } from '../../hooks/useGitHubStats'
 import { Logo } from '../ui/Logo'
+import { stripLangPrefix, useLocalizedPath } from '../../lib/routes'
 
 interface NavbarProps {
   theme: 'light' | 'dark'
@@ -21,7 +22,8 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
-  const isHome = location.pathname === '/'
+  const localize = useLocalizedPath()
+  const isHome = stripLangPrefix(location.pathname) === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -30,10 +32,10 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   }, [])
 
   const navLinks = [
-    { href: '/features', label: t('nav.features'), isHash: false },
-    { href: isHome ? '#how-it-works' : '/#how-it-works', label: t('nav.howItWorks'), isHash: true },
-    { href: isHome ? '#installation' : '/#installation', label: t('nav.installation'), isHash: true },
-    { href: '/docs', label: t('nav.docs'), isHash: false },
+    { href: localize('/features'), label: t('nav.features'), isHash: false },
+    { href: isHome ? '#how-it-works' : localize('/#how-it-works'), label: t('nav.howItWorks'), isHash: true },
+    { href: isHome ? '#installation' : localize('/#installation'), label: t('nav.installation'), isHash: true },
+    { href: localize('/docs'), label: t('nav.docs'), isHash: false },
   ]
 
   return (
@@ -46,7 +48,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between h-16">
         {/* Left: Logo */}
-        <Link to="/" className="flex items-center gap-2.5 no-underline text-(--fg) shrink-0">
+        <Link to={localize('/')} className="flex items-center gap-2.5 no-underline text-(--fg) shrink-0">
           <Logo width={32} height={32} />
           <div className="flex flex-col">
             <span className="font-bold text-lg font-sans tracking-tight leading-none">

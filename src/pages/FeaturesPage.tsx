@@ -17,7 +17,9 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { SectionReveal } from '../components/ui/SectionReveal'
-import { SITE_URL, INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
+import { INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
 
 interface FeatureItem {
   icon: LucideIcon
@@ -159,38 +161,13 @@ export function FeaturesPage() {
         `${TEST_COUNT} hermetic static, unit, registry parity, and gitleaks secret scanning tests`,
       ]
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: `${SITE_URL}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Features',
-        item: `${SITE_URL}/features`,
-      },
-    ],
-  }
-
-  const webPage = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/features',
     name: t('seo.featuresTitle'),
     description: t('seo.featuresDesc'),
-    url: `${SITE_URL}/features`,
-    inLanguage: i18n.language,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'macOS Updates',
-      url: `${SITE_URL}/`,
-    },
-  }
+  })
 
   return (
     <>
@@ -198,8 +175,8 @@ export function FeaturesPage() {
         title={t('seo.featuresTitle')}
         description={t('seo.featuresDesc')}
         path="/features"
-        lang={i18n.language}
-        jsonLd={[breadcrumb, webPage]}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <main className="pt-28 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">

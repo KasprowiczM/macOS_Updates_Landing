@@ -2,20 +2,20 @@ import { useTranslation } from 'react-i18next'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
 import { CodeBlock } from '../components/docs/WikiSection'
-import { SITE_URL } from '../lib/site'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 
 export function ContributingPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'macOS Updates', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: pl ? 'Współtworzenie' : 'Contributing', item: `${SITE_URL}/contributing` },
-    ],
-  }
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/contributing',
+    name: t('seo.contributingTitle'),
+    description: t('seo.contributingDesc'),
+  })
 
   return (
     <>
@@ -23,8 +23,8 @@ export function ContributingPage() {
         title={t('seo.contributingTitle')}
         description={t('seo.contributingDesc')}
         path="/contributing"
-        lang={i18n.language}
-        jsonLd={breadcrumb}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <DocLayout title={pl ? 'Jak kontrybuować' : 'Contributing'}>
         <section>

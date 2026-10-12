@@ -1,20 +1,21 @@
 import { useTranslation } from 'react-i18next'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
-import { APP_VERSION, SITE_URL } from '../lib/site'
+import { APP_VERSION } from '../lib/site'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 
 export function SecurityPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'macOS Updates', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: pl ? 'Bezpieczeństwo' : 'Security', item: `${SITE_URL}/security` },
-    ],
-  }
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/security',
+    name: t('seo.securityTitle'),
+    description: t('seo.securityDesc'),
+  })
 
   return (
     <>
@@ -22,8 +23,8 @@ export function SecurityPage() {
         title={t('seo.securityTitle')}
         description={t('seo.securityDesc')}
         path="/security"
-        lang={i18n.language}
-        jsonLd={breadcrumb}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <DocLayout title={pl ? 'Polityka bezpieczeństwa' : 'Security Policy'}>
         <section>

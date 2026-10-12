@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 
 interface Release {
   version: string
@@ -13,6 +15,56 @@ interface Release {
 }
 
 const RELEASES: Release[] = [
+  {
+    version: 'v1.5.5',
+    date: '2026-10-12',
+    summary: {
+      en: 'A Homebrew upgrade that removes python3 mid-run no longer breaks reporting, reporting failures no longer postpone macOS updates, and toolkit-launched apps are asked to quit repeatedly but never force-killed.',
+      pl: 'Aktualizacja Homebrew, która usuwa python3 w trakcie biegu, nie psuje już kroku raportowania, błędy raportowania nie odraczają aktualizacji macOS, a aplikacje uruchomione przez toolkit są wielokrotnie proszone o zamknięcie, ale nigdy nie są zamykane siłą.',
+    },
+    fixed: [
+      {
+        en: 'A Homebrew upgrade that removed python3 mid-run left bash with a stale command hash, so the inventory and run-summary steps failed. Every orchestrator now enables checkhash, and update_all.sh clears the hash table with hash -r before steps 2 to 5.',
+        pl: 'Aktualizacja Homebrew, która usunęła python3 w trakcie biegu, pozostawiła bash z nieaktualną zapamiętaną ścieżką polecenia, przez co kroki inwentarza i zapisu podsumowania kończyły się błędem. Wszystkie orkiestratory włączają teraz checkhash, a update_all.sh czyści tablicę poleceń przez hash -r przed krokami od 2 do 5.',
+      },
+      {
+        en: 'Reporting failures no longer defer macOS updates. A failed inventory or postupdate step is still recorded and exits non-zero, but it no longer blocks the macOS step because it changes nothing.',
+        pl: 'Błędy raportowania nie odraczają już aktualizacji macOS. Nieudany krok inwentarza lub postupdate nadal jest zapisywany i kończy się kodem niezerowym, ale nie blokuje kroku macOS, ponieważ niczego nie modyfikuje.',
+      },
+      {
+        en: 'The closing "files updated" message is printed only when the inventory step succeeded, so a failed run no longer claims that APPLICATIONS.md and UPDATES.md were updated.',
+        pl: 'Końcowy komunikat o zaktualizowanych plikach pojawia się tylko wtedy, gdy krok inwentarza się powiódł, więc nieudany bieg nie twierdzi już, że APPLICATIONS.md i UPDATES.md zostały zaktualizowane.',
+      },
+      {
+        en: 'Run-summary failures are named. write_machine_summary states whether python3 is missing from PATH or what its exit status was, and a summary left at "started" after a failed final write is relabelled "failed".',
+        pl: 'Błędy podsumowania biegu są nazwane. write_machine_summary podaje, czy python3 brakuje w PATH, albo jaki był kod wyjścia, a podsumowanie pozostawione ze statusem "started" po nieudanym końcowym zapisie jest oznaczane jako "failed".',
+      },
+      {
+        en: 'Toolkit-launched apps are asked to quit repeatedly. internet_app_quit_gracefully resends the quit request every 10 seconds within its wait window, so a copy relaunched by a vendor updater is asked to quit too. Apps are never force-killed. New settings: MAC_UPDATE_QUIT_WAIT (default 60, range 0 to 300) and MAC_UPDATE_QUIT_RESEND (default 10, range 1 to 60).',
+        pl: 'Aplikacje uruchomione przez toolkit są wielokrotnie proszone o zamknięcie. internet_app_quit_gracefully ponawia żądanie quit przez AppleScript co 10 sekund w oknie oczekiwania, więc kopia ponownie uruchomiona przez updater producenta też dostaje prośbę o zamknięcie. Aplikacje nigdy nie są zamykane siłą. Nowe ustawienia: MAC_UPDATE_QUIT_WAIT (domyślnie 60, zakres od 0 do 300) i MAC_UPDATE_QUIT_RESEND (domyślnie 10, zakres od 1 do 60).',
+      },
+      {
+        en: 'Warnings are worded honestly. A stale manufacturer feed, or a toolkit-launched app that did not quit, now produces "finished with warnings; no application update is pending" in all seven languages instead of claiming that an application was not verified or updated. The exit code stays 10.',
+        pl: 'Ostrzeżenia mają uczciwe brzmienie. Nieaktualny feed producenta albo aplikacja uruchomiona przez toolkit, która się nie zamknęła, daje teraz komunikat "zakończono z ostrzeżeniami; żadna aktualizacja aplikacji nie oczekuje" we wszystkich siedmiu językach, zamiast twierdzić, że aplikacja nie została zweryfikowana lub zaktualizowana. Kod wyjścia pozostaje 10.',
+      },
+    ],
+    changed: [
+      {
+        en: 'The automated suite grows to 561 tests (532 in v1.5.4).',
+        pl: 'Zestaw zautomatyzowanych testów liczy teraz 561 testów (532 w v1.5.4).',
+      },
+      {
+        en: 'Live evidence from 2026-10-11: App Store Track 2 (UniFi 10.38.1 to 11.0.0), a verified vendor install (OpenCode Desktop 1.18.35 to 1.19.0), and toolkit-launched native updaters for Claude Desktop 2.31226.1 and Warp. The macOS system step was skipped by the bug, so the system and restart path remains unaccepted.',
+        pl: 'Dowody z przebiegu na żywo z 11 października 2026 r.: aplikacja App Store z Toru 2 (UniFi 10.38.1 do 11.0.0), zweryfikowana instalacja od producenta (OpenCode Desktop 1.18.35 do 1.19.0) oraz natywne updatery uruchomione przez toolkit dla Claude Desktop 2.31226.1 i Warp. Krok systemowy macOS został pominięty z powodu tego błędu, więc ścieżka systemowa i restartu pozostaje niezaakceptowana.',
+      },
+    ],
+    added: [
+      {
+        en: 'New regression tests in tests/test_run_log_regressions_20261011.py cover checkhash with a vanishing python3, the non-blocking inventory step, the conditional "files updated" message, summary failures, repeated quit with a stubbed osascript, and warning wording. A static checkhash guard was added to test_safety_static.py.',
+        pl: 'Nowe testy regresyjne w tests/test_run_log_regressions_20261011.py obejmują checkhash przy znikającym python3, nieblokujący krok inwentarza, warunkowy komunikat o zaktualizowanych plikach, błędy podsumowania, powtarzane żądanie zamknięcia z atrapą osascript oraz brzmienie ostrzeżeń. Statyczny strażnik checkhash dodano do test_safety_static.py.',
+      },
+    ],
+  },
   {
     version: 'v1.5.4',
     date: '2026-10-05',
@@ -683,6 +735,14 @@ const RELEASES: Release[] = [
 export function ChangelogPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/changelog',
+    name: t('seo.changelogTitle'),
+    description: t('seo.changelogDesc'),
+    type: 'CollectionPage',
+  })
 
   return (
     <>
@@ -690,7 +750,8 @@ export function ChangelogPage() {
         title={t('seo.changelogTitle')}
         description={t('seo.changelogDesc')}
         path="/changelog"
-        lang={i18n.language}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <DocLayout title="Changelog">
         <p className="text-[15px]">

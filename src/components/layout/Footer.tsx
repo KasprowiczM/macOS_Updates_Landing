@@ -2,16 +2,18 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { APP_VERSION } from '../../lib/site'
 import { Logo } from '../ui/Logo'
+import { useLocalizedPath } from '../../lib/routes'
 
 export function Footer() {
   const { t } = useTranslation()
+  const localize = useLocalizedPath()
 
   const internalLinks = [
-    { label: t('footer.features'), href: '/features' },
-    { label: t('footer.docs'), href: '/docs' },
-    { label: t('footer.security'), href: '/security' },
-    { label: t('footer.changelog'), href: '/changelog' },
-    { label: t('footer.contributing'), href: '/contributing' },
+    { label: t('footer.features'), href: localize('/features') },
+    { label: t('footer.docs'), href: localize('/docs') },
+    { label: t('footer.security'), href: localize('/security') },
+    { label: t('footer.changelog'), href: localize('/changelog') },
+    { label: t('footer.contributing'), href: localize('/contributing') },
   ]
 
   return (

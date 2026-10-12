@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { WikiLayout, type WikiSection as WikiSectionType } from '../components/layout/WikiLayout'
 import { Seo } from '../components/Seo'
-import { SITE_URL, REPO_URL } from '../lib/site'
-import { FAQ_ITEMS } from '../lib/faq'
+import { REPO_URL } from '../lib/site'
+import { getFaqItems } from '../lib/faq'
+import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 import { GettingStarted } from '../components/docs/GettingStarted'
 import { UserGuide } from '../components/docs/UserGuide'
 import { Architecture } from '../components/docs/Architecture'
@@ -14,40 +16,15 @@ export function DocsPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
 
-  const techArticle = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: t('seo.docsTitle'),
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/docs',
+    name: t('seo.docsTitle'),
     description: t('seo.docsDesc'),
-    inLanguage: i18n.language,
-    url: `${SITE_URL}/docs`,
-    author: { '@type': 'Organization', name: 'macOS Updates', url: SITE_URL },
-    publisher: { '@type': 'Organization', name: 'macOS Updates', url: SITE_URL },
-  }
-
-  const breadcrumbList = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'macOS Updates', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: pl ? 'Dokumentacja' : 'Documentation', item: `${SITE_URL}/docs` },
-    ],
-  }
-
-  const localizedFaqItems = FAQ_ITEMS.map((item) => ({
-    q: pl ? t(`faq.items.${item.id}.q`) : item.q,
-    a: pl ? t(`faq.items.${item.id}.a`) : item.a,
-  }))
-
-  const faqPage = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: localizedFaqItems.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
-  }
+    type: 'TechArticle',
+    extra: [faqPageNode(getFaqItems(t), '/docs', lang), howToNode('/docs', lang)],
+  })
 
   const sections: WikiSectionType[] = [
     {
@@ -115,8 +92,8 @@ export function DocsPage() {
         title={t('seo.docsTitle')}
         description={t('seo.docsDesc')}
         path="/docs"
-        lang={i18n.language}
-        jsonLd={[techArticle, breadcrumbList, faqPage]}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <WikiLayout title={pl ? 'Dokumentacja' : 'Documentation'} sections={sections}>
         {/* Getting Started */}
