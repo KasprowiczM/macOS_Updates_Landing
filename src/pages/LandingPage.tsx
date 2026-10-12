@@ -4,17 +4,13 @@ import { getFaqItems } from '../lib/faq'
 import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
 import { Hero } from '../components/sections/Hero'
-import { SocialProof } from '../components/sections/SocialProof'
-import { ProblemSolution } from '../components/sections/ProblemSolution'
-import { WhyUpdate } from '../components/sections/WhyUpdate'
-import { UpdatePipeline } from '../components/sections/UpdatePipeline'
-import { Features } from '../components/sections/Features'
-import { PlatformSupport } from '../components/sections/PlatformSupport'
-import { HowItWorks } from '../components/sections/HowItWorks'
-import { OpenSource } from '../components/sections/OpenSource'
-import { Installation } from '../components/sections/Installation'
-
-
+import { FlightRules } from '../components/sections/FlightRules'
+import { WallDisplay } from '../components/wall/WallDisplay'
+import { FlightPlan } from '../components/sections/FlightPlan'
+import { CoverageRoster } from '../components/sections/CoverageRoster'
+import { MissionLog } from '../components/sections/MissionLog'
+import { FaqSection } from '../components/sections/FaqSection'
+import { InstallClose } from '../components/sections/InstallClose'
 
 export function LandingPage() {
   const { t } = useTranslation()
@@ -37,17 +33,15 @@ export function LandingPage() {
         lang={lang}
         jsonLd={jsonLd}
       />
-      <main>
+      <main id="main">
         <Hero />
-        <SocialProof />
-        <ProblemSolution />
-        <WhyUpdate />
-        <UpdatePipeline />
-        <Features />
-        <PlatformSupport />
-        <HowItWorks />
-        <OpenSource />
-        <Installation />
+        <FlightRules />
+        <WallDisplay />
+        <FlightPlan />
+        <CoverageRoster />
+        <MissionLog />
+        <FaqSection />
+        <InstallClose />
       </main>
     </>
   )

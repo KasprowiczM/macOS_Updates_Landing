@@ -34,7 +34,7 @@ export function PlatformReference({ pl }: { pl: boolean }) {
       </WikiSection>
 
       <WikiSection id="doctor-reference" title={pl ? 'Raport pokrycia & Testy' : 'Coverage Report & Testing'}>
-        <p className="text-[14px] mb-3">{pl
+        <p>{pl
           ? 'Raport pokrycia pokazuje, które zainstalowane aplikacje są obsługiwane, które obsługiwane aplikacje nie są zainstalowane oraz które aplikacje pozostają nieznane.'
           : 'The coverage report shows which installed apps are supported, which supported apps are missing, and which installed apps are still unknown.'
         }</p>

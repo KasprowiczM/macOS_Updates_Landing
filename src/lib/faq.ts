@@ -11,6 +11,31 @@ export interface FaqItem {
  */
 export const FAQ_ITEMS: FaqItem[] = [
   {
+    id: 'q10',
+    q: 'How do I update all apps on a Mac at once?',
+    a: "Run bash update_all.sh. It updates the App Store, native CLIs and npm, Homebrew, 43 internet-downloaded apps and macOS in one ordered run. Preview it first with bash update_all.sh --dry-run -y.",
+  },
+  {
+    id: 'q11',
+    q: 'Does macOS Updates close my open apps?',
+    a: "No. Apps you have open are never closed. The toolkit only quits what it launched itself, and running apps are protected at the bundle swap.",
+  },
+  {
+    id: 'q12',
+    q: 'Is it safe to run with sudo?',
+    a: "It is built for it. sudo is requested at most once per run, never without a terminal and never during --dry-run. Only the App Store and macOS steps need it, and the code is open to review.",
+  },
+  {
+    id: 'q13',
+    q: 'Does it work on Intel Macs?',
+    a: "No. macOS Updates supports Apple Silicon (arm64) Macs running macOS 13 to 27, with Homebrew at /opt/homebrew. Intel Macs are intentionally unsupported.",
+  },
+  {
+    id: 'q14',
+    q: 'How is it different from Homebrew or the App Store alone?',
+    a: "Homebrew and the App Store each cover one layer. macOS Updates runs both, plus native CLIs, npm globals, 43 internet-downloaded apps and macOS, in a fixed order. It checks each vendor's feed first and reports only what the Mac confirms.",
+  },
+  {
     id: 'q1',
     q: 'Is macOS Updates free and open source?',
     a: 'Yes. The public code is MIT licensed and runs locally. Machine-specific files are intentionally gitignored.',

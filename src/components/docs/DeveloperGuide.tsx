@@ -7,7 +7,7 @@ export function DeveloperGuide({ pl }: { pl: boolean }) {
         <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git
 cd macOS_updates
 bash run_tests.sh`}</CodeBlock>
-        <p className="text-[14px]">{pl
+        <p>{pl
           ? 'Przed zmianami w updaterach uruchom syntax check i testy. Nie dodawaj nowych samodzielnych plików .py do pipeline aktualizacji.'
           : 'Before updater changes, run syntax checks and tests. Do not add new standalone .py files to the update pipeline.'
         }</p>
@@ -34,7 +34,7 @@ bash run_tests.sh`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="pr-workflow" title={pl ? 'Workflow Pull Request' : 'Pull Request Workflow'}>
-        <ol className="list-decimal list-inside space-y-2 text-[14px]">
+        <ol>
           <li>{pl ? 'Utrzymuj zmiany małe i zgodne z istniejącymi modułami.' : 'Keep changes small and aligned with existing modules.'}</li>
           <li>{pl ? 'Dla nowej aplikacji dodaj registry, handler, dispatch i i18n.' : 'For a new app, add registry, handler, dispatch, and i18n.'}</li>
           <li>{pl ? 'Uruchom run_tests.sh i raport pokrycia.' : 'Run run_tests.sh and the coverage report.'}</li>

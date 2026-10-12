@@ -1,0 +1,85 @@
+{
+  "chrome": {
+    "skip": "Skip to content",
+    "nav": {
+      "home": "macOS Updates, home",
+      "primary": "Primary",
+      "features": "Features",
+      "howItWorks": "How it works",
+      "coverage": "Coverage",
+      "install": "Install",
+      "docs": "Docs",
+      "github": "GitHub",
+      "githubStars": "GitHub, {{count}} stars",
+      "menuOpen": "Open menu",
+      "menuClose": "Close menu",
+      "mobileLabel": "Site menu"
+    },
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "toLight": "Switch to light theme",
+      "toDark": "Switch to dark theme"
+    },
+    "lang": {
+      "switchTo": "Switch language to {{name}}",
+      "name_en": "English",
+      "name_pl": "Polish"
+    },
+    "terminal": {
+      "copy": "Copy",
+      "copied": "Copied",
+      "copyCommand": "Copy command",
+      "copyAria": "Copy to clipboard",
+      "copiedAria": "Copied to clipboard"
+    },
+    "footer": {
+      "blurb": "One command updates every layer of your Mac. Each layer reports GO only after the live Mac confirms it.",
+      "explore": "Explore",
+      "project": "Project",
+      "language": "Language",
+      "features": "Features",
+      "docs": "Docs",
+      "security": "Security",
+      "changelog": "Changelog",
+      "contributing": "Contributing",
+      "github": "GitHub",
+      "llms": "llms.txt",
+      "license": "MIT license",
+      "release": "Release",
+      "releaseLink": "Release notes",
+      "rights": "© 2026 macOS Updates",
+      "english": "English",
+      "polish": "Polski"
+    },
+    "doc": {
+      "backHome": "Back to home",
+      "onThisPage": "On this page",
+      "contents": "Contents",
+      "openContents": "Open contents",
+      "closeContents": "Close contents"
+    },
+    "changelog": {
+      "title": "Changelog",
+      "intro": "Notable macOS Updates changes are documented below, newest first.",
+      "added": "Added",
+      "changed": "Changed",
+      "fixed": "Fixed",
+      "latest": "Latest",
+      "candidate": "Candidate",
+      "releases": "Releases"
+    },
+    "features": {
+      "backHome": "Back to home",
+      "getStarted": "Get started",
+      "title": "Features of macOS Updates"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "This address does not exist.",
+      "home": "Back to home",
+      "docs": "Read the docs",
+      "seoTitle": "Page not found | macOS Updates"
+    }
+  }
+}

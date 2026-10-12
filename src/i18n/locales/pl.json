@@ -1,164 +1,84 @@
 {
-  "nav": {
-    "features": "Funkcje",
-    "howItWorks": "Jak działa",
-    "installation": "Instalacja",
-    "docs": "Dokumentacja",
-    "github": "GitHub",
-    "starOnGitHub": "Gwiazdka na GitHub",
-    "tagline": "UPDATE ORBIT"
-  },  "hero": {
-    "eyebrow": "Kontrola aktualizacji na Apple Silicon",
-    "headline1": "Aktualizuj każdą warstwę",
-    "headline2": "jednym zaufanym uruchomieniem.",
-    "headline3": "Bez cudzych inwentarzy.",
-    "subheadline": "macOS Updates utrzymuje aktualne macOS, App Store, Homebrew, narzędzia CLI, globalne pakiety npm i 43 aplikacji internetowych — dotyka tylko oprogramowania już zainstalowanego i raportuje wyłącznie to, co potwierdza żywy Mac.",
-    "ctaPrimary": "Zainstaluj macOS Updates",
-    "ctaSecondary": "Zobacz kod",
-    "oneLinerLabel": "Instalacja jedną komendą",
-    "platforms": "Apple Silicon · macOS 13+ · Bash 3.2 · 7 języków"
-  },
-  "socialProof": {
-    "stars": "gwiazdek GitHub",
-    "contributors": "kontrybutorów",
-    "version": "wersja",
-    "license": "licencja MIT",
-    "platforms": "warstw aktualizacji",
-    "tests": "kontroli bezpieczeństwa"
-  },
-  "problemSolution": {
-    "title": "Przestań aktualizować Maca każdy updater osobno.",
-    "subtitle": "macOS ma aktualizacje systemu, App Store, Homebrew, npm, vendorowe auto-updatery, DMG i aplikacje iPada obsługiwane przez GUI. macOS Updates spina to w jeden audytowalny przebieg.",
-    "without": "Ręczny dzień aktualizacji",
-    "with": "macOS Updates",
-    "withDesc": "Najpierw inwentarz. Aktualizuj tylko obecne aplikacje. Raportuj tylko to, co potwierdza żywy Mac."
-  },
-  "whyUpdate": {
-    "eyebrow": "Podejście macOS Updates",
-    "title": "Lokalny inwentarz jest źródłem prawdy.",
-    "subtitle": "Instalator skanuje tego Maca, buduje własny APPLICATIONS.md i nigdy nie importuje cudzej listy aplikacji ani nie instaluje brakujących aplikacji z katalogu maintainerów.",
-    "stats": {
-      "timeBefore": "Typowy ręczny przebieg przez System Settings, App Store, brew, npm i vendorowe dialogi.",
-      "timeAfter": "Jeden dry-run pozwala podejrzeć cały workflow bez stosowania zmian.",
-      "sources": "macOS, App Store, CLI/npm, Homebrew, aplikacje internetowe, inwentarz i historia postupdate."
-    },
-    "reasons": {
-      "security": {
-        "title": "Poprawne wywołania uprzywilejowane",
-        "desc": "Aktualizacje macOS instalują etykiety przez softwareupdate -i <label> -R, App Store używa sudo mas ze zmierzonymi ID, a mutacja jest raportowana dopiero po potwierdzeniu przez żywy system."
-      },
-      "compatibility": {
-        "title": "Polityka tylko-zainstalowane",
-        "desc": "Obsługiwane, ale brakujące aplikacje są raportowane, nie instalowane. Aplikacje, które masz otwarte, nigdy nie są zamykane — skrypt zamyka tylko to, co sam uruchomił."
-      },
-      "automation": {
-        "title": "Gotowe na prywatny overlay",
-        "desc": "Publiczne skrypty zostają w GitHub. Import overlay pomija pliki śledzone przez Git, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy zamiana się nie uda."
-      }
-    },
-    "callout": "\"Różnicę robi inwentarz. macOS Updates zaczyna od tego, co naprawdę jest na maszynie, a potem dobiera właściwy updater dla każdej warstwy.\""
-  },
-  "pipeline": {
-    "eyebrow": "Siedem kroków",
-    "title": "Jeden orkiestrator, siedem warstw aktualizacji.",
-    "subtitle": "update_all.sh uruchamia prescan, App Store, CLI/npm, Homebrew, 43 aplikacji internetowych, zapis postupdate i aktualizacje macOS w stałej kolejności.",
-    "phases": {
-      "check": { "name": "Prescan (Krok 0)", "desc": "Skanuje /Applications, Homebrew i App Store do lokalnego APPLICATIONS.md dla tego Maca.", "detail": "Publiczna instalacja nigdy nie importuje cudzej listy aplikacji." },
-      "plan": { "name": "App Store + CLI (Kroki 1 & 2)", "desc": "Uruchamia dwutorowy updater App Store (sudo mas ze zmierzonymi ID + GUI iPada) oraz natywne CLI vendorów (claude, Codex, OpenCode, agy).", "detail": "mas aktualizuje ID zmierzone w pre-skanie, z retry w sesji użytkownika; TUI vendorów ignorujące SIGTERM dostają SIGKILL, żeby pipeline nie mógł się zawiesić." },
-      "apply": { "name": "Brew + Internet (Kroki 3 & 4)", "desc": "Aktualizuje formuły i caski Homebrew (selektywne cele, pomijanie orphan casks) oraz 43 aplikacje internetowe w 11 metodach aktualizacji.", "detail": "Prawda feedu vendora, host allowlist i weryfikacja podpisu, kwarantanna MAU z własnym wygaśnięciem, bezpieczne instalacje DMG z rollbackiem i miękkie bramkowanie błędów." },
-      "verify": { "name": "Postupdate + macOS (Kroki 5 & 6)", "desc": "Atomowo odświeża inwentarz i historię, a na końcu wykonuje aktualizację systemu macOS (softwareupdate -i <label> -R).", "detail": "Aktualizacje macOS wykonują się na końcu dla bezpieczeństwa restartu. Postupdate rozdziela edycje inwentarza od zaobserwowanych zmian pakietów. 561 testów przechodzi." }
-    }
-  },
-  "showcase": {
-    "eyebrow": "CLI i raporty",
-    "title": "Powierzchnie operacyjne zamiast tajemniczych dialogów.",
-    "subtitle": "CLI do uruchomień, raport pokrycia do luk, dev_sync do prywatnego stanu maszyny.",
-    "tabs": { "overview": "Prescan", "categories": "Pokrycie", "runCenter": "Run", "apps": "Inwentarz", "aiTools": "Handlery", "insights": "Historia", "help": "Docs" },
-    "captions": {
-      "overview": "Buduj APPLICATIONS.md z tego Maca przed aktualizacją.",
-      "categories": "Zobacz obsługiwane obecne, obsługiwane brakujące i nieznane aplikacje.",
-      "runCenter": "Uruchom wszystkie warstwy albo pomiń wybrane flagami CLI.",
-      "apps": "Trzymaj prywatny inwentarz poza publicznym repo.",
-      "aiTools": "Szkieletuj handlery dla nowych aplikacji internetowych.",
-      "insights": "Dopisuj historię aktualizacji do UPDATES.md.",
-      "help": "Docs obejmują użytkowników, operatorów, agentów i prywatny overlay."
-    }
-  },
   "features": {
-    "title": "Dla Maców, które potrzebują",
-    "titleCode": "pełnego pokrycia aktualizacji",
-    "titleEnd": "bez dryfu.",
-    "subtitle": "Lokalny inwentarz, stała kolejność aktualizacji, uczciwe raportowanie żywego systemu, siedem języków i handlery dla metod Apple oraz vendorów.",
-    "cta": "Zobacz wszystkie funkcje →",
-    "pipeline": { "title": "Siedmiokrokowy pipeline", "desc": "Prescan → App Store → CLI/npm → Homebrew → internet apps → postupdate → system macOS." },
-    "snapshot": { "title": "Raport pokrycia", "desc": "Obsługiwane, brakujące i nieznane aplikacje oraz liczniki pending po przebiegu i chroniczne ostrzeżenia kroków." },
-    "frontends": { "title": "Instalacja od inwentarza", "desc": "install.sh buduje APPLICATIONS.md z tego Maca i aktualizuje tylko już zainstalowane programy." },
-    "scheduler": { "title": "Krytyczne reguły", "desc": "softwareupdate zawsze ma -R; mas upgrade używa sudo ze zmierzonymi ID; TUI vendorów nie mogą zawiesić przebiegu." },
-    "aiTools": { "title": "Handlery przyjazne agentom", "desc": "Szkieletuj handlery aplikacji internetowych i aktualizuj Claude, Codex, OpenCode i agy ich własnymi natywnymi instalatorami." },
-    "suggestionsAi": { "title": "Prywatny dev_sync", "desc": "Synchronizuj inwentarz, historię, preferencje i sekrety poza Git. Import odmawia nadpisania plików śledzonych i zostawia ścieżkę odzyskania." },
-    "plugins": { "title": "Testy i scan sekretów", "desc": "run_tests.sh uruchamia 561 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie." },
-    "multihost": { "title": "UI w 7 językach", "desc": "EN, PL, DE, FR, ES, IT i PT w komunikatach shell." },
-    "editions": { "title": "Fokus Apple Silicon", "desc": "Projekt dla Maców arm64 z macOS 13 lub nowszym." },
-    "vanillaJs": { "title": "Zgodność Bash 3.2", "desc": "Bez declare -A, mapfile, readarray i założeń z nowszego Basha." }
-  },
-  "platformSupport": {
-    "title": "Pokrywa ścieżki aktualizacji, których naprawdę używa Mac.",
-    "subtitle": "macOS Updates koordynuje Apple, Homebrew, npm, CLI, Microsoft, Google, GitHub release, Docker, Sparkle i vendorowe auto-updatery.",
-    "note": "Aplikacje internetowe są aktualizowane tylko gdy są już zainstalowane. Brakujące są raportowane, a nieznane trafiają do pracy nad handlerami.",
-    "macos": { "name": "Apple Silicon macOS", "status": "Production-ready · macOS 13+ · tylko arm64 · lokalny inwentarz · 43 aplikacji · 7 języków", "managers": ["system", "appstore", "cli-npm", "homebrew", "internet", "dev-sync"] },
-    "managerDetail": {
-      "system": "Aktualizacje macOS przez softwareupdate -i <label> -R --verbose.",
-      "appstore": "App Store przez sudo mas upgrade zmierzonych ID, retry w sesji użytkownika oraz fallback AppleScript dla aplikacji iPada.",
-      "cli-npm": "Node, Bun, globalne npm i natywne CLI vendorów (claude update, instalator Codex, opencode upgrade, agy).",
-      "homebrew": "Formuły, caski, cleanup i doctor.",
-      "internet": "Keystone, GitHub DMG, msupdate, Docker CLI, silent-launch, Sparkle i manual.",
-      "dev-sync": "Opcjonalny prywatny overlay. Import pomija pliki śledzone przez Git i zostawia ścieżkę odzyskania, gdy zamiana się nie uda."
+    "pipeline": {
+      "title": "Siedmiokrokowy pipeline",
+      "desc": "Prescan → App Store → CLI/npm → Homebrew → internet apps → postupdate → system macOS."
+    },
+    "snapshot": {
+      "title": "Raport pokrycia",
+      "desc": "Obsługiwane, brakujące i nieznane aplikacje oraz liczniki pending po przebiegu i chroniczne ostrzeżenia kroków."
+    },
+    "frontends": {
+      "title": "Instalacja od inwentarza",
+      "desc": "install.sh buduje APPLICATIONS.md z tego Maca i aktualizuje tylko już zainstalowane programy."
+    },
+    "scheduler": {
+      "title": "Krytyczne reguły",
+      "desc": "softwareupdate zawsze ma -R; mas upgrade używa sudo ze zmierzonymi ID; TUI vendorów nie mogą zawiesić przebiegu."
+    },
+    "aiTools": {
+      "title": "Handlery przyjazne agentom",
+      "desc": "Szkieletuj handlery aplikacji internetowych i aktualizuj Claude, Codex, OpenCode i agy ich własnymi natywnymi instalatorami."
+    },
+    "suggestionsAi": {
+      "title": "Prywatny dev_sync",
+      "desc": "Synchronizuj inwentarz, historię, preferencje i sekrety poza Git. Import odmawia nadpisania plików śledzonych i zostawia ścieżkę odzyskania."
+    },
+    "plugins": {
+      "title": "Testy i scan sekretów",
+      "desc": "run_tests.sh uruchamia 561 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
+    },
+    "multihost": {
+      "title": "UI w 7 językach",
+      "desc": "EN, PL, DE, FR, ES, IT i PT w komunikatach shell."
+    },
+    "editions": {
+      "title": "Fokus Apple Silicon",
+      "desc": "Projekt dla Maców arm64 z macOS 13 lub nowszym."
+    },
+    "vanillaJs": {
+      "title": "Zgodność Bash 3.2",
+      "desc": "Bez declare -A, mapfile, readarray i założeń z nowszego Basha."
     }
   },
-  "howItWorks": {
-    "title": "Zainstaluj, podejrzyj, aktualizuj.",
-    "subtitle": "Workflow jest prosty: lokalny inwentarz, dry-run orkiestratora, pełna aktualizacja gdy jesteś gotowy.",
-    "step1": { "label": "Install", "title": "Zbuduj inwentarz tego Maca", "desc": "Instalator klonuje repo, konfiguruje zależności, pyta o język i buduje APPLICATIONS.md z zainstalowanych programów." },
-    "step2": { "label": "Preview", "title": "Uruchom bez stosowania zmian", "desc": "Użyj update_all.sh --dry-run -y albo raportu pokrycia, aby sprawdzić zakres działania." },
-    "step3": { "label": "Update", "title": "Aktualizuj wszystkie warstwy", "desc": "update_all.sh uruchamia wszystkie obsługiwane warstwy, a potem zapisuje zaobserwowane zmiany pakietów osobno od edycji pól inwentarza." }
-  },
-  "openSource": {
-    "title": "Publiczny kod. Prywatny stan maszyny.",
-    "subtitle": "Skrypty i dokumentacja MIT żyją w GitHub. Inwentarz, historia, preferencje i sekrety zostają lokalnie lub w prywatnym overlay.",
-    "builtInOpen": "Zaprojektowane do przeglądu",
-    "builtInOpenDesc": "Repo pokazuje metody aktualizacji, kolejność dispatch, dokumentację, i18n i testy. Każdy handler można przejrzeć przed uruchomieniem.",
-    "contribute": "Przeczytaj przewodnik →",
-    "changelog": "Zobacz historię zmian →"
-  },
-  "installation": {
-    "title": "Zacznij od instalatora jedną linią.",
-    "subtitle": "Nowy użytkownik dostaje setup i świeży inwentarz. Właściciel może potem odtworzyć prywatny overlay.",
-    "macosTab": "macOS",
-    "linuxTab": "",
-    "windowsTab": "",
-    "oneLiner": "Instalacja nowego użytkownika",
-    "verify": "Podejrzyj pełny run",
-    "update": "Zaktualizuj repo i uruchom",
-    "fullGuide": "Pełny przewodnik instalacji →",
-    "copied": "Skopiowano!",
-    "copyToClipboard": "Kopiuj do schowka",
-    "fullDocs": "Pełna dokumentacja →"
-  },
-  "footer": {
-    "copyright": "© 2026 macOS Updates · MIT",
-    "features": "Funkcje",
-    "docs": "Dokumentacja",
-    "github": "GitHub",
-    "security": "Bezpieczeństwo",
-    "changelog": "Historia zmian",
-    "contributing": "Współtworzenie"
+  "roadmap": {
+    "title": "Pokrycie dalej rośnie",
+    "subtitle": "Publiczny registry i testy handlerów czynią wsparcie aplikacji jawne.",
+    "statusNow": "Teraz",
+    "statusNext": "Dalej",
+    "items": {
+      "signing": {
+        "title": "Więcej handlerów",
+        "desc": "Weryfikowane wsparcie dla kolejnych aplikacji internetowych."
+      },
+      "installers": {
+        "title": "Izolowane odtworzenie",
+        "desc": "Udokumentowane odtworzenie overlay na czystym Macu, które nigdy nie nadpisuje plików śledzonych przez Git."
+      },
+      "marketplace": {
+        "title": "Receptury handlerów",
+        "desc": "Wzorce GitHub DMG, Sparkle, Keystone i silent-launch."
+      },
+      "i18nMore": {
+        "title": "Dopracowanie lokali",
+        "desc": "Siedem języków utrzymanych razem z funkcjami."
+      },
+      "telemetry": {
+        "title": "Zero telemetrii",
+        "desc": "Lepsze raporty lokalne bez wysyłania danych."
+      },
+      "parallel": {
+        "title": "Szlif runów cyklicznych",
+        "desc": "LaunchAgent i przebiegi agentowe bez zawieszania, łatwe do audytu."
+      }
+    }
   },
   "seo": {
-    "homeTitle": "macOS Updates — Aktualizator Apple Silicon jedną komendą",
-    "homeDesc": "Updater dla macOS, App Store, Homebrew, CLI/npm i 43 aplikacji internetowych. Najpierw lokalny inwentarz. Uczciwe raportowanie żywego systemu.",
-    "featuresTitle": "Funkcje macOS Updates — Pokrycie i inwentarz",
+    "homeTitle": "macOS Updates: aktualizator Apple Silicon jedną komendą",
+    "homeDesc": "Otwartoźródłowy aktualizator dla Maców z Apple Silicon: App Store, Homebrew, CLI, 43 aplikacje internetowe i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
+    "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
     "featuresDesc": "Siedmiokrokowy pipeline, uczciwe raporty przebiegu, integralność prywatnego overlay i reguły bezpieczeństwa Apple Silicon.",
-    "docsTitle": "Dokumentacja macOS Updates — Instalacja i obsługa",
+    "docsTitle": "Dokumentacja macOS Updates: Instalacja i obsługa",
     "docsDesc": "Instaluj, uruchamiaj dry-run, poznaj pipeline i dodawaj handlery aplikacji.",
     "securityTitle": "Polityka bezpieczeństwa macOS Updates",
     "securityDesc": "Ochrona lokalnego inwentarza, prywatnego overlay i uprzywilejowanych operacji aktualizacji.",
@@ -167,34 +87,364 @@
     "contributingTitle": "Współtwórz macOS Updates",
     "contributingDesc": "Dodawaj handlery, ulepszaj dokumentację i utrzymuj zgodność Bash 3.2."
   },
-  "roadmap": {
-    "eyebrow": "Roadmap",
-    "title": "Pokrycie dalej rośnie",
-    "subtitle": "Publiczny registry i testy handlerów czynią wsparcie aplikacji jawne.",
-    "statusNow": "Teraz",
-    "statusNext": "Dalej",
+  "faq": {
     "items": {
-      "signing": { "title": "Więcej handlerów", "desc": "Weryfikowane wsparcie dla kolejnych aplikacji internetowych." },
-      "installers": { "title": "Izolowane odtworzenie", "desc": "Udokumentowane odtworzenie overlay na czystym Macu, które nigdy nie nadpisuje plików śledzonych przez Git." },
-      "marketplace": { "title": "Receptury handlerów", "desc": "Wzorce GitHub DMG, Sparkle, Keystone i silent-launch." },
-      "i18nMore": { "title": "Dopracowanie lokali", "desc": "Siedem języków utrzymanych razem z funkcjami." },
-      "telemetry": { "title": "Zero telemetrii", "desc": "Lepsze raporty lokalne bez wysyłania danych." },
-      "parallel": { "title": "Szlif runów cyklicznych", "desc": "LaunchAgent i przebiegi agentowe bez zawieszania, łatwe do audytu." }
+      "q1": {
+        "q": "Czy macOS Updates jest darmowy i open source?",
+        "a": "Tak. Publiczny kod ma licencję MIT i działa lokalnie. Pliki konkretnej maszyny są celowo gitignorowane."
+      },
+      "q2": {
+        "q": "Czy zainstaluje aplikacje, których nie mam?",
+        "a": "Nie. Updater aktualizuje tylko programy już zainstalowane na Macu. Obsługiwane brakujące aplikacje są tylko raportowane."
+      },
+      "q3": {
+        "q": "Dlaczego wymagany jest Apple Silicon?",
+        "a": "Projekt jest zawężony do Maców arm64 i Homebrew w /opt/homebrew. Intel nie jest wspierany."
+      },
+      "q4": {
+        "q": "Czy mogę podejrzeć przebieg przed aktualizacją?",
+        "a": "Tak. Uruchom bash update_all.sh --dry-run -y albo bash scripts/report_update_coverage.sh."
+      },
+      "q5": {
+        "q": "Do czego służy dev_sync?",
+        "a": "dev_sync obsługuje prywatne pliki overlay: APPLICATIONS.md, UPDATES.md, .env, preferencje i konfigurację chmury. Import rozwija manifesty katalogów, pomija pliki śledzone przez Git i wykluczone, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy zamiana się nie uda."
+      },
+      "q6": {
+        "q": "Dlaczego mas upgrade używa sudo?",
+        "a": "Projekt stosuje aktualne wymagania macOS/App Store CLI opisane w repo, w tym zachowanie związane z CVE na Sequoia."
+      },
+      "q7": {
+        "q": "Ile aplikacji jest obsługiwanych?",
+        "a": "Obecny registry obejmuje 43 aplikacji internetowych oraz macOS, App Store, Homebrew i CLI/npm."
+      },
+      "q8": {
+        "q": "Jak dodać nową aplikację internetową?",
+        "a": "Użyj scripts/scaffold_internet_app.sh, zarejestruj metodę i dispatch, dodaj i18n, potem uruchom bash run_tests.sh."
+      },
+      "q9": {
+        "q": "Skąd wiem, że aktualizacja naprawdę weszła?",
+        "a": "Mutacja jest raportowana dopiero po potwierdzeniu przez żywy Mac. Postupdate rozdziela edycje pól inwentarza od zaobserwowanych zmian pakietów i CLI. Nieznane pending zostaje nieznane, nie zero. CLI vendora liczy się jako zaktualizowane tylko gdy istnieje działające --version."
+      },
+      "q10": {
+        "q": "Jak zaktualizować wszystkie aplikacje na Macu naraz?",
+        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 43 aplikacje pobrane z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
+      },
+      "q11": {
+        "q": "Czy macOS Updates zamyka moje otwarte aplikacje?",
+        "a": "Nie. Aplikacje, które masz otwarte, nigdy nie są zamykane. Toolkit zamyka tylko to, co sam uruchomił, a działające aplikacje są chronione przy podmianie pakietu."
+      },
+      "q12": {
+        "q": "Czy bezpiecznie uruchamiać to z sudo?",
+        "a": "Skrypt jest na to przygotowany. sudo jest żądane najwyżej raz na przebieg, nigdy bez terminala i nigdy podczas --dry-run. Potrzebują go tylko kroki App Store i macOS, a kod jest otwarty do przeglądu."
+      },
+      "q13": {
+        "q": "Czy działa na Macach z Intelem?",
+        "a": "Nie. macOS Updates wspiera Maci z Apple Silicon (arm64) z macOS 13 do 27 i Homebrew w /opt/homebrew. Maci z Intelem są celowo niewspierane."
+      },
+      "q14": {
+        "q": "Czym różni się od samego Homebrew albo App Store?",
+        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 43 aplikacje z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
+      }
+    },
+    "title": "Pytania przed uruchomieniem.",
+    "lead": "Odpowiedzi o tym, co się uruchamia, czego dotyka i czego nigdy nie robi."
+  },
+  "hero": {
+    "titleA": "Każda warstwa Maca.",
+    "titleGo": "GO",
+    "titleB": "tylko po potwierdzeniu.",
+    "sub": "Jedno polecenie aktualizuje App Store, CLI, Homebrew, {{apps}} aplikacji internetowych i macOS w bezpiecznej kolejności.",
+    "copy": "Skopiuj polecenie instalacji",
+    "copied": "Skopiowano",
+    "copyFailed": "Nie udało się skopiować. Polecenie jest zaznaczone, naciśnij Cmd+C.",
+    "github": "Zobacz na GitHubie",
+    "commandLabel": "Polecenie instalacji",
+    "console": {
+      "detail": {
+        "prescan": "Inwentarz tego Maca",
+        "appstore": "sudo mas, potem Track 2",
+        "cli": "Natywne CLI, potem npm",
+        "brew": "brew upgrade --greedy",
+        "internet": "{{apps}} aplikacji, {{methods}} metod",
+        "post": "Inwentarz i historia",
+        "macos": "softwareupdate -R"
+      },
+      "state": {
+        "go": "GO",
+        "goHold": "GO · 1 HOLD",
+        "standbyRestart": "STANDBY · restart na końcu"
+      },
+      "legend": {
+        "go": "potwierdzone przez Maca",
+        "hold": "ostrzeżenie, które zostaje widoczne",
+        "standby": "czeka na swoją kolej"
+      }
     }
   },
-  "faq": {
-    "eyebrow": "FAQ",
-    "title": "Najczęściej zadawane pytania",
+  "rules": {
+    "title": "Cztery zasady każdego przebiegu.",
+    "lead": "Ręczna aktualizacja to Ustawienia systemowe, App Store, brew, globalne pakiety npm, własne updatery producentów i obrazy DMG. Te zasady obowiązują na każdej warstwie.",
     "items": {
-      "q1": { "q": "Czy macOS Updates jest darmowy i open source?", "a": "Tak. Publiczny kod ma licencję MIT i działa lokalnie. Pliki konkretnej maszyny są celowo gitignorowane." },
-      "q2": { "q": "Czy zainstaluje aplikacje, których nie mam?", "a": "Nie. Updater aktualizuje tylko programy już zainstalowane na Macu. Obsługiwane brakujące aplikacje są tylko raportowane." },
-      "q3": { "q": "Dlaczego wymagany jest Apple Silicon?", "a": "Projekt jest zawężony do Maców arm64 i Homebrew w /opt/homebrew. Intel nie jest wspierany." },
-      "q4": { "q": "Czy mogę podejrzeć przebieg przed aktualizacją?", "a": "Tak. Uruchom bash update_all.sh --dry-run -y albo bash scripts/report_update_coverage.sh." },
-      "q5": { "q": "Do czego służy dev_sync?", "a": "dev_sync obsługuje prywatne pliki overlay: APPLICATIONS.md, UPDATES.md, .env, preferencje i konfigurację chmury. Import rozwija manifesty katalogów, pomija pliki śledzone przez Git i wykluczone, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy zamiana się nie uda." },
-      "q6": { "q": "Dlaczego mas upgrade używa sudo?", "a": "Projekt stosuje aktualne wymagania macOS/App Store CLI opisane w repo, w tym zachowanie związane z CVE na Sequoia." },
-      "q7": { "q": "Ile aplikacji jest obsługiwanych?", "a": "Obecny registry obejmuje 43 aplikacji internetowych oraz macOS, App Store, Homebrew i CLI/npm." },
-      "q8": { "q": "Jak dodać nową aplikację internetową?", "a": "Użyj scripts/scaffold_internet_app.sh, zarejestruj metodę i dispatch, dodaj i18n, potem uruchom bash run_tests.sh." },
-      "q9": { "q": "Skąd wiem, że aktualizacja naprawdę weszła?", "a": "Mutacja jest raportowana dopiero po potwierdzeniu przez żywy Mac. Postupdate rozdziela edycje pól inwentarza od zaobserwowanych zmian pakietów i CLI. Nieznane pending zostaje nieznane, nie zero. CLI vendora liczy się jako zaktualizowane tylko gdy istnieje działające --version." }
+      "vendor": {
+        "title": "Najpierw prawda od producenta.",
+        "body": "Zainstalowana wersja każdej aplikacji jest najpierw sprawdzana w kanale jej producenta. Aplikacje, które są aktualne, zostają nietknięte."
+      },
+      "open": {
+        "title": "Otwarte aplikacje nigdy nie są zamykane.",
+        "body": "Toolkit zamyka tylko to, co sam uruchomił. Działające aplikacje są chronione także przy podmianie pakietu."
+      },
+      "installed": {
+        "title": "Tylko to, co zainstalowane.",
+        "body": "Brakujące obsługiwane aplikacje są raportowane, nie instalowane. Aplikacji usuniętych ręcznie nigdy nie instaluje ponownie."
+      },
+      "confirmed": {
+        "title": "Raport dopiero po potwierdzeniu.",
+        "body": "Wynik liczy się dopiero, gdy potwierdzi go działający Mac. Nieświeże kanały i przekroczone limity czasu zostają widoczne jako ostrzeżenia."
+      }
+    }
+  },
+  "stations": {
+    "title": "Siedem kroków, jedna stała kolejność.",
+    "lead": "Ten sam przebieg co wyżej, rozpisany. Każdy krok mówi, co uruchamia i czego nie zrobi.",
+    "caption": "Siedem kroków update_all.sh w kolejności uruchamiania, z tym, co każdy robi, i jego zabezpieczeniem.",
+    "cols": {
+      "station": "Stacja",
+      "what": "Co się uruchamia",
+      "guard": "Zabezpieczenie"
+    },
+    "flags": "Pomiń krok albo podejrzyj cały przebieg:",
+    "rows": {
+      "prescan": {
+        "what": "Skanuje /Applications, Homebrew i dane App Store do APPLICATIONS.md tego Maca.",
+        "guard": "Tylko lokalny inwentarz. Cudza lista nigdy nie jest importowana."
+      },
+      "appstore": {
+        "what": "Track 1: sudo mas upgrade dla zmierzonych ID. Track 2: AppleScript dla aplikacji iPada, np. UniFi.",
+        "guard": "sudo najwyżej raz na przebieg i nigdy bez terminala."
+      },
+      "cli": {
+        "what": "Najpierw natywne CLI producentów (claude, codex, opencode, agy), potem Node, Bun i globalne pakiety npm.",
+        "guard": "CLI producenta liczy się jako zaktualizowane tylko wtedy, gdy działa --version."
+      },
+      "brew": {
+        "what": "Formuły i caski z --greedy, potem cleanup i brew doctor.",
+        "guard": "Osierocone caski są pomijane, a obniżanie wersji casków jest blokowane."
+      },
+      "internet": {
+        "what": "{{apps}} aplikacji w {{methods}} metodach aktualizacji, każda sprawdzana w kanale samego producenta.",
+        "guard": "Zweryfikowane pobrania: Gatekeeper, bundle ID i Apple Team ID, potem podmiana etapowa z rollbackiem."
+      },
+      "post": {
+        "what": "Odświeża APPLICATIONS.md i atomowo dopisuje UPDATES.md.",
+        "guard": "Zaobserwowane zmiany pakietów są zapisywane osobno od edycji inwentarza."
+      },
+      "macos": {
+        "what": "softwareupdate -i <label> -R, jedna etykieta naraz.",
+        "guard": "Idzie na końcu, bo może zrestartować Maca. Pomijany, gdy wcześniejszy krok się nie powiódł."
+      }
+    }
+  },
+  "coverage": {
+    "title": "{{apps}} aplikacji internetowych, {{methods}} metod aktualizacji.",
+    "lead": "Aktualizowane są tylko aplikacje już zainstalowane. Rejestr poniżej jest pogrupowany według tego, jak każda z nich dostaje aktualizację.",
+    "methods": {
+      "brew_cask": {
+        "name": "Cask Homebrew",
+        "note": "Aktualizowane przez Homebrew, z ochroną przed obniżeniem wersji."
+      },
+      "silent_launch": {
+        "name": "Ciche uruchomienie",
+        "note": "Otwiera aplikację, żeby zadziałał jej własny updater. Sprawdza kanał producenta, jeśli istnieje, a w przeciwnym razie raportuje uruchomienie jako niezweryfikowane."
+      },
+      "github_dmg": {
+        "name": "GitHub DMG",
+        "note": "Obraz DMG z GitHuba, zweryfikowany, potem podmiana etapowa z rollbackiem."
+      },
+      "msupdate": {
+        "name": "Microsoft AutoUpdate",
+        "note": "Aplikacje Office aktualizowane przez msupdate."
+      },
+      "keystone": {
+        "name": "Google Keystone",
+        "note": "Własny agent aktualizacji Google. Tylko dla produktów Google."
+      },
+      "appstore_gui": {
+        "name": "App Store Track 2",
+        "note": "Aplikacje iPada aktualizowane przez sterowanie App Store z AppleScript."
+      },
+      "manual": {
+        "name": "Ręcznie",
+        "note": "Brak automatycznej ścieżki. Raportowane, żebyś zaktualizował je sam."
+      },
+      "sparkle_appcast": {
+        "name": "Sparkle appcast",
+        "note": "Wersja odczytywana z kanału Sparkle appcast aplikacji."
+      },
+      "docker_cli": {
+        "name": "Docker CLI",
+        "note": "Obsługiwane przez ścieżkę Docker CLI."
+      },
+      "mau_fallback_self_update": {
+        "name": "Samoaktualizacja z MAU",
+        "note": "Teams aktualizuje się sam, ze zweryfikowanym zapasowym torem Microsoft AutoUpdate, gdy Microsoft go oferuje."
+      },
+      "chromium_updater": {
+        "name": "Updater Chromium",
+        "note": "Obsługiwane przez ścieżkę updatera Chromium."
+      }
+    },
+    "other": {
+      "title": "Poza aplikacjami internetowymi",
+      "appstore": {
+        "name": "App Store",
+        "note": "Zmierzone ID przez sudo mas oraz Track 2 dla aplikacji iPada."
+      },
+      "brew": {
+        "name": "Homebrew",
+        "note": "Formuły i caski, cleanup i brew doctor."
+      },
+      "cli": {
+        "name": "CLI i npm",
+        "note": "claude, codex, opencode i agy, potem Node, Bun i globalne pakiety npm."
+      },
+      "macos": {
+        "name": "macOS",
+        "note": "Aktualizacje systemu według etykiet, zawsze na końcu."
+      }
+    },
+    "report": "Nieznane zainstalowane aplikacje są wypisywane, żeby można było dodać handler. Pokrycie na własnym Macu sprawdzisz poleceniem"
+  },
+  "log": {
+    "title": "Co toolkit faktycznie zrobił.",
+    "lead": "Każdy wpis to prawdziwe wydanie albo prawdziwy przebieg. Nic tu nie jest benchmarkiem.",
+    "entries": {
+      "release": {
+        "title": "Wydanie v1.5.5",
+        "body": "Dostarczone z {{tests}} testami automatycznymi. Aktualizacja Homebrew, która usuwa python3 w trakcie przebiegu, nie psuje już kroku raportu, a nieudany raport nie odkłada już aktualizacji macOS."
+      },
+      "live": {
+        "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",
+        "body": "Jedna aktualizacja przeszła przez App Store Track 2, druga przez zweryfikowaną instalację od producenta.",
+        "note": "Krok systemowy macOS został w tym przebiegu pominięty przez błąd, który naprawia v1.5.5."
+      },
+      "verify": {
+        "title": "Przebieg weryfikacyjny: 108 sekund",
+        "body": "Przebieg zakończył się bez oczekujących aktualizacji. To przebieg weryfikacyjny, a nie benchmark instalacji."
+      }
+    },
+    "how": {
+      "appstore": "App Store Track 2",
+      "vendor": "Zweryfikowana instalacja od producenta"
+    },
+    "open": {
+      "term": "Open source",
+      "title": "Licencja MIT, kod publiczny.",
+      "body": "Każda metoda aktualizacji, handler i test jest w repozytorium, więc możesz przeczytać, co się uruchomi, zanim to zrobisz. CLI mówi w siedmiu językach: EN, PL, ES, FR, DE, IT i PT.",
+      "github": "Zobacz na GitHubie",
+      "stars": "Gwiazdki na GitHubie: {{stars}}",
+      "changelog": "Historia zmian",
+      "security": "Polityka bezpieczeństwa"
+    }
+  },
+  "install": {
+    "title": "Gotowy do startu.",
+    "lead": "Zainstaluj, podejrzyj próbnym przebiegiem, potem uruchom.",
+    "stepInstall": "Instalacja",
+    "stepPreview": "Podgląd, nic nie jest zmieniane",
+    "stepRun": "Uruchomienie",
+    "note": "Instalator klonuje repozytorium, pyta o język, instaluje zależności i buduje APPLICATIONS.md z aplikacji, które już są na tym Macu. Nie instaluje za Ciebie żadnych aplikacji.",
+    "docs": "Przeczytaj dokumentację",
+    "github": "Zobacz na GitHubie"
+  },
+  "wall": {
+    "heading": "Zobacz jeden przebieg, stacja po stacji.",
+    "intro": "Każda warstwa aktualizacji zgłasza GO dopiero po potwierdzeniu przez działającego Maca. Nieświeży kanał producenta zgłasza HOLD, a ostrzeżenie zostaje na tablicy. macOS idzie ostatni, bo może się zrestartować.",
+    "caption": "Odczyty z prawdziwych uruchomień z 2026-10-05 i 2026-10-11.",
+    "scrollHint": "Przewiń, aby przesunąć odpytywanie",
+    "listLabel": "Stacje aktualizacji w kolejności uruchamiania",
+    "screen": {
+      "title": "Odpytanie dyrektora lotu",
+      "running": "Powtórka: odpytanie w toku",
+      "complete": "Powtórka: odpytanie zakończone",
+      "tMinus": "T-minus",
+      "dryRun": "Próba (dry-run)",
+      "confirmed": "Potwierdzone przez Maca",
+      "plotTitle": "Stacje do końca",
+      "result": "Wynik odpytania"
+    },
+    "state": {
+      "go": "GO",
+      "hold": "HOLD",
+      "standby": "STANDBY",
+      "polling": "ODPYTANIE",
+      "restart": "(restart)"
+    },
+    "line": {
+      "pending": "oczekuje",
+      "confirmed": "gotowe",
+      "hold": "wstrzymane"
+    },
+    "station": {
+      "prescan": {
+        "name": "PRESCAN",
+        "desc": "Inwentarz tego Maca do APPLICATIONS.md. Tylko zainstalowane oprogramowanie."
+      },
+      "appstore": {
+        "name": "APP STORE",
+        "desc": "sudo mas ze zmierzonymi identyfikatorami, potem AppleScript Track 2."
+      },
+      "cli": {
+        "name": "CLI + NPM",
+        "desc": "Najpierw natywne CLI producentów (claude update, codex, opencode, agy), potem globalne pakiety Node/npm."
+      },
+      "brew": {
+        "name": "HOMEBREW",
+        "desc": "brew upgrade --greedy, pominięte osierocone caski, czyszczenie, doctor."
+      },
+      "internet": {
+        "name": "INTERNET APPS",
+        "desc": "{{apps}} aplikacji, {{methods}} metod aktualizacji. Każda wersja jest najpierw sprawdzana w kanale samego producenta."
+      },
+      "post": {
+        "name": "POSTUPDATE",
+        "desc": "Historia APPLICATIONS.md i UPDATES.md zapisywana dopiero po udanym kroku."
+      },
+      "macos": {
+        "name": "macOS",
+        "desc": "softwareupdate -i <label> -R. Idzie na końcu, bo może zrestartować Maca."
+      }
+    },
+    "row": {
+      "prescan": {
+        "pending": "inwentarz tego Maca",
+        "done": "APPLICATIONS.md, tylko zainstalowane"
+      },
+      "cli": {
+        "pending": "claude, codex, opencode, agy, potem npm",
+        "done": "najpierw natywne, potem npm"
+      },
+      "brew": {
+        "pending": "brew upgrade --greedy",
+        "done": "osierocone caski pominięte, cleanup, doctor"
+      },
+      "opencode": {
+        "done": "zweryfikowana instalacja od producenta: Gatekeeper, bundle ID, Apple Team ID"
+      },
+      "proton": {
+        "pending": "sprawdzanie kanału producenta",
+        "done": "kanał producenta starszy niż zainstalowana wersja, nic nie zainstalowano"
+      },
+      "post": {
+        "pending": "APPLICATIONS.md, UPDATES.md",
+        "done": "historia zapisana dopiero po udanym kroku"
+      },
+      "macos": {
+        "pending": "softwareupdate -i <label> -R",
+        "done": "idzie na końcu, bo może zrestartować"
+      }
+    },
+    "note": {
+      "openApps": "Otwarte aplikacje nigdy nie są zamykane. Zamknięcie jest zlecane tylko temu, co uruchomił sam toolkit."
     }
   }
 }

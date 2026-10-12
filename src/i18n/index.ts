@@ -2,6 +2,8 @@ import i18n, { type i18n as I18nInstance } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import en from './locales/en.json'
 import pl from './locales/pl.json'
+import chromeEn from './locales/chrome.en.json'
+import chromePl from './locales/chrome.pl.json'
 import type { Lang } from '../lib/routes'
 
 /**
@@ -17,8 +19,9 @@ import type { Lang } from '../lib/routes'
  */
 i18n.use(initReactI18next).init({
   resources: {
-    en: { translation: en },
-    pl: { translation: pl },
+    // chrome.* holds the shared site chrome (nav, footer, subpage UI); merged under its own top-level key.
+    en: { translation: { ...en, ...chromeEn } },
+    pl: { translation: { ...pl, ...chromePl } },
   },
   lng: 'en',
   fallbackLng: 'en',

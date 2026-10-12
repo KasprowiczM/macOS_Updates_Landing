@@ -1,120 +1,5 @@
 {
-  "nav": {
-    "features": "Features",
-    "howItWorks": "How it works",
-    "installation": "Installation",
-    "docs": "Docs",
-    "github": "GitHub",
-    "starOnGitHub": "Star on GitHub",
-    "tagline": "UPDATE ORBIT"
-  },
-  "hero": {
-    "eyebrow": "Apple Silicon update control",
-    "headline1": "Update every layer",
-    "headline2": "from one trusted run.",
-    "headline3": "No borrowed inventories.",
-    "subheadline": "macOS Updates keeps system updates, App Store apps, Homebrew, native CLI tools, npm globals, and 43 internet apps current — touching only software already installed, and reporting only what the live Mac confirms.",
-    "ctaPrimary": "Install macOS Updates",
-    "ctaSecondary": "View source",
-    "oneLinerLabel": "One-line install",
-    "platforms": "Apple Silicon · macOS 13+ · Bash 3.2 · 7 languages"
-  },
-  "socialProof": {
-    "stars": "GitHub stars",
-    "contributors": "Contributors",
-    "version": "Current release",
-    "license": "MIT license",
-    "platforms": "update layers",
-    "tests": "safety checks"
-  },
-  "problemSolution": {
-    "title": "Stop maintaining your Mac one updater at a time.",
-    "subtitle": "macOS has system updates, App Store updates, Homebrew, npm globals, vendor auto-updaters, DMGs, and GUI-only iPad apps. macOS Updates turns that sprawl into one auditable run.",
-    "without": "Manual update day",
-    "with": "macOS Updates",
-    "withDesc": "Inventory first. Update only what is present. Report only what the live Mac confirms."
-  },
-  "whyUpdate": {
-    "eyebrow": "The macOS Updates way",
-    "title": "Your local inventory is the source of truth.",
-    "subtitle": "The installer scans this Mac, builds its own APPLICATIONS.md, and never imports another user's app list or installs missing apps from a maintainer catalog.",
-    "stats": {
-      "timeBefore": "Typical manual pass through System Settings, App Store, brew, npm globals, and vendor update dialogs.",
-      "timeAfter": "One dry-run can preview the full workflow without applying mutations.",
-      "sources": "macOS, App Store, native CLI/npm, Homebrew, internet apps, inventory, and postupdate history."
-    },
-    "reasons": {
-      "security": {
-        "title": "Correct privileged calls",
-        "desc": "macOS updates install each label with softwareupdate -i <label> -R, App Store updates use sudo mas with measured IDs, and a mutation is reported only after the live system confirms it."
-      },
-      "compatibility": {
-        "title": "Installed-only policy",
-        "desc": "Supported-but-missing apps are reported, not installed. Apps you have open are never closed — the toolkit only quits what it launched itself."
-      },
-      "automation": {
-        "title": "Private overlay ready",
-        "desc": "Public scripts stay in GitHub. Overlay import skips Git-tracked files, refuses symlink escapes, and keeps a recovery path if a swap fails."
-      }
-    },
-    "callout": "\"The difference is the inventory. macOS Updates starts from what is actually on the machine, then chooses the right updater for each layer.\""
-  },
-  "pipeline": {
-    "eyebrow": "Seven-step updater",
-    "title": "One orchestrator, seven update layers.",
-    "subtitle": "update_all.sh runs prescan, App Store, native CLI/npm, Homebrew, 43 internet apps, postupdate bookkeeping, and macOS system updates in order.",
-    "phases": {
-      "check": {
-        "name": "Prescan (Step 0)",
-        "desc": "Scan /Applications, Homebrew, and App Store receipts into this Mac's APPLICATIONS.md.",
-        "detail": "Public installs never import another user's inventory."
-      },
-      "plan": {
-        "name": "App Store + CLI (Steps 1 & 2)",
-        "desc": "Run two-track App Store updater (sudo mas with measured IDs + iPad GUI) and native vendor CLIs (claude, Codex, OpenCode, agy).",
-        "detail": "mas upgrades the IDs the pre-scan measured, with a user-session retry; vendor TUIs that ignore SIGTERM are SIGKILL'd so the pipeline cannot hang."
-      },
-      "apply": {
-        "name": "Brew + Internet (Steps 3 & 4)",
-        "desc": "Update Homebrew formulae/casks (selective targets, orphan casks skipped) and 43 internet apps across 11 update methods.",
-        "detail": "Vendor feed truth, host allowlist and signature checks, MAU quarantine with self-owned expiry, scheme-aware cask guards, roll-back safe DMG swaps, and non-blocking soft failure gating."
-      },
-      "verify": {
-        "name": "Postupdate + macOS (Steps 5 & 6)",
-        "desc": "Atomically refresh inventory and history, then run macOS system update (softwareupdate -i <label> -R) last.",
-        "detail": "macOS system updates run last to retain reboot safety. Postupdate splits inventory edits from observed package changes. 561 safety checks pass."
-      }
-    }
-  },
-  "showcase": {
-    "eyebrow": "CLI & reports",
-    "title": "Operational surfaces, not mystery dialogs.",
-    "subtitle": "Use the CLI for runs, coverage reports for gaps, and dev_sync for private machine state.",
-    "tabs": {
-      "overview": "Prescan",
-      "categories": "Coverage",
-      "runCenter": "Run",
-      "apps": "Inventory",
-      "aiTools": "Handlers",
-      "insights": "History",
-      "help": "Docs"
-    },
-    "captions": {
-      "overview": "Build APPLICATIONS.md from this Mac before updating.",
-      "categories": "See supported installed apps, supported missing apps, and unknown installed apps.",
-      "runCenter": "Run all layers or skip specific layers with CLI flags.",
-      "apps": "Keep personal inventory out of the public repository.",
-      "aiTools": "Scaffold handlers for new internet apps.",
-      "insights": "Append update history to UPDATES.md after each run.",
-      "help": "Docs cover users, operators, agents, and private overlay setup."
-    }
-  },
   "features": {
-    "title": "Built for Macs that need",
-    "titleCode": "complete update coverage",
-    "titleEnd": "without drift.",
-    "subtitle": "A local inventory, strict update order, honest live-system reporting, seven languages, and handlers for the update paths Apple and vendors actually use.",
-    "cta": "Explore all features →",
     "pipeline": {
       "title": "Seven-step pipeline",
       "desc": "Prescan → App Store → CLI/npm → Homebrew → internet apps → postupdate → macOS system."
@@ -156,80 +41,44 @@
       "desc": "No associative arrays, mapfile, or modern Bash assumptions."
     }
   },
-  "platformSupport": {
-    "title": "Covers the update paths your Mac actually uses.",
-    "subtitle": "macOS Updates coordinates Apple, Homebrew, npm, native CLI, Microsoft, Google, GitHub-release, Docker, Sparkle, and built-in vendor updaters.",
-    "note": "Internet apps are only updated when already installed. Missing supported apps are reported; unknown installed apps are listed for handler work.",
-    "macos": {
-      "name": "Apple Silicon macOS",
-      "status": "Production-ready · macOS 13+ · arm64 only · local inventory · 43 internet apps · 7 languages",
-      "managers": ["system", "appstore", "cli-npm", "homebrew", "internet", "dev-sync"]
-    },
-    "managerDetail": {
-      "system": "macOS updates via softwareupdate -i <label> -R --verbose.",
-      "appstore": "App Store updates through sudo mas upgrade of measured IDs, a user-session retry, plus AppleScript fallback for iPad apps.",
-      "cli-npm": "Node, Bun, npm globals, and native vendor CLIs (claude update, Codex installer, opencode upgrade, agy).",
-      "homebrew": "Formulae, casks, cleanup, and doctor.",
-      "internet": "Keystone, GitHub DMG, msupdate, Docker CLI, silent-launch, Sparkle, and manual handlers.",
-      "dev-sync": "Optional private overlay. Import skips Git-tracked files and keeps a recovery path if a swap fails."
+  "roadmap": {
+    "title": "Coverage keeps expanding",
+    "subtitle": "The public registry and handler tests make new app support explicit.",
+    "statusNow": "Current",
+    "statusNext": "Next",
+    "items": {
+      "signing": {
+        "title": "More handlers",
+        "desc": "Add verified support for more internet-downloaded apps."
+      },
+      "installers": {
+        "title": "Isolated restore",
+        "desc": "Documented overlay restore on a clean Mac that never overwrites Git-tracked files."
+      },
+      "marketplace": {
+        "title": "Handler recipes",
+        "desc": "Document common patterns for GitHub DMG, Sparkle, Keystone, and silent-launch apps."
+      },
+      "i18nMore": {
+        "title": "Locale polish",
+        "desc": "Keep all seven language files aligned with new features."
+      },
+      "telemetry": {
+        "title": "No telemetry",
+        "desc": "Improve local reports without sending usage data anywhere."
+      },
+      "parallel": {
+        "title": "Scheduled-run polish",
+        "desc": "Keep LaunchAgent and agent-driven runs hang-proof and easy to audit."
+      }
     }
-  },
-  "howItWorks": {
-    "title": "Install, preview, update.",
-    "subtitle": "The workflow is direct: build local inventory, dry-run the orchestrator, then run the full update when ready.",
-    "step1": {
-      "label": "Install",
-      "title": "Build this Mac's inventory",
-      "desc": "The installer clones the repo, configures dependencies, asks for language, and builds APPLICATIONS.md from installed software."
-    },
-    "step2": {
-      "label": "Preview",
-      "title": "Run without applying changes",
-      "desc": "Use update_all.sh --dry-run -y or the coverage report to inspect what the updater can handle."
-    },
-    "step3": {
-      "label": "Update",
-      "title": "Run all layers in order",
-      "desc": "update_all.sh orchestrates every supported layer, then records observed package changes separately from inventory field edits."
-    }
-  },
-  "openSource": {
-    "title": "Public code. Private machine state.",
-    "subtitle": "MIT licensed scripts and docs live in GitHub. Personal inventory, update history, preferences, and secrets stay local or in your private overlay.",
-    "builtInOpen": "Designed for review",
-    "builtInOpenDesc": "The repo keeps update methods, dispatch order, docs, i18n strings, and tests visible. You can inspect every handler before running it.",
-    "contribute": "Read the contributing guide →",
-    "changelog": "View the changelog →"
-  },
-  "installation": {
-    "title": "Start with the one-line installer.",
-    "subtitle": "New users get setup plus a fresh inventory. Owners can restore private overlay afterward.",
-    "macosTab": "macOS",
-    "linuxTab": "",
-    "windowsTab": "",
-    "oneLiner": "New user install",
-    "verify": "Preview full run",
-    "update": "Update repo and run",
-    "fullGuide": "Full install guide →",
-    "copied": "Copied!",
-    "copyToClipboard": "Copy to clipboard",
-    "fullDocs": "Full installation docs →"
-  },
-  "footer": {
-    "copyright": "© 2026 macOS Updates · MIT",
-    "features": "Features",
-    "docs": "Docs",
-    "github": "GitHub",
-    "security": "Security",
-    "changelog": "Changelog",
-    "contributing": "Contributing"
   },
   "seo": {
-    "homeTitle": "macOS Updates — One-command updater for Apple Silicon Macs",
-    "homeDesc": "Production-ready updater for macOS, App Store, Homebrew, CLI/npm tools, and 43 internet apps. Local inventory first. Honest live-system reporting.",
-    "featuresTitle": "macOS Updates features — Update coverage and local inventory",
+    "homeTitle": "macOS Updates: one-command updater for Apple Silicon Macs",
+    "homeDesc": "Open-source updater for Apple Silicon Macs: App Store, Homebrew, CLIs, 43 internet apps and macOS in a safe order. Reports only what your Mac confirms.",
+    "featuresTitle": "macOS Updates features: Update coverage and local inventory",
     "featuresDesc": "Explore the seven-step update pipeline, honest run reports, private overlay integrity, and Apple Silicon safety rules.",
-    "docsTitle": "macOS Updates docs — Install, operate, and extend",
+    "docsTitle": "macOS Updates docs: Install, operate, and extend",
     "docsDesc": "Install macOS Updates, run dry-runs, understand the update pipeline, and add internet app handlers.",
     "securityTitle": "macOS Updates security policy",
     "securityDesc": "How macOS Updates protects local inventory, private overlay files, and privileged update operations.",
@@ -238,34 +87,364 @@
     "contributingTitle": "Contributing to macOS Updates",
     "contributingDesc": "Add internet app handlers, improve docs, and keep Bash 3.2-compatible update scripts tested."
   },
-  "roadmap": {
-    "eyebrow": "Roadmap",
-    "title": "Coverage keeps expanding",
-    "subtitle": "The public registry and handler tests make new app support explicit.",
-    "statusNow": "Current",
-    "statusNext": "Next",
+  "faq": {
     "items": {
-      "signing": { "title": "More handlers", "desc": "Add verified support for more internet-downloaded apps." },
-      "installers": { "title": "Isolated restore", "desc": "Documented overlay restore on a clean Mac that never overwrites Git-tracked files." },
-      "marketplace": { "title": "Handler recipes", "desc": "Document common patterns for GitHub DMG, Sparkle, Keystone, and silent-launch apps." },
-      "i18nMore": { "title": "Locale polish", "desc": "Keep all seven language files aligned with new features." },
-      "telemetry": { "title": "No telemetry", "desc": "Improve local reports without sending usage data anywhere." },
-      "parallel": { "title": "Scheduled-run polish", "desc": "Keep LaunchAgent and agent-driven runs hang-proof and easy to audit." }
+      "q1": {
+        "q": "Is macOS Updates free and open source?",
+        "a": "Yes. The public code is MIT licensed and runs locally. Machine-specific files are intentionally gitignored."
+      },
+      "q2": {
+        "q": "Will it install apps I do not already have?",
+        "a": "No. The updater only updates software already installed on the Mac. Supported missing apps are reported, not installed."
+      },
+      "q3": {
+        "q": "Why is Apple Silicon required?",
+        "a": "The project is scoped to arm64 Macs and Homebrew at /opt/homebrew. Intel Macs are intentionally unsupported."
+      },
+      "q4": {
+        "q": "Can I preview before updating?",
+        "a": "Yes. Run bash update_all.sh --dry-run -y or bash scripts/report_update_coverage.sh to inspect coverage first."
+      },
+      "q5": {
+        "q": "What does dev_sync do?",
+        "a": "dev_sync handles optional private overlay files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and cloud sync configuration. Import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails."
+      },
+      "q6": {
+        "q": "Why does mas upgrade use sudo?",
+        "a": "The project follows the current macOS/App Store CLI requirement documented in the repo, including the CVE-related Sequoia behavior."
+      },
+      "q7": {
+        "q": "How many apps are supported?",
+        "a": "The current registry covers 43 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling."
+      },
+      "q8": {
+        "q": "How do I add a new internet app?",
+        "a": "Use scripts/scaffold_internet_app.sh, register the method and dispatch order, add i18n strings, then run bash run_tests.sh."
+      },
+      "q9": {
+        "q": "How do I know an update actually landed?",
+        "a": "A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists."
+      },
+      "q10": {
+        "q": "How do I update all apps on a Mac at once?",
+        "a": "Run bash update_all.sh. It updates the App Store, native CLIs and npm, Homebrew, 43 internet-downloaded apps and macOS in one ordered run. Preview it first with bash update_all.sh --dry-run -y."
+      },
+      "q11": {
+        "q": "Does macOS Updates close my open apps?",
+        "a": "No. Apps you have open are never closed. The toolkit only quits what it launched itself, and running apps are protected at the bundle swap."
+      },
+      "q12": {
+        "q": "Is it safe to run with sudo?",
+        "a": "It is built for it. sudo is requested at most once per run, never without a terminal and never during --dry-run. Only the App Store and macOS steps need it, and the code is open to review."
+      },
+      "q13": {
+        "q": "Does it work on Intel Macs?",
+        "a": "No. macOS Updates supports Apple Silicon (arm64) Macs running macOS 13 to 27, with Homebrew at /opt/homebrew. Intel Macs are intentionally unsupported."
+      },
+      "q14": {
+        "q": "How is it different from Homebrew or the App Store alone?",
+        "a": "Homebrew and the App Store each cover one layer. macOS Updates runs both, plus native CLIs, npm globals, 43 internet-downloaded apps and macOS, in a fixed order. It checks each vendor's feed first and reports only what the Mac confirms."
+      }
+    },
+    "title": "Questions before you run it.",
+    "lead": "Answers about what runs, what it touches and what it never does."
+  },
+  "hero": {
+    "titleA": "Every layer of your Mac.",
+    "titleGo": "GO",
+    "titleB": "only when confirmed.",
+    "sub": "One command updates App Store, CLIs, Homebrew, {{apps}} internet apps and macOS in a safe order.",
+    "copy": "Copy install command",
+    "copied": "Copied",
+    "copyFailed": "Copy failed. The command is selected, press Cmd+C.",
+    "github": "View on GitHub",
+    "commandLabel": "Install command",
+    "console": {
+      "detail": {
+        "prescan": "Inventory of this Mac",
+        "appstore": "sudo mas, then Track 2",
+        "cli": "Native CLIs, then npm",
+        "brew": "brew upgrade --greedy",
+        "internet": "{{apps}} apps, {{methods}} methods",
+        "post": "Inventory and history",
+        "macos": "softwareupdate -R"
+      },
+      "state": {
+        "go": "GO",
+        "goHold": "GO · 1 HOLD",
+        "standbyRestart": "STANDBY · restart last"
+      },
+      "legend": {
+        "go": "confirmed by your Mac",
+        "hold": "a warning that stays visible",
+        "standby": "waiting its turn"
+      }
     }
   },
-  "faq": {
-    "eyebrow": "FAQ",
-    "title": "Frequently asked questions",
+  "rules": {
+    "title": "Four rules every run follows.",
+    "lead": "Updating by hand means System Settings, the App Store, brew, npm globals, vendor updaters and DMGs. These rules hold on every layer.",
     "items": {
-      "q1": { "q": "Is macOS Updates free and open source?", "a": "Yes. The public code is MIT licensed and runs locally. Machine-specific files are intentionally gitignored." },
-      "q2": { "q": "Will it install apps I do not already have?", "a": "No. The updater only updates software already installed on the Mac. Supported missing apps are reported, not installed." },
-      "q3": { "q": "Why is Apple Silicon required?", "a": "The project is scoped to arm64 Macs and Homebrew at /opt/homebrew. Intel Macs are intentionally unsupported." },
-      "q4": { "q": "Can I preview before updating?", "a": "Yes. Run bash update_all.sh --dry-run -y or bash scripts/report_update_coverage.sh to inspect coverage first." },
-      "q5": { "q": "What does dev_sync do?", "a": "dev_sync handles optional private overlay files such as APPLICATIONS.md, UPDATES.md, .env, preferences, and cloud sync configuration. Import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails." },
-      "q6": { "q": "Why does mas upgrade use sudo?", "a": "The project follows the current macOS/App Store CLI requirement documented in the repo, including the CVE-related Sequoia behavior." },
-      "q7": { "q": "How many apps are supported?", "a": "The current registry covers 43 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling." },
-      "q8": { "q": "How do I add a new internet app?", "a": "Use scripts/scaffold_internet_app.sh, register the method and dispatch order, add i18n strings, then run bash run_tests.sh." },
-      "q9": { "q": "How do I know an update actually landed?", "a": "A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists." }
+      "vendor": {
+        "title": "Vendor truth before action.",
+        "body": "Each app's installed version is checked against its vendor's own feed first. Apps that are up to date are left alone."
+      },
+      "open": {
+        "title": "Open apps are never closed.",
+        "body": "The toolkit only quits what it launched itself. Running apps are also protected at the bundle swap."
+      },
+      "installed": {
+        "title": "Only what is installed.",
+        "body": "Supported apps that are missing are reported, not installed. Apps you removed by hand are never reinstalled."
+      },
+      "confirmed": {
+        "title": "Reported only when confirmed.",
+        "body": "A result counts only after the live Mac confirms it. Stale feeds and timeouts stay visible as warnings."
+      }
+    }
+  },
+  "stations": {
+    "title": "Seven steps, one fixed order.",
+    "lead": "The run above, written out. Each step names what it runs and what it refuses to do.",
+    "caption": "The seven steps of update_all.sh in run order, with what each one runs and its guard.",
+    "cols": {
+      "station": "Station",
+      "what": "What runs",
+      "guard": "Guard"
+    },
+    "flags": "Skip a step or preview the whole run:",
+    "rows": {
+      "prescan": {
+        "what": "Scans /Applications, Homebrew and App Store receipts into this Mac's APPLICATIONS.md.",
+        "guard": "Local inventory only. Another user's list is never imported."
+      },
+      "appstore": {
+        "what": "Track 1: sudo mas upgrade on measured IDs. Track 2: AppleScript for iPad apps such as UniFi.",
+        "guard": "sudo at most once per run, never without a terminal."
+      },
+      "cli": {
+        "what": "Native vendor CLIs first (claude, codex, opencode, agy), then Node, Bun and npm globals.",
+        "guard": "A vendor CLI counts as updated only when a working --version exists."
+      },
+      "brew": {
+        "what": "Formulae and casks with --greedy, then cleanup and brew doctor.",
+        "guard": "Orphan casks are skipped and cask downgrades are blocked."
+      },
+      "internet": {
+        "what": "{{apps}} apps through {{methods}} update methods, each checked against the vendor's own feed.",
+        "guard": "Verified downloads: Gatekeeper, bundle ID and Apple Team ID checks, then a staged swap with rollback."
+      },
+      "post": {
+        "what": "Refreshes APPLICATIONS.md and appends UPDATES.md atomically.",
+        "guard": "Observed package changes are recorded apart from inventory edits."
+      },
+      "macos": {
+        "what": "softwareupdate -i <label> -R, one label at a time.",
+        "guard": "Runs last because it may restart. Skipped when an earlier step failed."
+      }
+    }
+  },
+  "coverage": {
+    "title": "{{apps}} internet apps, {{methods}} update methods.",
+    "lead": "Only apps already installed are updated. The registry below is grouped by how each one gets its update.",
+    "methods": {
+      "brew_cask": {
+        "name": "Homebrew cask",
+        "note": "Upgraded through Homebrew, with downgrade protection."
+      },
+      "silent_launch": {
+        "name": "Silent launch",
+        "note": "Opens the app so its own updater runs. Checked against the vendor feed when one exists, otherwise reported as launched (unverified)."
+      },
+      "github_dmg": {
+        "name": "GitHub DMG",
+        "note": "Release DMG from GitHub, verified, then a staged swap with rollback."
+      },
+      "msupdate": {
+        "name": "Microsoft AutoUpdate",
+        "note": "Office apps updated through msupdate."
+      },
+      "keystone": {
+        "name": "Google Keystone",
+        "note": "Google's own update agent. Used for Google products only."
+      },
+      "appstore_gui": {
+        "name": "App Store Track 2",
+        "note": "iPad apps updated by driving the App Store with AppleScript."
+      },
+      "manual": {
+        "name": "Manual",
+        "note": "No automatic path. Reported so you can update them by hand."
+      },
+      "sparkle_appcast": {
+        "name": "Sparkle appcast",
+        "note": "Version read from the app's Sparkle appcast feed."
+      },
+      "docker_cli": {
+        "name": "Docker CLI",
+        "note": "Handled through the Docker CLI path."
+      },
+      "mau_fallback_self_update": {
+        "name": "Self-update with MAU fallback",
+        "note": "Teams updates itself, with a verified Microsoft AutoUpdate fallback when Microsoft offers one."
+      },
+      "chromium_updater": {
+        "name": "Chromium updater",
+        "note": "Handled through the Chromium updater path."
+      }
+    },
+    "other": {
+      "title": "Beyond internet apps",
+      "appstore": {
+        "name": "App Store",
+        "note": "Measured IDs through sudo mas, plus Track 2 for iPad apps."
+      },
+      "brew": {
+        "name": "Homebrew",
+        "note": "Formulae and casks, cleanup and brew doctor."
+      },
+      "cli": {
+        "name": "CLIs and npm",
+        "note": "claude, codex, opencode and agy, then Node, Bun and npm globals."
+      },
+      "macos": {
+        "name": "macOS",
+        "note": "System updates by label, always last."
+      }
+    },
+    "report": "Unknown installed apps are listed so a handler can be added. See your own Mac's coverage with"
+  },
+  "log": {
+    "title": "What the toolkit has actually done.",
+    "lead": "Every entry is a real release or a real run. Nothing here is a benchmark.",
+    "entries": {
+      "release": {
+        "title": "v1.5.5 released",
+        "body": "Ships with {{tests}} automated tests. A Homebrew upgrade that removes python3 mid-run no longer breaks the report step, and a failed report no longer postpones macOS updates."
+      },
+      "live": {
+        "title": "Live run: two updates verified",
+        "body": "One update came through App Store Track 2, the other through a verified vendor install.",
+        "note": "The macOS system step was skipped in this run by a bug that v1.5.5 fixes."
+      },
+      "verify": {
+        "title": "Verification run: 108 seconds",
+        "body": "The run finished with no updates pending. It is a verification run, not an install benchmark."
+      }
+    },
+    "how": {
+      "appstore": "App Store Track 2",
+      "vendor": "Verified vendor install"
+    },
+    "open": {
+      "term": "Open source",
+      "title": "MIT licensed and public.",
+      "body": "Every update method, handler and test is in the repository, so you can read what runs before it runs. The CLI speaks seven languages: EN, PL, ES, FR, DE, IT and PT.",
+      "github": "View on GitHub",
+      "stars": "GitHub stars: {{stars}}",
+      "changelog": "Read the changelog",
+      "security": "Security policy"
+    }
+  },
+  "install": {
+    "title": "Ready for launch.",
+    "lead": "Install, preview with a dry run, then run.",
+    "stepInstall": "Install",
+    "stepPreview": "Preview, nothing applied",
+    "stepRun": "Run",
+    "note": "The installer clones the repo, asks for your language, installs dependencies and builds APPLICATIONS.md from apps already on this Mac. It never installs apps for you.",
+    "docs": "Read the docs",
+    "github": "View on GitHub"
+  },
+  "wall": {
+    "heading": "Watch one run, station by station.",
+    "intro": "Each update layer reports GO only after the live Mac confirms it. A stale vendor feed reports HOLD, and the warning stays on the board. macOS goes last, because it can restart.",
+    "caption": "Readouts from real runs on 2026-10-05 and 2026-10-11.",
+    "scrollHint": "Scroll to advance the poll",
+    "listLabel": "Update stations in run order",
+    "screen": {
+      "title": "Flight director poll",
+      "running": "Replay: poll in progress",
+      "complete": "Replay: poll complete",
+      "tMinus": "T-minus",
+      "dryRun": "Dry-run",
+      "confirmed": "Confirmed by the live Mac",
+      "plotTitle": "Stations to go",
+      "result": "Poll result"
+    },
+    "state": {
+      "go": "GO",
+      "hold": "HOLD",
+      "standby": "STANDBY",
+      "polling": "POLLING",
+      "restart": "(restart)"
+    },
+    "line": {
+      "pending": "pending",
+      "confirmed": "confirmed",
+      "hold": "hold"
+    },
+    "station": {
+      "prescan": {
+        "name": "PRESCAN",
+        "desc": "Inventory of this Mac into APPLICATIONS.md. Only installed software."
+      },
+      "appstore": {
+        "name": "APP STORE",
+        "desc": "sudo mas with measured IDs, then AppleScript Track 2."
+      },
+      "cli": {
+        "name": "CLI + NPM",
+        "desc": "Native vendor CLIs first (claude update, codex, opencode, agy), then Node/npm globals."
+      },
+      "brew": {
+        "name": "HOMEBREW",
+        "desc": "brew upgrade --greedy, orphan casks skipped, cleanup, doctor."
+      },
+      "internet": {
+        "name": "INTERNET APPS",
+        "desc": "{{apps}} apps, {{methods}} update methods. Each version is checked against the vendor’s own feed first."
+      },
+      "post": {
+        "name": "POSTUPDATE",
+        "desc": "APPLICATIONS.md and UPDATES.md history written only after the step succeeded."
+      },
+      "macos": {
+        "name": "macOS",
+        "desc": "softwareupdate -i <label> -R. Runs last because it may restart."
+      }
+    },
+    "row": {
+      "prescan": {
+        "pending": "inventory of this Mac",
+        "done": "APPLICATIONS.md written, installed only"
+      },
+      "cli": {
+        "pending": "claude, codex, opencode, agy, then npm",
+        "done": "native first, npm after"
+      },
+      "brew": {
+        "pending": "brew upgrade --greedy",
+        "done": "orphan casks skipped, cleanup, doctor"
+      },
+      "opencode": {
+        "done": "verified vendor install: Gatekeeper, bundle ID, Apple Team ID"
+      },
+      "proton": {
+        "pending": "checking the manufacturer feed",
+        "done": "manufacturer feed older than installed, nothing installed"
+      },
+      "post": {
+        "pending": "APPLICATIONS.md, UPDATES.md",
+        "done": "history written only after the step succeeded"
+      },
+      "macos": {
+        "pending": "softwareupdate -i <label> -R",
+        "done": "runs last because it may restart"
+      }
+    },
+    "note": {
+      "openApps": "Open apps are never closed. Only what the toolkit launched is asked to quit."
     }
   }
 }

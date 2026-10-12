@@ -296,22 +296,12 @@ export function WallDisplay() {
     : {}
 
   return (
-    <section aria-labelledby={headingId}>
-      <header className="mx-auto max-w-[1280px] px-4 pb-10 pt-24 md:px-8 md:pb-14 md:pt-32">
-        <h2
-          id={headingId}
-          className="max-w-[20ch] text-balance text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-[1.04] tracking-tight"
-          style={{
-            color: 'var(--fg-display, var(--fg, inherit))',
-            fontFamily: 'var(--font-display, var(--font-sans, inherit))',
-          }}
-        >
+    <section id="wall" aria-labelledby={headingId} className="border-t border-(--rule)">
+      <header className="mx-auto max-w-7xl px-4 pb-10 pt-24 sm:px-6 md:pb-14 md:pt-32 lg:px-8">
+        <h2 id={headingId} className="m-0 max-w-[20ch]">
           {labels['wall.heading']}
         </h2>
-        <p
-          className="mt-5 max-w-[62ch] text-base leading-relaxed md:text-lg"
-          style={{ color: 'var(--fg-muted, inherit)' }}
-        >
+        <p className="mt-5 max-w-[40rem]" style={{ color: 'var(--fg-muted, inherit)' }}>
           {labels['wall.intro']}
         </p>
       </header>
@@ -321,7 +311,7 @@ export function WallDisplay() {
           className={
             scrub
               ? 'sticky top-0 flex h-[100svh] flex-col items-center justify-center gap-3 px-4 pb-4 pt-20 md:px-8'
-              : 'mx-auto flex max-w-[1280px] flex-col gap-4 px-4 pb-24 md:px-8'
+              : 'mx-auto flex max-w-7xl flex-col gap-4 px-4 pb-24 sm:px-6 lg:px-8'
           }
         >
           <div

@@ -1,0 +1,85 @@
+{
+  "chrome": {
+    "skip": "Przejdź do treści",
+    "nav": {
+      "home": "macOS Updates, strona główna",
+      "primary": "Główna",
+      "features": "Funkcje",
+      "howItWorks": "Jak działa",
+      "coverage": "Pokrycie",
+      "install": "Instalacja",
+      "docs": "Dokumentacja",
+      "github": "GitHub",
+      "githubStars": "GitHub, gwiazdki: {{count}}",
+      "menuOpen": "Otwórz menu",
+      "menuClose": "Zamknij menu",
+      "mobileLabel": "Menu serwisu"
+    },
+    "theme": {
+      "light": "Jasny",
+      "dark": "Ciemny",
+      "toLight": "Przełącz na jasny motyw",
+      "toDark": "Przełącz na ciemny motyw"
+    },
+    "lang": {
+      "switchTo": "Przełącz język na {{name}}",
+      "name_en": "angielski",
+      "name_pl": "polski"
+    },
+    "terminal": {
+      "copy": "Kopiuj",
+      "copied": "Skopiowano",
+      "copyCommand": "Kopiuj polecenie",
+      "copyAria": "Kopiuj do schowka",
+      "copiedAria": "Skopiowano do schowka"
+    },
+    "footer": {
+      "blurb": "Jedno polecenie aktualizuje każdą warstwę Maca. Każda warstwa zgłasza GO dopiero wtedy, gdy potwierdzi to działający Mac.",
+      "explore": "Serwis",
+      "project": "Projekt",
+      "language": "Język",
+      "features": "Funkcje",
+      "docs": "Dokumentacja",
+      "security": "Bezpieczeństwo",
+      "changelog": "Historia zmian",
+      "contributing": "Współtworzenie",
+      "github": "GitHub",
+      "llms": "llms.txt",
+      "license": "Licencja MIT",
+      "release": "Wydanie",
+      "releaseLink": "Notatki wydania",
+      "rights": "© 2026 macOS Updates",
+      "english": "English",
+      "polish": "Polski"
+    },
+    "doc": {
+      "backHome": "Wróć do strony głównej",
+      "onThisPage": "Na tej stronie",
+      "contents": "Spis treści",
+      "openContents": "Otwórz spis treści",
+      "closeContents": "Zamknij spis treści"
+    },
+    "changelog": {
+      "title": "Historia zmian",
+      "intro": "Znaczące zmiany w projekcie macOS Updates są udokumentowane poniżej, od najnowszych.",
+      "added": "Dodane",
+      "changed": "Zmienione",
+      "fixed": "Naprawione",
+      "latest": "Najnowsze",
+      "candidate": "Kandydat",
+      "releases": "Wydania"
+    },
+    "features": {
+      "backHome": "Wróć do strony głównej",
+      "getStarted": "Zacznij teraz",
+      "title": "Funkcje macOS Updates"
+    },
+    "notFound": {
+      "title": "Nie znaleziono strony",
+      "body": "Ten adres nie istnieje.",
+      "home": "Wróć na stronę główną",
+      "docs": "Czytaj dokumentację",
+      "seoTitle": "Nie znaleziono strony | macOS Updates"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+/*
+ * Hero poll console: stations tick STANDBY -> GO once, on first paint.
+ * Pure CSS on purpose: the prerendered markup already holds the final state, so
+ * there is no hydration mismatch and no layout shift. Reduced motion resolves
+ * every animation instantly (see the global rule in index.css).
+ */
+@property --poll-n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.poll-row {
+  --poll-delay: calc(380ms + var(--i, 0) * 120ms);
+}
+
+.poll-row .lamp {
+  animation: poll-lamp 200ms var(--ease) var(--poll-delay) both;
+}
+
+.poll-state {
+  display: inline-grid;
+  justify-items: start;
+}
+@media (min-width: 640px) {
+  .poll-state { justify-items: end; }
+}
+.poll-state > *,
+.poll-state::before {
+  grid-area: 1 / 1;
+}
+.poll-state::before {
+  content: attr(data-from);
+  color: var(--screen-dim);
+  animation: poll-out 160ms var(--ease) var(--poll-delay) both;
+}
+.poll-state > .poll-state-to {
+  animation: poll-in 200ms var(--ease) var(--poll-delay) both;
+}
+
+.poll-count {
+  --poll-n: 1;
+  counter-reset: poll-n var(--poll-n);
+  animation: poll-count 720ms steps(6, end) 380ms both;
+}
+.poll-count::before {
+  content: "T-" counter(poll-n, decimal-leading-zero);
+}
+
+@keyframes poll-lamp {
+  from {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--screen-dim);
+  }
+}
+@keyframes poll-out {
+  to { opacity: 0; }
+}
+@keyframes poll-in {
+  from { opacity: 0; }
+}
+@keyframes poll-count {
+  from { --poll-n: 7; }
+}

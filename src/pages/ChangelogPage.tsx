@@ -221,7 +221,7 @@ const RELEASES: Release[] = [
       },
       {
         en: 'iTunes Lookup API gate for iPad apps to skip Track 2 AppleScript GUI automation when everything is already up to date.',
-        pl: 'Weryfikacja przez iTunes Lookup API dla aplikacji z iPada — omija automatyzację GUI AppleScript, gdy wszystko jest aktualne.',
+        pl: 'Weryfikacja przez iTunes Lookup API dla aplikacji z iPada omija automatyzację GUI AppleScript, gdy wszystko jest aktualne.',
       },
       {
         en: 'Diagnostic tool scripts/check_vendor_feeds.sh for inspecting vendor feed truths, versions, and live Omaha updater logs.',
@@ -280,8 +280,8 @@ const RELEASES: Release[] = [
         pl: 'Izolacja wydań major macOS od łatek bezpieczeństwa: rezygnacja z dużej wersji zapisuje stan pending bez ukrywania aktualizacji.',
       },
       {
-        en: 'Platform metadata updated to macOS 13–27 across documentation and agent context files.',
-        pl: 'Zaktualizowano metadane wspieranych platform do macOS 13–27 w dokumentacji i profilach agentów.',
+        en: 'Platform metadata updated to macOS 13 to 27 across documentation and agent context files.',
+        pl: 'Zaktualizowano metadane wspieranych platform do macOS od 13 do 27 w dokumentacji i profilach agentów.',
       },
     ],
   },
@@ -391,8 +391,8 @@ const RELEASES: Release[] = [
     version: 'v1.4.2',
     date: '2026-08-26',
     summary: {
-      en: 'Unblocked Codex, Ledger Live, Brave, and MAU deferral verification — four run-log warnings that were permanent update blocks.',
-      pl: 'Odblokowane Codex, Ledger Live, Brave i weryfikacja odroczeń MAU — cztery ostrzeżenia z logu, które były trwałymi blokadami aktualizacji.',
+      en: 'Unblocked Codex, Ledger Live, Brave, and MAU deferral verification: four run-log warnings that were permanent update blocks.',
+      pl: 'Odblokowane Codex, Ledger Live, Brave i weryfikacja odroczeń MAU: cztery ostrzeżenia z logu, które były trwałymi blokadami aktualizacji.',
     },
     added: [
       {
@@ -732,6 +732,10 @@ const RELEASES: Release[] = [
   },
 ]
 
+function releaseId(version: string) {
+  return `release-${version.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase()}`
+}
+
 export function ChangelogPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
@@ -744,6 +748,12 @@ export function ChangelogPage() {
     type: 'CollectionPage',
   })
 
+  const groups = [
+    { key: 'added', label: t('chrome.changelog.added') },
+    { key: 'changed', label: t('chrome.changelog.changed') },
+    { key: 'fixed', label: t('chrome.changelog.fixed') },
+  ] as const
+
   return (
     <>
       <Seo
@@ -753,47 +763,46 @@ export function ChangelogPage() {
         lang={lang}
         jsonLd={jsonLd}
       />
-      <DocLayout title="Changelog">
-        <p className="text-[15px]">
-          {pl
-            ? 'Znaczące zmiany w projekcie macOS Updates są udokumentowane poniżej, od najnowszych.'
-            : 'Notable macOS Updates changes are documented below, newest first.'}
-        </p>
-
+      <DocLayout
+        title={t('chrome.changelog.title')}
+        lead={t('chrome.changelog.intro')}
+        tocTitle={t('chrome.changelog.releases')}
+        toc={RELEASES.map((r) => ({ id: releaseId(r.version), label: r.version, detail: r.date }))}
+      >
         {RELEASES.map((r, idx) => (
-          <section key={r.version} className={idx === 0 ? 'mt-8' : 'mt-8 pt-6 border-t border-(--border)'}>
-            <div className="flex flex-wrap items-center gap-3 mb-3">
-              <span className={`px-3 py-1 rounded-sm font-mono font-bold text-[13px] ${r.rc ? 'bg-(--bg-sunk) text-(--fg)' : 'bg-(--accent) text-(--accent-ink)'}`}>
-                {r.version}
-              </span>
-              <span className="text-(--fg-muted) text-[14px] font-mono">{r.date}</span>
+          <section key={r.version} id={releaseId(r.version)} className="scroll-mt-24">
+            <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <h2 className="readout m-0 text-[1.75rem] font-bold tracking-normal text-(--fg)">{r.version}</h2>
+              <time dateTime={r.date} className="readout text-[14px] text-(--fg-muted)">{r.date}</time>
+              {idx === 0 && (
+                <span className="placard inline-flex items-center gap-2 text-(--fg)">
+                  <span className="lamp lamp-go" aria-hidden="true" />
+                  {t('chrome.changelog.latest')}
+                </span>
+              )}
+              {r.rc && (
+                <span className="placard inline-flex items-center gap-2 text-(--fg)">
+                  <span className="lamp lamp-hold" aria-hidden="true" />
+                  {t('chrome.changelog.candidate')}
+                </span>
+              )}
             </div>
-            <p className="font-semibold text-(--fg) mb-3">{pl ? r.summary.pl : r.summary.en}</p>
+            <p className="mb-5 font-semibold leading-[1.5] text-(--fg)">{pl ? r.summary.pl : r.summary.en}</p>
 
-            {r.added && (
-              <>
-                <h3 className="text-(--fg) font-semibold text-[16px] mb-2 mt-4">{pl ? 'Dodane' : 'Added'}</h3>
-                <ul className="space-y-2 text-[14px] list-disc list-inside">
-                  {r.added.map((item, i) => <li key={i}>{pl ? item.pl : item.en}</li>)}
-                </ul>
-              </>
-            )}
-            {r.changed && (
-              <>
-                <h3 className="text-(--fg) font-semibold text-[16px] mb-2 mt-4">{pl ? 'Zmienione' : 'Changed'}</h3>
-                <ul className="space-y-2 text-[14px] list-disc list-inside">
-                  {r.changed.map((item, i) => <li key={i}>{pl ? item.pl : item.en}</li>)}
-                </ul>
-              </>
-            )}
-            {r.fixed && (
-              <>
-                <h3 className="text-(--fg) font-semibold text-[16px] mb-2 mt-4">{pl ? 'Naprawione' : 'Fixed'}</h3>
-                <ul className="space-y-2 text-[14px] list-disc list-inside">
-                  {r.fixed.map((item, i) => <li key={i}>{pl ? item.pl : item.en}</li>)}
-                </ul>
-              </>
-            )}
+            {groups.map((g) => {
+              const items = r[g.key]
+              if (!items?.length) return null
+              return (
+                <div key={g.key} className="mb-5 last:mb-0">
+                  <h3 className="placard mb-2 mt-0 text-(--fg)">{g.label}</h3>
+                  <ul>
+                    {items.map((item, i) => (
+                      <li key={i} className="[overflow-wrap:anywhere]">{pl ? item.pl : item.en}</li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
           </section>
         ))}
       </DocLayout>

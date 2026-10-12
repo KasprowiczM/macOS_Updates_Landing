@@ -1,249 +1,244 @@
 /* ============================================================
-   MACOS UPDATES LANDING PAGE — Design Tokens + Tailwind v4
-   Blue update-orbit theme aligned with the product logo.
+   macOS Updates: Mission Control design system
+   Tokens, base, and the world's utility classes.
+   Light = flight-plan paper, dark = MOCR console room.
+   Screens (code, readouts, wall) are dark in BOTH themes.
    ============================================================ */
 
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/martian-mono/wdth.css";
 @import "tailwindcss";
 
-/* ── Tailwind v4 theme tokens ──────────────────────────────── */
+/* ── Tailwind v4 theme ─────────────────────────────────────── */
 @theme {
-  --color-ink-900: #0F1115;
-  --color-ink-800: #171C23;
-  --color-ink-700: #1E2630;
-  --color-ink-600: #2B333D;
-  --color-ink-500: #3C4652;
-  --color-ink-400: #5E6874;
-  --color-ink-300: #7B8491;
-  --color-ink-200: #AAB2BD;
-  --color-ink-100: #D8DEE6;
-  --color-ink-50: #EEF2F6;
+  --font-sans: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Martian Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --color-paper-900: #1E2630;
-  --color-paper-100: #D8DEE6;
-  --color-paper-50: #EEF2F6;
-  --color-paper-25: #F3F6F9;
-  --color-paper-0: #F7F9FC;
+  /* Back-compat palette: legacy utilities (ink-*, paper-*, sky-*, status-*) land on-world. */
+  --color-ink-900: #0B131C;
+  --color-ink-800: #0F1823;
+  --color-ink-700: #15212F;
+  --color-ink-600: #1F3347;
+  --color-ink-500: #34506B;
+  --color-ink-400: #5B6B80;
+  --color-ink-300: #7E92A6;
+  --color-ink-200: #9FB1C3;
+  --color-ink-100: #C9D5E0;
+  --color-ink-50: #E3E9EF;
 
-  --color-sky-700: #19527F;
-  --color-sky-600: #256EA8;
-  --color-sky-500: #3278B8;
-  --color-sky-400: #4AA3FF;
+  --color-paper-900: #0D1B2A;
+  --color-paper-100: #E3E9EF;
+  --color-paper-50: #EEF2F5;
+  --color-paper-25: #F2F5F8;
+  --color-paper-0: #F7F9FB;
+
+  --color-sky-700: #174B85;
+  --color-sky-600: #1F5FA8;
+  --color-sky-500: #2A74C6;
+  --color-sky-400: #4A9EF0;
   --color-sky-300: #7BC4FF;
-  --color-sky-200: #B9DFFF;
-  --color-sky-100: #E3EFF8;
+  --color-sky-200: #B7DAFB;
+  --color-sky-100: #DCE8F5;
 
-  --color-danger-500: #DC4B43;
-  --color-danger-300: #F0A39E;
+  --color-danger-500: #B23A33;
+  --color-danger-300: #F0736A;
 
-  --color-status-ok: #3278B8;
-  --color-status-ok-bg: #E3EFF8;
-  --color-status-warn: #E0A82E;
-  --color-status-warn-bg: #FBF1DA;
-  --color-status-err: #DC4B43;
-  --color-status-err-bg: #FBE6E4;
-  --color-status-info: #3278B8;
-  --color-status-info-bg: #E3EFF8;
+  /* State colors follow the theme. */
+  --color-status-ok: var(--go);
+  --color-status-ok-bg: var(--accent-soft);
+  --color-status-warn: var(--hold-lamp);
+  --color-status-warn-bg: var(--hold-soft);
+  --color-status-err: var(--nogo);
+  --color-status-err-bg: var(--nogo-soft);
+  --color-status-info: var(--go);
+  --color-status-info-bg: var(--accent-soft);
 
-  --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* One corner radius everywhere: 2px. */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+  --radius-pill: 2px;
 
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 18px;
-  --radius-pill: 999px;
+  /* Elevation is a hairline border; Tailwind shadow utilities resolve to nothing. */
+  --shadow-2xs: 0 0 #0000;
+  --shadow-xs: 0 0 #0000;
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 0 #0000;
+  --shadow-lg: 0 0 #0000;
+  --shadow-xl: 0 0 #0000;
+  --shadow-2xl: 0 0 #0000;
 
-  --shadow-sm: 0 1px 0 rgba(15,17,21,0.04), 0 1px 2px rgba(15,17,21,0.04);
-  --shadow-md: 0 1px 0 rgba(15,17,21,0.04), 0 6px 14px rgba(15,17,21,0.06);
-  --shadow-lg: 0 10px 30px rgba(15,17,21,0.10), 0 2px 6px rgba(15,17,21,0.04);
-  --shadow-xl: 0 30px 60px rgba(15,17,21,0.18), 0 12px 24px rgba(15,17,21,0.08);
-
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --animate-fade-in: fade-in 0.5s var(--ease-out) forwards;
-  --animate-slide-up: slide-up 0.5s var(--ease-out) forwards;
-
-  @keyframes fade-in {
-    from { opacity: 0; }
+  @keyframes lamp-tick {
+    from { opacity: 0.35; }
     to { opacity: 1; }
   }
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes rise-in {
+    from { opacity: 0.001; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
   }
 }
 
-/* ── Semantic variables (light theme = default) ────────────── */
+/* ── Semantic tokens: light (default) ──────────────────────── */
 :root {
-  --bg: #EEF2F6;
-  --bg-elev: #F7F9FC;
-  --bg-sunk: #E8EDF3;
-  --bg-inverse: #0F1115;
+  color-scheme: light;
 
-  --fg: #0F1115;
-  --fg-muted: #4A5563;
-  --fg-faint: #7B8491;
-  --fg-display: #1E2630;
-  --fg-inverse: #F7F9FC;
+  --bg: #EEF2F5;
+  --bg-elev: #F7F9FB;
+  --bg-sunk: #E3E9EF;
+  --fg: #0D1B2A;
+  --fg-muted: #42536A;
+  --fg-faint: #5B6B80;
+  --rule: #C9D5E0;
+  --rule-strong: #8FA5BA;
 
-  --border: #D8DEE6;
-  --border-strong: #B7C0CC;
-  --border-focus: #3278B8;
+  --accent: #1F5FA8;
+  --accent-hover: #2A74C6;
+  --accent-ink: #F7F9FB;
+  --accent-text: #1F5FA8;
+  --accent-soft: #DCE8F5;
 
-  --accent: #3278B8;
-  --accent-hover: #4AA3FF;
-  --accent-ink: #F7F9FC;
-  --accent-soft: #E3EFF8;
-  --accent-strong: #256EA8;
-  --nav-tagline: #256EA8;
+  --go: var(--accent-text);
+  --hold: #8A5A12;
+  --hold-lamp: #E0A82E;
+  --hold-soft: #F6ECD3;
+  --nogo: #B23A33;
+  --nogo-soft: #F4DEDC;
+  --standby: #5B6B80;
+  --selection: #CFE0F3;
 
-  --ok: #3278B8;
-  --ok-bg: #E3EFF8;
-  --warn: #B98200;
-  --warn-bg: #FFF0C6;
-  --err: #DC4B43;
-  --err-bg: #FBE6E4;
-  --info: #3278B8;
-  --info-bg: #E3EFF8;
+  /* Dark instrument insets (same in both themes) */
+  --screen-bg: #0B1621;
+  --screen-elev: #112131;
+  --screen-rule: #1F3347;
+  --screen-fg: #D9E6F2;
+  --screen-dim: #7D93A8;
+  --screen-go: #5DB0FF;
+  --screen-hold: #F2B544;
+  --screen-nogo: #F0736A;
+  --screen-bezel: var(--rule-strong);
 
-  --logo-tile: #F7F9FC;
-  --logo-symbol: #1E2630;
-  --logo-cut: #F7F9FC;
-  --logo-badge: #3278B8;
-  --logo-glyph: #F7F9FC;
+  --nav-shadow: 0 1px 0 var(--rule), 0 8px 24px -16px rgba(13, 27, 42, 0.25);
 
-  --code-bg: var(--color-ink-900);
-  --code-fg: var(--color-paper-0);
-  --code-dim: var(--color-ink-300);
+  /* Brand mark (status lamp), light-ground variant */
+  --logo-bezel: #0D1B2A;
+  --logo-rim: #2A3F55;
+  --logo-screw: #6A829C;
+  --logo-seat: #050B12;
+  --logo-lens: #1F5FA8;
+  --logo-lens-edge: #174B85;
+  --logo-legend: #EEF2F5;
+  --logo-cut: #050B12;
+  --logo-cut-opacity: 0.55;
 
-  --dur-1: 90ms;
-  --dur-2: 160ms;
+  /* Back-compat aliases */
+  --fg-display: var(--fg);
+  --fg-inverse: var(--bg-elev);
+  --bg-inverse: var(--fg);
+  --border: var(--rule);
+  --border-strong: var(--rule-strong);
+  --border-focus: var(--accent);
+  --accent-strong: var(--accent-text);
+  --nav-tagline: var(--accent-text);
+  --code-bg: var(--screen-bg);
+  --code-fg: var(--screen-fg);
+  --code-dim: var(--screen-dim);
+  --ok: var(--go);
+  --ok-bg: var(--accent-soft);
+  --warn: var(--hold);
+  --warn-bg: var(--hold-soft);
+  --err: var(--nogo);
+  --err-bg: var(--nogo-soft);
+  --info: var(--go);
+  --info-bg: var(--accent-soft);
+
+  --dur-1: 120ms;
+  --dur-2: 180ms;
   --dur-3: 240ms;
-  --dur-4: 420ms;
+  --dur-4: 600ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   --fs-xs: 0.75rem;
   --fs-sm: 0.8125rem;
-  --fs-base: 0.9375rem;
+  --fs-base: 1rem;
   --fs-md: 1rem;
   --fs-lg: 1.125rem;
   --fs-xl: 1.375rem;
   --fs-2xl: 1.75rem;
   --fs-3xl: 2.25rem;
-  --fs-4xl: clamp(2.25rem, 3.5vw + 1rem, 3rem);
-  --fs-5xl: clamp(2.5rem, 4.5vw + 1rem, 3.5rem);
-  --fs-hero: clamp(3rem, 6vw + 1rem, 4.5rem);
+  --fs-4xl: clamp(1.9rem, 2.6vw + 0.6rem, 3rem);
+  --fs-5xl: clamp(2.5rem, 4.6vw + 0.5rem, 4.75rem);
+  --fs-hero: clamp(2.5rem, 4.6vw + 0.5rem, 4.75rem);
 
-  --lh-tight: 1.05;
-  --lh-snug: 1.18;
+  --lh-tight: 1.02;
+  --lh-snug: 1.08;
   --lh-normal: 1.45;
   --lh-relaxed: 1.6;
 
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;
-  --fw-bold: 700;
-  --fw-black: 800;
+  --shadow-inner: inset 0 0 0 1px var(--rule);
 
-  --tr-tight: 0;
-  --tr-snug: 0;
-  --tr-normal: 0;
-  --tr-wide: 0;
-  --tr-wider: 0;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
-  --space-10: 128px;
-
-  --shadow-inner: inset 0 0 0 1px rgba(15,17,21,0.06);
+  --nav-h: 64px;
 }
 
-/* ── Dark theme ────────────────────────────────────────────── */
+/* ── Semantic tokens: dark (MOCR console room) ─────────────── */
 :root[data-theme="dark"] {
-  --bg: #0F1115;
-  --bg-elev: #171C23;
-  --bg-sunk: #12161C;
-  --bg-inverse: #F7F9FC;
+  color-scheme: dark;
 
-  --fg: #F7F9FC;
-  --fg-muted: #AAB2BD;
-  --fg-faint: #7B8491;
-  --fg-display: #F7F9FC;
-  --fg-inverse: #0F1115;
+  --bg: #0F1823;
+  --bg-elev: #15212F;
+  --bg-sunk: #0B131C;
+  --fg: #E4EDF5;
+  --fg-muted: #9FB1C3;
+  --fg-faint: #7E92A6;
+  --rule: #233447;
+  --rule-strong: #34506B;
 
-  --border: #2B333D;
-  --border-strong: #3C4652;
-  --border-focus: #4AA3FF;
+  --accent: #4A9EF0;
+  --accent-hover: #7BC4FF;
+  --accent-ink: #06121E;
+  --accent-text: #5DB0FF;
+  --accent-soft: rgba(93, 176, 255, 0.14);
 
-  --accent: #3278B8;
-  --accent-hover: #4AA3FF;
-  --accent-soft: rgba(74, 163, 255, 0.16);
-  --accent-strong: #7BC4FF;
-  --nav-tagline: #7BC4FF;
+  --hold: #F2B544;
+  --hold-lamp: #F2B544;
+  --hold-soft: rgba(242, 181, 68, 0.14);
+  --nogo: #F0736A;
+  --nogo-soft: rgba(240, 115, 106, 0.14);
+  --standby: #7E92A6;
+  --selection: rgba(93, 176, 255, 0.28);
 
-  --logo-tile: #0F1115;
-  --logo-symbol: #F7F9FC;
-  --logo-cut: #0F1115;
-  --logo-badge: #4AA3FF;
-  --logo-glyph: #F7F9FC;
+  --screen-bezel: var(--screen-rule);
 
-  --ok-bg: rgba(74, 163, 255, 0.14);
-  --warn-bg: rgba(224, 168, 46, 0.14);
-  --err-bg: rgba(220, 75, 67, 0.14);
-  --info-bg: rgba(50, 120, 184, 0.14);
+  --nav-shadow: 0 1px 0 var(--rule), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
 
-  --shadow-sm: 0 1px 0 rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.4);
-  --shadow-md: 0 1px 0 rgba(0,0,0,0.4), 0 6px 14px rgba(0,0,0,0.5);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4);
-  --shadow-xl: 0 30px 60px rgba(0,0,0,0.7), 0 12px 24px rgba(0,0,0,0.5);
-  --shadow-inner: inset 0 0 0 1px rgba(247,249,252,0.06);
+  /* Brand mark, dark-ground variant */
+  --logo-bezel: #1B2B3E;
+  --logo-rim: #3A5068;
+  --logo-screw: #7C95B0;
+  --logo-seat: #0B1621;
+  --logo-lens: #5DB0FF;
+  --logo-lens-edge: #3E8EDB;
+  --logo-legend: #0D1B2A;
+  --logo-cut: #B5DEFF;
+  --logo-cut-opacity: 0.9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg: #0F1115;
-    --bg-elev: #171C23;
-    --bg-sunk: #12161C;
-    --bg-inverse: #F7F9FC;
-    --fg: #F7F9FC;
-    --fg-muted: #AAB2BD;
-    --fg-faint: #7B8491;
-    --fg-display: #F7F9FC;
-    --fg-inverse: #0F1115;
-    --border: #2B333D;
-    --border-strong: #3C4652;
-    --border-focus: #4AA3FF;
-    --accent: #3278B8;
-    --accent-hover: #4AA3FF;
-    --accent-soft: rgba(74, 163, 255, 0.16);
-    --accent-strong: #7BC4FF;
-    --nav-tagline: #7BC4FF;
-    --logo-tile: #0F1115;
-    --logo-symbol: #F7F9FC;
-    --logo-cut: #0F1115;
-    --logo-badge: #4AA3FF;
-    --logo-glyph: #F7F9FC;
-  }
-}
-
-/* ── Base resets ───────────────────────────────────────────── */
+/* ── Base ──────────────────────────────────────────────────── */
+@layer base {
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  scrollbar-color: var(--rule-strong) var(--bg);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -251,35 +246,217 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  font-size: var(--fs-base);
-  line-height: var(--lh-relaxed);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  caret-color: var(--accent);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+@media (min-width: 768px) {
+  body { font-size: 17px; }
 }
 
-/* ── Scrollbar styling (dark mode) ─────────────────────────── */
-:root[data-theme="dark"] ::-webkit-scrollbar {
-  width: 8px;
+::selection {
+  background: var(--selection);
+  color: var(--fg);
 }
-:root[data-theme="dark"] ::-webkit-scrollbar-track {
-  background: var(--color-ink-900);
+
+input, textarea, select { caret-color: var(--accent); accent-color: var(--accent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
-:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: var(--color-ink-500);
-  border-radius: 4px;
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
 }
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
+h1 {
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-size: clamp(2.5rem, 4.6vw + 0.5rem, 4.75rem);
+}
+h2 {
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  font-size: clamp(1.9rem, 2.6vw + 0.6rem, 3rem);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+table { font-variant-numeric: tabular-nums; }
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ── World utilities ───────────────────────────────────────── */
+@layer components {
+
+/* Engraved console label. Only on instruments, lamps, table headers; never above a heading. */
+.placard {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 620;
+  font-stretch: 125%;
+  letter-spacing: 0.07em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Status lamp: 10px square, 2px radius, 1px inner ring. Always paired with a text label. */
+.lamp {
+  --lamp: var(--go);
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--lamp);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--lamp) 68%, black);
+  vertical-align: baseline;
+}
+.lamp-go { --lamp: var(--go); }
+.lamp-hold { --lamp: var(--hold-lamp); }
+.lamp-nogo { --lamp: var(--nogo); }
+.lamp-standby {
+  --lamp: var(--standby);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--standby);
+}
+.screen .lamp-go { --lamp: var(--screen-go); }
+.screen .lamp-hold { --lamp: var(--screen-hold); }
+.screen .lamp-nogo { --lamp: var(--screen-nogo); }
+.screen .lamp-standby { --lamp: var(--screen-dim); box-shadow: inset 0 0 0 1px var(--screen-dim); }
+.lamp-tick { animation: lamp-tick 240ms var(--ease) both; }
+
+/* Dark instrument inset, same in both themes. */
+.screen {
+  background: var(--screen-bg);
+  color: var(--screen-fg);
+  border: 1px solid var(--screen-bezel);
+  border-radius: 2px;
+  --fg: var(--screen-fg);
+  --fg-muted: var(--screen-dim);
+  --fg-faint: var(--screen-dim);
+  --rule: var(--screen-rule);
+  --border: var(--screen-rule);
+}
+
+/* Mono readout: versions, counts, timestamps. */
+.readout {
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Measure for reading surfaces. */
+.measure { max-width: 68ch; }
+
+/* ── Reading surfaces (docs, changelog, legal pages) ───────── */
+.read {
+  color: var(--fg-muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+@media (min-width: 768px) {
+  .read { font-size: 17px; }
+}
+.read :where(p, ul, ol, dl) { max-width: 68ch; }
+.read :where(h2:not(.placard)) {
+  color: var(--fg);
+  font-size: clamp(1.45rem, 1.2vw + 1.1rem, 1.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+.read :where(h3:not(.placard)) {
+  color: var(--fg);
+  font-size: 1.125rem;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  font-weight: 680;
+  margin: 1.5rem 0 0.5rem;
+}
+.read :where(strong) { color: var(--fg); font-weight: 650; }
+.read :where(ul, ol) { padding-left: 1.25rem; margin: 0; }
+.read :where(ul) { list-style: square; }
+.read :where(ol) { list-style: decimal; }
+.read :where(li) { margin: 0.35rem 0; padding-left: 0.25rem; }
+.read :where(li)::marker { color: var(--fg-faint); }
+.read :where(a:not([class])), .read a.link {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.read :where(a:not([class])):hover, .read a.link:hover { color: var(--accent-hover); }
+.read :where(code):not(pre code) {
+  font-size: 0.84em;
+  padding: 0.1em 0.4em;
+  background: var(--bg-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+}
+
+/* Brand mark parts (inline SVG in Logo.tsx; recolors with the theme) */
+.logo-bezel { fill: var(--logo-bezel); }
+.logo-rim { fill: none; stroke: var(--logo-rim); }
+.logo-screw { fill: var(--logo-screw); }
+.logo-slot { stroke: var(--logo-bezel); fill: none; }
+.logo-seat { fill: var(--logo-seat); }
+.logo-lens { fill: var(--logo-lens); }
+.logo-lens-edge { fill: none; stroke: var(--logo-lens-edge); }
+.logo-legend { fill: var(--logo-legend); }
+.logo-cut { fill: var(--logo-cut); fill-opacity: var(--logo-cut-opacity); }
+
+/* ── Nav / sticky chrome ───────────────────────────────────── */
+.nav-scrolled { box-shadow: var(--nav-shadow); }
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 0 16px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 2px;
+  font-weight: 650;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
 
 /* ── Reduced motion ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
 }

@@ -5,7 +5,7 @@ import { WikiSection } from './WikiSection'
 import { FAQ_ITEMS } from '../../lib/faq'
 
 /**
- * FAQ — EN uses the canonical `FAQ_ITEMS` shared with schema.
+ * FAQ: EN uses the canonical `FAQ_ITEMS` shared with schema.
  * PL renders translated locale strings so the visible docs page is localized.
  */
 export function Faq({ pl = false }: { pl?: boolean }) {
@@ -18,7 +18,7 @@ export function Faq({ pl = false }: { pl?: boolean }) {
 
   return (
     <WikiSection id="faq" title={pl ? 'Najczęściej zadawane pytania' : 'Frequently Asked Questions'}>
-      <div className="rounded-md border border-(--border) divide-y divide-(--border) overflow-hidden">
+      <div className="max-w-[68ch] divide-y divide-(--rule) border-y border-(--rule-strong)">
         {FAQ_ITEMS.map((item) => {
           const isOpen = open === item.id
           const question = pl ? t(`faq.items.${item.id}.q`) : item.q
@@ -32,12 +32,13 @@ export function Faq({ pl = false }: { pl?: boolean }) {
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${item.id}`}
                   id={`faq-trigger-${item.id}`}
-                  className="w-full flex items-start justify-between gap-3 text-left px-4 sm:px-5 py-4 bg-transparent border-0 cursor-pointer text-(--fg) font-semibold text-[15px] font-sans hover:bg-(--bg-sunk) transition-colors"
+                  className="flex min-h-[52px] w-full cursor-pointer items-start justify-between gap-4 border-0 bg-transparent px-1 py-3.5 text-left font-sans text-[17px] font-semibold leading-snug text-(--fg) transition-colors duration-(--dur-2) hover:bg-(--bg-sunk)"
                 >
                   <span className="min-w-0 break-words">{question}</span>
                   <ChevronDown
                     size={16}
-                    className={`mt-0.5 shrink-0 text-(--fg-muted) transition-transform duration-(--dur-2) ${isOpen ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
+                    className={`mt-1 shrink-0 text-(--fg-muted) transition-transform duration-(--dur-2) ${isOpen ? 'rotate-180' : ''}`}
                   />
                 </button>
               </h3>
@@ -46,7 +47,7 @@ export function Faq({ pl = false }: { pl?: boolean }) {
                   id={`faq-panel-${item.id}`}
                   role="region"
                   aria-labelledby={`faq-trigger-${item.id}`}
-                  className="px-4 sm:px-5 pb-4 text-[14px] leading-[1.7] text-(--fg-muted) break-words [overflow-wrap:anywhere]"
+                  className="px-1 pb-5 pr-8 text-[16px] leading-[1.65] text-(--fg-muted) break-words [overflow-wrap:anywhere]"
                 >
                   {answer}
                 </div>
