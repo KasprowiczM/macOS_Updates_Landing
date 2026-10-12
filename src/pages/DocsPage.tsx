@@ -1,8 +1,12 @@
+import { type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ArrowUpRight } from 'lucide-react'
 import { WikiLayout, type WikiSection as WikiSectionType } from '../components/layout/WikiLayout'
 import { Seo } from '../components/Seo'
-import { SITE_URL, REPO_URL } from '../lib/site'
-import { FAQ_ITEMS } from '../lib/faq'
+import { REPO_URL } from '../lib/site'
+import { getFaqItems } from '../lib/faq'
+import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 import { GettingStarted } from '../components/docs/GettingStarted'
 import { UserGuide } from '../components/docs/UserGuide'
 import { Architecture } from '../components/docs/Architecture'
@@ -14,40 +18,15 @@ export function DocsPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
 
-  const techArticle = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: t('seo.docsTitle'),
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/docs',
+    name: t('seo.docsTitle'),
     description: t('seo.docsDesc'),
-    inLanguage: i18n.language,
-    url: `${SITE_URL}/docs`,
-    author: { '@type': 'Organization', name: 'macOS Updates', url: SITE_URL },
-    publisher: { '@type': 'Organization', name: 'macOS Updates', url: SITE_URL },
-  }
-
-  const breadcrumbList = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'macOS Updates', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: pl ? 'Dokumentacja' : 'Documentation', item: `${SITE_URL}/docs` },
-    ],
-  }
-
-  const localizedFaqItems = FAQ_ITEMS.map((item) => ({
-    q: pl ? t(`faq.items.${item.id}.q`) : item.q,
-    a: pl ? t(`faq.items.${item.id}.a`) : item.a,
-  }))
-
-  const faqPage = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: localizedFaqItems.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
-  }
+    type: 'TechArticle',
+    extra: [faqPageNode(getFaqItems(t), '/docs', lang), howToNode('/docs', lang)],
+  })
 
   const sections: WikiSectionType[] = [
     {
@@ -109,82 +88,40 @@ export function DocsPage() {
     },
   ]
 
+  const groups: { key: string; title: string; node: ReactNode }[] = [
+    { key: 'getting-started', title: pl ? 'Pierwsze kroki' : 'Getting Started', node: <GettingStarted pl={pl} /> },
+    { key: 'user-guide', title: pl ? 'Przewodnik użytkownika' : 'User Guide', node: <UserGuide pl={pl} /> },
+    { key: 'architecture-group', title: pl ? 'Architektura' : 'Architecture', node: <Architecture pl={pl} /> },
+    { key: 'platform-reference', title: pl ? 'Referencyjna platforma' : 'Platform Reference', node: <PlatformReference pl={pl} /> },
+    { key: 'developer-guide', title: pl ? 'Przewodnik dewelopera' : 'Developer Guide', node: <DeveloperGuide pl={pl} /> },
+    { key: 'faq-group', title: 'FAQ', node: <Faq pl={pl} /> },
+  ]
+
   return (
     <>
       <Seo
         title={t('seo.docsTitle')}
         description={t('seo.docsDesc')}
         path="/docs"
-        lang={i18n.language}
-        jsonLd={[techArticle, breadcrumbList, faqPage]}
+        lang={lang}
+        jsonLd={jsonLd}
       />
       <WikiLayout title={pl ? 'Dokumentacja' : 'Documentation'} sections={sections}>
-        {/* Getting Started */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">1</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            {pl ? 'Pierwsze kroki' : 'Getting Started'}
-          </h2>
-        </div>
-        <GettingStarted pl={pl} />
+        {groups.map((group) => (
+          <section key={group.key} aria-labelledby={`${group.key}-title`}>
+            <h2 id={`${group.key}-title`} className="mb-6">{group.title}</h2>
+            <div className="space-y-10">{group.node}</div>
+          </section>
+        ))}
 
-        {/* User Guide */}
-        <div className="flex items-center gap-3 mb-6 pt-10 border-t border-(--border)">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">2</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            {pl ? 'Przewodnik użytkownika' : 'User Guide'}
-          </h2>
-        </div>
-        <UserGuide pl={pl} />
-
-        {/* Architecture */}
-        <div className="flex items-center gap-3 mb-6 pt-10 border-t border-(--border)">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">3</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            {pl ? 'Architektura' : 'Architecture'}
-          </h2>
-        </div>
-        <Architecture pl={pl} />
-
-        {/* Platform Reference */}
-        <div className="flex items-center gap-3 mb-6 pt-10 border-t border-(--border)">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">4</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            {pl ? 'Referencyjna platforma' : 'Platform Reference'}
-          </h2>
-        </div>
-        <PlatformReference pl={pl} />
-
-        {/* Developer Guide */}
-        <div className="flex items-center gap-3 mb-6 pt-10 border-t border-(--border)">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">5</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            {pl ? 'Przewodnik dewelopera' : 'Developer Guide'}
-          </h2>
-        </div>
-        <DeveloperGuide pl={pl} />
-
-        {/* FAQ */}
-        <div className="flex items-center gap-3 mb-6 pt-10 border-t border-(--border)">
-          <div className="w-8 h-8 rounded-md bg-(--accent-soft) flex items-center justify-center text-(--accent-strong) text-[14px] font-bold">6</div>
-          <h2 className="text-(--fg) font-bold text-[26px] tracking-tight font-sans m-0">
-            FAQ
-          </h2>
-        </div>
-        <Faq pl={pl} />
-
-        {/* Footer link */}
-        <section className="pt-10 border-t border-(--border)">
-          <p className="text-[14px]">
-            {pl ? 'Pełna dokumentacja techniczna dostępna w ' : 'For the full technical documentation, see the '}
-            <a
-              href={`${REPO_URL}/tree/main/docs`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-(--accent-strong) hover:text-(--accent) no-underline transition-colors break-words"
-            >
-              {pl ? 'katalogu docs/ na GitHub →' : 'docs/ directory on GitHub →'}
+        <section>
+          <p className="m-0">
+            {pl ? 'Pełna dokumentacja techniczna dostępna jest w ' : 'For the full technical documentation, see the '}
+            <a href={`${REPO_URL}/tree/main/docs`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 break-words">
+              {pl ? 'katalogu docs/ na GitHubie' : 'docs/ directory on GitHub'}
+              <ArrowUpRight size={15} aria-hidden="true" />
             </a>
+            .
           </p>
         </section>
       </WikiLayout>

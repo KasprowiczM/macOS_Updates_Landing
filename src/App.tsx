@@ -1,64 +1,71 @@
-import { lazy, Suspense } from 'react'
-import { LazyMotion, domAnimation } from 'framer-motion'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { createElement, lazy, Suspense, type ReactNode } from 'react'
+import { LazyMotion, domAnimation } from 'motion/react'
+import { Route, Routes } from 'react-router-dom'
+import { I18nextProvider } from 'react-i18next'
 import { useTheme } from './hooks/useTheme'
+import { useHtmlLang } from './hooks/useHtmlLang'
 import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
-import { Seo } from './components/Seo'
+import { getI18n } from './i18n'
+import { LANGS, localizedPath, useLang } from './lib/routes'
+import { getLoadedPage, pageLoaders, preloadPage, type PagePath } from './lib/pageLoaders'
+import { NotFoundPage } from './pages/NotFoundPage'
 
-const LandingPage = lazy(() => import('./pages/LandingPage').then(m => ({ default: m.LandingPage })))
-const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(m => ({ default: m.FeaturesPage })))
-const DocsPage = lazy(() => import('./pages/DocsPage').then(m => ({ default: m.DocsPage })))
-const SecurityPage = lazy(() => import('./pages/SecurityPage').then(m => ({ default: m.SecurityPage })))
-const ChangelogPage = lazy(() => import('./pages/ChangelogPage').then(m => ({ default: m.ChangelogPage })))
-const ContributingPage = lazy(() => import('./pages/ContributingPage').then(m => ({ default: m.ContributingPage })))
+// React.lazy creates a fresh pending promise on first render even when main.tsx
+// already loaded the chunk, which made hydration drop the prerendered HTML for the
+// Suspense fallback (a large layout shift). Render the cached module directly when
+// it is available and fall back to lazy loading only for routes not loaded yet.
+const LAZY_PAGES = Object.fromEntries(
+  (Object.keys(pageLoaders) as PagePath[]).map((path) => [path, lazy(() => preloadPage(path))]),
+) as Record<PagePath, ReturnType<typeof lazy>>
+
+function RoutePage({ path }: { path: PagePath }) {
+  return createElement(getLoadedPage(path) ?? LAZY_PAGES[path])
+}
 
 function PageLoadingFallback() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center" aria-busy="true" aria-live="polite">
-      <div className="flex items-center gap-2 font-mono text-[13px] text-(--fg-muted)">
-        <span className="w-2 h-2 rounded-full bg-(--accent) animate-ping" />
-        <span>Loading...</span>
+      <div className="flex items-center gap-2.5 text-(--fg-muted)">
+        <span className="lamp lamp-standby" aria-hidden="true" />
+        <span className="placard">Loading</span>
       </div>
     </div>
   )
 }
 
-function NotFoundRedirect() {
-  const { i18n } = useTranslation()
-  return (
-    <>
-      <Seo
-        title="macOS Updates"
-        description=""
-        path="/404"
-        lang={i18n.language}
-        noindex
-      />
-      <Navigate to="/" replace />
-    </>
-  )
+/** Feeds react-i18next the fixed instance for the language of the current URL. */
+function LangProvider({ children }: { children: ReactNode }) {
+  const lang = useLang()
+  return <I18nextProvider i18n={getI18n(lang)}>{children}</I18nextProvider>
 }
 
-export default function App() {
+function Shell() {
   const { theme, toggle } = useTheme()
+  useHtmlLang()
 
   return (
     <LazyMotion features={domAnimation}>
       <Navbar theme={theme} toggleTheme={toggle} />
       <Suspense fallback={<PageLoadingFallback />}>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/docs" element={<DocsPage />} />
-          <Route path="/security" element={<SecurityPage />} />
-          <Route path="/changelog" element={<ChangelogPage />} />
-          <Route path="/contributing" element={<ContributingPage />} />
-          <Route path="*" element={<NotFoundRedirect />} />
+          {LANGS.flatMap((lang) =>
+            (Object.keys(pageLoaders) as PagePath[]).map((path) => (
+              <Route key={`${lang}:${path}`} path={localizedPath(path, lang)} element={<RoutePage path={path} />} />
+            )),
+          )}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       <Footer />
     </LazyMotion>
+  )
+}
+
+export default function App() {
+  return (
+    <LangProvider>
+      <Shell />
+    </LangProvider>
   )
 }

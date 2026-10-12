@@ -1,26 +1,84 @@
+# macOS Updates - https://macosupdates.dev
+#
+# Every public page is prerendered static HTML (English at /, Polish under /pl),
+# so crawlers and AI agents that do not run JavaScript get the full content.
+#
+# Machine-readable summaries for AI answer engines:
+#   llms.txt       https://macosupdates.dev/llms.txt
+#   llms-full.txt  https://macosupdates.dev/llms-full.txt
+# Sitemap with hreflang alternates (en, pl):
+#   https://macosupdates.dev/sitemap.xml
+
 User-agent: *
 Allow: /
 
-# AI crawlers — explicitly invited (GEO)
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# OpenAI
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+# Anthropic
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
 
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI controls / Apple AI controls
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Other AI assistants and datasets
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 User-agent: CCBot
 Allow: /
+
+# xAI / Grok: no officially documented crawler token was found at the time of writing,
+# so Grok is covered by the "User-agent: *" group above.
 
 Sitemap: https://macosupdates.dev/sitemap.xml

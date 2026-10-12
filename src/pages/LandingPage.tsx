@@ -1,49 +1,28 @@
 import { useTranslation } from 'react-i18next'
 import { Seo } from '../components/Seo'
-import { SITE_URL } from '../lib/site'
-import { FAQ_ITEMS } from '../lib/faq'
+import { getFaqItems } from '../lib/faq'
+import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 import { Hero } from '../components/sections/Hero'
-import { SocialProof } from '../components/sections/SocialProof'
-import { ProblemSolution } from '../components/sections/ProblemSolution'
-import { WhyUpdate } from '../components/sections/WhyUpdate'
-import { UpdatePipeline } from '../components/sections/UpdatePipeline'
-import { Features } from '../components/sections/Features'
-import { PlatformSupport } from '../components/sections/PlatformSupport'
-import { HowItWorks } from '../components/sections/HowItWorks'
-import { OpenSource } from '../components/sections/OpenSource'
-import { Installation } from '../components/sections/Installation'
-
-
+import { FlightRules } from '../components/sections/FlightRules'
+import { WallDisplay } from '../components/wall/WallDisplay'
+import { FlightPlan } from '../components/sections/FlightPlan'
+import { CoverageRoster } from '../components/sections/CoverageRoster'
+import { MissionLog } from '../components/sections/MissionLog'
+import { FaqSection } from '../components/sections/FaqSection'
+import { InstallClose } from '../components/sections/InstallClose'
 
 export function LandingPage() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
-  const webPage = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/',
     name: t('seo.homeTitle'),
     description: t('seo.homeDesc'),
-    url: `${SITE_URL}/`,
-    inLanguage: i18n.language,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'macOS Updates',
-      url: `${SITE_URL}/`,
-    },
-  }
-
-  const faqPage = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
-    })),
-  }
+    extra: [faqPageNode(getFaqItems(t), '/', lang), howToNode('/', lang)],
+  })
 
   return (
     <>
@@ -51,20 +30,18 @@ export function LandingPage() {
         title={t('seo.homeTitle')}
         description={t('seo.homeDesc')}
         path="/"
-        lang={i18n.language}
-        jsonLd={[webPage, faqPage]}
+        lang={lang}
+        jsonLd={jsonLd}
       />
-      <main>
+      <main id="main">
         <Hero />
-        <SocialProof />
-        <ProblemSolution />
-        <WhyUpdate />
-        <UpdatePipeline />
-        <Features />
-        <PlatformSupport />
-        <HowItWorks />
-        <OpenSource />
-        <Installation />
+        <FlightRules />
+        <WallDisplay />
+        <FlightPlan />
+        <CoverageRoster />
+        <MissionLog />
+        <FaqSection />
+        <InstallClose />
       </main>
     </>
   )

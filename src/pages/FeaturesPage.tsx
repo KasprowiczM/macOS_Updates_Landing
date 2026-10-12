@@ -1,26 +1,13 @@
 import { useTranslation } from 'react-i18next'
-import { m } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import {
-  GitBranch,
-  Camera,
-  Lightbulb,
-  Puzzle,
-  Layers,
-  ShieldCheck,
-  Terminal,
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  CircleDot,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { DocLayout } from '../components/layout/DocLayout'
+import { Button } from '../components/ui/Button'
 import { SectionReveal } from '../components/ui/SectionReveal'
-import { SITE_URL, INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
+import { INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
 
 interface FeatureItem {
-  icon: LucideIcon
   title: string
   desc: string
 }
@@ -41,17 +28,14 @@ export function FeaturesPage() {
       title: pl ? 'Pipeline i inwentarz' : 'Pipeline & Inventory',
       items: [
         {
-          icon: GitBranch,
           title: t('features.pipeline.title'),
           desc: t('features.pipeline.desc'),
         },
         {
-          icon: ShieldCheck,
           title: t('features.frontends.title'),
           desc: t('features.frontends.desc'),
         },
         {
-          icon: Camera,
           title: t('features.snapshot.title'),
           desc: t('features.snapshot.desc'),
         },
@@ -62,17 +46,14 @@ export function FeaturesPage() {
       title: pl ? 'Pokrycie i prywatność' : 'Coverage & Privacy',
       items: [
         {
-          icon: ShieldCheck,
           title: t('features.scheduler.title'),
           desc: t('features.scheduler.desc'),
         },
         {
-          icon: Layers,
           title: t('features.editions.title'),
           desc: t('features.editions.desc'),
         },
         {
-          icon: Lightbulb,
           title: t('features.vanillaJs.title'),
           desc: t('features.vanillaJs.desc'),
         },
@@ -83,22 +64,18 @@ export function FeaturesPage() {
       title: pl ? 'Rozszerzanie i audyt' : 'Extension & Auditing',
       items: [
         {
-          icon: Terminal,
           title: t('features.aiTools.title'),
           desc: t('features.aiTools.desc'),
         },
         {
-          icon: Lightbulb,
           title: t('features.suggestionsAi.title'),
           desc: t('features.suggestionsAi.desc'),
         },
         {
-          icon: Puzzle,
           title: t('features.plugins.title'),
           desc: t('features.plugins.desc'),
         },
         {
-          icon: GitBranch,
           title: t('features.multihost.title'),
           desc: t('features.multihost.desc'),
         },
@@ -124,13 +101,13 @@ export function FeaturesPage() {
         'Sprawdzanie historii Omaha (updater_history.jsonl) przed wybudzeniem updaterów Chrome, Gemini i Comet',
         'Bezpośrednie pobieranie wydań ChatGPT przed uruchomieniem GUI (oszczędność do 150 s na bieg)',
         'Aktualizacja bezczynnego Dockera ze zweryfikowanego DMG z appcastu (działający Docker jest chroniony)',
-        'Oddzielenie ostrzeżeń o feedach producentów od celów instalacji bez rzekomych downgrade’ów (v1.5.4)',
-        'Aplikacje otwarte przez Ciebie nigdy nie są zamykane — toolkit zamyka tylko to, co sam uruchomił',
+        'Oddzielenie ostrzeżeń o feedach producentów od celów instalacji bez rzekomych downgrade’ów (od v1.5.4)',
+        'Aplikacje otwarte przez Ciebie nigdy nie są zamykane: toolkit zamyka tylko to, co sam uruchomił',
         'Dwutorowy App Store: sudo mas ze zmierzonymi ID + retry w sesji użytkownika; GUI iPada',
-        'Natywne CLI vendorów (claude, Codex, OpenCode, agy) — priorytet przed npm, czyszczenie duplikatów',
+        'Natywne CLI vendorów (claude, Codex, OpenCode, agy), priorytet przed npm, czyszczenie duplikatów',
         'Uczciwe raporty: edycje inwentarza vs zaobserwowane zmiany pakietów/CLI; nieznane pending zostaje nieznane',
         'Import overlay odmawia nadpisania Git, pomija wykluczenia i zostawia ścieżkę odzyskania po nieudanej zamianie',
-        'Kwarantanna MAU z własnym wygaśnięciem — aktualizacje Office nie mogą ukryć się w nieskończoność',
+        'Kwarantanna MAU z własnym wygaśnięciem: aktualizacje Office nie mogą ukryć się w nieskończoność',
         'Końcowa bezpieczna aktualizacja macOS z wymuszonym softwareupdate -R i odporną warstwą Homebrew',
         'Prywatny overlay dev_sync dla inwentarza i historii ze wsparciem Proton Drive',
         'Tryb bezmutacyjnej weryfikacji --verify-only oraz automatyzacja LaunchAgent i Touch ID sudo',
@@ -145,10 +122,10 @@ export function FeaturesPage() {
         'Pre-action Omaha history proof (updater_history.jsonl) before wake for Chrome, Gemini, and Comet',
         'Direct verified downloads for ChatGPT before GUI launch saving up to 150 seconds per run',
         'Idle Docker Desktop updates from verified appcast DMG without container engine disruptions',
-        'Decoupled manufacturer feed warnings with explicit versions and no false downgrade targets (v1.5.4)',
-        'Apps you have open are never closed — the toolkit only quits what it launched itself',
+        'Decoupled manufacturer feed warnings with explicit versions and no false downgrade targets (since v1.5.4)',
+        'Apps you have open are never closed: the toolkit only quits what it launched itself',
         'Two-track App Store: sudo mas with measured IDs + user-session retry; iPad AppleScript GUI',
-        'Native vendor CLIs (claude, Codex, OpenCode, agy) — priority over npm, duplicate binary cleanup',
+        'Native vendor CLIs (claude, Codex, OpenCode, agy), priority over npm, duplicate binary cleanup',
         'Honest reports: inventory field edits vs observed package/CLI changes; unknown pending stays unknown',
         'Overlay import refuses Git overwrite, skips exclusions, and keeps a recovery path after a failed swap',
         'MAU quarantine with self-owned expiry so Office updates cannot hide forever',
@@ -159,38 +136,18 @@ export function FeaturesPage() {
         `${TEST_COUNT} hermetic static, unit, registry parity, and gitleaks secret scanning tests`,
       ]
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: `${SITE_URL}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Features',
-        item: `${SITE_URL}/features`,
-      },
-    ],
-  }
-
-  const webPage = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/features',
     name: t('seo.featuresTitle'),
     description: t('seo.featuresDesc'),
-    url: `${SITE_URL}/features`,
-    inLanguage: i18n.language,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'macOS Updates',
-      url: `${SITE_URL}/`,
-    },
-  }
+  })
+
+  const toc = [
+    ...groups.map((g) => ({ id: g.id, label: g.title })),
+    { id: 'roadmap', label: t('roadmap.title') },
+  ]
 
   return (
     <>
@@ -198,156 +155,79 @@ export function FeaturesPage() {
         title={t('seo.featuresTitle')}
         description={t('seo.featuresDesc')}
         path="/features"
-        lang={i18n.language}
-        jsonLd={[breadcrumb, webPage]}
+        lang={lang}
+        jsonLd={jsonLd}
       />
-      <main className="pt-28 pb-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
-          {/* Header */}
-          <SectionReveal>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-(--fg-muted) hover:text-(--fg) text-[13px] font-mono no-underline mb-8 transition-colors duration-(--dur-2)"
-            >
-              <ArrowLeft size={14} />
-              {pl ? 'Wróć do strony głównej' : 'Back to home'}
-            </Link>
-            <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
-              {t('nav.features')}
-            </div>
-            <h1
-              className="font-bold text-(--fg) font-sans tracking-tight mb-4 max-w-[820px]"
-              style={{ fontSize: 'clamp(2rem, 4vw + 1rem, 3.4rem)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
-            >
-              {t('seo.featuresTitle')}
-            </h1>
-            <p
-              className="text-(--fg-muted) text-[17px] leading-normal font-sans max-w-[640px] mb-16"
-              style={{ textWrap: 'pretty' as const }}
-            >
-              {t('seo.featuresDesc')}
-            </p>
-          </SectionReveal>
-
-          {/* Feature groups */}
-          <div className="space-y-16">
-            {groups.map((group, gi) => (
-              <SectionReveal key={group.id} delay={0.05 * gi}>
-                <section id={group.id}>
-                  <h2 className="font-semibold text-(--fg) font-sans tracking-tight text-[22px] mb-6 pb-3 border-b border-(--border)">
-                    {group.title}
-                  </h2>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {group.items.map((item) => {
-                      const Icon = item.icon
-                      return (
-                        <m.div
-                          key={item.title}
-                          whileHover={{ y: -2 }}
-                          transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
-                          className="p-6 border border-(--border) rounded-lg bg-(--bg-elev) hover:shadow-(--shadow-md) transition-shadow duration-(--dur-2)"
-                        >
-                          <div className="w-9 h-9 rounded-sm bg-(--accent) text-(--accent-ink) flex items-center justify-center mb-4">
-                            <Icon size={18} />
-                          </div>
-                          <h3 className="font-semibold text-[15px] font-sans tracking-tight mb-2 text-(--fg)">
-                            {item.title}
-                          </h3>
-                          <p className="text-(--fg-muted) text-[13px] leading-[1.6] font-sans m-0">
-                            {item.desc}
-                          </p>
-                        </m.div>
-                      )
-                    })}
+      <DocLayout title={t('chrome.features.title')} lead={t('seo.featuresDesc')} toc={toc}>
+        {groups.map((group, gi) => (
+          <SectionReveal key={group.id} delay={0.04 * gi}>
+            <section id={group.id} className="scroll-mt-24">
+              <h2 className="mb-4">{group.title}</h2>
+              <dl className="m-0 border-b border-(--rule-strong)">
+                {group.items.map((item) => (
+                  <div
+                    key={item.title}
+                    className="grid gap-x-8 gap-y-1 border-t border-(--rule-strong) py-4 md:grid-cols-[15rem_minmax(0,1fr)]"
+                  >
+                    <dt className="font-semibold leading-snug text-(--fg)">{item.title}</dt>
+                    <dd className="m-0 max-w-[62ch] text-(--fg-muted)">{item.desc}</dd>
                   </div>
-                </section>
-              </SectionReveal>
-            ))}
-          </div>
-
-          {/* Roadmap */}
-          <SectionReveal delay={0.1}>
-            <section id="roadmap" className="mt-24">
-              <div className="font-mono text-[11px] uppercase tracking-normal text-(--accent-strong) mb-4">
-                {t('roadmap.eyebrow')}
-              </div>
-              <h2
-                className="font-bold text-(--fg) font-sans tracking-tight mb-4 max-w-[780px]"
-                style={{ fontSize: 'clamp(1.7rem, 3vw + 1rem, 2.6rem)', lineHeight: '1.08', letterSpacing: '-0.03em' }}
-              >
-                {t('roadmap.title')}
-              </h2>
-              <p
-                className="text-(--fg-muted) text-[16px] leading-normal font-sans max-w-[620px] mb-12"
-                style={{ textWrap: 'pretty' as const }}
-              >
-                {t('roadmap.subtitle')}
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Shipping today */}
-                <div className="p-7 border border-(--border) rounded-lg bg-(--bg-elev)">
-                  <h3 className="flex items-center gap-2 font-semibold text-[16px] font-sans tracking-tight mb-5 text-(--fg)">
-                    <CheckCircle2 size={18} className="text-(--accent-strong)" />
-                    {t('roadmap.statusNow')}
-                  </h3>
-                  <ul className="space-y-3 m-0 p-0 list-none">
-                    {shippingToday.map((label) => (
-                      <li key={label} className="flex items-start gap-2.5 text-(--fg-muted) text-[13px] leading-[1.5] font-sans">
-                        <CheckCircle2 size={14} className="text-(--accent-strong) shrink-0 mt-0.5" />
-                        <span>{label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Next */}
-                <div className="p-7 border border-(--border) rounded-lg bg-(--bg-elev)">
-                  <h3 className="flex items-center gap-2 font-semibold text-[16px] font-sans tracking-tight mb-5 text-(--fg)">
-                    <CircleDot size={18} className="text-(--fg-muted)" />
-                    {t('roadmap.statusNext')}
-                  </h3>
-                  <ul className="space-y-4 m-0 p-0 list-none">
-                    {roadmapItems.map((key) => (
-                      <li key={key} className="flex items-start gap-2.5">
-                        <CircleDot size={14} className="text-(--fg-faint) shrink-0 mt-1" />
-                        <div>
-                          <div className="font-semibold text-[13px] font-sans text-(--fg) mb-0.5">
-                            {t(`roadmap.items.${key}.title`)}
-                          </div>
-                          <div className="text-(--fg-muted) text-[12px] leading-[1.5] font-sans">
-                            {t(`roadmap.items.${key}.desc`)}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+                ))}
+              </dl>
             </section>
           </SectionReveal>
+        ))}
 
-          {/* Back-to-home CTA */}
-          <SectionReveal delay={0.15}>
-            <div className="mt-20 flex flex-wrap items-center gap-4">
-              <Link
-                to="/docs#quick-install"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-(--accent) text-(--accent-ink) font-semibold text-[13px] font-sans no-underline hover:bg-(--accent-hover) transition-colors duration-(--dur-2)"
-              >
-                {pl ? 'Zacznij teraz' : 'Get started'}
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 text-(--fg) hover:text-(--accent-strong) text-[13px] font-semibold font-sans no-underline transition-colors duration-(--dur-2)"
-              >
-                <ArrowLeft size={14} />
-                {pl ? 'Wróć do strony głównej' : 'Back to home'}
-              </Link>
+        <SectionReveal>
+          <section id="roadmap" className="scroll-mt-24">
+            <h2 className="mb-3">{t('roadmap.title')}</h2>
+            <p className="mb-8">{t('roadmap.subtitle')}</p>
+
+            <div className="grid items-start gap-6 xl:grid-cols-2">
+              <div className="rounded-sm border border-(--rule-strong) bg-(--bg-elev)">
+                <div className="flex items-center gap-2.5 border-b border-(--rule-strong) bg-(--bg-sunk) px-4 py-2.5">
+                  <span className="lamp lamp-go" aria-hidden="true" />
+                  <h3 className="placard m-0 text-(--fg)">{t('roadmap.statusNow')}</h3>
+                </div>
+                <ul className="m-0 list-none p-0">
+                  {shippingToday.map((label) => (
+                    <li
+                      key={label}
+                      className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) px-4 py-3 text-[15px] leading-[1.5] last:border-b-0"
+                    >
+                      <span className="lamp lamp-go mt-[5px]" aria-hidden="true" />
+                      <span className="min-w-0 [overflow-wrap:anywhere]">{label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-sm border border-(--rule-strong) bg-(--bg-elev)">
+                <div className="flex items-center gap-2.5 border-b border-(--rule-strong) bg-(--bg-sunk) px-4 py-2.5">
+                  <span className="lamp lamp-standby" aria-hidden="true" />
+                  <h3 className="placard m-0 text-(--fg)">{t('roadmap.statusNext')}</h3>
+                </div>
+                <ul className="m-0 list-none p-0">
+                  {roadmapItems.map((key) => (
+                    <li key={key} className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) px-4 py-3 last:border-b-0">
+                      <span className="lamp lamp-standby mt-[5px]" aria-hidden="true" />
+                      <div className="min-w-0">
+                        <div className="font-semibold leading-snug text-(--fg)">{t(`roadmap.items.${key}.title`)}</div>
+                        <div className="mt-0.5 text-[15px] leading-[1.5]">{t(`roadmap.items.${key}.desc`)}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </SectionReveal>
+          </section>
+        </SectionReveal>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <Button href="/docs#quick-install">{t('chrome.features.getStarted')}</Button>
+          <Button href="/" variant="secondary">{t('chrome.features.backHome')}</Button>
         </div>
-      </main>
+      </DocLayout>
     </>
   )
 }

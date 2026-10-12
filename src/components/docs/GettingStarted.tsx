@@ -9,11 +9,11 @@ export function GettingStarted({ pl }: { pl: boolean }) {
           ? `macOS Updates to jednopoleceniowy aktualizator dla Maców Apple Silicon. Aktualizuje macOS, App Store, Homebrew, natywne CLI/npm i ${INTERNET_APP_COUNT} aplikacje internetowe na podstawie lokalnego inwentarza. Mutacja jest raportowana dopiero po potwierdzeniu przez żywy Mac.`
           : `macOS Updates is a one-command updater for Apple Silicon Macs. It updates macOS, App Store apps, Homebrew, native CLI/npm tooling, and ${INTERNET_APP_COUNT} internet-downloaded apps from a local inventory. A mutation is reported only after the live Mac confirms it.`
         }</p>
-        <p className="text-[14px]">{pl
+        <p>{pl
           ? 'Kluczowa zasada: aktualizowane jest tylko oprogramowanie już zainstalowane na tym Macu. Instalator nie importuje cudzych plików APPLICATIONS.md i nie instaluje brakujących aplikacji.'
           : 'Core rule: it updates only software already installed on this Mac. The installer does not import another user’s APPLICATIONS.md and does not install missing apps.'
         }</p>
-        <div className="grid sm:grid-cols-2 gap-3 mt-4">
+        <div className="grid gap-3 sm:grid-cols-2">
           <InfoCard title={pl ? 'Wymagania' : 'Requirements'}>
             <p>{pl ? 'Apple Silicon, macOS 13+, Bash 3.2, Xcode Command Line Tools i Homebrew.' : 'Apple Silicon, macOS 13+, Bash 3.2, Xcode Command Line Tools, and Homebrew.'}</p>
           </InfoCard>
@@ -29,7 +29,7 @@ export function GettingStarted({ pl }: { pl: boolean }) {
           : 'The installer clones the repo, configures dependencies, asks for language, and builds a fresh APPLICATIONS.md from this Mac.'
         }</p>
         <CodeBlock title="bash">{`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasprowiczM/macOS_updates/main/install.sh)"`}</CodeBlock>
-        <h3 className="text-(--fg) font-semibold text-[15px] mt-5 mb-2">{pl ? 'Instalacja ręczna' : 'Manual install'}</h3>
+        <h3>{pl ? 'Instalacja ręczna' : 'Manual install'}</h3>
         <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git ~/Dev_Env/macOS_updates
 cd ~/Dev_Env/macOS_updates
 bash setup.sh

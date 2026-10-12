@@ -1,53 +1,53 @@
-import { useState, useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Check, Copy } from 'lucide-react'
+import { cn } from '../../lib/utils'
+import { CopyButton } from './CopyButton'
 
 interface TerminalBlockProps {
   lines: { text: string; className?: string }[]
   showCopy?: boolean
   copyText?: string
   className?: string
+  /** Optional title in the readout header (a file or directory name). */
+  title?: string
 }
 
-export function TerminalBlock({ lines, showCopy = true, copyText, className }: TerminalBlockProps) {
-  const { t } = useTranslation()
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = useCallback(async () => {
-    const text = copyText || lines.map(l => l.text).join('\n')
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch { /* clipboard not available */ }
-  }, [copyText, lines])
+/**
+ * A dark instrument readout (.screen) for commands. Lines without a custom className are
+ * commands and get a prompt glyph; lines with one (or starting with #) are output/comments.
+ * The prompt is not selectable, so a manual selection copies only the command text.
+ */
+export function TerminalBlock({ lines, showCopy = true, copyText, className, title }: TerminalBlockProps) {
+  const text = copyText ?? lines.map((l) => l.text).join('\n')
 
   return (
-    <div className={`relative group rounded-md bg-(--code-bg) border border-[rgba(255,255,255,0.06)] overflow-hidden ${className || ''}`}>
-      {/* Window dots */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-[rgba(255,255,255,0.06)]">
-        <span className="w-2.5 h-2.5 rounded-full bg-status-err opacity-70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-status-warn opacity-70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-status-ok opacity-70" />
-      </div>
-
-      <div className="px-5 py-4 font-mono text-[13px] leading-[1.6] overflow-x-auto">
-        {lines.map((line, i) => (
-          <div key={i} className={line.className || 'text-(--code-fg)'}>
-            {line.text}
-          </div>
-        ))}
-      </div>
-
-      {showCopy && (
-        <button
-          onClick={handleCopy}
-          className="absolute top-2 right-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-sm bg-[rgba(255,255,255,0.06)] text-(--code-dim) hover:text-(--code-fg) hover:bg-[rgba(255,255,255,0.1)] transition-all duration-(--dur-2) opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-strong) cursor-pointer border-0"
-          aria-label={copied ? t('installation.copied') : t('installation.copyToClipboard')}
-        >
-          {copied ? <Check size={14} className="text-(--ok)" /> : <Copy size={14} />}
-        </button>
+    <div className={cn('screen overflow-hidden', className)}>
+      {title && (
+        <div className="px-4 py-2 border-b border-(--screen-rule) placard text-(--screen-dim)">{title}</div>
       )}
+      <div className="flex items-stretch">
+        <pre
+          tabIndex={0}
+          className="readout flex-1 min-w-0 m-0 px-4 py-3 text-[13px] leading-[1.7] overflow-x-auto"
+        >
+          {lines.map((line, i) => {
+            const isCommand = !line.className && !line.text.trimStart().startsWith('#')
+            return (
+              <div key={i} className={cn('whitespace-pre', line.className || (isCommand ? 'text-(--screen-fg)' : 'text-(--screen-dim)'))}>
+                {isCommand ? (
+                  <span aria-hidden="true" className="select-none text-(--screen-go) mr-2.5">$</span>
+                ) : (
+                  <span aria-hidden="true" className="select-none mr-2.5 invisible">$</span>
+                )}
+                {line.text}
+              </div>
+            )
+          })}
+        </pre>
+        {showCopy && (
+          <div className="shrink-0 flex items-start border-l border-(--screen-rule)">
+            <CopyButton text={text} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }

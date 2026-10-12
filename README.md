@@ -1,120 +1,154 @@
-# macOS Updates — Official Landing Page & Documentation
+# macOS Updates Landing
 
-[![Build & Lint](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/version-v1.5.4-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-532%20passed-success.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-v1.5.5-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Tests](https://img.shields.io/badge/tests-561%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Production landing page, feature showcase, and operational documentation portal for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates) — the one-command update orchestrator for Apple Silicon Macs running macOS 13–27.
+The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macosupdates.dev](https://macosupdates.dev).
 
----
-
-## Overview
-
-This repository powers [`macosupdates.dev`](https://macosupdates.dev), providing:
-- **Product Overview & Live Terminal Simulation:** Zero-CLS interactive terminal demonstrating `update_all.sh --dry-run` and the seven-layer pipeline.
-- **Seven-Phase Update Architecture:** Deep-dive into prescan, App Store, CLI/npm, Homebrew, 43 internet apps, postupdate, and macOS system updates.
-- **Interactive App Registry & Coverage:** Searchable matrix of supported applications, canonical update methods (`keystone`, `github_dmg`, `silent_launch`, `msupdate`, `docker_cli`, `sparkle_appcast`, `chromium_updater`, etc.), and vendor feed truth mappings.
-- **Complete Release History:** Bilingual (EN/PL) changelog synchronized with upstream release versions (**v1.5.4**, **v1.5.3**, **v1.5.2**, **v1.5.1**, **v1.5.0**, **v1.4.6**, etc.).
-- **Security Policy & Operations Wiki:** Direct guides for operators, developers, and autonomous agents.
+The site is static: no backend and no secrets. Every page is prerendered at build time, then hydrated in the browser.
 
 ---
 
-## Technical Stack & Architecture
+## What the site is
 
-- **Runtime & Framework:** React 19, TypeScript 6, Vite 8 (Rolldown engine).
-- **Styling & Design Tokens:** Tailwind CSS v4 CSS-first design system with blue update-orbit tokens and dark/light mode parity.
-- **Motion & Micro-interactions:** Framer Motion (restrained Motion 5 setting, prefers-reduced-motion compliance, zero uninvited looping animations).
-- **Internationalization (i18n):** `i18next` with full English (`en`) and Polish (`pl`) parity, persisted via local storage and HTML lang sync.
-- **SEO & Structured Data:** `react-helmet-async` managing canonical routes, OpenGraph, Twitter Cards, Breadcrumbs, and JSON-LD `SoftwareApplication` metadata.
-- **Performance & Code-Splitting:** Dynamic `React.lazy()` route loading with `<Suspense>` fallbacks and fine-grained vendor chunk partitioning (`vendor-react`, `vendor-motion`, `vendor-icons`, `vendor-i18n`), reducing initial bundle size to under 180 kB.
-- **Accessibility:** WCAG AA/AAA compliant 44px minimum tap targets across all buttons and toggles, `focus-visible` focus rings, and screen-reader accessible copy buttons.
+The landing page frames updating a Mac as a flight director's go/no-go poll. Light theme is flight-plan paper, dark theme is the console room. Sections on the home page, in order:
+
+- `#poll`: hero with the poll console
+- `#rules`: flight rules
+- `#wall`: scroll-scrubbed wall display (Remotion, lazy-loaded)
+- `#stations`: flight plan table
+- `#coverage`: coverage roster, 43 internet apps and 11 update methods
+- `#log`: mission log with dated real runs
+- `#faq`: FAQ, shared with the `FAQPage` JSON-LD
+- `#install`: install close
+
+Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributing`. Every page also exists in Polish under `/pl`.
 
 ---
 
-## Project Structure
+## Stack
+
+- React 19, TypeScript 6, Vite 8, Tailwind CSS 4 (design tokens in `src/index.css`)
+- Motion (`motion/react`) for animation; respects `prefers-reduced-motion`
+- react-router-dom 7 with `StaticRouter` for prerender; react-helmet-async 3 for head tags
+- i18next and react-i18next for English and Polish
+- Self-hosted fonts: Archivo Variable and Martian Mono Variable (`@fontsource-variable`)
+- Remotion 4.0.530 (`remotion`, `@remotion/player`) for the wall display. It is loaded as a lazy chunk and never in the main entry bundle. Remotion is free for individuals and small teams (see remotion.dev/license); this is an individual open-source project.
+
+---
+
+## Commands
+
+```bash
+npm install        # Node >= 20
+npm run dev        # Vite dev server with HMR
+npm run build      # typecheck, client build, SSR build, prerender
+npm run preview    # serve the production build locally
+npm run lint       # ESLint
+```
+
+`npm run build` runs, in order:
+
+1. `tsc -b`
+2. `vite build` (client assets to `dist/`)
+3. `vite build --ssr src/entry-server.tsx --outDir dist-server`
+4. `node scripts/prerender.mjs`
+
+The prerender step must report every route in both languages. A missing `<!--app-head-->` or `<!--app-html-->` marker in `index.html` fails the build.
+
+---
+
+## Prerendering and /pl routing
+
+- Language comes only from the URL path. English lives at the root (`/docs`), Polish under `/pl` (`/pl/docs`). Route definitions are in `src/lib/routes.ts`; `src/lib/site.ts` holds the route list.
+- `src/entry-server.tsx` renders a route with React 19 `prerenderToNodeStream` and `StaticRouter`.
+- `scripts/prerender.mjs` writes `dist/<route>/index.html` and `dist/<route>.html` (Vercel `cleanUrls`), lifts the hoisted head tags into the template, writes `dist/404.html` (noindex) and generates `dist/sitemap.xml` from the same route list.
+- Each page's `<title>`, description, canonical, hreflang, Open Graph, Twitter tags and JSON-LD come from the `Seo` component (`src/components/Seo.tsx`). Hydration adopts the prerendered markup, so the page does not shift on load.
+
+---
+
+## SEO, structured data and agent discovery
+
+- **Per-route head:** title, description, canonical, hreflang (`en`, `pl`, `x-default`), Open Graph and Twitter tags.
+- **JSON-LD:** one `@graph` per page, built in `src/lib/jsonld.ts`: `WebSite`, publisher, `SoftwareApplication`, `SoftwareSourceCode`, page node, `BreadcrumbList`, and `FAQPage` or `HowTo` where a page has them. All version facts come from `src/lib/site.ts`.
+- **`index.html`** holds only the theme bootstrap, favicon and manifest links, and the two prerender markers. It contains no static JSON-LD and no version or count.
+- **Crawlers and agents:** `public/robots.txt` allows every crawler, with explicit groups for search, OpenAI, Anthropic, Perplexity, Google and Apple AI, and other AI assistants. `dist/sitemap.xml` is generated at build time with `hreflang` alternates. `public/llms.txt` is static; `public/llms-full.txt` has `{{APP_VERSION}}`, `{{APP_VERSION_DATE}}` and `{{TEST_COUNT}}` tokens that the prerender fills from `site.ts`.
+- **Headers and routing:** `vercel.json` sets clean URLs, no trailing slash, security headers, long cache on `/assets/*`, and `text/plain` for the llms files.
+
+---
+
+## Brand assets
+
+- Logo geometry lives in `src/components/ui/Logo.tsx` (64-unit grid). `scripts/og/build-brand.mjs` regenerates the mark, favicons, PWA icons, apple-touch-icon and the logo lockup in `public/` and `design_system/assets/`.
+  - Run `node scripts/og/build-brand.mjs`. It needs Inkscape for PNG export.
+  - Wordmark outlines come from `scripts/og/wordmark.json`. Run `scripts/og/build-wordmark.mjs` first if that file is missing.
+- The Open Graph image is `public/og-image.png`, rendered from `scripts/og/og.html` (1200 x 630) with headless Chrome.
+- The visual specification is `design_system/DESIGN.md`. It is the visual source of truth; token values are in `src/index.css`.
+
+---
+
+## Project structure
 
 ```
 macOS_updates_landing/
-├── public/                 # Static assets, favicon, manifest, robots.txt, sitemap.xml
+├── public/              # Icons, manifest, robots.txt, llms.txt, llms-full.txt, OG image, logo files
+├── scripts/
+│   ├── prerender.mjs    # Static prerender of every route in both languages, sitemap
+│   └── og/              # Brand asset and OG image generation (build-brand.mjs, og.html, wordmark)
+├── design_system/       # DESIGN.md (visual source of truth), assets, UI kits
 ├── src/
+│   ├── App.tsx          # Router, lazy route chunks, Suspense
+│   ├── entry-server.tsx # SSR and prerender entry (render(url), siteManifest)
+│   ├── main.tsx         # Browser entry, hydration
+│   ├── index.css        # Tailwind v4 theme, design tokens, radius (2px)
 │   ├── components/
-│   │   ├── docs/           # Wiki documentation submodules (Architecture, GettingStarted, etc.)
-│   │   ├── layout/         # Navbar, Footer, DocLayout, WikiLayout
-│   │   ├── sections/       # Hero, Features, HowItWorks, PlatformSupport, UpdatePipeline, etc.
-│   │   └── ui/             # Badge, Button, LanguageToggle, Logo, SectionReveal, TerminalBlock, ThemeToggle
-│   ├── hooks/              # useGitHubStats, useHtmlLang, useTheme
-│   ├── i18n/               # i18next configuration and bilingual locale files (en.json, pl.json)
-│   ├── lib/                # Single source of truth (site.ts), utils, FAQ data
-│   ├── pages/              # LandingPage, FeaturesPage, DocsPage, SecurityPage, ChangelogPage, ContributingPage
-│   ├── App.tsx             # Root router with Suspense-wrapped lazy routes
-│   ├── index.css           # Tailwind v4 theme, design tokens, responsive typography
-│   └── main.tsx            # Entry point with HelmetProvider and I18nextProvider
-├── index.html              # HTML shell with noscript fallbacks and JSON-LD schema
-├── vite.config.ts          # Vite 8 config with manual vendor chunking
-└── package.json            # Node >= 20 dependencies and scripts
+│   │   ├── Seo.tsx      # Per-route head tags and JSON-LD
+│   │   ├── sections/    # Home page sections (hero, poll, rules, stations, coverage, log, FAQ, install)
+│   │   ├── wall/        # Remotion wall display: section, lazy player, composition, labels
+│   │   ├── layout/      # Navbar, Footer, DocLayout, WikiLayout, TocPanel
+│   │   ├── docs/        # Wiki sections for the docs page
+│   │   └── ui/          # Button, Logo, LanguageToggle, ThemeToggle, TerminalBlock, etc.
+│   ├── hooks/           # useTheme, useHtmlLang, useGitHubStats
+│   ├── i18n/
+│   │   └── locales/     # en.json, pl.json (page copy); chrome.en.json, chrome.pl.json (UI chrome)
+│   ├── lib/
+│   │   ├── site.ts      # Site constants (single source of truth)
+│   │   ├── routes.ts    # Language-aware routing helpers
+│   │   ├── jsonld.ts    # JSON-LD @graph builder
+│   │   ├── pageLoaders.ts # Route chunk loaders (used by prerender)
+│   │   ├── seoContext.ts  # JSON-LD collector for SSR
+│   │   └── faq.ts       # FAQ items shared by the page and FAQPage JSON-LD
+│   └── pages/           # Landing, Features, Docs, Security, Changelog, Contributing, NotFound
+├── index.html           # HTML shell with the prerender markers
+├── vercel.json          # Clean URLs, headers, cache rules
+└── vite.config.ts       # Vite 8, vendor chunking
 ```
 
 ---
 
-## Getting Started
+## Deployment
 
-### Prerequisites
-
-- Node.js >= 20.0.0
-- npm >= 10.0.0
-
-### Installation
-
-```bash
-git clone https://github.com/KasprowiczM/macOS_updates_landing.git
-cd macOS_updates_landing
-npm install
-```
-
-### Development
-
-Start the local Vite development server with Hot Module Replacement (HMR):
-
-```bash
-npm run dev
-```
-
-### Production Build
-
-Typecheck and compile optimized static assets:
-
-```bash
-npm run build
-```
-
-Preview the production build locally:
-
-```bash
-npm run preview
-```
-
-### Linting
-
-Run ESLint with React Hooks and TypeScript rules:
-
-```bash
-npm run lint
-```
+Production deploys from the `main` branch on Vercel. `vercel.json` controls URL and header behavior. The static output is `dist/`, produced by `npm run build`.
 
 ---
 
-## Upstream Synchronization
+## Maintenance
 
-Site constants are governed by `src/lib/site.ts`:
-- `APP_VERSION`: Current upstream version (`v1.5.4`).
-- `APP_VERSION_DATE`: Upstream release date (`2026-10-05`).
-- `TEST_COUNT`: Number of passing upstream automated checks (`532`).
-- `INTERNET_APP_COUNT`: Canonical internet app registry size (`43`).
-- `UPDATE_METHOD_COUNT`: Distinct update handlers (`11`).
+Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
+
+- `APP_VERSION` (currently `v1.5.5`)
+- `APP_VERSION_DATE` (currently `2026-10-12`)
+- `TEST_COUNT` (currently `561`)
+- `INTERNET_APP_COUNT` (currently `43`)
+- `UPDATE_METHOD_COUNT` (currently `11`)
+
+JSON-LD, the sitemap and the `llms-full.txt` tokens follow automatically on the next build. Update these by hand so they match the release: the version badge above, `CHANGELOG.md`, the version and test count in `public/llms.txt` (a static file), and the copy in `src/i18n/locales/en.json`. Every English claim and test count in `en.json` needs a Polish counterpart in `pl.json`, and the same for `chrome.en.json` and `chrome.pl.json`. Then run `npm run build` and confirm the prerender reports all routes.
+
+Contributor and agent rules are in `AGENTS.md`.
 
 ---
 
 ## License
 
-MIT License. Copyright (c) 2026 macOS Updates Contributors.
+Released under the MIT License. Copyright (c) 2026 macOS Updates Contributors.

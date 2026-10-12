@@ -1,39 +1,65 @@
 import { type ReactNode, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import { useLocalizedPath } from '../../lib/routes'
+import { TocPanel, type TocSection } from './TocPanel'
 
 interface DocLayoutProps {
   title: string
   children: ReactNode
+  /** One-sentence lead under the title. */
+  lead?: string
+  /** In-page contents: rendered as a sticky console panel beside the text. */
+  toc?: TocSection[]
+  /** Heading of the contents panel. */
+  tocTitle?: string
 }
 
-export function DocLayout({ title, children }: DocLayoutProps) {
+/**
+ * Read mode: comprehension first. A 68ch measure, a quiet title, and an optional console
+ * side panel that follows the reader through the page.
+ */
+export function DocLayout({ title, children, lead, toc, tocTitle }: DocLayoutProps) {
+  const { t } = useTranslation()
+  const localize = useLocalizedPath()
+
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (!window.location.hash) window.scrollTo(0, 0)
   }, [])
 
   return (
-    <article className="min-h-screen pt-24 pb-16 px-6 md:px-12">
-      <div className="max-w-[800px] mx-auto">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-(--fg-muted) hover:text-(--fg) text-[14px] font-medium font-sans no-underline transition-colors mb-8"
-        >
-          <ArrowLeft size={16} />
-          Back to home
-        </Link>
+    <main id="main" className="mx-auto max-w-7xl px-4 pb-8 pt-8 sm:px-6 lg:px-8 lg:pt-12">
+      <div className={toc ? 'grid gap-x-12 gap-y-6 lg:grid-cols-[248px_minmax(0,1fr)]' : undefined}>
+        {toc && (
+          <aside className="order-2 lg:order-1 lg:row-span-2">
+            <TocPanel sections={toc} title={tocTitle} />
+          </aside>
+        )}
 
-        <h1
-          className="font-bold text-(--fg) font-sans tracking-tight mb-8"
-          style={{ fontSize: 'clamp(2rem, 3vw + 1rem, 3rem)', lineHeight: '1.1', letterSpacing: '-0.03em' }}
-        >
-          {title}
-        </h1>
+        <header className="order-1 lg:order-2 lg:col-start-2">
+          <Link
+            to={localize('/')}
+            className="mb-6 inline-flex min-h-[44px] items-center gap-2 text-[14px] font-medium text-(--fg-muted) no-underline hover:text-(--fg)"
+          >
+            <ArrowLeft size={16} aria-hidden="true" />
+            {t('chrome.doc.backHome')}
+          </Link>
+          <h1
+            className="m-0 max-w-[22ch] text-(--fg)"
+            style={{ fontSize: 'clamp(2.25rem, 3.4vw + 0.9rem, 3.75rem)', lineHeight: 1.03 }}
+          >
+            {title}
+          </h1>
+          {lead && <p className="mt-4 max-w-[60ch] text-[18px] leading-[1.55] text-(--fg-muted)">{lead}</p>}
+        </header>
 
-        <div className="doc-content font-sans text-(--fg-muted) text-[16px] leading-[1.7] space-y-6">
-          {children}
-        </div>
+        <article className="read order-3 min-w-0 pt-6 lg:col-start-2">
+          <div className="space-y-12 [&>section]:border-t [&>section]:border-(--rule) [&>section]:pt-8 [&>section:first-child]:border-t-0 [&>section:first-child]:pt-0">
+            {children}
+          </div>
+        </article>
       </div>
-    </article>
+    </main>
   )
 }

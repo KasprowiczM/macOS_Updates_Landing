@@ -17,22 +17,24 @@ const FALLBACK: Omit<GitHubStats, 'loading'> = {
 }
 
 export function useGitHubStats(): GitHubStats {
-  const [stats, setStats] = useState<GitHubStats>(() => {
-    if (typeof window === 'undefined') return { ...FALLBACK, loading: true }
-    const cached = localStorage.getItem(CACHE_KEY)
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached) as { data: Omit<GitHubStats, 'loading'>; ts: number }
-        if (Date.now() - parsed.ts < CACHE_TTL) {
-          return { ...parsed.data, loading: false }
-        }
-      } catch { /* ignore */ }
-    }
-    return { ...FALLBACK, loading: true }
-  })
+  // Initial state must be identical on the server (prerender) and the first client
+  // render so hydration never mismatches; the localStorage cache is read in the effect.
+  const [stats, setStats] = useState<GitHubStats>({ ...FALLBACK, loading: true })
 
   useEffect(() => {
     if (!stats.loading) return
+
+    try {
+      const cached = localStorage.getItem(CACHE_KEY)
+      if (cached) {
+        const parsed = JSON.parse(cached) as { data: Omit<GitHubStats, 'loading'>; ts: number }
+        if (Date.now() - parsed.ts < CACHE_TTL) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect -- post-hydration cache read
+          setStats({ ...parsed.data, loading: false })
+          return
+        }
+      }
+    } catch { /* ignore */ }
 
     const controller = new AbortController()
 

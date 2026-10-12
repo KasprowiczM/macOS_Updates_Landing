@@ -2,20 +2,20 @@ import { useTranslation } from 'react-i18next'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
 import { CodeBlock } from '../components/docs/WikiSection'
-import { SITE_URL } from '../lib/site'
+import { buildPageJsonLd } from '../lib/jsonld'
+import { useLang } from '../lib/routes'
 
 export function ContributingPage() {
   const { t, i18n } = useTranslation()
   const pl = i18n.language === 'pl'
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'macOS Updates', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: pl ? 'Współtworzenie' : 'Contributing', item: `${SITE_URL}/contributing` },
-    ],
-  }
+  const lang = useLang()
+  const jsonLd = buildPageJsonLd({
+    lang,
+    path: '/contributing',
+    name: t('seo.contributingTitle'),
+    description: t('seo.contributingDesc'),
+  })
 
   return (
     <>
@@ -23,14 +23,26 @@ export function ContributingPage() {
         title={t('seo.contributingTitle')}
         description={t('seo.contributingDesc')}
         path="/contributing"
-        lang={i18n.language}
-        jsonLd={breadcrumb}
+        lang={lang}
+        jsonLd={jsonLd}
       />
-      <DocLayout title={pl ? 'Jak kontrybuować' : 'Contributing'}>
-        <section>
-          <h2 className="text-(--fg) font-semibold text-[22px] tracking-tight mb-3">
-            {pl ? 'Zakres projektu' : 'Project Scope'}
-          </h2>
+      <DocLayout
+        title={pl ? 'Jak kontrybuować' : 'Contributing'}
+        lead={
+          pl
+            ? 'Najlepsze wkłady są małe, przetestowane i zgodne z istniejącymi modułami.'
+            : 'The best contributions are small, tested, and aligned with the existing modules.'
+        }
+        toc={[
+          { id: 'scope', label: pl ? 'Zakres projektu' : 'Project Scope' },
+          { id: 'setup', label: pl ? 'Konfiguracja lokalna' : 'Development Setup' },
+          { id: 'add-app', label: pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App' },
+          { id: 'structure', label: pl ? 'Struktura projektu' : 'Project Structure' },
+          { id: 'rules', label: pl ? 'Reguły kodu' : 'Code Rules' },
+        ]}
+      >
+        <section id="scope">
+          <h2>{pl ? 'Zakres projektu' : 'Project Scope'}</h2>
           <p>
             {pl
               ? 'macOS Updates jest updaterem dla Apple Silicon. Najbardziej wartościowe kontrybucje to nowe handlery aplikacji internetowych, testy registry, dokumentacja operacyjna i poprawki zgodności Bash 3.2.'
@@ -38,20 +50,16 @@ export function ContributingPage() {
           </p>
         </section>
 
-        <section>
-          <h2 className="text-(--fg) font-semibold text-[22px] tracking-tight mb-3">
-            {pl ? 'Konfiguracja lokalna' : 'Development Setup'}
-          </h2>
+        <section id="setup">
+          <h2>{pl ? 'Konfiguracja lokalna' : 'Development Setup'}</h2>
           <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git
 cd macOS_updates
 bash run_tests.sh
 bash update_all.sh --dry-run -y`}</CodeBlock>
         </section>
 
-        <section>
-          <h2 className="text-(--fg) font-semibold text-[22px] tracking-tight mb-3">
-            {pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}
-          </h2>
+        <section id="add-app">
+          <h2>{pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}</h2>
           <p>
             {pl
               ? 'Nowa aplikacja wymaga wpisu w publicznym registry, metody, funkcji handlera, dispatch order, i18n w siedmiu językach i testów.'
@@ -67,10 +75,8 @@ bash update_all.sh --dry-run -y`}</CodeBlock>
 bash run_tests.sh`}</CodeBlock>
         </section>
 
-        <section>
-          <h2 className="text-(--fg) font-semibold text-[22px] tracking-tight mb-3">
-            {pl ? 'Struktura projektu' : 'Project Structure'}
-          </h2>
+        <section id="structure">
+          <h2>{pl ? 'Struktura projektu' : 'Project Structure'}</h2>
           <CodeBlock title="macOS_updates/">{`install.sh                    # one-line public installer
 setup.sh                      # public setup without cloud overlay
 migration_setup.sh            # owner setup + cloud wizard
@@ -88,10 +94,8 @@ dev_sync/                     # private overlay backend
 tests/                        # safety/static tests`}</CodeBlock>
         </section>
 
-        <section>
-          <h2 className="text-(--fg) font-semibold text-[22px] tracking-tight mb-3">
-            {pl ? 'Reguły kodu' : 'Code Rules'}
-          </h2>
+        <section id="rules">
+          <h2>{pl ? 'Reguły kodu' : 'Code Rules'}</h2>
           <ul className="space-y-2">
             <li>{pl ? 'Bash 3.2 tylko: bez declare -A, mapfile i readarray.' : 'Bash 3.2 only: no declare -A, mapfile, or readarray.'}</li>
             <li>{pl ? 'Nie dodawaj nowych samodzielnych plików .py do pipeline aktualizacji.' : 'Do not add new standalone .py files to the update pipeline.'}</li>

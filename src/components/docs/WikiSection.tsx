@@ -1,73 +1,49 @@
-import { useState, useCallback, type ReactNode } from 'react'
-import { Check, Copy } from 'lucide-react'
+import { type ReactNode } from 'react'
+import { cn } from '../../lib/utils'
+import { CopyButton } from '../ui/CopyButton'
 
 interface Props {
   id: string
   title: string
   children: ReactNode
+  /** 2 = group-level heading, 3 = a section inside a group (default). */
   level?: 2 | 3
 }
 
-export function WikiSection({ id, title, children, level = 2 }: Props) {
+export function WikiSection({ id, title, children, level = 3 }: Props) {
   const Tag = level === 2 ? 'h2' : 'h3'
-  const size = level === 2 ? 'text-[22px]' : 'text-[18px]'
-  const border = level === 2 ? 'border-t border-(--border) pt-10' : ''
   return (
-    <section id={id} className={`scroll-mt-28 ${border}`}>
-      <Tag className={`text-(--fg) font-semibold ${size} tracking-tight mb-4 font-sans`}>
-        {title}
-      </Tag>
+    <section id={id} className="scroll-mt-24">
+      <Tag>{title}</Tag>
       <div className="space-y-4">{children}</div>
     </section>
   )
 }
 
+/** A command or file listing on a dark instrument screen, with a 44px copy control. */
 export function CodeBlock({ children, title }: { children: string; title?: string }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(children)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch { /* clipboard not available */ }
-  }, [children])
-
   return (
-    <div className="relative group rounded-md bg-(--code-bg) border border-[rgba(255,255,255,0.06)] overflow-hidden">
-      {/* Window chrome */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-[rgba(255,255,255,0.06)]">
-        <span className="w-2.5 h-2.5 rounded-full bg-status-err opacity-70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-status-warn opacity-70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-status-ok opacity-70" />
-        {title && (
-          <span className="ml-3 text-[11px] font-mono text-(--code-dim)">
-            {title}
-          </span>
-        )}
+    <div className="screen overflow-hidden">
+      <div className="flex items-stretch border-b border-(--screen-rule)">
+        <p className="placard m-0 flex min-h-[44px] max-w-none min-w-0 flex-1 items-center truncate px-4 text-(--screen-dim)">{title ?? ' '}</p>
+        <CopyButton text={children} />
       </div>
-
-      <div className="px-5 py-4 font-mono text-[13px] leading-[1.6] text-(--code-fg) whitespace-pre-wrap overflow-x-auto">
-        {children}
-      </div>
-
-      {/* Copy button */}
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-sm bg-[rgba(255,255,255,0.06)] text-(--code-dim) hover:text-(--code-fg) hover:bg-[rgba(255,255,255,0.1)] transition-all duration-(--dur-2) opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-strong) cursor-pointer border-0"
-        aria-label={copied ? 'Copied!' : 'Copy to clipboard'}
+      <pre
+        tabIndex={0}
+        className="readout m-0 overflow-x-auto px-4 py-3.5 text-[13px] leading-[1.7] whitespace-pre text-(--screen-fg)"
       >
-        {copied ? <Check size={14} className="text-(--ok)" /> : <Copy size={14} />}
-      </button>
+        {children}
+      </pre>
     </div>
   )
 }
 
+/** Small bordered console panel for a short fact (requirements, languages). */
 export function InfoCard({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="rounded-md border border-(--border) bg-(--bg-elev) p-5">
-      <h4 className="text-(--fg) font-semibold text-[15px] mb-2 font-sans">{title}</h4>
-      <div className="text-[14px] leading-[1.6] text-(--fg-muted)">{children}</div>
+    <div className="rounded-sm border border-(--rule-strong) bg-(--bg-elev)">
+      <h4 className="placard m-0 border-b border-(--rule) bg-(--bg-sunk) px-4 py-2 text-(--fg)">{title}</h4>
+      <div className="px-4 py-3 text-[15px] leading-[1.6] text-(--fg-muted) [&>p]:m-0">{children}</div>
     </div>
   )
 }
@@ -77,22 +53,36 @@ interface TableProps {
   rows: (string | ReactNode)[][]
 }
 
+const CODE_LIKE = /(\.sh\b|\.py\b|\.txt\b|^bash |^sudo |^softwareupdate|^mas |--[a-z]|^[A-Z_]{4,}$)/
+
+/** Reference table: placard column heads, hairline rows, command-like cells set in mono. */
 export function DocTable({ headers, rows }: TableProps) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-[14px] border-collapse">
+    <div className="max-w-full overflow-x-auto rounded-sm border border-(--rule-strong) bg-(--bg-elev)" tabIndex={0}>
+      <table className="w-full border-collapse text-left text-[15px]">
         <thead>
-          <tr className="border-b border-(--border)">
+          <tr className="border-b border-(--rule-strong) bg-(--bg-sunk)">
             {headers.map((h, i) => (
-              <th key={i} className="text-left py-3 pr-4 font-semibold text-(--fg) font-sans">{h}</th>
+              <th key={i} scope="col" className="placard px-4 py-2.5 text-left text-(--fg)">
+                {h}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-b border-(--border)">
+            <tr key={i} className="border-b border-(--rule) last:border-b-0">
               {row.map((cell, j) => (
-                <td key={j} className="py-3 pr-4">{cell}</td>
+                <td
+                  key={j}
+                  className={cn(
+                    'px-4 py-2.5 align-top',
+                    j === 0 && 'font-semibold text-(--fg)',
+                    typeof cell === 'string' && CODE_LIKE.test(cell) && 'readout text-[13px] font-medium break-words [overflow-wrap:anywhere]',
+                  )}
+                >
+                  {cell}
+                </td>
               ))}
             </tr>
           ))}
