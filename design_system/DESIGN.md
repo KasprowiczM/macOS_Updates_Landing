@@ -1,6 +1,6 @@
 # macOS Updates: Design System ("Mission Control")
 
-Source of truth for the visual world of macosupdates.dev since landing v1.5.5 (2026-10-12).
+Source of truth for the visual world of macos-updates.64bit.site since landing v1.5.5 (2026-10-12).
 Implementation lives in `src/index.css` (tokens and world utilities); this file documents it.
 
 ## Idea

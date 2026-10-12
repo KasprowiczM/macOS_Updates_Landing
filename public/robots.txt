@@ -1,13 +1,13 @@
-# macOS Updates - https://macosupdates.dev
+# macOS Updates - https://macos-updates.64bit.site
 #
 # Every public page is prerendered static HTML (English at /, Polish under /pl),
 # so crawlers and AI agents that do not run JavaScript get the full content.
 #
 # Machine-readable summaries for AI answer engines:
-#   llms.txt       https://macosupdates.dev/llms.txt
-#   llms-full.txt  https://macosupdates.dev/llms-full.txt
+#   llms.txt       https://macos-updates.64bit.site/llms.txt
+#   llms-full.txt  https://macos-updates.64bit.site/llms-full.txt
 # Sitemap with hreflang alternates (en, pl):
-#   https://macosupdates.dev/sitemap.xml
+#   https://macos-updates.64bit.site/sitemap.xml
 
 User-agent: *
 Allow: /
@@ -81,4 +81,4 @@ Allow: /
 # xAI / Grok: no officially documented crawler token was found at the time of writing,
 # so Grok is covered by the "User-agent: *" group above.
 
-Sitemap: https://macosupdates.dev/sitemap.xml
+Sitemap: https://macos-updates.64bit.site/sitemap.xml

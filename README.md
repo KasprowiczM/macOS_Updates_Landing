@@ -4,7 +4,7 @@
 [![Tests](https://img.shields.io/badge/tests-561%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macosupdates.dev](https://macosupdates.dev).
+The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macos-updates.64bit.site](https://macos-updates.64bit.site).
 
 The site is static: no backend and no secrets. Every page is prerendered at build time, then hydrated in the browser.
 

@@ -4,7 +4,7 @@
  * All values are from the project Ground-Truth Facts — do NOT deviate.
  */
 
-export const SITE_URL = 'https://macosupdates.dev'
+export const SITE_URL = 'https://macos-updates.64bit.site'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 

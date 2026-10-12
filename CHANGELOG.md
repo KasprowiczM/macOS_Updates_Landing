@@ -1,9 +1,14 @@
 # Changelog — macOS Updates Landing Page
 
-All notable changes to the **macOS Updates Landing Page** (`macosupdates.dev`) are documented here.
+All notable changes to the **macOS Updates Landing Page** (`macos-updates.64bit.site`) are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
+
+## [Unreleased]
+
+### Fixed
+- **Canonical domain:** `SITE_URL` now points to the live production domain `macos-updates.64bit.site`. Canonical and `og:url` tags, hreflang alternates, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt` and `llms-full.txt` no longer reference the unregistered `macosupdates.dev`.
 
 ## [1.5.5] - 2026-10-12
 

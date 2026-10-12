@@ -2,7 +2,7 @@
 
 > macOS Updates is a free, open-source (MIT) one-command update orchestrator for Apple Silicon Macs running macOS 13 to 27. One run updates macOS, Mac App Store apps, Homebrew formulae and casks, native CLI tools plus npm globals, and 43 internet-downloaded apps. It only touches software that is already installed, never closes apps you have open, checks every app's version against the vendor's own feed before acting, verifies vendor downloads, and reports a result only after the live Mac confirms it.
 
-This file is the long-form companion to https://macosupdates.dev/llms.txt. All statements come from the project's own documentation (README, CHANGELOG, docs/). Current release: {{APP_VERSION}} ({{APP_VERSION_DATE}}). The site is published in English at https://macosupdates.dev and in Polish under https://macosupdates.dev/pl.
+This file is the long-form companion to https://macos-updates.64bit.site/llms.txt. All statements come from the project's own documentation (README, CHANGELOG, docs/). Current release: {{APP_VERSION}} ({{APP_VERSION_DATE}}). The site is published in English at https://macos-updates.64bit.site and in Polish under https://macos-updates.64bit.site/pl.
 
 ## Quick facts
 
@@ -13,7 +13,7 @@ This file is the long-form companion to https://macosupdates.dev/llms.txt. All s
 - Quality gate: {{TEST_COUNT}} automated tests (shell syntax, Python compilation, static safety contracts, unit and registry-parity tests, secret scan).
 - Terminal UI languages: English, Polish, German, French, Spanish, Italian, Portuguese.
 - [Source code](https://github.com/KasprowiczM/macOS_updates)
-- Documentation: https://macosupdates.dev/docs, features: https://macosupdates.dev/features, security policy: https://macosupdates.dev/security, changelog: https://macosupdates.dev/changelog, contributing: https://macosupdates.dev/contributing
+- Documentation: https://macos-updates.64bit.site/docs, features: https://macos-updates.64bit.site/features, security policy: https://macos-updates.64bit.site/security, changelog: https://macos-updates.64bit.site/changelog, contributing: https://macos-updates.64bit.site/contributing
 
 ## Who it is for
 
@@ -171,7 +171,7 @@ The LaunchAgent runs `update_all.sh -y --skip-system` with non-interactive mode 
 - v1.4.1 (2026-08-19): post-migration hardening after the first full run on a new Mac.
 - v1.4.0 (2026-08-14): shared version utilities, Python inventory and run-summary modules, configurable inventory exclusions.
 
-Full history: https://macosupdates.dev/changelog and https://github.com/KasprowiczM/macOS_updates/blob/main/CHANGELOG.md
+Full history: https://macos-updates.64bit.site/changelog and https://github.com/KasprowiczM/macOS_updates/blob/main/CHANGELOG.md
 
 ## FAQ
 
@@ -210,12 +210,12 @@ A: No. Apple Silicon and macOS 13 or later only.
 
 ## Links
 
-- Website: https://macosupdates.dev (English), https://macosupdates.dev/pl (Polish)
-- [Documentation](https://macosupdates.dev/docs)
-- [Features](https://macosupdates.dev/features)
-- [Security policy](https://macosupdates.dev/security)
-- [Changelog](https://macosupdates.dev/changelog)
-- [Contributing](https://macosupdates.dev/contributing)
-- [Short summary for LLMs](https://macosupdates.dev/llms.txt)
-- [Sitemap](https://macosupdates.dev/sitemap.xml)
+- Website: https://macos-updates.64bit.site (English), https://macos-updates.64bit.site/pl (Polish)
+- [Documentation](https://macos-updates.64bit.site/docs)
+- [Features](https://macos-updates.64bit.site/features)
+- [Security policy](https://macos-updates.64bit.site/security)
+- [Changelog](https://macos-updates.64bit.site/changelog)
+- [Contributing](https://macos-updates.64bit.site/contributing)
+- [Short summary for LLMs](https://macos-updates.64bit.site/llms.txt)
+- [Sitemap](https://macos-updates.64bit.site/sitemap.xml)
 - [Source code and issues](https://github.com/KasprowiczM/macOS_updates)
