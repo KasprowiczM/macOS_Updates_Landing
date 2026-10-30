@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Run tests and secret scans",
-      "desc": "run_tests.sh runs 561 static, unit, registry-parity, and gitleaks checks before a change ships."
+      "desc": "run_tests.sh runs 600 static, unit, registry-parity, and gitleaks checks before a change ships."
     },
     "multihost": {
       "title": "Seven-language UI",
@@ -324,8 +324,8 @@
     "lead": "Every entry is a real release or a real run. Nothing here is a benchmark.",
     "entries": {
       "release": {
-        "title": "v1.5.5 released",
-        "body": "Ships with {{tests}} automated tests. A Homebrew upgrade that removes python3 mid-run no longer breaks the report step, and a failed report no longer postpones macOS updates."
+        "title": "v1.5.5 follow-up updates",
+        "body": "Ships with {{tests}} automated tests. Managed Node.js pins to stable releases, declined automatic restarts exit cleanly without error, App Store Track 2 adds polling and product page fallbacks, and tests run behind host-tool guards."
       },
       "live": {
         "title": "Live run: two updates verified",

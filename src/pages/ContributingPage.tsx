@@ -82,9 +82,9 @@ setup.sh                      # public setup without cloud overlay
 migration_setup.sh            # owner setup + cloud wizard
 build_inventory.sh            # builds APPLICATIONS.md from this Mac
 update_all.sh                 # seven-step orchestrator
-update_system.sh              # softwareupdate -i <label> -R
-update_appstore.sh            # sudo mas + AppleScript fallback
-update_npm_cli.sh             # Node, Bun, npm global CLIs
+update_system.sh              # softwareupdate -i <label> -R (declined restart exits 10)
+update_appstore.sh            # sudo mas (Track 1) + AppleScript Track 2 for iPad apps
+update_npm_cli.sh             # stable Node, Bun, npm global CLIs
 update_brew.sh                # Homebrew layer
 update_internet_apps.sh       # internet app handlers
 config/                       # public app registry and methods
@@ -99,7 +99,10 @@ tests/                        # safety/static tests`}</CodeBlock>
           <ul className="space-y-2">
             <li>{pl ? 'Bash 3.2 tylko: bez declare -A, mapfile i readarray.' : 'Bash 3.2 only: no declare -A, mapfile, or readarray.'}</li>
             <li>{pl ? 'Nie dodawaj nowych samodzielnych plików .py do pipeline aktualizacji.' : 'Do not add new standalone .py files to the update pipeline.'}</li>
-            <li>{pl ? 'softwareupdate musi mieć -R; mas upgrade musi mieć sudo.' : 'softwareupdate must keep -R; mas upgrade must use sudo.'}</li>
+            <li>{pl ? 'softwareupdate musi mieć -R (odrzucony restart instaluje pakiety bez restartu i kończy kodem 10); mas upgrade musi mieć sudo.' : 'softwareupdate must keep -R (declined restart installs no-restart labels and exits 10); mas upgrade must use sudo.'}</li>
+            <li>{pl ? 'Zarządzany Node.js musi wybierać wyłącznie stabilne wydania vX.Y.Z z nodejs.org/dist/index.json (brak wydań alpha).' : 'Managed Node.js must select only stable vX.Y.Z releases from nodejs.org/dist/index.json (no alpha releases).'}</li>
+            <li>{pl ? 'Brama licencji Xcode weryfikuje licencję przez xcodebuild -license check.' : 'Xcode gate verifies license via xcodebuild -license check.'}</li>
+            <li>{pl ? 'Wersje wydań macOS_updates i Ascendo postępują wspólnie w modelu lockstep od v1.5.5.' : 'Release versions of macOS_updates and Ascendo proceed in lockstep from v1.5.5.'}</li>
             <li>{pl ? 'Nie commituj APPLICATIONS.md, UPDATES.md, .env ani plików dev_sync config.' : 'Do not commit APPLICATIONS.md, UPDATES.md, .env, or dev_sync config files.'}</li>
           </ul>
         </section>

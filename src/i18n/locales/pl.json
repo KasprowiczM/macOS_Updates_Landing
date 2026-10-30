@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Testy i scan sekretów",
-      "desc": "run_tests.sh uruchamia 561 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
+      "desc": "run_tests.sh uruchamia 600 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
     },
     "multihost": {
       "title": "UI w 7 językach",
@@ -324,8 +324,8 @@
     "lead": "Każdy wpis to prawdziwe wydanie albo prawdziwy przebieg. Nic tu nie jest benchmarkiem.",
     "entries": {
       "release": {
-        "title": "Wydanie v1.5.5",
-        "body": "Dostarczone z {{tests}} testami automatycznymi. Aktualizacja Homebrew, która usuwa python3 w trakcie przebiegu, nie psuje już kroku raportu, a nieudany raport nie odkłada już aktualizacji macOS."
+        "title": "Aktualizacje uzupełniające v1.5.5",
+        "body": "Dostarczone z {{tests}} testami automatycznymi. Zarządzany Node.js przypina wersje stabilne, odrzucony restart systemu kończy się czysto bez błędu, App Store Track 2 zyskuje odpytywanie i fallbacki, a testy działają za strażnikami narzędzi."
       },
       "live": {
         "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",

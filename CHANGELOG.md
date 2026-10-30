@@ -7,6 +7,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- **Upstream Ground-Truth Synchronization (2026-10-30):**
+  - Updated `APP_VERSION_DATE` to `2026-10-30` and `TEST_COUNT` to 600 automated tests.
+  - Documented lockstep versioning policy between macOS Updates and Ascendo starting from v1.5.5.
+  - Synchronized site documentation, guides, security boundaries, and changelog across all pages:
+    - Managed Node.js pins strictly to stable releases from nodejs.org/dist/index.json, rejecting alpha builds.
+    - Declined automatic restarts skip restart labels, install no-restart labels, record `system_skipped_by_user`, and exit 10.
+    - App Store Track 2 polls up to 30s, falls back to individual product pages, and emits a non-blocking soft warning exit 10 for unoffered iPad apps.
+    - Staged rollout channels verified via `config/vendor_appcasts.txt` without false stale-feed warnings.
+    - Host-tool isolation stubs in `run_tests.sh` to prevent unit tests from calling live host tools.
+    - Locale overrides invoke through `env LANG=C LC_ALL=C softwareupdate -l` to prevent bash setlocale crashes.
+    - Xcode gate verifies license via `xcodebuild -license check`.
+  - Synchronized `README.md`, `AGENTS.md`, `public/llms.txt`, and `public/llms-full.txt`.
+
 ### Fixed
 - **Canonical domain:** `SITE_URL` now points to the live production domain `macos-updates.64bit.site`. Canonical and `og:url` tags, hreflang alternates, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt` and `llms-full.txt` no longer reference the unregistered `macosupdates.dev`.
 

@@ -17,12 +17,48 @@ interface Release {
 const RELEASES: Release[] = [
   {
     version: 'v1.5.5',
-    date: '2026-10-12',
+    date: '2026-10-30',
     summary: {
-      en: 'A Homebrew upgrade that removes python3 mid-run no longer breaks reporting, reporting failures no longer postpone macOS updates, and toolkit-launched apps are asked to quit repeatedly but never force-killed.',
-      pl: 'Aktualizacja Homebrew, która usuwa python3 w trakcie biegu, nie psuje już kroku raportowania, błędy raportowania nie odraczają aktualizacji macOS, a aplikacje uruchomione przez toolkit są wielokrotnie proszone o zamknięcie, ale nigdy nie są zamykane siłą.',
+      en: 'A Homebrew upgrade that removes python3 mid-run no longer breaks reporting, reporting failures no longer postpone macOS updates, toolkit-launched apps are asked to quit repeatedly but never force-killed, and comprehensive follow-ups harden Node.js stable pinning, declined restart safety, App Store Track 2 polling, Proton Drive rollout detection, and host-tool test guards.',
+      pl: 'Aktualizacja Homebrew, która usuwa python3 w trakcie biegu, nie psuje już kroku raportowania, błędy raportowania nie odraczają aktualizacji macOS, aplikacje uruchomione przez toolkit są wielokrotnie proszone o zamknięcie, ale nigdy nie są zamykane siłą, a kompleksowe aktualizacje uzupełniające utwardzają przypinanie stabilnych wersji Node.js, bezpieczną obsługę odrzuconego restartu, odpytywanie w App Store Track 2, wykrywanie kanałów rolloutu Proton Drive i strażniki narzędzi w testach.',
     },
     fixed: [
+      {
+        en: 'Managed Node.js pins strictly to stable releases. lib/python/node_releases.py selects the newest stable vX.Y.Z from nodejs.org/dist/index.json, and n installs that exact version to prevent installing pre-release or alpha builds (such as v27.0.0-alpha).',
+        pl: 'Zarządzany Node.js przypina wyłącznie wersje stabilne. lib/python/node_releases.py wybiera najnowsze stabilne wydanie vX.Y.Z z nodejs.org/dist/index.json, a n instaluje tę dokładną wersję, zapobiegając instalacji wydań testowych lub alpha (takich jak v27.0.0-alpha).',
+      },
+      {
+        en: 'Declining an automatic restart no longer fails the run. Answering no to the restart prompt installs no-restart labels, skips restart-required labels without running them without -R, records system_skipped_by_user, and exits 10 with a localized message (L_SYSTEM_RESTART_DECLINED_FMT in seven languages).',
+        pl: 'Odrzucenie automatycznego restartu nie powoduje już błędu całego przebiegu. Odpowiedź odmowna instaluje etykiety niewymagające restartu, pomija te wymagające restartu bez wywoływania ich bez flagi -R, zapisuje system_skipped_by_user i kończy bieg kodem 10 ze zlokalizowanym komunikatem (L_SYSTEM_RESTART_DECLINED_FMT w siedmiu językach).',
+      },
+      {
+        en: 'OpenCode Desktop feed migrated to Electron. The updater switches from the deprecated Tauri feed to latest-mac.yml, prefers arm64 zip archives in multi-architecture feeds, and resolves relative download URLs cleanly.',
+        pl: 'Kanał wydań OpenCode Desktop zmigrowany do formatu Electron. Updater przechodzi z wycofanego kanału Tauri na latest-mac.yml, preferuje archiwa arm64 zip w feedach wieloarchitekturowych i poprawnie rozwiązuje względne adresy URL.',
+      },
+      {
+        en: 'Terminal status visibility in vendor truth checks. The current, stale-feed, unknown, and dry-run branches of internet_handler_vendor_truth now explicitly print their status instead of leaving empty application sections.',
+        pl: 'Widoczność statusu w terminalu podczas weryfikacji dostawców. Gałęzie stanu aktualnego, nieświeżego kanału, nieznanego oraz dry-run w internet_handler_vendor_truth jawnie wypisują swój status zamiast pozostawiać puste sekcje aplikacji.',
+      },
+      {
+        en: 'App Store Track 2 polling and fallback. The AppleScript polls the Updates page for up to 30 seconds across name, description, and title attributes, refreshes once (Cmd+R), falls back to opening individual product pages, and emits a non-blocking soft warning (L_APPSTORE_IOS_NOT_OFFERED_FMT, exit 10) when the store does not offer a pending iPad app.',
+        pl: 'Odpytywanie i fallbacki w App Store Track 2. AppleScript odpytuje stronę uaktualnień do 30 sekund sprawdzając atrybuty name, description i title, odświeża stronę raz (Cmd+R), przechodzi awaryjnie do otwierania stron produktów i zgłasza nieblokujące miękkie ostrzeżenie (L_APPSTORE_IOS_NOT_OFFERED_FMT, kod 10), gdy sklep nie oferuje jeszcze oczekującej aplikacji dla iPada.',
+      },
+      {
+        en: 'Proton Drive gradual-rollout channel proof. When the primary feed is older than the installed app, internet_handler_vendor_truth cross-checks the appcast in config/vendor_appcasts.txt to verify staged rollout builds as current without false stale-feed warnings. Rollout builds are never treated as install targets.',
+        pl: 'Weryfikacja kanału stopniowego wdrażania Proton Drive. Gdy główny kanał jest starszy niż zainstalowana aplikacja, internet_handler_vendor_truth weryfikuje appcast z config/vendor_appcasts.txt, aby potwierdzić etapowy rollout jako stan aktualny bez fałszywych ostrzeżeń. Wersje z rolloutu nigdy nie stają się celem instalacji.',
+      },
+      {
+        en: 'Honest final banner for feed-only warnings. When the only cause of a degraded run is a manufacturer feed warning and no updates are unverified or pending, update_all.sh prints L_ALL_WARNINGS_ONLY in all seven languages.',
+        pl: 'Uczciwy baner końcowy przy ostrzeżeniach kanałów producentów. Gdy jedyną przyczyną obniżonego statusu jest ostrzeżenie o feedzie producenta i żadne aktualizacje nie pozostają niepotwierdzone ani oczekujące, update_all.sh wypisuje L_ALL_WARNINGS_ONLY we wszystkich siedmiu językach.',
+      },
+      {
+        en: 'Fixed intermittent softwareupdate -l crash (exit 139). Subshell locale overrides with Homebrew bash 5.3 and gettext on macOS 27 crashed in setlocale(). Both calls now invoke through env LANG=C LC_ALL=C softwareupdate -l, protected by a static safety guard.',
+        pl: 'Naprawiono sporadyczny błąd softwareupdate -l (kod 139). Nadpisywanie zmiennych lokalizacyjnych w podpowłoce przy użyciu Homebrew bash 5.3 i gettext na macOS 27 powodowało awarię w setlocale(). Oba wywołania korzystają teraz z env LANG=C LC_ALL=C softwareupdate -l, chronione przez statyczny test bezpieczeństwa.',
+      },
+      {
+        en: 'Profile backups created only on real content changes. Backups of ~/.zshrc and ~/.npmrc and their terminal notices appear only when file contents actually change, and .npmrc prefix cleanup runs only when prefix or globalconfig directives are present.',
+        pl: 'Kopie zapasowe profili tworzone tylko przy rzeczywistej zmianie treści. Kopie ~/.zshrc i ~/.npmrc oraz powiadomienia w terminalu pojawiają się tylko wtedy, gdy zawartość ulega zmianie, a czyszczenie .npmrc uruchamia się wyłącznie w obecności wpisów prefix lub globalconfig.',
+      },
       {
         en: 'A Homebrew upgrade that removed python3 mid-run left bash with a stale command hash, so the inventory and run-summary steps failed. Every orchestrator now enables checkhash, and update_all.sh clears the hash table with hash -r before steps 2 to 5.',
         pl: 'Aktualizacja Homebrew, która usunęła python3 w trakcie biegu, pozostawiła bash z nieaktualną zapamiętaną ścieżką polecenia, przez co kroki inwentarza i zapisu podsumowania kończyły się błędem. Wszystkie orkiestratory włączają teraz checkhash, a update_all.sh czyści tablicę poleceń przez hash -r przed krokami od 2 do 5.',
@@ -50,15 +86,31 @@ const RELEASES: Release[] = [
     ],
     changed: [
       {
-        en: 'The automated suite grows to 561 tests (532 in v1.5.4).',
-        pl: 'Zestaw zautomatyzowanych testów liczy teraz 561 testów (532 w v1.5.4).',
+        en: 'The automated suite grows to 600 tests (532 in v1.5.4, 561 on 2026-10-12).',
+        pl: 'Zestaw zautomatyzowanych testów liczy teraz 600 testów (532 w v1.5.4, 561 w dniu 2026-10-12).',
       },
       {
-        en: 'Live evidence from 2026-10-11: App Store Track 2 (UniFi 10.38.1 to 11.0.0), a verified vendor install (OpenCode Desktop 1.18.35 to 1.19.0), and toolkit-launched native updaters for Claude Desktop 2.31226.1 and Warp. The macOS system step was skipped by the bug, so the system and restart path remains unaccepted.',
-        pl: 'Dowody z przebiegu na żywo z 11 października 2026 r.: aplikacja App Store z Toru 2 (UniFi 10.38.1 do 11.0.0), zweryfikowana instalacja od producenta (OpenCode Desktop 1.18.35 do 1.19.0) oraz natywne updatery uruchomione przez toolkit dla Claude Desktop 2.31226.1 i Warp. Krok systemowy macOS został pominięty z powodu tego błędu, więc ścieżka systemowa i restartu pozostaje niezaakceptowana.',
+        en: 'Documented lockstep versioning policy with Ascendo. Release versions of macOS Updates and Ascendo proceed in lockstep starting from v1.5.5, with parity ports sharing identical release version numbers.',
+        pl: 'Udokumentowano politykę wersjonowania lockstep z projektem Ascendo. Numery wydań macOS Updates i Ascendo postępują wspólnie począwszy od v1.5.5, a porty spójności dzielą identyczne oznaczenia wersji.',
+      },
+      {
+        en: 'Documentation updated to reflect that the Xcode license gate is xcodebuild -license check (the previously documented -checkFirstLaunchStatus flag returned exit 69 on a licensed Xcode 27.2).',
+        pl: 'Dokumentacja zaktualizowana: bramą licencji Xcode jest xcodebuild -license check (wcześniej dokumentowana flaga -checkFirstLaunchStatus zwracała kod 69 na licencjonowanym Xcode 27.2).',
+      },
+      {
+        en: 'Live evidence from 2026-10-11 to 2026-10-30: App Store Track 2 (UniFi), verified vendor updates (KeePassXC 2.7.12 to 2.8.0, OpenCode Desktop 1.18.35 to 1.19.0), stable CLI toolchain verification across macOS 27.0.1 and macOS 27.2, and clean exit status across all 11 vendor feeds.',
+        pl: 'Dowody z przebiegów na żywo od 2026-10-11 do 2026-10-30: App Store Track 2 (UniFi), zweryfikowane aktualizacje od producentów (KeePassXC 2.7.12 do 2.8.0, OpenCode Desktop 1.18.35 do 1.19.0), weryfikacja stabilnego toolchaina CLI na macOS 27.0.1 i macOS 27.2 oraz czyste statusy we wszystkich 11 kanałach producentów.',
       },
     ],
     added: [
+      {
+        en: 'Host-tool isolation guard in run_tests.sh. The unittest step runs with closed stdin and a guard directory containing failing stubs for softwareupdate, mas, brew, msupdate, installer, sudo, launchctl, docker, and killall behind mocks to prevent tests from reaching live native tools.',
+        pl: 'Strażnik izolacji narzędzi systemowych w run_tests.sh. Krok testów jednostkowych działa z zamkniętym wejściem stdin i katalogiem atrap dla softwareupdate, mas, brew, msupdate, installer, sudo, launchctl, docker oraz killall umieszczonym za mockami, zapobiegając sięganiu testów do rzeczywistych narzędzi hosta.',
+      },
+      {
+        en: 'Regression and unit test coverage expanded: tests/test_run_log_regressions_20261025.py covers appcast channels, Track 2 fallbacks, and profile sync idempotency; tests/test_node_releases.py covers stable Node.js selection; tests/test_system_step.py covers declined restarts.',
+        pl: 'Rozszerzone pokrycie testami regresyjnymi i jednostkowymi: tests/test_run_log_regressions_20261025.py pokrywa kanały appcastów, fallbacki Track 2 i idempotencję synchronizacji profilu; tests/test_node_releases.py sprawdza wybór stabilnego Node.js; tests/test_system_step.py weryfikuje odrzucenie restartu.',
+      },
       {
         en: 'New regression tests in tests/test_run_log_regressions_20261011.py cover checkhash with a vanishing python3, the non-blocking inventory step, the conditional "files updated" message, summary failures, repeated quit with a stubbed osascript, and warning wording. A static checkhash guard was added to test_safety_static.py.',
         pl: 'Nowe testy regresyjne w tests/test_run_log_regressions_20261011.py obejmują checkhash przy znikającym python3, nieblokujący krok inwentarza, warunkowy komunikat o zaktualizowanych plikach, błędy podsumowania, powtarzane żądanie zamknięcia z atrapą osascript oraz brzmienie ostrzeżeń. Statyczny strażnik checkhash dodano do test_safety_static.py.',
