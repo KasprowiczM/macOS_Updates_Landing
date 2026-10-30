@@ -19,8 +19,12 @@ bash run_tests.sh`}</CodeBlock>
           rows={[
             ['Bash', 'Bash 3.2 only; no declare -A, mapfile, readarray'],
             ['Paths', 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"'],
-            ['macOS update', 'softwareupdate must keep -R'],
-            ['App Store', 'mas upgrade must run through sudo'],
+            ['macOS update', 'softwareupdate must keep -R; declined restart installs no-restart labels and exits 10'],
+            ['App Store', 'Track 1: sudo mas upgrade; Track 2: AppleScript polls up to 30s with product-page fallback and exit 10 for unoffered apps'],
+            ['Node.js', 'Managed Node.js selects newest stable vX.Y.Z from nodejs.org/dist/index.json (never alpha or pre-release)'],
+            ['macOS 27 & Locale', 'Locale overrides must use env LANG=C LC_ALL=C to avoid bash setlocale segfault'],
+            ['Xcode gate', 'xcodebuild -license check (not -checkFirstLaunchStatus, which returns 69 on licensed Xcode 27.2)'],
+            ['Lockstep versioning', 'Release versions of macOS_updates and Ascendo proceed in lockstep starting from v1.5.5'],
             ['Private files', '.env, APPLICATIONS.md, UPDATES.md, .dev_sync_config.json stay gitignored'],
           ]}
         />
@@ -47,8 +51,10 @@ bash run_tests.sh`}</CodeBlock>
           ? 'Te reguły pochodzą z docs/agents/critical_rules.md i są częścią publicznego kontraktu projektu.'
           : 'These rules come from docs/agents/critical_rules.md and are part of the project contract.'
         }</p>
-        <CodeBlock title="bash">{`softwareupdate -i <label> -R
-sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>`}</CodeBlock>
+        <CodeBlock title="bash">{`env LANG=C LC_ALL=C softwareupdate -l
+sudo softwareupdate -i "$label" -R --verbose
+sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>
+xcodebuild -license check`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="contributing-plugins" title={pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}>

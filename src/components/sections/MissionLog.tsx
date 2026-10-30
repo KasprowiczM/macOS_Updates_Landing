@@ -21,7 +21,7 @@ interface Entry {
 
 /** Real, dated entries only. Dates and versions come from the toolkit's own history. */
 const ENTRIES: readonly Entry[] = [
-  { id: 'release', date: '2026-10-12' },
+  { id: 'release', date: '2026-10-30' },
   {
     id: 'live',
     date: '2026-10-11',

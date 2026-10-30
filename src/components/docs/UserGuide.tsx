@@ -19,8 +19,9 @@ bash update_all.sh`}</CodeBlock>
           headers={[pl ? 'Zasada' : 'Rule', pl ? 'Znaczenie' : 'Meaning']}
           rows={[
             [pl ? 'Tylko zainstalowane' : 'Installed only', pl ? 'Brakujące obsługiwane aplikacje są raportowane, nie instalowane.' : 'Supported missing apps are reported, not installed.'],
-            ['softwareupdate -R', pl ? 'Aktualizacje macOS zachowują metadane restartu wymagane do zastosowania update.' : 'macOS updates preserve reboot metadata needed to apply the update.'],
-            ['sudo mas upgrade', pl ? 'App Store CLI działa przez sudo ze zmierzonymi ID i retry w sesji użytkownika.' : 'The App Store CLI runs through sudo with measured IDs and a user-session retry.'],
+            ['softwareupdate -R', pl ? 'Aktualizacje macOS wymagają -R; odrzucenie restartu instaluje pakiety bez restartu, pomija pakiety z restartem i kończy kodem 10 (skipped by user).' : 'macOS updates require -R; declining a restart installs no-restart labels, skips restart labels, and exits 10 (skipped by user).'],
+            ['App Store Track 1 & 2', pl ? 'Track 1 działa przez sudo ze zmierzonymi ID; Track 2 odpytuje GUI do 30 s z fallbackiem na product page i kodem 10 dla nieoferowanych aplikacji.' : 'Track 1 runs through sudo with measured IDs; Track 2 polls the GUI up to 30 s with product-page fallback and exit 10 for unoffered apps.'],
+            [pl ? 'Stabilny Node.js' : 'Stable Node.js', pl ? 'Managed Node.js wybiera najnowsze wydanie stabilne vX.Y.Z z nodejs.org/dist/index.json, eliminując wersje alpha.' : 'Managed Node.js selects the newest stable vX.Y.Z release from nodejs.org/dist/index.json, eliminating alpha builds.'],
             [pl ? 'Prywatny overlay' : 'Private overlay', pl ? 'APPLICATIONS.md, UPDATES.md i sekrety pozostają poza publicznym Git.' : 'APPLICATIONS.md, UPDATES.md, and secrets stay outside public Git.'],
           ]}
         />

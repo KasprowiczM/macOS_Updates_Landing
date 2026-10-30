@@ -1,7 +1,7 @@
 # macOS Updates Landing
 
 [![Version](https://img.shields.io/badge/version-v1.5.5-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-561%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Tests](https://img.shields.io/badge/tests-600%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macos-updates.64bit.site](https://macos-updates.64bit.site).
@@ -138,8 +138,8 @@ Production deploys from the `main` branch on Vercel. `vercel.json` controls URL 
 Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
 
 - `APP_VERSION` (currently `v1.5.5`)
-- `APP_VERSION_DATE` (currently `2026-10-12`)
-- `TEST_COUNT` (currently `561`)
+- `APP_VERSION_DATE` (currently `2026-10-30`)
+- `TEST_COUNT` (currently `600`)
 - `INTERNET_APP_COUNT` (currently `43`)
 - `UPDATE_METHOD_COUNT` (currently `11`)
 

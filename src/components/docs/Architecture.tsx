@@ -10,20 +10,22 @@ export function Architecture({ pl }: { pl: boolean }) {
           : 'The core is Bash 3.2 with inline/heredoc Python where structured parsing is needed. The public internet-app registry lives in config/, and shared behavior lives in lib/.'
         }</p>
         <CodeBlock title="macOS_updates/">{`update_all.sh                  # ${pl ? 'główny orkiestrator (kroki 0 do 6)' : 'main orchestrator (steps 0 to 6)'}
-update_appstore.sh             # step 1: sudo mas + AppleScript fallback
-update_npm_cli.sh              # step 2: native vendor CLIs + Node/Bun/npm
+update_appstore.sh             # step 1: sudo mas (Track 1) + AppleScript Track 2 for iPad apps
+update_npm_cli.sh              # step 2: native vendor CLIs + stable Node/Bun/npm
 update_brew.sh                 # step 3: brew upgrade + cleanup + doctor
 update_internet_apps.sh        # step 4: ${INTERNET_APP_COUNT} internet app handlers
 build_inventory.sh / postupdate # step 0 & 5: APPLICATIONS.md & UPDATES.md
-update_system.sh               # step 6: softwareupdate -i <label> -R (macOS final)
+update_system.sh               # step 6: softwareupdate -i <label> -R (declined restart exits 10)
 config/internet_apps.txt       # public registry (${INTERNET_APP_COUNT} apps)
 config/vendor_feeds.txt        # official vendor feeds (Sparkle RSS, JSON, YAML, KV)
+config/vendor_appcasts.txt     # rollout channels for vendor truth (Proton Drive)
 config/vendor_direct_first.txt # direct-download-first apps (ChatGPT, Cursor, OpenCode)
 config/inventory_exclusions.txt # discovery exclusions (Ascendo)
 lib/brew.sh                    # resilient Homebrew query layer
 lib/proc.sh                    # process-group timeout + SIGKILL
 lib/native_installers.sh       # vendor CLI download-then-exec
 lib/vendor_direct.sh           # Gatekeeper & Team ID verified atomic app swap
+lib/python/node_releases.py    # stable Node.js release selector
 lib/python/vendor_feeds.py     # multi-format vendor feed parsing & Omaha history proof
 lib/python/cli_duplicates.py   # native vs npm duplicate binary detector
 lib/run_lock.sh                # per-repo run lock
@@ -41,12 +43,12 @@ docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotia
           headers={[pl ? 'Krok' : 'Step', pl ? 'Skrypt' : 'Script', pl ? 'Cel' : 'Purpose']}
           rows={[
             ['0', 'prescan', pl ? 'Odświeża APPLICATIONS.md z tej maszyny.' : 'Refresh APPLICATIONS.md from this machine.'],
-            ['1', 'update_appstore.sh', pl ? 'sudo mas ze zmierzonymi ID + retry w sesji użytkownika + GUI iPada.' : 'sudo mas with measured IDs + user-session retry + iPad GUI'],
-            ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI vendorów (claude, Codex, OpenCode, agy) oraz Node/Bun/npm.' : 'Native vendor CLIs (claude, Codex, OpenCode, agy) plus Node/Bun/npm.'],
+            ['1', 'update_appstore.sh', pl ? 'Track 1: sudo mas ze zmierzonymi ID; Track 2: AppleScript dla aplikacji iPada (polling 30 s, product pages, soft warning exit 10).' : 'Track 1: sudo mas with measured IDs; Track 2: AppleScript for iPad apps (30 s polling, product pages, exit 10 soft warning).'],
+            ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI vendorów (claude, Codex, OpenCode, agy) oraz stabilny Node/Bun/npm (izolacja od wydań alpha).' : 'Native vendor CLIs (claude, Codex, OpenCode, agy) plus stable Node/Bun/npm (alpha releases excluded).'],
             ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (selektywne caski, pomijanie orphan casks), cleanup i doctor przez lib/brew.sh.' : 'Homebrew upgrade (selective cask targets, skips orphan casks), cleanup, and doctor via lib/brew.sh.'],
             ['4', 'update_internet_apps.sh', pl ? `${INTERNET_APP_COUNT} obsługiwane aplikacje internetowe (keystone, dmg, mau, sparkle, etc.).` : `${INTERNET_APP_COUNT} supported internet apps (keystone, dmg, mau, sparkle, etc.).`],
             ['5', 'postupdate', pl ? 'Rozdziela edycje inwentarza od zaobserwowanych zmian pakietów; zapis UPDATES.md.' : 'Splits inventory field edits from observed package changes; writes UPDATES.md.'],
-            ['6', 'update_system.sh', pl ? 'softwareupdate -i <label> -R (końcowy krok bezpieczny dla restartu).' : 'softwareupdate -i <label> -R (final restart-safe step).'],
+            ['6', 'update_system.sh', pl ? 'softwareupdate -i <label> -R (końcowy krok bezpieczny dla restartu; odrzucony restart instaluje pakiety bez restartu i kończy kodem 10).' : 'softwareupdate -i <label> -R (final restart-safe step; declined restart installs no-restart labels and exits 10).'],
           ]}
         />
       </WikiSection>
