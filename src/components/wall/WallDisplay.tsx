@@ -34,6 +34,7 @@ import {
   useWallLabels,
 } from './labels'
 import type { WallLabels, WallLayout, WallStation } from './labels'
+import { CONTAINER } from '../sections/layout'
 
 const WallPlayer = lazy(() => import('./WallPlayer'))
 
@@ -301,7 +302,7 @@ export function WallDisplay() {
 
   return (
     <section id="wall" aria-labelledby={headingId} className="border-t border-(--rule)">
-      <header className="mx-auto max-w-7xl px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-28 lg:px-8">
+      <header className={`${CONTAINER} pb-10 pt-20 md:pb-14 md:pt-28`}>
         <h2 id={headingId} className="m-0 max-w-[20ch]">
           {labels['wall.heading']}
         </h2>
@@ -314,43 +315,48 @@ export function WallDisplay() {
         <div
           className={
             scrub
-              ? 'sticky top-0 flex h-[100svh] flex-col items-center justify-center gap-3 px-4 pb-4 pt-20 md:px-8'
-              : 'mx-auto flex max-w-7xl flex-col gap-4 px-4 pb-24 sm:px-6 lg:px-8'
+              ? 'sticky top-0 flex h-[100svh] w-full items-center justify-center px-4 pb-4 pt-20 sm:px-6 lg:px-8'
+              : `${CONTAINER} flex flex-col gap-4 pb-24`
           }
         >
-          <div
-            className="relative mx-auto w-full"
-            style={stageStyle}
-          >
-            {scrub && near ? (
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 select-none"
-                style={{ opacity: playerReady ? 1 : 0 }}
-              >
-                <PlayerBoundary onError={handleError}>
-                  <Suspense fallback={null}>
-                    <WallPlayer
-                      playerRef={playerRef}
-                      labels={labels}
-                      layout={layout}
-                      getInitialFrame={getInitialFrame}
-                      onReady={handleReady}
-                    />
-                  </Suspense>
-                </PlayerBoundary>
-              </div>
-            ) : null}
-            <StationList
-              labels={labels}
-              mode={showScreen ? 'hidden' : scrub ? 'fill' : 'flow'}
-            />
-          </div>
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-3">
+            <div
+              className="relative mx-auto w-full"
+              style={stageStyle}
+            >
+              {scrub && near ? (
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 select-none"
+                  style={{ opacity: playerReady ? 1 : 0 }}
+                >
+                  <PlayerBoundary onError={handleError}>
+                    <Suspense fallback={null}>
+                      <WallPlayer
+                        playerRef={playerRef}
+                        labels={labels}
+                        layout={layout}
+                        getInitialFrame={getInitialFrame}
+                        onReady={handleReady}
+                      />
+                    </Suspense>
+                  </PlayerBoundary>
+                </div>
+              ) : null}
+              <StationList
+                labels={labels}
+                mode={showScreen ? 'hidden' : scrub ? 'fill' : 'flow'}
+              />
+            </div>
 
-          <div className="flex w-full items-center justify-between gap-4 text-[0.8125rem]">
-            <p className="m-0" style={{ color: 'var(--fg-muted, inherit)' }}>
-              {labels['wall.caption']}
-            </p>
+            <div
+              className="mx-auto flex items-center justify-between gap-4 text-[0.8125rem]"
+              style={{ width: stageStyle.width ?? '100%', maxWidth: '100%' }}
+            >
+              <p className="m-0" style={{ color: 'var(--fg-muted, inherit)' }}>
+                {labels['wall.caption']}
+              </p>
+            </div>
           </div>
         </div>
       </div>
