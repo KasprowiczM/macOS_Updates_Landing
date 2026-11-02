@@ -8,6 +8,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- **Upstream Ground-Truth Synchronization (2026-11-02):**
+  - Updated `TEST_COUNT` to 621 automated tests (from 600).
+  - Updated `INTERNET_APP_COUNT` to 46 internet apps (from 43).
+  - Updated `APP_VERSION_DATE` to `2026-11-02`.
+  - Added 3 new internet apps since last sync: Open Design, HyperFrames, Superset (all `silent_launch`).
+  - Added 21 new regression tests (`test_run_log_regressions_20261025`, `test_run_log_regressions_20261102`).
+  - Synchronized all hardcoded counts in `en.json`, `pl.json`, `llms.txt`, `llms-full.txt`, `README.md`, and `AGENTS.md`.
+
 - **Upstream Ground-Truth Synchronization (2026-10-30):**
   - Updated `APP_VERSION_DATE` to `2026-10-30` and `TEST_COUNT` to 600 automated tests.
   - Documented lockstep versioning policy between macOS Updates and Ascendo starting from v1.5.5.

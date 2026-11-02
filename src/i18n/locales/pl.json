@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Testy i scan sekretów",
-      "desc": "run_tests.sh uruchamia 600 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
+      "desc": "run_tests.sh uruchamia 621 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
     },
     "multihost": {
       "title": "UI w 7 językach",
@@ -75,7 +75,7 @@
   },
   "seo": {
     "homeTitle": "macOS Updates: aktualizator Apple Silicon jedną komendą",
-    "homeDesc": "Aktualizator Maców z Apple Silicon: App Store, Homebrew, CLI, 43 aplikacje i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
+    "homeDesc": "Aktualizator Maców z Apple Silicon: App Store, Homebrew, CLI, 46 aplikacji i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
     "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
     "featuresDesc": "Siedem kroków w stałej kolejności, sprawdzanie kanałów producentów, brak zamykania otwartych aplikacji i raporty tylko z tego, co potwierdzi Mac.",
     "docsTitle": "Dokumentacja macOS Updates: Instalacja i obsługa",
@@ -115,7 +115,7 @@
       },
       "q7": {
         "q": "Ile aplikacji jest obsługiwanych?",
-        "a": "Obecny registry obejmuje 43 aplikacji internetowych oraz macOS, App Store, Homebrew i CLI/npm."
+        "a": "Obecny registry obejmuje 46 aplikacji internetowych oraz macOS, App Store, Homebrew i CLI/npm."
       },
       "q8": {
         "q": "Jak dodać nową aplikację internetową?",
@@ -127,7 +127,7 @@
       },
       "q10": {
         "q": "Jak zaktualizować wszystkie aplikacje na Macu naraz?",
-        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 43 aplikacje pobrane z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
+        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 46 aplikacji pobranych z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
       },
       "q11": {
         "q": "Czy macOS Updates zamyka moje otwarte aplikacje?",
@@ -143,7 +143,7 @@
       },
       "q14": {
         "q": "Czym różni się od samego Homebrew albo App Store?",
-        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 43 aplikacje z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
+        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 46 aplikacji z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
       }
     },
     "title": "Pytania przed uruchomieniem.",

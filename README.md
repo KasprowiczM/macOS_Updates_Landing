@@ -1,7 +1,7 @@
 # macOS Updates Landing
 
 [![Version](https://img.shields.io/badge/version-v1.5.5-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-600%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Tests](https://img.shields.io/badge/tests-621%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macos-updates.64bit.site](https://macos-updates.64bit.site).
@@ -18,7 +18,7 @@ The landing page frames updating a Mac as a flight director's go/no-go poll. Lig
 - `#rules`: flight rules
 - `#wall`: scroll-scrubbed wall display (Remotion, lazy-loaded)
 - `#stations`: flight plan table
-- `#coverage`: coverage roster, 43 internet apps and 11 update methods
+- `#coverage`: coverage roster, 46 internet apps and 11 update methods
 - `#log`: mission log with dated real runs
 - `#faq`: FAQ, shared with the `FAQPage` JSON-LD
 - `#install`: install close
@@ -138,9 +138,9 @@ Production deploys from the `main` branch on Vercel. `vercel.json` controls URL 
 Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
 
 - `APP_VERSION` (currently `v1.5.5`)
-- `APP_VERSION_DATE` (currently `2026-10-30`)
-- `TEST_COUNT` (currently `600`)
-- `INTERNET_APP_COUNT` (currently `43`)
+- `APP_VERSION_DATE` (currently `2026-11-02`)
+- `TEST_COUNT` (currently `621`)
+- `INTERNET_APP_COUNT` (currently `46`)
 - `UPDATE_METHOD_COUNT` (currently `11`)
 
 JSON-LD, the sitemap and the `llms-full.txt` tokens follow automatically on the next build. Update these by hand so they match the release: the version badge above, `CHANGELOG.md`, the version and test count in `public/llms.txt` (a static file), and the copy in `src/i18n/locales/en.json`. Every English claim and test count in `en.json` needs a Polish counterpart in `pl.json`, and the same for `chrome.en.json` and `chrome.pl.json`. Then run `npm run build` and confirm the prerender reports all routes.
