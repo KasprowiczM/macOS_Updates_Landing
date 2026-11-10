@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Testy i scan sekretów",
-      "desc": "run_tests.sh uruchamia 621 testów statycznych, unit, registry i gitleaks zanim zmiana wypłynie."
+      "desc": "Zestaw zbiera 846 przypadków testowych unittest w Pythonie oraz sprawdza składnię skryptów, rejestr i sekrety."
     },
     "multihost": {
       "title": "UI w 7 językach",
@@ -74,8 +74,8 @@
     }
   },
   "seo": {
-    "homeTitle": "macOS Updates: aktualizator Apple Silicon jedną komendą",
-    "homeDesc": "Aktualizator Maców z Apple Silicon: App Store, Homebrew, CLI, 46 aplikacji i macOS w bezpiecznej kolejności. Raportuje tylko to, co potwierdzi Mac.",
+    "homeTitle": "macOS Updates: aktualizator Maca z Apple Silicon jedną komendą",
+    "homeDesc": "Aktualizator Maców z Apple Silicon: macOS, App Store, Homebrew, narzędzia wiersza poleceń, pakiety npm i 47 obsługiwanych aplikacji. Raportuje tylko zmiany potwierdzone przez Maca.",
     "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
     "featuresDesc": "Siedem kroków w stałej kolejności, sprawdzanie kanałów producentów, brak zamykania otwartych aplikacji i raporty tylko z tego, co potwierdzi Mac.",
     "docsTitle": "Dokumentacja macOS Updates: Instalacja i obsługa",
@@ -83,7 +83,7 @@
     "securityTitle": "Polityka bezpieczeństwa macOS Updates",
     "securityDesc": "Jak macOS Updates obsługuje sudo, zweryfikowane pobrania, kontrole Gatekeeper i Team ID oraz chroni prywatny inwentarz i pliki overlay.",
     "changelogTitle": "Historia zmian macOS Updates",
-    "changelogDesc": "Historia wydań macOS Updates dla Apple Silicon: co zmieniło się w każdej wersji od v1.4 do v1.5.5, z poprawkami i nowymi funkcjami.",
+    "changelogDesc": "Bieżący snapshot kodu macOS Updates v1.6.0 i historia oznaczonych wydań do v1.5.5 dla Maców z Apple Silicon.",
     "contributingTitle": "Współtwórz macOS Updates",
     "contributingDesc": "Współtwórz macOS Updates: dodaj handler aplikacji internetowej, popraw dokumentację i utrzymuj testowane skrypty zgodne z Bash 3.2."
   },
@@ -115,7 +115,7 @@
       },
       "q7": {
         "q": "Ile aplikacji jest obsługiwanych?",
-        "a": "Obecny registry obejmuje 46 aplikacji internetowych oraz macOS, App Store, Homebrew i CLI/npm."
+        "a": "Obecny rejestr obejmuje 47 aplikacji pobieranych z internetu oraz macOS, App Store, Homebrew i CLI/npm."
       },
       "q8": {
         "q": "Jak dodać nową aplikację internetową?",
@@ -127,7 +127,7 @@
       },
       "q10": {
         "q": "Jak zaktualizować wszystkie aplikacje na Macu naraz?",
-        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 46 aplikacji pobranych z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
+        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 47 aplikacji pobranych z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
       },
       "q11": {
         "q": "Czy macOS Updates zamyka moje otwarte aplikacje?",
@@ -143,17 +143,20 @@
       },
       "q14": {
         "q": "Czym różni się od samego Homebrew albo App Store?",
-        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 46 aplikacji z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
+        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 47 aplikacji z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
       }
     },
     "title": "Pytania przed uruchomieniem.",
     "lead": "Odpowiedzi o tym, co się uruchamia, czego dotyka i czego nigdy nie robi."
   },
   "hero": {
-    "titleA": "Każda warstwa Maca.",
-    "titleGo": "GO",
-    "titleB": "po potwierdzeniu.",
-    "sub": "Jedno polecenie aktualizuje App Store, CLI, Homebrew, {{apps}} aplikacji internetowych i macOS w bezpiecznej kolejności.",
+    "titleA": "Twój Mac.",
+    "titleGo": "Na bieżąco.",
+    "titleB": "",
+    "sub": "Aktualizuj macOS, App Store, Homebrew, narzędzia CLI i {{apps}} obsługiwanych aplikacji w jednym ostrożnym przebiegu. Najpierw sprawdź podgląd. Ty decydujesz.",
+    "proofApps": "obsługiwanych aplikacji",
+    "proofTests": "przypadków testowych unit",
+    "proofOpen": "otwarty kod",
     "copy": "Skopiuj polecenie instalacji",
     "copied": "Skopiowano",
     "copyFailed": "Nie udało się skopiować. Polecenie jest zaznaczone, naciśnij Cmd+C.",
@@ -184,6 +187,33 @@
       "text": "{{go}} GO · {{hold}} HOLD · macOS na końcu",
       "aria": "Wynik odpytania: {{go}} stacji GO, {{hold}} na HOLD, macOS na STANDBY i idzie na końcu. Przejdź do konsoli odpytania."
     }
+  },
+  "visual": {
+    "title": "Każda warstwa. Jeden przemyślany proces.",
+    "lead": "Sprawdzaj zarządzane już aktualizacje w jednej czytelnej kolejności.",
+    "items": {
+      "coverage": {
+        "title": "Jedno miejsce do sprawdzenia",
+        "body": "Przejrzyj App Store, Homebrew, narzędzia CLI, aplikacje producentów i macOS w jednym uporządkowanym przebiegu."
+      },
+      "safety": {
+        "title": "Zweryfikowane instalacje bezpośrednie",
+        "body": "Bezpośrednie pobrania od producentów mogą korzystać z sum kontrolnych, weryfikacji podpisu, etapowej podmiany i przywrócenia poprzedniej wersji."
+      },
+      "process": {
+        "title": "Najpierw podgląd",
+        "body": "Sprawdź dostępne aktualizacje, przejrzyj próbny przebieg i zdecyduj, kiedy zastosować zmiany."
+      }
+    }
+  },
+  "terminal": {
+    "demo": "Przykładowy podgląd",
+    "title": "Najpierw podgląd, potem decyzja.",
+    "caption": "Przykładowy dry-run. Ta strona nie zmienia niczego na Twoim Macu.",
+    "scan": "Odczyt zainstalowanego oprogramowania na tym Macu",
+    "vendor": "Sprawdzanie wersji u producentów",
+    "ready": "Podgląd gotowy. Przejrzyj zmiany przed aktualizacją.",
+    "pending": "Decyzja o aktualizacjach należy do Ciebie."
   },
   "rules": {
     "title": "Cztery zasady każdego przebiegu.",
@@ -325,7 +355,7 @@
     "entries": {
       "release": {
         "title": "Aktualizacje uzupełniające v1.5.5",
-        "body": "Dostarczone z {{tests}} testami automatycznymi. Zarządzany Node.js przypina wersje stabilne, odrzucony restart systemu kończy się czysto bez błędu, App Store Track 2 zyskuje odpytywanie i fallbacki, a testy działają za strażnikami narzędzi."
+        "body": "Późniejsze poprawki przypięły zarządzany Node.js do wersji stabilnych, zapewniły czyste zakończenie po odmowie restartu i dodały odpytywanie App Store Track 2 oraz strony produktów. Strażniki testów blokują niezamockowane narzędzia systemowe."
       },
       "live": {
         "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",
@@ -352,19 +382,19 @@
     }
   },
   "install": {
-    "title": "Gotowy do startu.",
-    "lead": "Zainstaluj, podejrzyj próbnym przebiegiem, potem uruchom.",
+    "title": "Aktualizuj Maca na bieżąco.",
+    "lead": "Zainstaluj toolkit, przejdź do jego katalogu, sprawdź podgląd i uruchom aktualizacje.",
     "stepInstall": "Instalacja",
-    "stepPreview": "Podgląd, nic nie jest zmieniane",
-    "stepRun": "Uruchomienie",
-    "note": "Instalator klonuje repozytorium, pyta o język, instaluje zależności i buduje APPLICATIONS.md z aplikacji, które już są na tym Macu. Nie instaluje za Ciebie żadnych aplikacji.",
+    "stepPreview": "Podgląd bez zmian",
+    "stepRun": "Uruchom aktualizacje",
+    "note": "Instalator klonuje repozytorium, pyta o język, sprawdza lub instaluje zależności, może skonfigurować Touch ID dla sudo i buduje APPLICATIONS.md na podstawie tego Maca. Nie instaluje obsługiwanych aplikacji. Po instalacji uruchamiaj polecenia z katalogu ~/Dev_Env/macOS_updates.",
     "docs": "Przeczytaj dokumentację",
     "github": "Zobacz na GitHubie"
   },
   "wall": {
-    "heading": "Zobacz jeden przebieg, stacja po stacji.",
-    "intro": "Każda warstwa aktualizacji zgłasza GO dopiero po potwierdzeniu przez działającego Maca. Nieświeży kanał producenta zgłasza HOLD, a ostrzeżenie zostaje na tablicy. macOS idzie ostatni, bo może się zrestartować.",
-    "caption": "Odczyty z prawdziwych uruchomień z 2026-10-05 i 2026-10-11.",
+    "heading": "Przykładowe wyniki aktualizacji.",
+    "intro": "Ta powtórka łączy zapisy z dwóch rzeczywistych przebiegów. Każdy wiersz pokazuje przykładowy krok i zgłoszony status.",
+    "caption": "Przykłady na podstawie przebiegów z 2026-10-05 i 2026-10-11.",
     "listLabel": "Stacje aktualizacji w kolejności uruchamiania",
     "screen": {
       "title": "Odpytanie dyrektora lotu",
@@ -407,7 +437,7 @@
       },
       "internet": {
         "name": "INTERNET APPS",
-        "desc": "{{apps}} aplikacji, {{methods}} metod aktualizacji. Każda wersja jest najpierw sprawdzana w kanale samego producenta."
+        "desc": "{{apps}} obsługiwanych aplikacji w {{methods}} metodach aktualizacji. Zainstalowane wersje są najpierw sprawdzane w kanałach producentów."
       },
       "post": {
         "name": "POSTUPDATE",
@@ -444,7 +474,7 @@
       },
       "macos": {
         "pending": "softwareupdate -i <label> -R",
-        "done": "restart na końcu, brak oferty w tych przebiegach"
+        "done": "nie uruchomiono w tej powtórce"
       }
     },
     "note": {

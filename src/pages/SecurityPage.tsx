@@ -58,7 +58,7 @@ export function SecurityPage() {
           <ol>
             <li>
               <strong>GitHub Security Advisories</strong>: {' '}
-              <a href="https://github.com/KasprowiczM/macOS_updates/security/advisories/new" target="_blank" rel="noopener noreferrer" className="link inline-flex items-center gap-1">
+              <a href="https://github.com/KasprowiczM/macOS_updates/security/advisories/new" target="_blank" rel="noopener noreferrer" className="link inline-flex min-h-[44px] items-center gap-1">
                 {pl ? 'zgłoś prywatnie' : 'report privately'}
                 <ArrowUpRight size={15} aria-hidden="true" />
               </a>

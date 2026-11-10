@@ -24,14 +24,15 @@ bash run_tests.sh`}</CodeBlock>
             ['Node.js', 'Managed Node.js selects newest stable vX.Y.Z from nodejs.org/dist/index.json (never alpha or pre-release)'],
             ['macOS 27 & Locale', 'Locale overrides must use env LANG=C LC_ALL=C to avoid bash setlocale segfault'],
             ['Xcode gate', 'xcodebuild -license check (not -checkFirstLaunchStatus, which returns 69 on licensed Xcode 27.2)'],
-            ['Lockstep versioning', 'Release versions of macOS_updates and Ascendo proceed in lockstep starting from v1.5.5'],
+            ['Release versioning', 'macOS_updates and Ascendo releases are intended to use matching versions. An explicitly approved upstream release may precede parity; report the latest tag separately from the source version.'],
             ['Private files', '.env, APPLICATIONS.md, UPDATES.md, .dev_sync_config.json stay gitignored'],
           ]}
         />
       </WikiSection>
 
       <WikiSection id="testing" title={pl ? 'Testowanie' : 'Testing'}>
-        <CodeBlock title="bash">{`bash -n update_all.sh
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+bash -n update_all.sh
 bash update_all.sh --dry-run -y
 bash scripts/report_update_coverage.sh
 bash run_tests.sh`}</CodeBlock>
@@ -51,14 +52,16 @@ bash run_tests.sh`}</CodeBlock>
           ? 'Te reguły pochodzą z docs/agents/critical_rules.md i są częścią publicznego kontraktu projektu.'
           : 'These rules come from docs/agents/critical_rules.md and are part of the project contract.'
         }</p>
-        <CodeBlock title="bash">{`env LANG=C LC_ALL=C softwareupdate -l
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+env LANG=C LC_ALL=C softwareupdate -l
 sudo softwareupdate -i "$label" -R --verbose
 sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>
 xcodebuild -license check`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="contributing-plugins" title={pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}>
-        <CodeBlock title="bash">{`bash scripts/scaffold_internet_app.sh "App Name" silent_launch
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+bash scripts/scaffold_internet_app.sh "App Name" silent_launch
 # update config/internet_apps.txt
 # update config/internet_app_methods.txt
 # update config/internet_dispatch_order.txt

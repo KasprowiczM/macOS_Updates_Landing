@@ -99,8 +99,8 @@ const SCREEN = {
   hold: 'var(--screen-hold, #F2B544)',
 } as const
 
-const FONT_SANS = 'var(--font-sans, "Archivo Variable", system-ui)'
-const FONT_MONO = 'var(--font-mono, "Martian Mono Variable", ui-monospace)'
+const FONT_SANS = 'var(--font-sans, "Manrope Variable", system-ui)'
+const FONT_MONO = 'var(--font-mono, "IBM Plex Mono", ui-monospace)'
 
 const PLACARD: CSSProperties = {
   fontFamily: FONT_SANS,
@@ -311,7 +311,7 @@ export function WallDisplay() {
         </p>
       </header>
 
-      <div ref={trackRef} className={scrub ? 'relative h-[340svh] md:h-[380svh]' : 'relative'}>
+      <div ref={trackRef} className={scrub ? 'relative h-[230svh] md:h-[260svh]' : 'relative'}>
         <div
           className={
             scrub

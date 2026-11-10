@@ -102,7 +102,7 @@ tests/                        # safety/static tests`}</CodeBlock>
             <li>{pl ? 'softwareupdate musi mieć -R (odrzucony restart instaluje pakiety bez restartu i kończy kodem 10); mas upgrade musi mieć sudo.' : 'softwareupdate must keep -R (declined restart installs no-restart labels and exits 10); mas upgrade must use sudo.'}</li>
             <li>{pl ? 'Zarządzany Node.js musi wybierać wyłącznie stabilne wydania vX.Y.Z z nodejs.org/dist/index.json (brak wydań alpha).' : 'Managed Node.js must select only stable vX.Y.Z releases from nodejs.org/dist/index.json (no alpha releases).'}</li>
             <li>{pl ? 'Brama licencji Xcode weryfikuje licencję przez xcodebuild -license check.' : 'Xcode gate verifies license via xcodebuild -license check.'}</li>
-            <li>{pl ? 'Wersje wydań macOS_updates i Ascendo postępują wspólnie w modelu lockstep od v1.5.5.' : 'Release versions of macOS_updates and Ascendo proceed in lockstep from v1.5.5.'}</li>
+            <li>{pl ? 'Wersje macOS_updates i Ascendo mają być zgodne. Wydanie upstream może za zgodą właściciela wyprzedzić port; podawaj osobno najnowszy tag i wersję kodu.' : 'macOS_updates and Ascendo releases are intended to match. An owner-approved upstream release may precede parity; report the latest tag separately from the source version.'}</li>
             <li>{pl ? 'Nie commituj APPLICATIONS.md, UPDATES.md, .env ani plików dev_sync config.' : 'Do not commit APPLICATIONS.md, UPDATES.md, .env, or dev_sync config files.'}</li>
           </ul>
         </section>

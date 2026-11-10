@@ -4,6 +4,7 @@ import { Button } from '../ui/Button'
 import { INSTALL_NIX, REPO_URL } from '../../lib/site'
 import { CommandReadout } from './CommandReadout'
 import { CONTAINER } from './layout'
+import { useLocalizedPath } from '../../lib/routes'
 
 /**
  * #install: the close. The one centered composition on the page: heading,
@@ -11,6 +12,7 @@ import { CONTAINER } from './layout'
  */
 export function InstallClose() {
   const { t } = useTranslation()
+  const localize = useLocalizedPath()
 
   return (
     <section
@@ -26,14 +28,14 @@ export function InstallClose() {
 
         <div className="mx-auto mt-12 grid max-w-[60rem] gap-3 text-left md:mt-14">
           <CommandReadout command={INSTALL_NIX} label={t('install.stepInstall')} />
-          <CommandReadout command="bash update_all.sh --dry-run -y" label={t('install.stepPreview')} />
-          <CommandReadout command="bash update_all.sh" label={t('install.stepRun')} />
+          <CommandReadout command="cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y" label={t('install.stepPreview')} />
+          <CommandReadout command="cd ~/Dev_Env/macOS_updates && bash update_all.sh" label={t('install.stepRun')} />
         </div>
 
         <p className="mx-auto mt-6 max-w-[40rem] text-[15px] text-(--fg-muted)">{t('install.note')}</p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Button variant="primary" size="lg" href="/docs#quick-install">
+          <Button variant="primary" size="lg" href={localize('/docs#quick-install')}>
             {t('install.docs')}
           </Button>
           <Button variant="secondary" size="lg" href={REPO_URL}>

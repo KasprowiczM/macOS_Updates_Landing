@@ -117,12 +117,11 @@ export function DocsPage() {
         <section>
           <p className="m-0">
             {pl ? 'Pełna dokumentacja techniczna dostępna jest w ' : 'For the full technical documentation, see the '}
-            <a href={`${REPO_URL}/tree/main/docs`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 break-words">
-              {pl ? 'katalogu docs/ na GitHubie' : 'docs/ directory on GitHub'}
-              <ArrowUpRight size={15} aria-hidden="true" />
-            </a>
-            .
           </p>
+          <a href={`${REPO_URL}/tree/main/docs`} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-[44px] items-center gap-1 break-words px-2 font-semibold text-(--accent-text) underline decoration-1 underline-offset-[0.2em]">
+            {pl ? 'Katalog docs/ na GitHubie' : 'docs/ directory on GitHub'}
+            <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
         </section>
       </WikiLayout>
     </>

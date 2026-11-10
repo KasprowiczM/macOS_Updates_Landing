@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T18:30:00+01:00",
+  "title": "Design System: macOS Updates",
+  "extensions": {
+    "shadows": [
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "Flat surfaces use hairline rules."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Once-only supporting reveals."
+      },
+      {
+        "name": "hero-scroll",
+        "value": "translateY(0..75px) rotate(0..-4deg)",
+        "purpose": "Scroll reveals the rising software stack; static under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "description": "Primary installation action, minimum 44px target.",
+      "html": "<button class=\"ds-primary\">Copy install command</button>",
+      "css": ".ds-primary { min-height:48px; padding:0 24px; border:1px solid #165EE5; border-radius:2px; background:#165EE5; color:#fff; font-family:Manrope,sans-serif; font-weight:600; } .ds-primary:focus-visible { outline:2px solid #165EE5; outline-offset:2px; }"
+    }
+  ]
+}

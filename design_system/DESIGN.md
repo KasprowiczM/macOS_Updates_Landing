@@ -1,101 +1,70 @@
-# macOS Updates: Design System ("Mission Control")
+---
+name: macOS Updates
+description: Precision editorial software maintenance
+colors:
+  primary: "#165EE5"
+  surface: "#FAFAF8"
+  elevated: "#FFFFFF"
+  ink: "#202321"
+  muted: "#59605D"
+  rule: "#E0E3DE"
+typography:
+  display:
+    fontFamily: "Manrope Variable"
+    fontWeight: 500
+    fontSize: "clamp(3.2rem, 6.5vw, 6rem)"
+    lineHeight: 1.07
+    letterSpacing: "-0.04em"
+  body:
+    fontFamily: "Manrope Variable"
+    fontWeight: 400
+    fontSize: "17px"
+    lineHeight: 1.6
+rounded:
+  default: "2px"
+spacing:
+  sm: "8px"
+  md: "16px"
+  lg: "32px"
+  section: "112px"
+---
 
-Source of truth for the visual world of macos-updates.64bit.site since landing v1.5.5 (2026-10-12).
-Implementation lives in `src/index.css` (tokens and world utilities); this file documents it.
+# macOS Updates design system
 
-## Idea
+Current visual identity, November 2026. The implementation tokens in `src/index.css` govern every route.
 
-Updating a Mac is a launch sequence. The site is a flight director's go/no-go poll: every
-update layer is a console station that reports **GO** only after the live Mac confirms it,
-**HOLD** when a vendor feed is stale (the warning stays visible), and macOS goes last because
-it can restart. Apollo-era mission control room plus the paper flight data file. No neon,
-no glow, no glass, no gradients.
+## Direction
 
-## Themes
+Precision editorial. A calm, readable interface for people trusting a maintenance tool with their Mac. The product speaks before the interface: a short promise, a visible command, clear safeguards and an illustrative walkthrough. URL structure and section anchors remain stable.
 
-Both themes are first-class; `index.html` sets `data-theme` before paint from saved choice
-or `prefers-color-scheme`.
+## Type and composition
 
-| Token | Light (flight plan paper) | Dark (console room) |
-|---|---|---|
-| `--bg` | #EEF2F5 | #0F1823 |
-| `--bg-elev` | #F7F9FB | #15212F |
-| `--bg-sunk` | #E3E9EF | #0B131C |
-| `--fg` | #0D1B2A | #E4EDF5 |
-| `--fg-muted` | #42536A | #9FB1C3 |
-| `--fg-faint` | #536377 | #7E92A6 |
-| `--rule` | #C9D5E0 | #233447 |
-| `--rule-strong` | #8FA5BA | #34506B |
-| `--accent` (GO, the only accent) | #1F5FA8 | #4A9EF0 |
-| `--accent-hover` | #2A74C6 | #7BC4FF |
-| `--accent-ink` (text on accent) | #F7F9FB | #06121E |
-| `--accent-text` (accent as text) | #1F5FA8 | #5DB0FF |
-| `--accent-soft` | #DCE8F5 | rgba(93,176,255,.14) |
-| `--hold` (text) / `--hold-lamp` | #8A5A12 / #E0A82E | #F2B544 |
-| `--nogo` | #B23A33 | #F0736A |
-| `--standby` | #536377 | #7E92A6 |
-| `--selection` | #CFE0F3 | rgba(93,176,255,.28) |
+Self-hosted Manrope Variable for all prose, display and navigation. IBM Plex Mono regular for commands and versions. Headings use medium weight with tracking no tighter than -0.04em. Shared 1280px container, 16px mobile gutters, 24px tablet gutters, 32px desktop gutters. Generous vertical rhythm separates sections. Content remains in document order when the hero collapses below 768px.
 
-**Screens** (console insets, wall display, command readouts, code) are dark in both themes:
-`--screen-bg #0B1621`, `--screen-elev #112131`, `--screen-rule #1F3347`, `--screen-fg #D9E6F2`,
-`--screen-dim #7D93A8`, `--screen-go #5DB0FF`, `--screen-hold #F2B544`, `--screen-nogo #F0736A`.
-Inside `.screen` the page tokens are remapped to screen tokens and the focus ring uses `--screen-go`.
+## Color and shape
 
-All text pairs meet WCAG AA (verified; Lighthouse accessibility 100).
+Warm near-white and graphite neutrals, a single cobalt accent. Dark mode uses neutral green-grey surfaces, with the same hierarchy and accent role. Amber means a real warning only. All surface colors come from semantic CSS tokens. Corners are 2px. No shadows or decorative grids. Code and demonstrations inherit the page theme.
 
-## Type
+## Identity and imagery
 
-- Sans: **Archivo Variable** (wdth + wght axes, self-hosted via `@fontsource-variable/archivo/wdth.css`).
-- Mono: **Martian Mono Variable** (`@fontsource-variable/martian-mono/wdth.css`) only for commands,
-  versions, readouts and timestamps, always `tabular-nums`.
-- H1: weight ~760, tracking -0.03em, 2 lines max, capped at 4rem in the 7/12 hero column
-  (font-stretch 90% there to hold two lines in EN and PL).
-- H2: weight ~720, tracking -0.025em, clamp(1.9rem, 2.6vw + .6rem, 3rem).
-- Body: 16 to 17px / 1.6, 68ch measure (`.measure`, `.read`).
-- `.placard`: engraved console label, uppercase, font-stretch 125%, weight 620, tracking .07em,
-  11 to 12px. Only on instruments (panels, lamps, table headers, the wall), never above a heading.
+Three ascending open chevrons represent software layers receiving an update. The live wordmark preserves the product name. Public SVG and raster icons use the same mark. The generated hero depicts stacked aluminum software layers above a compact computer base, with one blue upward arrow. It is an abstract illustration, not a screenshot or evidence of a user's system.
 
-## Shape, depth, texture
-
-- Radius 2px everywhere (all `--radius-*` tokens resolve to 2px). No pills.
-- Elevation by 1px hairlines only (`--rule`, `--rule-strong` for bezels). Shadow tokens are off.
-- The only grid texture is the plotting grid inside screens (the wall plotter).
-
-## World components
-
-- `.lamp` + `.lamp-go | .lamp-hold | .lamp-standby | .lamp-nogo`: 10px square status lamp,
-  always paired with a text label.
-- `.screen`, `.readout`: instrument surfaces and readouts.
-- Button: primary = accent fill + `--accent-ink`; secondary/ghost = 1px `--rule-strong` border;
-  min 44px, `:active` translate 1px. One label per intent: "Copy install command",
-  "View on GitHub", "Read the docs".
-- Logo: square status lamp (bezel, screws, lens, engraved up-chevron). `public/brand-icon.svg`,
-  `brand-icon-dark.svg`, `favicon.svg` (light/dark aware), `logo.svg` lockup with outlined
-  Archivo wordmark "macOS Updates". Screws drop below 28px. Regenerate with
-  `node scripts/og/build-brand.mjs`; OG image from `scripts/og/og.html` (1200x630).
+The asset `public/images/update-layers.webp` was generated using the built-in imagegen tool on 2026-11-10 and compressed to WebP. Prompt: premium industrial product photograph, seven thin aluminum plates floating above a silver compact computer base, a cobalt upward arrow, white seamless studio, no text or interface. No external artwork was used as input.
 
 ## Motion
 
-- Ease `cubic-bezier(0.16, 1, 0.3, 1)`; 160 to 240ms UI, 600 to 900ms one-time reveals.
-- One authored moment: the Remotion wall display (`src/components/wall/`), frame = scroll
-  position via `useScroll`, lazy chunk, static semantic board for SSR, reduced motion and chunk
-  failure. Second: the hero poll console ticks STANDBY to GO once (CSS only, SSR shows final state).
-- Content is visible by default; no loops, no bounce, no scroll listeners, no scroll cues.
+The hero illustration moves 75px and rotates four degrees as the visitor scrolls through its section. This explains a stack rising toward its updated state. The existing lazy Remotion walkthrough maps scroll progress to update stages; it does not run automatically or loop. Supporting safeguards settle into view once through IntersectionObserver. Reduced-motion users receive a static hero and semantic walkthrough list. Rendered content remains visible without animation support.
 
-## Browser surfaces
+## Reference principles
 
-Themed `::selection`, caret, scrollbar, 2px `--accent` focus ring with 2px offset,
-link underline offset .2em, tabular numerals.
+Reviewed online on 2026-11-10: Linear (`https://linear.app`) for concise hierarchy and product demonstrations, Motion (`https://motion.dev`) for spatial transforms linked to interaction and clear accessible fallbacks. Their branding, layouts and assets are not copied.
 
-## Copy rules
+## Accessibility and performance
 
-No em or en dashes in visible text, no eyebrows or kickers above headings, no decorative
-section numbers (station order 01 to 07 is information), no invented numbers: counts come
-from `src/lib/site.ts`, evidence only from dated real runs.
+Minimum 44px interactive targets, visible accent focus outlines, native headings and landmarks, bilingual routes, and readable measures. Decorative hero image has empty alternative text. Hero is an optimized local WebP with explicit dimensions. Route chunks and the Remotion player stay lazy. Fonts are local. Light, dark and reduced-motion states share one system.
 
-## Layout (landing)
+## Feature and installation extensions
 
-`#poll` hero 7/5 split (mobile status strip under CTAs) · `#rules` ruled 4-col / 2x2 grid ·
-`#wall` pinned scroll-scrubbed screen · `#stations` flight plan table · `#coverage` grouped
-roster (43 apps, 11 methods) · `#log` dated mission log · `#faq` disclosure rows ·
-`#install` centered close. Subpages (Read mode) use the sticky console TOC panel.
+A matching triptych illustrates coverage, verification and the preview-update-verify process. Its seven tiles mean the pipeline layers and do not count update methods. Images are decorative; adjacent real text explains capabilities. `FeatureVisual` shares the artwork with the detailed features route. Both light and dark variants were generated from the hero material language with imagegen, without external source art. Feature art moves 48px over its viewport passage; no continuous loops run.
+
+`TerminalPreview` is explicitly an illustrative dry run. Lines reveal once when viewed and remain readable for reduced-motion users. It executes nothing. Copyable preview commands include the default install directory. The installation section states the alternative `MAC_UPDATE_DIR` path requirement. Documentation command blocks reuse the same `CopyButton` primitive.

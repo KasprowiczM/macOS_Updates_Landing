@@ -31,9 +31,9 @@ export const WALL_SIZE = {
 /* ── Labels ───────────────────────────────────────────────── */
 
 const EN = {
-  'wall.heading': 'Watch one run, station by station.',
+  'wall.heading': 'Example update results.',
   'wall.intro':
-    'Each update layer reports GO only after the live Mac confirms it. A stale vendor feed reports HOLD, and the warning stays on the board. macOS goes last, because it can restart.',
+    'This replay combines records from two real runs. Each row shows an example step and its reported status.',
   'wall.caption': 'Readouts from real runs on 2026-10-05 and 2026-10-11.',
   'wall.listLabel': 'Update stations in run order',
 
@@ -89,7 +89,7 @@ const EN = {
   'wall.row.post.pending': 'APPLICATIONS.md, UPDATES.md',
   'wall.row.post.done': 'history written only after the step succeeded',
   'wall.row.macos.pending': 'softwareupdate -i <label> -R',
-  'wall.row.macos.done': 'restart last, none offered in these runs',
+  'wall.row.macos.done': 'not run in this replay',
 
   'wall.note.openApps':
     'Open apps are never closed. Only what the toolkit launched is asked to quit.',

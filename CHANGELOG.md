@@ -8,6 +8,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- Replaced Mission Control styling with a unified precision editorial identity: Manrope, IBM Plex Mono, a three-layer logo, neutral light/dark tokens and generated silver/cobalt illustrations.
+- Added scroll-linked artwork, a clearly labelled illustrative terminal preview and matching feature illustrations. Reduced-motion visitors receive static content.
+- Improved installation guidance with separate copyable commands, preserved bilingual routes and metadata, and refreshed social imagery.
+- Applied compatible dependency fixes. Runtime dependency audit reports zero vulnerabilities; nine moderate findings remain in the development lint toolchain.
 - **Upstream Ground-Truth Synchronization (2026-11-02):**
   - Updated `TEST_COUNT` to 621 automated tests (from 600).
   - Updated `INTERNET_APP_COUNT` to 46 internet apps (from 43).
@@ -31,6 +35,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 - **Canonical domain:** `SITE_URL` now points to the live production domain `macos-updates.64bit.site`. Canonical and `og:url` tags, hreflang alternates, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt` and `llms-full.txt` no longer reference the unregistered `macosupdates.dev`.
+
+## Upstream fact sync (2026-11-10)
+
+- Updated product registry count to 47 apps and the collected Python unittest case count to 846 from the upstream main branch. Test collection was counted without running the suite.
+- The landing now identifies upstream main as source snapshot v1.6.0 from VERSION and CHANGELOG. No v1.6.0 Git tag or GitHub Release exists; v1.5.5 remains the latest tagged release.
+- Added the upstream v1.6.0 source changes to the product facts: scheduled launchd runs, `--doctor` readiness checks, preflight checks, persistent vendor-feed state, and safer handling of Open Design, HyperFrames, and Superset.
+- Corrected the install guide to include changing into the cloned repository before running commands and to disclose setup dependency and optional Touch ID configuration effects.
+- Reworked English and Polish page metadata for clear product and install intent.
 
 ## [1.5.5] - 2026-10-12
 

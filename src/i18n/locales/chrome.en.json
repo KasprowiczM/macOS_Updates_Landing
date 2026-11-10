@@ -47,7 +47,7 @@
       "llms": "llms.txt",
       "license": "MIT license",
       "release": "Release",
-      "releaseLink": "Release notes",
+      "releaseLink": "Current source snapshot",
       "rights": "© 2026 macOS Updates",
       "english": "English",
       "polish": "Polski"
@@ -61,7 +61,7 @@
     },
     "changelog": {
       "title": "Changelog",
-      "intro": "Notable macOS Updates changes are documented below, newest first.",
+      "intro": "Upstream main is identified as source snapshot v1.6.0, with no matching tag or GitHub Release. Tagged release notes follow below, newest first.",
       "added": "Added",
       "changed": "Changed",
       "fixed": "Fixed",

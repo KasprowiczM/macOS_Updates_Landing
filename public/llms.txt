@@ -1,8 +1,8 @@
 # macOS Updates
 
-> Production-ready one-command updater for Apple Silicon Macs running macOS 13 to 27 (v1.5.5, updated 2026-11-02). It keeps macOS, App Store apps, Homebrew, native CLI and npm tooling, and 46 internet-downloaded apps current, updating only software already installed on the current Mac. A mutation is reported only after the live Mac confirms it.
+> Production-ready one-command updater for Apple Silicon Macs running macOS 13 to 27 (latest tagged release v1.5.5, source synchronized 2026-11-10). It keeps macOS, App Store apps, Homebrew, native CLI and npm tooling, and 47 internet-downloaded apps current, updating only software already installed on the current Mac. A mutation is reported only after the live Mac confirms it.
 
-Supported platform: Apple Silicon (arm64) only, macOS 13 to 27. The suite has 621 automated tests.
+Supported platform: Apple Silicon (arm64) only, macOS 13 to 27. The unittest suite collects 846 Python test cases.
 
 ## Install
 
@@ -24,7 +24,7 @@ Manual setup:
 2. Step 1: App Store. Track 1 runs `sudo mas upgrade` for the IDs the pre-scan measured. Track 2 uses AppleScript GUI automation for iPad apps such as UniFi.
 3. Step 2: Native CLI and npm. Node, Bun, native vendor CLIs, and global npm CLIs.
 4. Step 3: Homebrew formulae and casks with downgrade protection. Orphan casks whose apps were removed by hand are skipped, followed by cleanup and a health check.
-5. Step 4: 46 internet apps through 11 update methods. Each installed vendor version is checked against the vendor feed first. Direct installs use verified vendor downloads (Gatekeeper signature, bundle ID, Apple Team ID, staged swap with rollback).
+5. Step 4: 47 internet apps through 11 update methods. Each installed vendor version is checked against the vendor feed first. Direct installs use verified vendor downloads (Gatekeeper signature, bundle ID, Apple Team ID, staged swap with rollback).
 6. Step 5: Postupdate refreshes APPLICATIONS.md and appends UPDATES.md atomically. A failed reporting step does not block macOS updates.
 7. Step 6: macOS system updates, one `softwareupdate -i <label> -R` per label. This runs last because it may restart the Mac.
 
@@ -43,20 +43,20 @@ Manual setup:
 - Vendor CLI success requires a working `--version`; unknown pending stays unknown.
 - Vendor TUIs that ignore SIGTERM are SIGKILL'd so the pipeline cannot hang.
 - Bash code stays compatible with Bash 3.2.
-- Automated tests: 621 static, unit, and registry checks with host-tool isolation stubs in run_tests.sh so tests never touch real native tools.
+- Tests: 846 collected Python unittest cases, plus static, registry, and secret checks with host-tool isolation stubs in run_tests.sh so tests never touch real native tools.
 - Managed Node.js is always restricted to stable releases (never alpha or pre-release builds).
 - Declined restart skips restart labels, installs no-restart labels, and exits 10 with system_skipped_by_user.
 - App Store Track 2 polls up to 30s, falls back to product pages, and flags unoffered iPad apps with a soft warning instead of claiming false negative success.
 - Gradual-rollout channel proof via vendor appcasts prevents false stale feed warnings (e.g. Proton Drive).
 
-## What changed in v1.5.5
+## Latest tagged release: v1.5.5
 
 - Managed Node.js selects the newest stable release from nodejs.org/dist/index.json, preventing alpha builds like v27.0.0-alpha from being installed by n.
 - Answering "no" to an automatic restart skips restart-required labels, installs no-restart labels, and exits 10 with system_skipped_by_user instead of failing the run.
 - App Store Track 2 polls up to 30 seconds, reads labels from name, description, and title, refreshes once (Cmd+R), falls back to product pages, and reports unoffered updates as soft warnings.
 - Proton Drive gradual rollout support: checks vendor appcasts to verify current installed builds before showing stale feed warnings.
 - OpenCode Desktop moved to Electron feed (latest-mac.yml) with arm64 zip preference and relative URL resolution.
-- Test runner run_tests.sh adds host-tool isolation guard stubs behind mocks to fail if any unmocked native tool is called; test suite grows to 621 tests.
+- Test runner run_tests.sh adds host-tool isolation guard stubs behind mocks to fail if any unmocked native tool is called; the suite contains 846 collected Python unittest cases.
 - Stale command hash after a Homebrew upgrade is fixed: orchestrators enable checkhash and update_all.sh runs hash -r before steps 2 to 5.
 - Reporting failures no longer defer macOS updates, and closing messages appear only when the inventory succeeded.
 - Lockstep versioning policy with Ascendo formally documented.
@@ -73,3 +73,8 @@ Manual setup:
 - [Source code](https://github.com/KasprowiczM/macOS_updates)
 - [Full knowledge file (llms-full.txt)](https://macos-updates.64bit.site/llms-full.txt)
 - [Polski](https://macos-updates.64bit.site/pl)
+
+
+## Upstream source status
+
+The repository main branch identifies its current source snapshot as v1.6.0 in VERSION and CHANGELOG, dated 2026-11-10. No v1.6.0 Git tag or GitHub Release exists as of this sync. The source snapshot is v1.6.0; the latest tagged release is v1.5.5.

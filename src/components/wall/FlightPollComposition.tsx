@@ -35,8 +35,8 @@ const C = {
   hold: 'var(--screen-hold, #F2B544)',
 } as const
 
-const FONT_SANS = 'var(--font-sans, "Archivo Variable", system-ui)'
-const FONT_MONO = 'var(--font-mono, "Martian Mono Variable", ui-monospace)'
+const FONT_SANS = 'var(--font-sans, "Manrope Variable", system-ui)'
+const FONT_MONO = 'var(--font-mono, "IBM Plex Mono", ui-monospace)'
 
 const PLACARD: CSSProperties = {
   fontFamily: FONT_SANS,
@@ -219,24 +219,7 @@ const Version: FC<{ from: string; to: string; at: number }> = ({ from, to, at })
 /* ── Backdrop: the plotting grid ──────────────────────────── */
 
 const Backdrop: FC<{ width: number; height: number }> = ({ width, height }) => (
-  <svg
-    width={width}
-    height={height}
-    viewBox={`0 0 ${width} ${height}`}
-    style={{ position: 'absolute', inset: 0 }}
-    aria-hidden="true"
-  >
-    <defs>
-      <pattern id="wall-grid-minor" width="25" height="25" patternUnits="userSpaceOnUse">
-        <path d="M25 0H0V25" fill="none" style={{ stroke: C.rule }} strokeWidth="1" opacity="0.35" />
-      </pattern>
-      <pattern id="wall-grid-major" width="100" height="100" patternUnits="userSpaceOnUse">
-        <path d="M100 0H0V100" fill="none" style={{ stroke: C.rule }} strokeWidth="1" opacity="0.8" />
-      </pattern>
-    </defs>
-    <rect width={width} height={height} fill="url(#wall-grid-minor)" />
-    <rect width={width} height={height} fill="url(#wall-grid-major)" />
-  </svg>
+ <svg width={width} height={height} style={{ position: 'absolute', inset: 0 }} aria-hidden="true"><rect width={width} height={height} fill={C.bg} /></svg>
 )
 
 /* ── Header: title, status, T-minus ───────────────────────── */

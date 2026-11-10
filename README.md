@@ -1,7 +1,7 @@
 # macOS Updates Landing
 
-[![Version](https://img.shields.io/badge/version-v1.5.5-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-621%20automated-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Source snapshot](https://img.shields.io/badge/source-v1.6.0-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Tests](https://img.shields.io/badge/tests-846%20unit-cases-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macos-updates.64bit.site](https://macos-updates.64bit.site).
@@ -12,16 +12,18 @@ The site is static: no backend and no secrets. Every page is prerendered at buil
 
 ## What the site is
 
-The landing page frames updating a Mac as a flight director's go/no-go poll. Light theme is flight-plan paper, dark theme is the console room. Sections on the home page, in order:
+The landing page explains how macOS Updates checks and updates software already installed on Apple Silicon Macs. Sections on the home page, in order:
 
-- `#poll`: hero with the poll console
-- `#rules`: flight rules
+- `#poll`: hero with the generated software-layer illustration and copyable install command
+- Feature illustrations: coverage, verified direct installs and preview workflow
+- `#rules`: four update safeguards
 - `#wall`: scroll-scrubbed wall display (Remotion, lazy-loaded)
-- `#stations`: flight plan table
-- `#coverage`: coverage roster, 46 internet apps and 11 update methods
-- `#log`: mission log with dated real runs
+- `#stations`: ordered pipeline reference
+- `#coverage`: coverage roster, 47 internet apps and 11 update methods
+- `#log`: dated release and live-run evidence
 - `#faq`: FAQ, shared with the `FAQPage` JSON-LD
-- `#install`: install close
+- Illustrative terminal preview with an animated dry run
+- `#install`: three copyable installation and update commands
 
 Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributing`. Every page also exists in Polish under `/pl`.
 
@@ -33,7 +35,7 @@ Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributi
 - Motion (`motion/react`) for animation; respects `prefers-reduced-motion`
 - react-router-dom 7 with `StaticRouter` for prerender; react-helmet-async 3 for head tags
 - i18next and react-i18next for English and Polish
-- Self-hosted fonts: Archivo Variable and Martian Mono Variable (`@fontsource-variable`)
+- Self-hosted fonts: Manrope Variable and IBM Plex Mono (`@fontsource`)
 - Remotion 4.0.530 (`remotion`, `@remotion/player`) for the wall display. It is loaded as a lazy chunk and never in the main entry bundle. Remotion is free for individuals and small teams (see remotion.dev/license); this is an individual open-source project.
 
 ---
@@ -80,10 +82,8 @@ The prerender step must report every route in both languages. A missing `<!--app
 
 ## Brand assets
 
-- Logo geometry lives in `src/components/ui/Logo.tsx` (64-unit grid). `scripts/og/build-brand.mjs` regenerates the mark, favicons, PWA icons, apple-touch-icon and the logo lockup in `public/` and `design_system/assets/`.
-  - Run `node scripts/og/build-brand.mjs`. It needs Inkscape for PNG export.
-  - Wordmark outlines come from `scripts/og/wordmark.json`. Run `scripts/og/build-wordmark.mjs` first if that file is missing.
-- The Open Graph image is `public/og-image.png`, rendered from `scripts/og/og.html` (1200 x 630) with headless Chrome.
+- Logo geometry lives in `src/components/ui/Logo.tsx` (40-unit grid). Run `node scripts/og/build-brand.mjs` with ImageMagick to regenerate the shared mark, favicons, PWA icons and logo lockups.
+- Generated illustration variants live in `public/images/`, with prompt provenance in adjacent JSON files. The Open Graph image uses the same generated hero artwork. The old `scripts/og/og.html` is a historical rendering recipe.
 - The visual specification is `design_system/DESIGN.md`. It is the visual source of truth; token values are in `src/index.css`.
 
 ---
@@ -137,10 +137,10 @@ Production deploys from the `main` branch on Vercel. `vercel.json` controls URL 
 
 Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
 
-- `APP_VERSION` (currently `v1.5.5`)
-- `APP_VERSION_DATE` (currently `2026-11-02`)
-- `TEST_COUNT` (currently `621`)
-- `INTERNET_APP_COUNT` (currently `46`)
+- `APP_VERSION` (current upstream source snapshot: `v1.6.0`; latest tagged release: `v1.5.5`)
+- `APP_VERSION_DATE` (currently `2026-11-10`)
+- `TEST_COUNT` (currently `846` collected Python unittest cases)
+- `INTERNET_APP_COUNT` (currently `47`)
 - `UPDATE_METHOD_COUNT` (currently `11`)
 
 JSON-LD, the sitemap and the `llms-full.txt` tokens follow automatically on the next build. Update these by hand so they match the release: the version badge above, `CHANGELOG.md`, the version and test count in `public/llms.txt` (a static file), and the copy in `src/i18n/locales/en.json`. Every English claim and test count in `en.json` needs a Polish counterpart in `pl.json`, and the same for `chrome.en.json` and `chrome.pl.json`. Then run `npm run build` and confirm the prerender reports all routes.

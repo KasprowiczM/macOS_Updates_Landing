@@ -3,6 +3,8 @@ import { Seo } from '../components/Seo'
 import { getFaqItems } from '../lib/faq'
 import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
+import { FeatureVisual } from '../components/sections/FeatureVisual'
+import { TerminalPreview } from '../components/sections/TerminalPreview'
 import { Hero } from '../components/sections/Hero'
 import { FlightRules } from '../components/sections/FlightRules'
 import { WallDisplay } from '../components/wall/WallDisplay'
@@ -35,12 +37,14 @@ export function LandingPage() {
       />
       <main id="main">
         <Hero />
+        <FeatureVisual />
         <FlightRules />
         <WallDisplay />
         <FlightPlan />
         <CoverageRoster />
         <MissionLog />
         <FaqSection />
+        <TerminalPreview />
         <InstallClose />
       </main>
     </>

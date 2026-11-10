@@ -47,7 +47,7 @@
       "llms": "llms.txt",
       "license": "Licencja MIT",
       "release": "Wydanie",
-      "releaseLink": "Notatki wydania",
+      "releaseLink": "Bieżący snapshot kodu",
       "rights": "© 2026 macOS Updates",
       "english": "English",
       "polish": "Polski"
@@ -61,7 +61,7 @@
     },
     "changelog": {
       "title": "Historia zmian",
-      "intro": "Znaczące zmiany w projekcie macOS Updates są udokumentowane poniżej, od najnowszych.",
+      "intro": "Gałąź upstream main jest oznaczona jako snapshot kodu v1.6.0, bez odpowiadającego taga ani GitHub Release. Poniżej znajdują się oznaczone wydania, od najnowszego.",
       "added": "Dodane",
       "changed": "Zmienione",
       "fixed": "Naprawione",

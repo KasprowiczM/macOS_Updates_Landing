@@ -38,7 +38,7 @@ const COPY = {
     siteDesc:
       'Open-source, one-command updater for Apple Silicon Macs: macOS, App Store, Homebrew, native CLIs, npm and internet-downloaded apps, updated only when the live Mac confirms it.',
     appDesc: `macOS Updates is an open-source Bash and Python toolkit that keeps macOS, App Store apps, Homebrew, native CLI tools, npm globals and ${INTERNET_APP_COUNT} internet-downloaded apps current on Apple Silicon Macs. It updates only software already installed, never closes apps you have open, checks each vendor's own feed before acting, and reports a result only after the live Mac confirms it.`,
-    sourceDesc: 'Source code of the macOS Updates toolkit (Bash 3.2-compatible scripts and a Python backend), MIT licensed.',
+    sourceDesc: 'Public source snapshot of macOS Updates on upstream main, currently identified as v1.6.0. The latest tagged release is v1.5.5; no v1.6.0 Git tag or GitHub Release exists.',
     category: 'System update utility',
     os: 'macOS 13 or later (Apple Silicon)',
     home: 'Home',
@@ -52,27 +52,27 @@ const COPY = {
       'Dry-run mode and read-only update coverage report before anything is changed',
       'macOS softwareupdate with mandatory -R runs last because it can restart the Mac',
       'Optional private dev_sync overlay for inventory, history and preferences',
-      `Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT) and ${TEST_COUNT} automated tests`,
+      `Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT) and ${TEST_COUNT} collected Python unittest cases`,
     ],
     howTo: {
       name: 'Install and run macOS Updates on an Apple Silicon Mac',
       description:
-        'Install the toolkit with one command, preview the run with a dry-run, then apply all updates.',
+        'Install the current source snapshot, preview the proposed updates without applying them, then decide whether to run the full workflow.',
       tool: 'Terminal',
       steps: [
         {
           name: 'Install',
-          text: `Run the one-line installer in Terminal. It clones the toolkit, installs dependencies and builds an inventory from the apps already on this Mac: ${INSTALL_NIX}`,
+          text: `Run the one-line installer in Terminal. It checks or installs setup dependencies, builds a local inventory, and may configure Touch ID for sudo. It does not install supported apps: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {
           name: 'Preview with a dry-run',
-          text: 'From the toolkit directory run: bash update_all.sh --dry-run -y. It previews every step, mutates nothing and never asks for credentials.',
+          text: 'Run from the install folder: cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y. Review the proposed changes before continuing.',
           anchor: '#quick-install',
         },
         {
           name: 'Run the update',
-          text: 'Run: bash update_all.sh. The seven steps run in order and the macOS system update runs last because it can restart the Mac.',
+          text: 'Run from the install folder: cd ~/Dev_Env/macOS_updates && bash update_all.sh. The seven steps run in order and the macOS system update runs last because it can restart the Mac.',
           anchor: '#quick-install',
         },
       ],
@@ -90,7 +90,7 @@ const COPY = {
     siteDesc:
       'Open-source’owy aktualizator Apple Silicon jedną komendą: macOS, App Store, Homebrew, natywne CLI, npm i aplikacje pobrane z internetu, aktualizowane tylko wtedy, gdy potwierdzi to żywy Mac.',
     appDesc: `macOS Updates to open-source’owy zestaw skryptów Bash i Python, który utrzymuje aktualne macOS, aplikacje z App Store, Homebrew, natywne narzędzia CLI, globalne pakiety npm i ${INTERNET_APP_COUNT} aplikacji pobranych z internetu na Macach z Apple Silicon. Aktualizuje tylko oprogramowanie już zainstalowane, nigdy nie zamyka otwartych aplikacji, sprawdza wersję w feedzie producenta przed działaniem i raportuje wynik dopiero po potwierdzeniu przez żywego Maca.`,
-    sourceDesc: 'Kod źródłowy zestawu macOS Updates (skrypty zgodne z Bash 3.2 i backend w Pythonie), licencja MIT.',
+    sourceDesc: 'Publiczny snapshot kodu macOS Updates w gałęzi upstream main, obecnie oznaczony jako v1.6.0. Najnowszy tag wydania to v1.5.5; nie ma taga v1.6.0 ani GitHub Release.',
     category: 'Narzędzie do aktualizacji systemu',
     os: 'macOS 13 lub nowszy (Apple Silicon)',
     home: 'Strona główna',
@@ -104,27 +104,27 @@ const COPY = {
       'Tryb dry-run i raport pokrycia tylko do odczytu przed jakąkolwiek zmianą',
       'macOS softwareupdate z obowiązkowym -R działa na końcu, bo może zrestartować Maca',
       'Opcjonalny prywatny overlay dev_sync dla inwentarza, historii i preferencji',
-      `Siedem języków interfejsu terminala (EN, PL, DE, FR, ES, IT, PT) i ${TEST_COUNT} testów automatycznych`,
+      `Siedem języków interfejsu terminala (EN, PL, DE, FR, ES, IT, PT) i ${TEST_COUNT} zebranych przypadków unittest w Pythonie`,
     ],
     howTo: {
       name: 'Instalacja i uruchomienie macOS Updates na Macu z Apple Silicon',
       description:
-        'Zainstaluj zestaw jedną komendą, obejrzyj przebieg w trybie dry-run, a następnie zastosuj wszystkie aktualizacje.',
+        'Zainstaluj bieżący snapshot kodu, przejrzyj proponowane aktualizacje bez ich stosowania, a następnie zdecyduj, czy uruchomić pełny przebieg.',
       tool: 'Terminal',
       steps: [
         {
           name: 'Instalacja',
-          text: `Uruchom jednoliniowy instalator w Terminalu. Klonuje zestaw, instaluje zależności i buduje inwentarz z aplikacji już obecnych na tym Macu: ${INSTALL_NIX}`,
+          text: `Uruchom jednoliniowy instalator w Terminalu. Sprawdza lub instaluje zależności, buduje lokalny inwentarz i może skonfigurować Touch ID dla sudo. Nie instaluje obsługiwanych aplikacji: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {
           name: 'Podgląd w trybie dry-run',
-          text: 'Z katalogu zestawu uruchom: bash update_all.sh --dry-run -y. Pokazuje każdy krok, niczego nie zmienia i nigdy nie prosi o dane uwierzytelniające.',
+          text: 'Uruchom z katalogu instalacji: cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y. Przejrzyj proponowane zmiany przed kontynuacją.',
           anchor: '#quick-install',
         },
         {
           name: 'Uruchom aktualizację',
-          text: 'Uruchom: bash update_all.sh. Siedem kroków działa po kolei, a aktualizacja systemu macOS na końcu, bo może zrestartować Maca.',
+          text: 'Uruchom z katalogu instalacji: cd ~/Dev_Env/macOS_updates && bash update_all.sh. Siedem kroków działa po kolei, a aktualizacja systemu macOS na końcu, bo może zrestartować Maca.',
           anchor: '#quick-install',
         },
       ],
@@ -182,7 +182,6 @@ function softwareNode(lang: Lang) {
     url: homeUrl(lang),
     inLanguage: lang,
     softwareVersion: VERSION_NUMBER,
-    datePublished: APP_VERSION_DATE,
     dateModified: APP_VERSION_DATE,
     operatingSystem: c.os,
     processorRequirements: 'Apple Silicon (arm64)',
@@ -288,7 +287,6 @@ export function buildPageJsonLd({ lang, path, name, description, type = 'WebPage
     about: { '@id': IDS.software },
     publisher: { '@id': IDS.publisher },
     primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE },
-    datePublished: APP_VERSION_DATE,
     dateModified: APP_VERSION_DATE,
   }
   if (type === 'TechArticle') {

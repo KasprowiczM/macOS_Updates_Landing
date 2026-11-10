@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Seo } from '../components/Seo'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Button } from '../components/ui/Button'
+import { FeatureArtwork } from '../components/sections/FeatureVisual'
 import { SectionReveal } from '../components/ui/SectionReveal'
 import { buildPageJsonLd } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
@@ -112,7 +113,7 @@ export function FeaturesPage() {
         'Prywatny overlay dev_sync dla inwentarza i historii ze wsparciem Proton Drive',
         'Tryb bezmutacyjnej weryfikacji --verify-only oraz automatyzacja LaunchAgent i Touch ID sudo',
         'Siedem języków UI terminala (EN, PL, DE, FR, ES, IT, PT)',
-        `${TEST_COUNT} hermetycznych testów statycznych, unit, registry parity i skan sekretów gitleaks`,
+        `${TEST_COUNT} zebranych przypadków testowych unittest w Pythonie, plus statyczne kontrole i skan sekretów`,
       ]
     : [
         'Seven steps: prescan → App Store → CLI/npm → brew → internet → postupdate → macOS system',
@@ -133,7 +134,7 @@ export function FeaturesPage() {
         'Private dev_sync overlay for inventory and history with Proton Drive support',
         'Non-mutating --verify-only mode, LaunchAgent automation, and Touch ID sudo onboarding',
         'Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT)',
-        `${TEST_COUNT} hermetic static, unit, registry parity, and gitleaks secret scanning tests`,
+        `${TEST_COUNT} collected Python unittest cases, plus static checks and secret scanning`,
       ]
 
   const lang = useLang()
@@ -162,6 +163,7 @@ export function FeaturesPage() {
         {groups.map((group, gi) => (
           <SectionReveal key={group.id} delay={0.04 * gi}>
             <section id={group.id} className="scroll-mt-24">
+              <div className="feature-doc-art"><FeatureArtwork index={[2,1,0][gi]} /></div>
               <h2 className="mb-4">{group.title}</h2>
               <dl className="m-0 border-b border-(--rule-strong)">
                 {group.items.map((item) => (

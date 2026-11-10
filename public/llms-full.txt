@@ -1,16 +1,16 @@
 # macOS Updates - full knowledge file
 
-> macOS Updates is a free, open-source (MIT) one-command update orchestrator for Apple Silicon Macs running macOS 13 to 27. One run updates macOS, Mac App Store apps, Homebrew formulae and casks, native CLI tools plus npm globals, and 46 internet-downloaded apps. It only touches software that is already installed, never closes apps you have open, checks every app's version against the vendor's own feed before acting, verifies vendor downloads, and reports a result only after the live Mac confirms it.
+> macOS Updates is a free, open-source (MIT) one-command update orchestrator for Apple Silicon Macs running macOS 13 to 27. One run updates macOS, Mac App Store apps, Homebrew formulae and casks, native CLI tools plus npm globals, and 47 internet-downloaded apps. It only touches software that is already installed, never closes apps you have open, checks every app's version against the vendor's own feed before acting, verifies vendor downloads, and reports a result only after the live Mac confirms it.
 
-This file is the long-form companion to https://macos-updates.64bit.site/llms.txt. All statements come from the project's own documentation (README, CHANGELOG, docs/). Current release: {{APP_VERSION}} ({{APP_VERSION_DATE}}). The site is published in English at https://macos-updates.64bit.site and in Polish under https://macos-updates.64bit.site/pl.
+This file is the long-form companion to https://macos-updates.64bit.site/llms.txt. All statements come from the project's own documentation (README, CHANGELOG, docs/). Current source snapshot: {{APP_VERSION}} ({{APP_VERSION_DATE}}). The latest tagged release is v1.5.5; upstream main labels the current source v1.6.0, without a matching Git tag or GitHub Release. The site is published in English at https://macos-updates.64bit.site and in Polish under https://macos-updates.64bit.site/pl.
 
 ## Quick facts
 
-- Name: macOS Updates (repository: macOS_updates). Current release: {{APP_VERSION}}, released {{APP_VERSION_DATE}}.
+- Name: macOS Updates (repository: macOS_updates). Current source snapshot: {{APP_VERSION}}, synchronized {{APP_VERSION_DATE}}. Latest tagged release: v1.5.5.
 - Licence: MIT. Languages: Bash (3.2-compatible) and Python. Author and publisher: KasprowiczM.
 - Platform: Apple Silicon (arm64) Macs only, macOS 13 (Ventura) through macOS 27. Intel Macs and macOS 12 or older are intentionally unsupported; setup fails before any mutation on them.
-- Scope: 46 internet-downloaded apps handled through 11 update methods, plus macOS, the Mac App Store, Homebrew, native CLIs and npm.
-- Quality gate: {{TEST_COUNT}} automated tests (shell syntax, Python compilation, static safety contracts, unit and registry-parity tests, secret scan).
+- Scope: 47 internet-downloaded apps handled through 11 update methods, plus macOS, the Mac App Store, Homebrew, native CLIs and npm.
+- Quality gate: {{TEST_COUNT}} collected Python unittest cases, plus shell syntax, Python compilation, static safety contracts, registry-parity tests, and secret scan.
 - Terminal UI languages: English, Polish, German, French, Spanish, Italian, Portuguese.
 - [Source code](https://github.com/KasprowiczM/macOS_updates)
 - Documentation: https://macos-updates.64bit.site/docs, features: https://macos-updates.64bit.site/features, security policy: https://macos-updates.64bit.site/security, changelog: https://macos-updates.64bit.site/changelog, contributing: https://macos-updates.64bit.site/contributing
@@ -59,7 +59,7 @@ The steps always run in this order. The final macOS step runs last because `soft
 1. App Store - Track 1 runs `sudo mas upgrade` for the app IDs measured by the prescan, with a user-session retry. Track 2 is a separate AppleScript GUI automation for iPad apps on the Mac (for example UniFi, WiFiman, Picsart) that `mas outdated` cannot see; it first asks the public iTunes Lookup API and skips the GUI work when everything is current. Track 2 needs Accessibility permission for your terminal.
 2. Native CLI and npm - existing native vendor CLIs are updated first through their own update commands (for example `claude update`, Codex, OpenCode, `agy`), then Node, Bun and global npm CLIs. Only CLIs that are already installed are updated; `--bootstrap-cli` deliberately installs missing ones. Redundant npm copies are removed only after a supported native installation is validated. Vendor CLI success requires a working `--version`.
 3. Homebrew - formulae and casks with `--greedy`, plus cleanup and `brew doctor`. Cask downgrade protection compares Homebrew records with the real app bundle version; orphan casks (app deleted by hand) are detected, skipped and offered for cleanup.
-4. Internet apps - the 46 apps registered in `config/internet_apps.txt`, each through one of 11 update methods (below), always after checking the vendor's own release feed.
+4. Internet apps - the 47 apps registered in `config/internet_apps.txt`, each through one of 11 update methods (below), always after checking the vendor's own release feed.
 5. Postupdate and history - refreshes `APPLICATIONS.md` and appends `UPDATES.md` atomically. It reports inventory field edits separately from observed package and CLI changes, so a table edit is never counted as an install.
 6. macOS system update (final) - per-label `softwareupdate -i <label> -R`; restart-required labels go in one final batch. The step is skipped when an earlier step had a hard failure, and deferred with a warning when authorisation is unavailable. A major macOS upgrade is only installed when explicitly approved.
 
@@ -158,7 +158,9 @@ The LaunchAgent runs `update_all.sh -y --skip-system` with non-interactive mode 
 
 ## Version history (summary)
 
-- v1.5.5 (2026-10-12, updated 2026-10-30): a Homebrew upgrade that removes `python3` mid-run no longer breaks the inventory and report step (stale command hash fixed); a failed reporting step no longer postpones macOS updates; final messages are honest (no "files updated" claim after a failure); stale-feed and quit-timeout warnings are not reported as unverified updates; toolkit-launched apps are asked to quit repeatedly, never force-killed; managed Node.js selects newest stable release; declined restart exits 10 with system_skipped_by_user; App Store Track 2 retries and soft-warns for unoffered iPad apps; Proton Drive gradual-rollout channel verified; host-tool isolation guards in test suite; 621 tests pass.
+- Upstream source snapshot (2026-11-10): the repository VERSION, README, and CHANGELOG identify v1.6.0, but no v1.6.0 tag or GitHub Release exists. The latest tagged release remains v1.5.5. The current source registry contains 47 internet apps and 11 methods; unittest collection finds 846 cases.
+
+- v1.5.5 (2026-10-12, updated 2026-10-30): a Homebrew upgrade that removes `python3` mid-run no longer breaks the inventory and report step (stale command hash fixed); a failed reporting step no longer postpones macOS updates; final messages are honest (no "files updated" claim after a failure); stale-feed and quit-timeout warnings are not reported as unverified updates; toolkit-launched apps are asked to quit repeatedly, never force-killed; managed Node.js selects newest stable release; declined restart exits 10 with system_skipped_by_user; App Store Track 2 retries and soft-warns for unoffered iPad apps; Proton Drive gradual-rollout channel verified; host-tool isolation guards in test suite; 621 tests passed in the v1.5.5 follow-up source state.
 - v1.5.4 (2026-10-05): stale manufacturer feeds are separate warnings without a downgrade target or a claim that an updater launched; warning labels localised in seven languages.
 - v1.5.3 (2026-10-05): ChatGPT uses its verified vendor download before GUI launch; native CLI updates run before Node and npm; running applications are protected at the bundle swap; system updates without authorisation are deferred with a warning.
 - v1.5.2 (2026-09-28): Chromium updater proof from structured update history (Gemini, Google Drive, Comet); idle Docker Desktop updated from its verified DMG; OpenCode installs from the verified vendor feed; false Microsoft Teams quarantine message removed.
@@ -194,7 +196,7 @@ Q: Why does mas upgrade use sudo?
 A: The project follows the current macOS/App Store CLI requirement documented in the repo, including the CVE-related Sequoia behavior.
 
 Q: How many apps are supported?
-A: The current registry covers 46 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling.
+A: The current registry covers 47 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling.
 
 Q: How do I add a new internet app?
 A: Use `scripts/scaffold_internet_app.sh`, register the method and dispatch order, add i18n strings, then run `bash run_tests.sh`.

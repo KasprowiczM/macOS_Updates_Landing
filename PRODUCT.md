@@ -14,7 +14,7 @@ Secondary (inferred from repo evidence, not interviewed): contributors evaluatin
 
 ## Product Purpose
 
-macOS Updates is an open-source (MIT) Bash/Python toolkit that updates every layer of an Apple Silicon Mac in one run: App Store, native vendor CLIs and npm, Homebrew, 43 internet-downloaded apps, inventory/history, and finally macOS itself. Success for the landing page: a visitor understands what it does, believes it is safe, and copies the one-line install or opens the GitHub repo.
+macOS Updates is an open-source (MIT) Bash/Python toolkit that updates every layer of an Apple Silicon Mac in one run: App Store, native vendor CLIs and npm, Homebrew, 47 internet-downloaded apps, inventory/history, and finally macOS itself. Success for the landing page: a visitor understands what it does, believes it is safe, and copies the one-line install or opens the GitHub repo.
 
 ## Positioning
 
@@ -27,14 +27,14 @@ Runs from Terminal (`bash update_all.sh`, `--dry-run`, flags in `lib/cli.sh`), o
 ## Capabilities and Constraints
 
 - Apple Silicon only, macOS 13 to 27, Bash 3.2 compatible.
-- Seven ordered steps: prescan/inventory, App Store (`sudo mas` measured IDs plus AppleScript Track 2), native CLIs + npm, Homebrew (`--greedy`, orphan casks skipped), 43 internet apps via 11 update methods, postupdate inventory/history, macOS `softwareupdate -i <label> -R` last.
+- Seven ordered steps: prescan/inventory, App Store (`sudo mas` measured IDs plus AppleScript Track 2), native CLIs + npm, Homebrew (`--greedy`, orphan casks skipped), 47 internet apps via 11 update methods, postupdate inventory/history, macOS `softwareupdate -i <label> -R` last.
 - Verified vendor downloads: Gatekeeper, bundle ID and Apple Team ID checks, staged swap with rollback.
-- Current release: v1.5.5 (2026-10-12), 561 automated tests. Ground truth lives in the upstream repo and `src/lib/site.ts`.
+- Upstream main identifies v1.6.0; latest published tag is v1.5.5. Test inventory collects 846 unittest cases; this is not a claim that the full upstream suite ran in this session. Ground truth lives in the upstream repo and `src/lib/site.ts`.
 - Landing stack: React 19, Vite 8, Tailwind 4, react-i18next (EN/PL at the same URLs), deployed on Vercel from `main`. Static, no backend, no secrets.
 
 ## Brand Commitments
 
-- Name "macOS Updates"; existing logo files in `public/` (logo.svg, brand-icon.svg, favicons). The user approved a full visual overhaul on 2026-10-12; logo assets stay unless replaced deliberately.
+- Name "macOS Updates"; new three-layer ascending mark in `public/` (logo.svg, brand-icon.svg, favicons), deliberately replaced during the November 2026 redesign.
 - Voice: precise, technical, honest; no hype. The open-apps principle is a core public promise.
 
 ## Evidence on Hand

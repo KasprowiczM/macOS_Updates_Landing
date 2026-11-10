@@ -8,7 +8,8 @@ export function UserGuide({ pl }: { pl: boolean }) {
           ? 'Najczęstszy workflow to prescan, raport pokrycia, dry-run i dopiero pełna aktualizacja.'
           : 'The common workflow is prescan, coverage report, dry-run, then the full update.'
         }</p>
-        <CodeBlock title="bash">{`bash build_inventory.sh
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+bash build_inventory.sh
 bash scripts/report_update_coverage.sh
 bash update_all.sh --dry-run -y
 bash update_all.sh`}</CodeBlock>
@@ -32,7 +33,8 @@ bash update_all.sh`}</CodeBlock>
           ? 'dev_sync rozdziela publiczny kod od plików konkretnej maszyny: inwentarza, historii, preferencji, .env i konfiguracji chmury. Import rozwija manifesty katalogów, pomija pliki śledzone przez Git i wykluczone, odmawia ucieczek symlinkami i zostawia ścieżkę odzyskania, gdy zamiana się nie uda.'
           : 'dev_sync separates public code from machine-specific files: inventory, history, preferences, .env, and cloud configuration. Import expands directory manifests, skips Git-tracked and excluded files, refuses symlink escapes, and leaves a recovery path if a swap fails.'
         }</p>
-        <CodeBlock title="bash">{`bash dev_sync/provider_setup.sh
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+bash dev_sync/provider_setup.sh
 bash dev_sync/dev-sync-export.sh
 bash dev_sync/dev-sync-import.sh
 bash dev_sync/dev-sync-verify-full.sh`}</CodeBlock>
@@ -43,7 +45,8 @@ bash dev_sync/dev-sync-verify-full.sh`}</CodeBlock>
           ? 'update_all.sh obsługuje dry-run, weryfikację bez mutacji (--verify-only), automatyczne potwierdzenie (-y), onboarding Touch ID, harmonogram LaunchAgent oraz --json-summary z uczciwym rozdzieleniem edycji inwentarza od zmian pakietów.'
           : 'update_all.sh supports dry-run, non-mutating verification (--verify-only), yes mode (-y), Touch ID onboarding, LaunchAgent scheduling, and --json-summary that splits inventory edits from observed package changes.'
         }</p>
-        <CodeBlock title="bash">{`bash update_all.sh --dry-run -y
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
+bash update_all.sh --dry-run -y
 bash update_all.sh --verify-only
 bash update_all.sh --json-summary
 bash update_all.sh --skip-system
