@@ -13,8 +13,8 @@
       "desc": "install.sh builds APPLICATIONS.md from this Mac and updates only already-installed software."
     },
     "scheduler": {
-      "title": "Critical safety rules",
-      "desc": "softwareupdate always keeps -R; mas upgrade uses sudo with measured IDs; vendor TUIs cannot hang the run."
+      "title": "Readiness and scheduled runs",
+      "desc": "Use --doctor for a read-only readiness report. LaunchAgent checks confirm the job is loaded and use an explicit PATH."
     },
     "aiTools": {
       "title": "Agent-friendly handlers",
@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Run tests and secret scans",
-      "desc": "The test suite collects 846 Python unittest cases, alongside shell syntax, registry, and secret checks."
+      "desc": "The upstream runner collects 846 Python unittest cases, plus shell syntax, registry, static safety, and secret checks."
     },
     "multihost": {
       "title": "Seven-language UI",
@@ -77,9 +77,9 @@
     "homeTitle": "macOS Updates: one-command Mac updater for Apple Silicon",
     "homeDesc": "Open-source updater for Apple Silicon Macs: macOS, App Store, Homebrew, command-line tools, npm packages, and 47 supported apps. Reports only changes your Mac confirms.",
     "featuresTitle": "macOS Updates features: Update coverage and local inventory",
-    "featuresDesc": "See how macOS Updates runs seven ordered steps, checks vendor feeds first, never closes open apps and reports only what your Mac confirms.",
-    "docsTitle": "macOS Updates docs: Install, operate, and extend",
-    "docsDesc": "Install macOS Updates on Apple Silicon, preview with a dry run, read the flags and learn how the seven update steps and handlers work.",
+    "featuresDesc": "See how macOS Updates previews seven ordered steps, checks vendor feeds, protects running apps and schedules verified runs on Apple Silicon.",
+    "docsTitle": "macOS Updates docs: Install, preview, and run",
+    "docsDesc": "Install on Apple Silicon, preview updates, check readiness with --doctor, configure LaunchAgent scheduling, and understand feed and cask safety.",
     "securityTitle": "macOS Updates security policy",
     "securityDesc": "How macOS Updates handles sudo, verified vendor downloads, Gatekeeper and Team ID checks, and keeps your inventory and overlay files private.",
     "changelogTitle": "macOS Updates changelog",
@@ -294,6 +294,10 @@
         "name": "GitHub DMG",
         "note": "Release DMG from GitHub, verified, then a staged swap with rollback."
       },
+      "mozilla_dmg": {
+        "name": "Mozilla DMG",
+        "note": "Firefox Developer Edition release downloaded from Mozilla and verified before replacement."
+      },
       "msupdate": {
         "name": "Microsoft AutoUpdate",
         "note": "Office apps updated through msupdate."
@@ -354,13 +358,13 @@
     "lead": "Every entry is a real release or a real run. Nothing here is a benchmark.",
     "entries": {
       "release": {
-        "title": "v1.5.5 follow-up updates",
-        "body": "Follow-up changes pinned managed Node.js to stable releases, made declined restarts exit cleanly, and added App Store Track 2 polling and product-page fallbacks. The test runner blocks unmocked host tools."
+        "title": "v1.6.0 current source snapshot",
+        "body": "Upstream main adds a read-only --doctor report, safer LaunchAgent scheduling, prompt timeouts, running-cask deferrals, persistent vendor-feed statuses, and new app handlers. No v1.6.0 Git tag or GitHub Release is published yet; v1.5.5 is the latest tag."
       },
       "live": {
         "title": "Live run: two updates verified",
         "body": "One update came through App Store Track 2, the other through a verified vendor install.",
-        "note": "The macOS system step was skipped in this run by a bug that v1.5.5 fixes."
+        "note": "The macOS system step was skipped in this historical run. This record does not describe current source behavior."
       },
       "verify": {
         "title": "Verification run: 108 seconds",
@@ -397,20 +401,25 @@
     "caption": "Examples based on real runs from 2026-10-05 and 2026-10-11.",
     "listLabel": "Update stations in run order",
     "screen": {
-      "title": "Flight director poll",
-      "running": "Replay: poll in progress",
-      "complete": "Replay: poll complete",
-      "tMinus": "T-minus",
-      "dryRun": "Dry-run",
+      "title": "Update workflow",
+      "running": "Checking",
+      "complete": "Review complete",
+      "tMinus": "Step",
+      "dryRun": "Preview",
       "confirmed": "Confirmed by the live Mac",
-      "plotTitle": "Stations to go",
-      "result": "Poll result"
+      "plotTitle": "Steps remaining",
+      "result": "Summary",
+      "current": "Current step",
+      "progress": "{{done}} of {{total}} steps reviewed",
+      "example": "Recorded example",
+      "changed": "Updated",
+      "unchanged": "No change"
     },
     "state": {
-      "go": "GO",
-      "hold": "HOLD",
-      "standby": "STANDBY",
-      "polling": "POLLING"
+      "go": "Confirmed",
+      "hold": "Needs attention",
+      "standby": "Not run",
+      "polling": "Checking"
     },
     "line": {
       "pending": "pending",
@@ -420,27 +429,27 @@
     },
     "station": {
       "prescan": {
-        "name": "PRESCAN",
+        "name": "Inventory",
         "desc": "Inventory of this Mac into APPLICATIONS.md. Only installed software."
       },
       "appstore": {
-        "name": "APP STORE",
+        "name": "App Store",
         "desc": "sudo mas with measured IDs, then AppleScript Track 2."
       },
       "cli": {
-        "name": "CLI + NPM",
+        "name": "Command line + npm",
         "desc": "Native vendor CLIs first (claude update, codex, opencode, agy), then Node/npm globals."
       },
       "brew": {
-        "name": "HOMEBREW",
+        "name": "Homebrew",
         "desc": "brew upgrade --greedy, orphan casks skipped, cleanup, doctor."
       },
       "internet": {
-        "name": "INTERNET APPS",
+        "name": "Internet apps",
         "desc": "{{apps}} supported apps across {{methods}} update methods. Installed versions are checked against vendor feeds first."
       },
       "post": {
-        "name": "POSTUPDATE",
+        "name": "Run records",
         "desc": "APPLICATIONS.md and UPDATES.md history written only after the step succeeded."
       },
       "macos": {

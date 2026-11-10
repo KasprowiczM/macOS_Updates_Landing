@@ -66,6 +66,8 @@
       "changed": "Zmienione",
       "fixed": "Naprawione",
       "latest": "Najnowsze",
+      "currentSource": "Bieżący snapshot kodu",
+      "latestTagged": "Najnowsze wydanie z tagiem",
       "candidate": "Kandydat",
       "releases": "Wydania"
     },

@@ -1,12 +1,12 @@
 /**
- * Flight director wall display: the page section.
+ * Recorded update workflow: the page section.
  *
- * A tall track with a sticky screen. Scroll progress through the track is
+ * On desktop, a tall track holds a sticky workflow. Scroll progress is
  * mapped to a Remotion frame (PlayerRef.seekTo). The Player and composition
  * live in a lazy chunk (WallPlayer) that mounts about one viewport before the
  * section. Before that, during SSR, for reduced-motion users and if the chunk
- * fails, the section renders a static console board: a semantic <ol> of the
- * seven stations. That list stays in the DOM (visually hidden) while the
+ * fails, the section renders a native semantic <ol> of the
+ * seven steps. That list stays in the DOM (visually hidden) while the
  * animated screen is shown, so screen readers and crawlers always get it.
  */
 import {
@@ -89,143 +89,34 @@ class PlayerBoundary extends Component<
 
 /* ── Static console board (semantic list) ─────────────────── */
 
-const SCREEN = {
-  bg: 'var(--screen-bg, #0B1621)',
-  elev: 'var(--screen-elev, #112131)',
-  rule: 'var(--screen-rule, #1F3347)',
-  fg: 'var(--screen-fg, #D9E6F2)',
-  dim: 'var(--screen-dim, #7D93A8)',
-  go: 'var(--screen-go, #5DB0FF)',
-  hold: 'var(--screen-hold, #F2B544)',
-} as const
-
-const FONT_SANS = 'var(--font-sans, "Manrope Variable", system-ui)'
-const FONT_MONO = 'var(--font-mono, "IBM Plex Mono", ui-monospace)'
-
-const PLACARD: CSSProperties = {
-  fontFamily: FONT_SANS,
-  textTransform: 'uppercase',
-  fontStretch: '125%',
-  fontWeight: 600,
-  letterSpacing: '0.06em',
-}
-
-function StationItem({
-  station,
-  index,
-  labels,
-  compact,
-}: {
-  station: WallStation
-  index: number
-  labels: WallLabels
-  compact: boolean
+function StationItem({ station, index, labels, compact }: {
+  station: WallStation; index: number; labels: WallLabels; compact: boolean
 }) {
   const outcome = stationOutcome(station)
-  const detail = compact ? 'sr-only' : undefined
-  return (
-    <li
-      className={`grid grid-cols-[2rem_minmax(0,1fr)_auto] items-start gap-x-3 px-4 py-3 md:px-5 md:py-4 ${
-        compact ? 'flex-1 items-center' : ''
-      }`}
-      style={{ borderTop: index === 0 ? 'none' : `1px solid ${SCREEN.rule}` }}
-    >
-      <span
-        className="pt-1 text-xs"
-        style={{ fontFamily: FONT_MONO, fontVariantNumeric: 'tabular-nums', color: SCREEN.dim }}
-        aria-hidden="true"
-      >
-        {String(index + 1).padStart(2, '0')}
-      </span>
-      <div className="min-w-0">
-        <p className="text-sm md:text-base" style={{ ...PLACARD, textTransform: 'none', color: SCREEN.fg }}>
-          {labels[station.name]}
-        </p>
-        <p
-          className={`mt-1 text-sm leading-snug ${detail ?? ''}`}
-          style={{ fontFamily: FONT_SANS, color: SCREEN.dim }}
-        >
-          {labels[station.desc]}
-        </p>
-        {station.rows.map((row) => {
-          if (!rowIsInformative(station, row)) return null
-          const text = rowReadout(row, labels)
-          return text ? (
-            <p
-              key={row.id}
-              className={`mt-1.5 text-[0.8125rem] leading-snug ${detail ?? ''}`}
-              style={{ fontFamily: FONT_SANS, color: row.outcome === 'hold' ? SCREEN.hold : SCREEN.fg }}
-            >
-              {text}
-            </p>
-          ) : null
-        })}
-        {station.note ? (
-          <p
-            className={`mt-1.5 text-[0.8125rem] leading-snug ${detail ?? ''}`}
-            style={{ fontFamily: FONT_SANS, color: SCREEN.fg }}
-          >
-            {labels[station.note]}
-          </p>
-        ) : null}
-      </div>
-      <span
-        className="inline-flex h-7 min-w-[4.5rem] items-center justify-center whitespace-nowrap px-3 text-xs"
-        style={{
-          ...PLACARD,
-          borderRadius: 2,
-          background: outcome === 'hold' ? SCREEN.hold : outcome === 'standby' ? 'transparent' : SCREEN.go,
-          border: outcome === 'standby' ? `1px solid ${SCREEN.dim}` : undefined,
-          color: outcome === 'standby' ? SCREEN.fg : SCREEN.bg,
-        }}
-      >
-        {stationFinalLabel(station, labels)}
-      </span>
-    </li>
-  )
+  return <li className={`workflow-step ${compact ? 'workflow-step-compact' : ''}`}>
+    <span className="workflow-step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+    <div className="workflow-step-content">
+      <h3>{labels[station.name]}</h3>
+      <p className={compact ? 'sr-only' : undefined}>{labels[station.desc]}</p>
+      {station.rows.map(row => {
+        if (!rowIsInformative(station, row)) return null
+        const text = rowReadout(row, labels)
+        return text ? <p key={row.id} className={`${compact ? 'sr-only' : 'workflow-step-result'} ${row.outcome === 'hold' ? 'workflow-step-warning' : ''}`}>{text}</p> : null
+      })}
+      {station.note && <p className={compact ? 'sr-only' : 'workflow-step-note'}>{labels[station.note]}</p>}
+    </div>
+    <span className={`workflow-step-status workflow-step-status-${outcome}`}>{stationFinalLabel(station, labels)}</span>
+  </li>
 }
 
-function StationList({
-  labels,
-  mode,
-}: {
-  labels: WallLabels
-  /** flow: normal block. fill: absolute, clipped placeholder. hidden: screen reader only. */
-  mode: 'flow' | 'fill' | 'hidden'
+function StationList({ labels, mode }: {
+  labels: WallLabels; mode: 'flow' | 'fill' | 'hidden'
 }) {
-  const layoutClass =
-    mode === 'hidden'
-      ? 'sr-only'
-      : mode === 'fill'
-        ? 'absolute inset-0 flex flex-col overflow-hidden'
-        : 'flex flex-col'
-  return (
-    <ol
-      role="list"
-      aria-label={labels['wall.listLabel']}
-      className={`m-0 list-none p-0 ${layoutClass}`}
-      style={
-        mode === 'hidden'
-          ? undefined
-          : {
-              background: SCREEN.bg,
-              color: SCREEN.fg,
-              border: `1px solid ${SCREEN.rule}`,
-              borderRadius: 2,
-            }
-      }
-    >
-      {WALL_STATIONS.map((station, index) => (
-        <StationItem
-          key={station.id}
-          station={station}
-          index={index}
-          labels={labels}
-          compact={mode === 'fill'}
-        />
-      ))}
-    </ol>
-  )
+  return <ol role="list" aria-label={labels['wall.listLabel']} className={
+    mode === 'hidden' ? 'sr-only' : `workflow-static ${mode === 'fill' ? 'absolute inset-0 overflow-hidden' : ''}`
+  }>
+    {WALL_STATIONS.map((station, index) => <StationItem key={station.id} station={station} index={index} labels={labels} compact={mode === 'fill'} />)}
+  </ol>
 }
 
 /* ── Section ──────────────────────────────────────────────── */
@@ -245,7 +136,7 @@ export function WallDisplay() {
   const [near, setNear] = useState(false)
   const [playerReady, setPlayerReady] = useState(false)
 
-  const scrub = isClient && !reduceMotion && !failed
+  const scrub = isClient && !reduceMotion && !failed && layout === 'landscape'
   const showScreen = scrub && playerReady
 
   const trackRef = useRef<HTMLDivElement>(null)
@@ -311,7 +202,7 @@ export function WallDisplay() {
         </p>
       </header>
 
-      <div ref={trackRef} className={scrub ? 'relative h-[230svh] md:h-[260svh]' : 'relative'}>
+      <div ref={trackRef} className={scrub ? 'relative h-[260svh]' : 'relative'}>
         <div
           className={
             scrub

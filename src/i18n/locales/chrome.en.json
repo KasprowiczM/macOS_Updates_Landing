@@ -66,6 +66,8 @@
       "changed": "Changed",
       "fixed": "Fixed",
       "latest": "Latest",
+      "currentSource": "Current source snapshot",
+      "latestTagged": "Latest tagged release",
       "candidate": "Candidate",
       "releases": "Releases"
     },

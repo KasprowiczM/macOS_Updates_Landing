@@ -112,6 +112,10 @@ export function FeaturesPage() {
         'Końcowa bezpieczna aktualizacja macOS: softwareupdate -R, instalacja bezrestartowa przy odrzuceniu restartu (exit 10)',
         'Prywatny overlay dev_sync dla inwentarza i historii ze wsparciem Proton Drive',
         'Tryb bezmutacyjnej weryfikacji --verify-only oraz automatyzacja LaunchAgent i Touch ID sudo',
+        'Raport gotowości --doctor tylko do odczytu; rzeczywiste przebiegi dodają kontrole miejsca, baterii i sieci',
+        'LaunchAgent ma jawny PATH, sprawdza załadowanie zadania i obsługuje --minute oraz jednorazowy --once-in',
+        'Caski Homebrew z działającą aplikacją lub nieznanym stanem są odraczane; timeout odpowiada bezpiecznie „nie”, a otwarte aplikacje nie są podmieniane',
+        'Trwałe statusy kanałów rozróżniają niedostępny feed, dowód z pamięci podręcznej i cofnięcie wersji; dodano DeepSeek Harness i Grok Bot, usunięto DJI Assistant 2',
         'Siedem języków UI terminala (EN, PL, DE, FR, ES, IT, PT)',
         `${TEST_COUNT} zebranych przypadków testowych unittest w Pythonie, plus statyczne kontrole i skan sekretów`,
       ]
@@ -133,6 +137,10 @@ export function FeaturesPage() {
         'Restart-safe final macOS system update: softwareupdate -R, no-restart labels installed on declined reboot (exit 10)',
         'Private dev_sync overlay for inventory and history with Proton Drive support',
         'Non-mutating --verify-only mode, LaunchAgent automation, and Touch ID sudo onboarding',
+        'Read-only --doctor readiness report; real runs add disk, battery, and network pre-flight checks',
+        'LaunchAgent has an explicit PATH, verifies the loaded job, and supports --minute and one-shot --once-in schedules',
+        'Running or unknown-state Homebrew casks are deferred; timed-out prompts safely answer no and open apps are not replaced',
+        'Persistent vendor-feed statuses distinguish unreachable feeds, cached proof, and feed regressions; DeepSeek Harness and Grok Bot are registered while DJI Assistant 2 is retired',
         'Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT)',
         `${TEST_COUNT} collected Python unittest cases, plus static checks and secret scanning`,
       ]

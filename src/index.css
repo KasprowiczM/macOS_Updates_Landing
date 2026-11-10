@@ -540,3 +540,30 @@ h3 { letter-spacing: -0.025em; }
 }
 
 .feature-doc-art { width:240px; max-width:100%; margin:0 0 24px; }
+
+/* The moving artwork has its own clip boundary, separate from the facts row. */
+.hero-art-boundary { overflow:hidden; min-width:0; isolation:isolate; }
+.hero-proof { position:relative; z-index:1; background:var(--bg); }
+.workflow-static { list-style:none; margin:0; padding:0; background:var(--bg-elev); border:1px solid var(--rule); border-radius:2px; }
+.workflow-step { display:grid; grid-template-columns:36px minmax(0,1fr) auto; gap:16px; padding:28px; border-top:1px solid var(--rule); align-items:start; }
+.workflow-step:first-child { border-top:0; }
+.workflow-step-number { color:var(--fg-faint); font-variant-numeric:tabular-nums; font-size:14px; line-height:28px; }
+.workflow-step-content { min-width:0; }
+.workflow-step h3 { margin:0; font-size:22px; line-height:1.25; font-weight:500; letter-spacing:-0.025em; }
+.workflow-step p { margin:10px 0 0; font-size:15px; line-height:1.65; color:var(--fg-muted); }
+.workflow-step p.workflow-step-result { color:var(--fg); }
+.workflow-step p.workflow-step-warning { color:var(--hold); background:var(--hold-soft); padding:12px; border-radius:2px; }
+.workflow-step p.workflow-step-note { font-size:14px; }
+.workflow-step-status { font-size:13px; color:var(--fg-muted); line-height:28px; }
+.workflow-step-status-go { color:var(--accent-text); }
+.workflow-step-status-hold { color:var(--hold); }
+.workflow-step-compact { padding-block:16px; flex:1; }
+@media(max-width:767px) {
+ .workflow-step { grid-template-columns:24px minmax(0,1fr); gap:6px 12px; padding:24px 20px; }
+ .workflow-step-status { grid-column:2; font-weight:600; }
+ .workflow-step h3 { font-size:21px; }
+ .hero-art-boundary { margin-inline:-16px; }
+ .hero-art { margin-inline:0; }
+}
+
+.workflow-static { font-variant-ligatures:none; }

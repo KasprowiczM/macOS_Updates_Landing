@@ -21,12 +21,12 @@ export function WikiSection({ id, title, children, level = 3 }: Props) {
 }
 
 /** A command or file listing on a dark instrument screen, with a 44px copy control. */
-export function CodeBlock({ children, title }: { children: string; title?: string }) {
+export function CodeBlock({ children, title, copyable = true }: { children: string; title?: string; copyable?: boolean }) {
   return (
     <div className="screen overflow-hidden">
       <div className="flex items-stretch border-b border-(--screen-rule)">
         <p className="placard m-0 flex min-h-[44px] max-w-none min-w-0 flex-1 items-center truncate px-4 text-(--screen-dim)">{title ?? ' '}</p>
-        <CopyButton text={children} />
+        {copyable && <CopyButton text={children} />}
       </div>
       <pre
         tabIndex={0}

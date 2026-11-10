@@ -8,6 +8,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- Rebuilt the recorded workflow with editorial typography, a current-step view and persistent warning status. Mobile uses a native readable sequence; reduced-motion behavior and recorded example dates are preserved.
+- Contained the moving hero artwork so it cannot cover the mobile facts row. Synced v1.6.0 source documentation and the 47-app coverage roster, while keeping the latest tagged release distinct.
+- Split command blocks into individual actions and removed Copy from illustrative references, file trees and placeholder scaffolds.
 - Replaced Mission Control styling with a unified precision editorial identity: Manrope, IBM Plex Mono, a three-layer logo, neutral light/dark tokens and generated silver/cobalt illustrations.
 - Added scroll-linked artwork, a clearly labelled illustrative terminal preview and matching feature illustrations. Reduced-motion visitors receive static content.
 - Improved installation guidance with separate copyable commands, preserved bilingual routes and metadata, and refreshed social imagery.

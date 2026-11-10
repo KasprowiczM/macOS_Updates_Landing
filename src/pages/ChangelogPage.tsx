@@ -7,6 +7,7 @@ import { useLang } from '../lib/routes'
 interface Release {
   version: string
   date: string
+  sourceSnapshot?: boolean
   rc?: boolean
   summary: { en: string; pl: string }
   added?: { en: string; pl: string }[]
@@ -15,6 +16,43 @@ interface Release {
 }
 
 const RELEASES: Release[] = [
+  {
+    version: 'v1.6.0',
+    date: '2026-11-10',
+    sourceSnapshot: true,
+    summary: {
+      en: 'Current upstream source snapshot identified as v1.6.0. No v1.6.0 Git tag or GitHub Release is published; v1.5.5 remains the latest tag. This source adds safer scheduled runs, a read-only readiness doctor, pre-flight checks, safer cask handling, persistent vendor-feed state, and new app handlers.',
+      pl: 'Bieżący snapshot kodu upstream oznaczony jako v1.6.0. Nie opublikowano taga Git ani GitHub Release v1.6.0; najnowszym tagiem pozostaje v1.5.5. Ten kod dodaje bezpieczniejsze harmonogramy, raport gotowości tylko do odczytu, kontrole wstępne, bezpieczniejszą obsługę casków, pamięć statusów kanałów producentów i nowe handlery aplikacji.',
+    },
+    added: [
+      {
+        en: 'Scheduled runs now use an explicit PATH, verify that the LaunchAgent loaded, and support --minute N and one-time --once-in N (1 to 1440 minutes). Use --check to inspect the installed schedule.',
+        pl: 'Zaplanowane przebiegi używają jawnego PATH, weryfikują załadowanie LaunchAgent i obsługują --minute N oraz jednorazowe --once-in N (od 1 do 1440 minut). --check pokazuje stan zainstalowanego harmonogramu.',
+      },
+      {
+        en: 'bash update_all.sh --doctor prints a read-only readiness report for tools, permissions, LaunchAgent, disk, power, network, toolkit state, and the last real run. Real runs add disk, battery, and network pre-flight checks and keep the Mac awake.',
+        pl: 'bash update_all.sh --doctor wyświetla raport gotowości bez zmian: narzędzia, uprawnienia, LaunchAgent, miejsce, zasilanie, sieć, stan toolkita i ostatni rzeczywisty przebieg. Rzeczywiste przebiegi dodają kontrole miejsca, baterii i sieci oraz utrzymują Maca aktywnego.',
+      },
+      {
+        en: 'New internet app handlers: DeepSeek Harness and Grok Bot. DJI Assistant 2 was removed from the current registry. The registry now has 47 apps across 11 methods.',
+        pl: 'Dodano handlery DeepSeek Harness i Grok Bot. DJI Assistant 2 usunięto z bieżącego rejestru. Rejestr obejmuje teraz 47 aplikacji w 11 metodach.',
+      },
+    ],
+    changed: [
+      {
+        en: 'Mid-run prompts have a configurable timeout (MAC_UPDATE_PROMPT_TIMEOUT); a timeout safely answers no. Homebrew casks are deferred when their app is running or its state is unknown. Open apps are not closed or replaced.',
+        pl: 'Pytania w trakcie przebiegu mają konfigurowalny limit czasu (MAC_UPDATE_PROMPT_TIMEOUT); po jego przekroczeniu bezpieczną odpowiedzią jest „nie”. Caski Homebrew są odraczane, gdy aplikacja działa albo jej stan jest nieznany. Otwarte aplikacje nie są zamykane ani podmieniane.',
+      },
+      {
+        en: 'Vendor feed state is persisted. feed_unreachable, current_cached, and current_feed_regressed distinguish an unavailable feed, recent cached proof, and a feed regression. Cached proof is not counted as verified update evidence.',
+        pl: 'Stan kanałów producentów jest zapisywany. feed_unreachable, current_cached i current_feed_regressed rozróżniają niedostępny feed, świeży dowód z pamięci podręcznej i cofnięcie wersji kanału. Dowód z pamięci podręcznej nie jest liczony jako potwierdzenie aktualizacji.',
+      },
+      {
+        en: 'HyperFrames and Superset use verified direct-only installs and are never launched by the toolkit. Open Design is never launched or quit; when behind, the report asks the user to open it. Per-step durations, advisories, and ANSI-free logs improve run reporting.',
+        pl: 'HyperFrames i Superset używają zweryfikowanej instalacji bezpośredniej i toolkit ich nie uruchamia. Open Design nie jest uruchamiany ani zamykany; przy nieaktualnej wersji raport prosi o otwarcie aplikacji. Czas kroków, advisories i logi bez ANSI poprawiają raportowanie przebiegu.',
+      },
+    ],
+  },
   {
     version: 'v1.5.5',
     date: '2026-10-30',
@@ -86,8 +124,8 @@ const RELEASES: Release[] = [
     ],
     changed: [
       {
-        en: 'The automated suite grows to 600 tests (532 in v1.5.4, 561 on 2026-10-12).',
-        pl: 'Zestaw zautomatyzowanych testów liczy teraz 600 testów (532 w v1.5.4, 561 w dniu 2026-10-12).',
+        en: 'The automated suite expanded with host-tool isolation guards and broader regression coverage.',
+        pl: 'Zestaw automatyczny rozszerzono o strażniki izolujące narzędzia hosta i szersze testy regresyjne.',
       },
       {
         en: 'Documented lockstep versioning policy with Ascendo. Release versions of macOS Updates and Ascendo proceed in lockstep starting from v1.5.5, with parity ports sharing identical release version numbers.',
@@ -826,10 +864,16 @@ export function ChangelogPage() {
             <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-2">
               <h2 className="readout m-0 text-[1.75rem] font-bold tracking-normal text-(--fg)">{r.version}</h2>
               <time dateTime={r.date} className="readout text-[14px] text-(--fg-muted)">{r.date}</time>
-              {idx === 0 && (
+              {r.sourceSnapshot && (
                 <span className="placard inline-flex items-center gap-2 text-(--fg)">
                   <span className="lamp lamp-go" aria-hidden="true" />
-                  {t('chrome.changelog.latest')}
+                  {t('chrome.changelog.currentSource')}
+                </span>
+              )}
+              {!r.sourceSnapshot && idx === 1 && (
+                <span className="placard inline-flex items-center gap-2 text-(--fg)">
+                  <span className="lamp lamp-hold" aria-hidden="true" />
+                  {t('chrome.changelog.latestTagged')}
                 </span>
               )}
               {r.rc && (

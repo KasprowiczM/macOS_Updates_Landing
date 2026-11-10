@@ -27,7 +27,7 @@ export function PlatformReference({ pl }: { pl: boolean }) {
             ['App Store (Step 1)', 'Track 1: sudo mas upgrade; Track 2: AppleScript GUI for iPad apps (30 s polling, product-page fallback, exit 10 if unoffered)'],
             ['Native CLI/npm (Step 2)', 'Stable Node (via node_releases.py), Bun, npm globals, claude, Codex, opencode, agy'],
             ['Homebrew (Step 3)', pl ? 'brew upgrade (formuły + wyznaczone caski, pomijanie sierot) + cleanup + doctor' : 'brew upgrade (formulae + designated casks, orphan skip) + cleanup + doctor'],
-            [pl ? 'Aplikacje internetowe (Step 4)' : 'Internet apps (Step 4)', 'keystone, github_dmg, silent_launch, msupdate, mau_fallback_self_update, docker_cli, brew_cask, sparkle_appcast, chromium_updater, appstore_gui, manual'],
+            [pl ? 'Aplikacje internetowe (Step 4)' : 'Internet apps (Step 4)', 'keystone, github_dmg, mozilla_dmg, silent_launch, msupdate, mau_fallback_self_update, docker_cli, brew_cask, sparkle_appcast, chromium_updater, appstore_gui'],
             ['dev_sync', pl ? 'Prywatny overlay dla inwentarza i historii.' : 'Private overlay for inventory and history.'],
           ]}
         />
@@ -41,6 +41,7 @@ export function PlatformReference({ pl }: { pl: boolean }) {
         <DocTable
           headers={[pl ? 'Polecenie' : 'Command', pl ? 'Cel' : 'Purpose']}
           rows={[
+            ['bash update_all.sh --doctor', pl ? 'Tylko do odczytu raport gotowości: narzędzia, harmonogram, uprawnienia, miejsce, zasilanie, sieć i ostatni rzeczywisty przebieg.' : 'Read-only readiness report for tools, scheduling, permissions, disk, power, network, and the last real run.'],
             ['bash scripts/report_update_coverage.sh', pl ? `Pełny raport pokrycia metod dla ${INTERNET_APP_COUNT} aplikacji.` : `Full method coverage report for ${INTERNET_APP_COUNT} apps.`],
             ['bash update_all.sh --verify-only', pl ? 'Weryfikacja wersji aplikacji bez modyfikacji systemu.' : 'Verify app versions without system mutations.'],
             ['bash scripts/scaffold_internet_app.sh "App Name" silent_launch', pl ? 'Szkielet nowego handlera aplikacji.' : 'Scaffold a new app handler.'],

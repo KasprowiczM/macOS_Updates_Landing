@@ -10,6 +10,10 @@ export function GettingStarted({ pl }: { pl: boolean }) {
           : `macOS Updates ${APP_VERSION} is a one-command updater for Apple Silicon Macs. It covers macOS, the App Store, Homebrew, command-line tools, and ${INTERNET_APP_COUNT} supported apps. Changes are reported only after the Mac confirms them.`
         }</p>
         <p>{pl
+          ? `Witryna opisuje bieżący snapshot kodu upstream ${APP_VERSION}. Najnowszy tag wydania w Git to v1.5.5; dla ${APP_VERSION} nie ma taga ani GitHub Release.`
+          : `The site describes the current upstream source snapshot ${APP_VERSION}. The latest Git release tag is v1.5.5; ${APP_VERSION} has no tag or GitHub Release.`
+        }</p>
+        <p>{pl
           ? 'Aktualizowane jest wyłącznie oprogramowanie już zainstalowane na tym Macu. Instalator tworzy lokalny inwentarz i nie instaluje obsługiwanych aplikacji.'
           : 'Only software already installed on this Mac is updated. The installer builds a local inventory and does not install the supported apps.'
         }</p>

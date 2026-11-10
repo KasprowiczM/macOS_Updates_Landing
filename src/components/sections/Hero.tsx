@@ -34,10 +34,10 @@ export function Hero() {
             </div>
             <div className="hero-command"><CommandReadout command={INSTALL_NIX} label={t('hero.commandLabel')} codeRef={commandRef} /></div>
           </div>
-          <motion.div className="hero-art" style={reduced ? undefined : { y, rotate }} aria-hidden="true">
+          <div className="hero-art-boundary"><motion.div className="hero-art" style={reduced ? undefined : { y, rotate }} aria-hidden="true">
             <img className="hero-image-light" src="/images/update-layers.webp" width="1536" height="1024" alt="" fetchPriority="high" />
             <img className="hero-image-dark" src="/images/update-layers-dark.webp" width="1536" height="1024" alt="" />
-          </motion.div>
+          </motion.div></div>
         </div>
         <div className="hero-proof">
           <span><strong>Apple Silicon</strong> · macOS 13+</span>

@@ -52,10 +52,9 @@ export function ContributingPage() {
 
         <section id="setup">
           <h2>{pl ? 'Konfiguracja lokalna' : 'Development Setup'}</h2>
-          <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git
-cd macOS_updates
-bash run_tests.sh
-bash update_all.sh --dry-run -y`}</CodeBlock>
+          <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git ~/Dev_Env/macOS_updates`}</CodeBlock>
+          <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
+          <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
         </section>
 
         <section id="add-app">
@@ -65,19 +64,15 @@ bash update_all.sh --dry-run -y`}</CodeBlock>
               ? 'Nowa aplikacja wymaga wpisu w publicznym registry, metody, funkcji handlera, dispatch order, i18n w siedmiu językach i testów.'
               : 'A new app needs a public registry entry, method, handler function, dispatch order, seven-language i18n, and tests.'}
           </p>
-          <CodeBlock title="bash">{`bash scripts/scaffold_internet_app.sh "App Name" silent_launch
-# config/internet_apps.txt
-# config/internet_app_methods.txt
-# config/internet_dispatch_order.txt
-# lib/internet_app_updates.sh
-# update_internet_apps.sh
-# i18n/lang_*.sh
-bash run_tests.sh`}</CodeBlock>
+          <p>{pl ? 'Zastąp „App Name” nazwą aplikacji. Polecenie tworzy pliki do dalszej edycji.' : 'Replace “App Name” with the app name. The command creates files for further editing.'}</p>
+          <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh "App Name" silent_launch`}</CodeBlock>
+          <p>{pl ? 'Po ukończeniu zmian w rejestrze, handlerze i tłumaczeniach uruchom testy.' : 'After completing the registry, handler, and translations, run the tests.'}</p>
+          <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
         </section>
 
         <section id="structure">
           <h2>{pl ? 'Struktura projektu' : 'Project Structure'}</h2>
-          <CodeBlock title="macOS_updates/">{`install.sh                    # one-line public installer
+          <CodeBlock title="macOS_updates/" copyable={false}>{`install.sh                    # one-line public installer
 setup.sh                      # public setup without cloud overlay
 migration_setup.sh            # owner setup + cloud wizard
 build_inventory.sh            # builds APPLICATIONS.md from this Mac

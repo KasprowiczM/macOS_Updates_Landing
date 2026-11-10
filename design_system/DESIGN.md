@@ -68,3 +68,11 @@ Minimum 44px interactive targets, visible accent focus outlines, native headings
 A matching triptych illustrates coverage, verification and the preview-update-verify process. Its seven tiles mean the pipeline layers and do not count update methods. Images are decorative; adjacent real text explains capabilities. `FeatureVisual` shares the artwork with the detailed features route. Both light and dark variants were generated from the hero material language with imagegen, without external source art. Feature art moves 48px over its viewport passage; no continuous loops run.
 
 `TerminalPreview` is explicitly an illustrative dry run. Lines reveal once when viewed and remain readable for reduced-motion users. It executes nothing. Copyable preview commands include the default install directory. The installation section states the alternative `MAC_UPDATE_DIR` path requirement. Documentation command blocks reuse the same `CopyButton` primitive.
+
+## Update workflow review
+
+The recorded update section uses the same editorial type and silver/cobalt artwork as the landing page. The desktop composition presents an ordered step list and a single current-step detail view. It has no countdown, flight vocabulary, plotter, expanded capitals or console bezels. Actual recorded versions remain visible in each relevant step. A vendor-feed warning stays visible after its step and macOS is explicitly marked as not run in this replay.
+
+Below 768px the section becomes a native vertical HTML sequence rather than a scaled-down animation canvas. This preserves 21px step titles and 15px descriptions on narrow screens. Reduced-motion visitors receive the same semantic sequence at every viewport. The desktop Remotion player stays in a lazy chunk and follows scroll position without automatic playback.
+
+The hero artwork is clipped by a separate boundary. Its animated transform cannot overlap the proof row below it.

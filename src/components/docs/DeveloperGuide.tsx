@@ -4,9 +4,8 @@ export function DeveloperGuide({ pl }: { pl: boolean }) {
   return (
     <>
       <WikiSection id="dev-setup" title={pl ? 'Konfiguracja deweloperska' : 'Development Setup'}>
-        <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git
-cd macOS_updates
-bash run_tests.sh`}</CodeBlock>
+        <CodeBlock title="bash">{`git clone https://github.com/KasprowiczM/macOS_updates.git ~/Dev_Env/macOS_updates`}</CodeBlock>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
         <p>{pl
           ? 'Przed zmianami w updaterach uruchom syntax check i testy. Nie dodawaj nowych samodzielnych plików .py do pipeline aktualizacji.'
           : 'Before updater changes, run syntax checks and tests. Do not add new standalone .py files to the update pipeline.'
@@ -31,11 +30,10 @@ bash run_tests.sh`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="testing" title={pl ? 'Testowanie' : 'Testing'}>
-        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
-bash -n update_all.sh
-bash update_all.sh --dry-run -y
-bash scripts/report_update_coverage.sh
-bash run_tests.sh`}</CodeBlock>
+        <p>{pl ? 'Sprawdź gotowość bez uruchamiania aktualizacji.' : 'Check readiness without running updates.'}</p>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --doctor`}</CodeBlock>
+        <p>{pl ? 'Uruchom testy projektu osobno.' : 'Run the project tests separately.'}</p>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="pr-workflow" title={pl ? 'Workflow Pull Request' : 'Pull Request Workflow'}>
@@ -52,21 +50,24 @@ bash run_tests.sh`}</CodeBlock>
           ? 'Te reguły pochodzą z docs/agents/critical_rules.md i są częścią publicznego kontraktu projektu.'
           : 'These rules come from docs/agents/critical_rules.md and are part of the project contract.'
         }</p>
-        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
-env LANG=C LC_ALL=C softwareupdate -l
-sudo softwareupdate -i "$label" -R --verbose
-sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>
-xcodebuild -license check`}</CodeBlock>
+        <CodeBlock title="shell reference" copyable={false}>{`Read-only listing:
+  env LANG=C LC_ALL=C softwareupdate -l
+
+One system-update example (requires restart approval):
+  sudo softwareupdate -i "$label" -R --verbose
+
+One App Store CLI example (use only measured app IDs):
+  sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>
+
+Xcode licence check:
+  xcodebuild -license check`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="contributing-plugins" title={pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}>
-        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates
-bash scripts/scaffold_internet_app.sh "App Name" silent_launch
-# update config/internet_apps.txt
-# update config/internet_app_methods.txt
-# update config/internet_dispatch_order.txt
-# add L_INTERNET_* keys to all 7 i18n/lang_*.sh files
-bash run_tests.sh`}</CodeBlock>
+        <p>{pl ? 'Zastąp „App Name” nazwą aplikacji. To polecenie tworzy pliki do dalszej edycji.' : 'Replace “App Name” with the app name. This command creates files for further editing.'}</p>
+        <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh "App Name" silent_launch`}</CodeBlock>
+        <p>{pl ? 'Po uzupełnieniu rejestru i handlera uruchom testy.' : 'After completing the registry and handler, run the tests.'}</p>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="security" title={pl ? 'Bezpieczeństwo' : 'Security'}>

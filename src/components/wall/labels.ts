@@ -1,13 +1,13 @@
 /**
- * Flight-director wall display: labels, i18n hook and the shared run model.
+ * Recorded update workflow: labels, i18n hook and the shared run model.
  *
  * - `WALL_LABELS_EN` holds the flat dotted `wall.*` defaults (and the key type).
  *   The real copy lives nested under `wall` in en.json / pl.json;
  *   `useWallLabels()` reads it through i18n and falls back to these defaults.
  * - `WALL_STATIONS` is the single source of truth for the run: station order,
  *   readouts, version numbers and the frame at which each readout is polled and
- *   confirmed. The Remotion composition, the static board and the plotter all
- *   read it, so the three views can never disagree.
+ *   confirmed. The desktop composition and the native semantic sequence both
+ *   read it, so the views share the same recorded evidence.
  *
  * Readouts are replays of real runs (2026-10-05 and 2026-10-11).
  * macOS did not install an update in either run, so it ends on STANDBY.
@@ -37,40 +37,45 @@ const EN = {
   'wall.caption': 'Readouts from real runs on 2026-10-05 and 2026-10-11.',
   'wall.listLabel': 'Update stations in run order',
 
-  'wall.screen.title': 'Flight director poll',
-  'wall.screen.running': 'Replay: poll in progress',
-  'wall.screen.complete': 'Replay: poll complete',
-  'wall.screen.tMinus': 'T-minus',
-  'wall.screen.dryRun': 'Dry-run',
+  'wall.screen.title': 'Update workflow',
+  'wall.screen.running': 'Checking',
+  'wall.screen.complete': 'Review complete',
+  'wall.screen.tMinus': 'Step',
+  'wall.screen.dryRun': 'Preview',
   'wall.screen.confirmed': 'Confirmed by the live Mac',
-  'wall.screen.plotTitle': 'Stations to go',
-  'wall.screen.result': 'Poll result',
+  'wall.screen.plotTitle': 'Steps remaining',
+  'wall.screen.result': 'Summary',
+  'wall.screen.current': 'Current step',
+  'wall.screen.progress': '{{done}} of {{total}} steps reviewed',
+  'wall.screen.example': 'Recorded example',
+  'wall.screen.changed': 'Updated',
+  'wall.screen.unchanged': 'No change',
 
-  'wall.state.go': 'GO',
-  'wall.state.hold': 'HOLD',
-  'wall.state.standby': 'STANDBY',
-  'wall.state.polling': 'POLLING',
+  'wall.state.go': 'Confirmed',
+  'wall.state.hold': 'Needs attention',
+  'wall.state.standby': 'Not run',
+  'wall.state.polling': 'Checking',
 
-  'wall.line.pending': 'pending',
-  'wall.line.standby': 'standby',
-  'wall.line.confirmed': 'confirmed',
-  'wall.line.hold': 'hold',
+  'wall.line.pending': 'Pending',
+  'wall.line.standby': 'Not run',
+  'wall.line.confirmed': 'Confirmed',
+  'wall.line.hold': 'Needs attention',
 
-  'wall.station.prescan.name': 'PRESCAN',
+  'wall.station.prescan.name': 'Inventory',
   'wall.station.prescan.desc':
     'Inventory of this Mac into APPLICATIONS.md. Only installed software.',
-  'wall.station.appstore.name': 'APP STORE',
+  'wall.station.appstore.name': 'App Store',
   'wall.station.appstore.desc': 'sudo mas with measured IDs, then AppleScript Track 2.',
-  'wall.station.cli.name': 'CLI + NPM',
+  'wall.station.cli.name': 'Command line + npm',
   'wall.station.cli.desc':
     'Native vendor CLIs first (claude update, codex, opencode, agy), then Node/npm globals.',
-  'wall.station.brew.name': 'HOMEBREW',
+  'wall.station.brew.name': 'Homebrew',
   'wall.station.brew.desc':
     'brew upgrade --greedy, orphan casks skipped, cleanup, doctor.',
-  'wall.station.internet.name': 'INTERNET APPS',
+  'wall.station.internet.name': 'Internet apps',
   'wall.station.internet.desc':
     '{{apps}} apps, {{methods}} update methods. Each version is checked against the vendor’s own feed first.',
-  'wall.station.post.name': 'POSTUPDATE',
+  'wall.station.post.name': 'Run records',
   'wall.station.post.desc':
     'APPLICATIONS.md and UPDATES.md history written only after the step succeeded.',
   'wall.station.macos.name': 'macOS',

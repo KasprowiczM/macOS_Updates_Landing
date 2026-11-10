@@ -9,7 +9,7 @@ export function Architecture({ pl }: { pl: boolean }) {
           ? 'Rdzeń to Bash 3.2 z pomocniczym Pythonem inline/heredoc tam, gdzie trzeba parsować dane strukturalne. Publiczny registry aplikacji internetowych mieszka w config/, a wspólne funkcje w lib/.'
           : 'The core is Bash 3.2 with inline/heredoc Python where structured parsing is needed. The public internet-app registry lives in config/, and shared behavior lives in lib/.'
         }</p>
-        <CodeBlock title="macOS_updates/">{`update_all.sh                  # ${pl ? 'główny orkiestrator (kroki 0 do 6)' : 'main orchestrator (steps 0 to 6)'}
+        <CodeBlock title="macOS_updates/" copyable={false}>{`update_all.sh                  # ${pl ? 'główny orkiestrator (kroki 0 do 6)' : 'main orchestrator (steps 0 to 6)'}
 update_appstore.sh             # step 1: sudo mas (Track 1) + AppleScript Track 2 for iPad apps
 update_npm_cli.sh              # step 2: native vendor CLIs + stable Node/Bun/npm
 update_brew.sh                 # step 3: brew upgrade + cleanup + doctor

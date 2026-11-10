@@ -1,6 +1,6 @@
 # macOS Updates
 
-> Production-ready one-command updater for Apple Silicon Macs running macOS 13 to 27 (latest tagged release v1.5.5, source synchronized 2026-11-10). It keeps macOS, App Store apps, Homebrew, native CLI and npm tooling, and 47 internet-downloaded apps current, updating only software already installed on the current Mac. A mutation is reported only after the live Mac confirms it.
+> macOS Updates is a one-command updater for Apple Silicon Macs running macOS 13 to 27. The current upstream source snapshot is v1.6.0; the latest Git tag is v1.5.5 and no v1.6.0 GitHub Release exists. It updates macOS, App Store apps, Homebrew, native CLI and npm tooling, and 47 internet-downloaded apps already installed on the Mac. A mutation is reported only after the live Mac confirms it.
 
 Supported platform: Apple Silicon (arm64) only, macOS 13 to 27. The unittest suite collects 846 Python test cases.
 
@@ -49,6 +49,15 @@ Manual setup:
 - App Store Track 2 polls up to 30s, falls back to product pages, and flags unoffered iPad apps with a soft warning instead of claiming false negative success.
 - Gradual-rollout channel proof via vendor appcasts prevents false stale feed warnings (e.g. Proton Drive).
 
+## Current upstream source snapshot: v1.6.0 (2026-11-10)
+
+- `bash update_all.sh --doctor` is a read-only readiness report. Real runs add disk, battery, and network pre-flight checks and keep the Mac awake.
+- LaunchAgent runs use an explicit PATH, verify that the job is loaded, and support `--minute N` and one-time `--once-in N` schedules. `--check` inspects the installed schedule.
+- Homebrew casks are deferred when their app is running or its state is unknown. Mid-run prompts have a timeout and safely default to no. Open apps are not closed or replaced.
+- Vendor-feed state distinguishes `feed_unreachable`, `current_cached`, and `current_feed_regressed`. Cached proof is informational and is not counted as verified update evidence.
+- HyperFrames and Superset use verified direct-only installs; Open Design is never launched. DeepSeek Harness and Grok Bot are registered, and DJI Assistant 2 was removed from the current registry.
+- Run summaries include advisories and per-step duration. Logs are ANSI-free.
+
 ## Latest tagged release: v1.5.5
 
 - Managed Node.js selects the newest stable release from nodejs.org/dist/index.json, preventing alpha builds like v27.0.0-alpha from being installed by n.
@@ -56,11 +65,11 @@ Manual setup:
 - App Store Track 2 polls up to 30 seconds, reads labels from name, description, and title, refreshes once (Cmd+R), falls back to product pages, and reports unoffered updates as soft warnings.
 - Proton Drive gradual rollout support: checks vendor appcasts to verify current installed builds before showing stale feed warnings.
 - OpenCode Desktop moved to Electron feed (latest-mac.yml) with arm64 zip preference and relative URL resolution.
-- Test runner run_tests.sh adds host-tool isolation guard stubs behind mocks to fail if any unmocked native tool is called; the suite contains 846 collected Python unittest cases.
+- The test runner adds host-tool isolation guard stubs behind mocks so an unmocked native-tool call fails. Current upstream main collects 846 Python unittest cases.
 - Stale command hash after a Homebrew upgrade is fixed: orchestrators enable checkhash and update_all.sh runs hash -r before steps 2 to 5.
 - Reporting failures no longer defer macOS updates, and closing messages appear only when the inventory succeeded.
 - Lockstep versioning policy with Ascendo formally documented.
-- Live evidence from 2026-10-11: App Store Track 2 (UniFi 10.38.1 to 11.0.0) and a verified vendor install (OpenCode Desktop 1.18.35 to 1.19.0) succeeded. The macOS system step was skipped by the bug, so the system and restart path is not yet accepted.
+- Historical live evidence from 2026-10-11: App Store Track 2 (UniFi 10.38.1 to 11.0.0) and a verified vendor install (OpenCode Desktop 1.18.35 to 1.19.0) succeeded. The macOS step was skipped in that historical run; this does not describe the current source behavior.
 
 ## Links
 
@@ -77,4 +86,4 @@ Manual setup:
 
 ## Upstream source status
 
-The repository main branch identifies its current source snapshot as v1.6.0 in VERSION and CHANGELOG, dated 2026-11-10. No v1.6.0 Git tag or GitHub Release exists as of this sync. The source snapshot is v1.6.0; the latest tagged release is v1.5.5.
+The repository main branch identifies its current source snapshot as v1.6.0 in VERSION and CHANGELOG, dated 2026-11-10. No v1.6.0 Git tag or GitHub Release exists as of this sync. The source snapshot is v1.6.0; the latest tagged release is v1.5.5. Upstream `run_tests.sh` collects 846 Python unittest cases; collection count is not a claim that this site ran them.

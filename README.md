@@ -17,7 +17,7 @@ The landing page explains how macOS Updates checks and updates software already 
 - `#poll`: hero with the generated software-layer illustration and copyable install command
 - Feature illustrations: coverage, verified direct installs and preview workflow
 - `#rules`: four update safeguards
-- `#wall`: scroll-scrubbed wall display (Remotion, lazy-loaded)
+- `#wall`: recorded update workflow with a lazy scroll-driven desktop view and a readable native sequence on mobile
 - `#stations`: ordered pipeline reference
 - `#coverage`: coverage roster, 47 internet apps and 11 update methods
 - `#log`: dated release and live-run evidence

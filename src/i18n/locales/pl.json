@@ -13,8 +13,8 @@
       "desc": "install.sh buduje APPLICATIONS.md z tego Maca i aktualizuje tylko już zainstalowane programy."
     },
     "scheduler": {
-      "title": "Krytyczne reguły",
-      "desc": "softwareupdate zawsze ma -R; mas upgrade używa sudo ze zmierzonymi ID; TUI vendorów nie mogą zawiesić przebiegu."
+      "title": "Gotowość i zaplanowane przebiegi",
+      "desc": "Użyj --doctor, aby odczytać raport gotowości bez zmian. LaunchAgent sprawdza, czy zadanie jest załadowane, i korzysta z jawnego PATH."
     },
     "aiTools": {
       "title": "Handlery przyjazne agentom",
@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Testy i scan sekretów",
-      "desc": "Zestaw zbiera 846 przypadków testowych unittest w Pythonie oraz sprawdza składnię skryptów, rejestr i sekrety."
+      "desc": "Upstreamowy runner zbiera 846 przypadków unittest w Pythonie oraz sprawdza składnię, rejestr, zabezpieczenia statyczne i sekrety."
     },
     "multihost": {
       "title": "UI w 7 językach",
@@ -77,9 +77,9 @@
     "homeTitle": "macOS Updates: aktualizator Maca z Apple Silicon jedną komendą",
     "homeDesc": "Aktualizator Maców z Apple Silicon: macOS, App Store, Homebrew, narzędzia wiersza poleceń, pakiety npm i 47 obsługiwanych aplikacji. Raportuje tylko zmiany potwierdzone przez Maca.",
     "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
-    "featuresDesc": "Siedem kroków w stałej kolejności, sprawdzanie kanałów producentów, brak zamykania otwartych aplikacji i raporty tylko z tego, co potwierdzi Mac.",
-    "docsTitle": "Dokumentacja macOS Updates: Instalacja i obsługa",
-    "docsDesc": "Zainstaluj macOS Updates na Apple Silicon, podejrzyj przebieg próbnym uruchomieniem, poznaj flagi oraz działanie siedmiu kroków i handlerów.",
+    "featuresDesc": "Poznaj siedem kroków aktualizacji, sprawdzanie kanałów producentów, ochronę działających aplikacji i weryfikowane harmonogramy na Apple Silicon.",
+    "docsTitle": "Dokumentacja macOS Updates: Instalacja i uruchomienie",
+    "docsDesc": "Zainstaluj na Apple Silicon, podejrzyj aktualizacje, sprawdź gotowość przez --doctor, skonfiguruj LaunchAgent i poznaj zabezpieczenia kanałów oraz casków.",
     "securityTitle": "Polityka bezpieczeństwa macOS Updates",
     "securityDesc": "Jak macOS Updates obsługuje sudo, zweryfikowane pobrania, kontrole Gatekeeper i Team ID oraz chroni prywatny inwentarz i pliki overlay.",
     "changelogTitle": "Historia zmian macOS Updates",
@@ -294,6 +294,10 @@
         "name": "GitHub DMG",
         "note": "Obraz DMG z GitHuba, zweryfikowany, potem podmiana etapowa z rollbackiem."
       },
+      "mozilla_dmg": {
+        "name": "Mozilla DMG",
+        "note": "Wydanie Firefox Developer Edition pobierane z Mozilla i weryfikowane przed podmianą."
+      },
       "msupdate": {
         "name": "Microsoft AutoUpdate",
         "note": "Aplikacje Office aktualizowane przez msupdate."
@@ -354,13 +358,13 @@
     "lead": "Każdy wpis to prawdziwe wydanie albo prawdziwy przebieg. Nic tu nie jest benchmarkiem.",
     "entries": {
       "release": {
-        "title": "Aktualizacje uzupełniające v1.5.5",
-        "body": "Późniejsze poprawki przypięły zarządzany Node.js do wersji stabilnych, zapewniły czyste zakończenie po odmowie restartu i dodały odpytywanie App Store Track 2 oraz strony produktów. Strażniki testów blokują niezamockowane narzędzia systemowe."
+        "title": "Bieżący snapshot kodu v1.6.0",
+        "body": "Upstream main dodaje raport --doctor tylko do odczytu, bezpieczniejszy harmonogram LaunchAgent, limity czasu pytań, odraczanie działających casków, trwałe statusy kanałów producentów i nowe handlery. Nie ma jeszcze taga Git ani GitHub Release v1.6.0; najnowszym tagiem jest v1.5.5."
       },
       "live": {
         "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",
         "body": "Jedna aktualizacja przeszła przez App Store Track 2, druga przez zweryfikowaną instalację od producenta.",
-        "note": "Krok systemowy macOS został w tym przebiegu pominięty przez błąd, który naprawia v1.5.5."
+        "note": "Krok systemowy macOS pominięto w tym historycznym przebiegu. Ten zapis nie opisuje obecnego zachowania kodu."
       },
       "verify": {
         "title": "Przebieg weryfikacyjny: 108 sekund",
@@ -397,20 +401,25 @@
     "caption": "Przykłady na podstawie przebiegów z 2026-10-05 i 2026-10-11.",
     "listLabel": "Stacje aktualizacji w kolejności uruchamiania",
     "screen": {
-      "title": "Odpytanie dyrektora lotu",
-      "running": "Powtórka: odpytanie w toku",
-      "complete": "Powtórka: odpytanie zakończone",
-      "tMinus": "T-minus",
-      "dryRun": "Próba (dry-run)",
+      "title": "Przebieg aktualizacji",
+      "running": "Sprawdzanie",
+      "complete": "Przegląd zakończony",
+      "tMinus": "Krok",
+      "dryRun": "Podgląd",
       "confirmed": "Potwierdzone przez Maca",
-      "plotTitle": "Stacje do końca",
-      "result": "Wynik odpytania"
+      "plotTitle": "Pozostałe kroki",
+      "result": "Podsumowanie",
+      "current": "Bieżący krok",
+      "progress": "Przejrzano {{done}} z {{total}} kroków",
+      "example": "Zapisany przykład",
+      "changed": "Zaktualizowano",
+      "unchanged": "Bez zmian"
     },
     "state": {
-      "go": "GO",
-      "hold": "HOLD",
-      "standby": "STANDBY",
-      "polling": "ODPYTANIE"
+      "go": "Potwierdzono",
+      "hold": "Wymaga uwagi",
+      "standby": "Nie uruchomiono",
+      "polling": "Sprawdzanie"
     },
     "line": {
       "pending": "oczekuje",
@@ -420,27 +429,27 @@
     },
     "station": {
       "prescan": {
-        "name": "PRESCAN",
+        "name": "Inwentarz",
         "desc": "Inwentarz tego Maca do APPLICATIONS.md. Tylko zainstalowane oprogramowanie."
       },
       "appstore": {
-        "name": "APP STORE",
+        "name": "App Store",
         "desc": "sudo mas ze zmierzonymi identyfikatorami, potem AppleScript Track 2."
       },
       "cli": {
-        "name": "CLI + NPM",
+        "name": "Wiersz poleceń + npm",
         "desc": "Najpierw natywne CLI producentów (claude update, codex, opencode, agy), potem globalne pakiety Node/npm."
       },
       "brew": {
-        "name": "HOMEBREW",
+        "name": "Homebrew",
         "desc": "brew upgrade --greedy, pominięte osierocone caski, czyszczenie, doctor."
       },
       "internet": {
-        "name": "INTERNET APPS",
+        "name": "Aplikacje internetowe",
         "desc": "{{apps}} obsługiwanych aplikacji w {{methods}} metodach aktualizacji. Zainstalowane wersje są najpierw sprawdzane w kanałach producentów."
       },
       "post": {
-        "name": "POSTUPDATE",
+        "name": "Zapis przebiegu",
         "desc": "Historia APPLICATIONS.md i UPDATES.md zapisywana dopiero po udanym kroku."
       },
       "macos": {
