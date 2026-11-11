@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu, Star, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
@@ -44,6 +45,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   const [openAt, setOpenAt] = useState<string | null>(null)
   const mobileOpen = openAt === locationKey
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   const closeMenu = useCallback(() => setOpenAt(null), [])
 
@@ -58,10 +60,12 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   // and growing past the desktop breakpoint dismisses it.
   useEffect(() => {
     if (!mobileOpen) return
+    const dialog = dialogRef.current
+    const trigger = menuButtonRef.current
+    if (dialog && !dialog.open) dialog.showModal()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setOpenAt(null)
-        menuButtonRef.current?.focus()
       }
     }
     const previousOverflow = document.body.style.overflow
@@ -73,9 +77,11 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
     document.addEventListener('keydown', onKey)
     mql.addEventListener('change', onChange)
     return () => {
+      if (dialog?.open) dialog.close()
       document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', onKey)
       mql.removeEventListener('change', onChange)
+      trigger?.focus({ preventScroll: true })
     }
   }, [mobileOpen])
 
@@ -120,7 +126,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   }
 
   return (
-    <header className={cn('sticky top-0 z-50 bg-(--bg) border-b border-(--rule)', scrolled && 'nav-scrolled')}>
+    <header className={cn('experience-navbar sticky top-0 z-50 bg-(--bg) border-b border-(--rule)', scrolled && 'nav-scrolled')}>
       <a href="#main" className="skip-link">
         {t('chrome.skip')}
       </a>
@@ -144,7 +150,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             href={REPO_URL}
             variant="secondary"
             size="sm"
-            className="mr-1"
+            className="nav-github mr-1"
             aria-label={githubLabel}
           >
             <Star size={14} aria-hidden="true" />
@@ -168,13 +174,19 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
         </button>
       </div>
 
-      {mobileOpen && (
-        <div
+      {mobileOpen && createPortal(
+        <dialog
+          ref={dialogRef}
           id="mobile-navigation"
-          role="dialog"
           aria-label={t('chrome.nav.mobileLabel')}
-          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain border-t border-(--rule) bg-(--bg) px-4 pb-8 pt-2 sm:px-6 lg:hidden"
+          onCancel={(event) => { event.preventDefault(); closeMenu() }}
+          className="mobile-navigation-dialog"
         >
+          <div className="mobile-navigation-heading">
+            <Link to={localize('/')} onClick={closeMenu} aria-label={t('chrome.nav.home')}><Lockup size={32} /></Link>
+            <button type="button" autoFocus onClick={closeMenu} aria-label={t('chrome.nav.menuClose')} className="mobile-navigation-close"><X size={20} aria-hidden="true" /></button>
+          </div>
+          <div className="mobile-navigation-content">
           <nav aria-label={t('chrome.nav.primary')} className="flex flex-col">
             {navItems.map((item) => renderItem(item, true))}
           </nav>
@@ -187,7 +199,8 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             {t('chrome.nav.github')}
             {stars > 0 && <span className="readout text-[12px] text-(--fg-muted)">{stars}</span>}
           </Button>
-        </div>
+          </div>
+        </dialog>, document.body,
       )}
     </header>
   )

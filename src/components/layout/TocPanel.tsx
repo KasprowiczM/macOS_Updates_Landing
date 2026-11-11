@@ -35,9 +35,8 @@ function collectIds(sections: TocSection[]): string[] {
 }
 
 /**
- * Console side panel for in-page navigation. Each entry is a station lamp: the section in view
- * reports GO, the rest stand by. Desktop: sticky beside the content. Mobile: a collapsible
- * "Contents" control above the content (no overlay, nothing covers the text).
+ * In-page navigation with the current section highlighted. Desktop: sticky beside the
+ * article. Mobile: a collapsible contents control in the document flow.
  */
 export function TocPanel({ sections, title }: TocPanelProps) {
   const { t } = useTranslation()
@@ -73,12 +72,11 @@ export function TocPanel({ sections, title }: TocPanelProps) {
         aria-current={isActive ? 'location' : undefined}
         onClick={() => setOpen(false)}
         className={cn(
-          'flex min-h-[44px] items-center gap-2.5 py-1.5 pr-3 text-[13.5px] leading-[1.3] no-underline focus-visible:outline-offset-[-2px]',
+          'reading-toc-link flex min-h-[44px] items-center gap-2.5 py-1.5 pr-3 text-[13.5px] leading-[1.3] no-underline focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:outline-offset-[-2px]',
           nested ? 'pl-5' : 'pl-3',
-          isActive ? 'font-semibold text-(--fg) bg-(--accent-soft)' : 'text-(--fg-muted) hover:text-(--fg) hover:bg-(--bg-sunk)',
+          isActive ? 'font-semibold text-(--accent-text)' : 'text-(--fg-muted) hover:text-(--fg)',
         )}
       >
-        <span aria-hidden="true" className={cn('lamp', isActive ? 'lamp-go' : 'invisible')} />
         <span className="min-w-0 flex-1">{item.label}</span>
         {item.detail && <span className="readout shrink-0 text-[11.5px] text-(--fg-faint)">{item.detail}</span>}
       </a>
@@ -90,10 +88,10 @@ export function TocPanel({ sections, title }: TocPanelProps) {
       {sections.map((group) => {
         const children = group.children?.length ? group.children : null
         return (
-          <li key={group.id + group.label} className="border-b border-(--rule) last:border-b-0">
+          <li key={group.id + group.label} className="reading-toc-group">
             {children ? (
               <>
-                <p className="placard m-0 px-3 pb-1 pt-3">{group.label}</p>
+                <p className="m-0 px-3 pb-1 pt-4 text-[13px] font-semibold text-(--fg)">{group.label}</p>
                 <ul className="m-0 mb-1 list-none p-0">
                   {children.map((child) => (
                     <li key={child.id}>{link(child, true)}</li>
@@ -110,7 +108,7 @@ export function TocPanel({ sections, title }: TocPanelProps) {
   )
 
   return (
-    <nav aria-label={heading} className="lg:sticky lg:top-[calc(var(--nav-h)+24px)] lg:max-h-[calc(100vh-var(--nav-h)-48px)] lg:overflow-y-auto">
+    <nav aria-label={heading} className="reading-toc lg:sticky lg:top-[calc(var(--nav-h)+24px)] lg:max-h-[calc(100vh-var(--nav-h)-48px)] lg:overflow-y-auto">
       {/* Mobile: collapsible contents */}
       <div className="lg:hidden">
         <button
@@ -128,10 +126,10 @@ export function TocPanel({ sections, title }: TocPanelProps) {
         </div>
       </div>
 
-      {/* Desktop: sticky console panel */}
-      <div className="hidden rounded-sm border border-(--rule-strong) bg-(--bg-elev) lg:block">
-        <div className="border-b border-(--rule-strong) bg-(--bg-sunk) px-3 py-2">
-          <p className="placard m-0">{heading}</p>
+      {/* Desktop: sticky contents */}
+      <div className="hidden border-l border-(--rule) lg:block">
+        <div className="px-3 py-2">
+          <p className="m-0 text-[13px] font-semibold text-(--fg)">{heading}</p>
         </div>
         {list}
       </div>

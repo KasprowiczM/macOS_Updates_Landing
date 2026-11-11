@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { APP_VERSION, APP_VERSION_DATE, REPO_URL } from '../../lib/site'
 import { alternateLangPath, saveLangPreference, useLang, useLocalizedPath, type Lang } from '../../lib/routes'
 import { Lockup } from '../ui/Logo'
+import { ArrowUpRight } from 'lucide-react'
+import { experienceCopy } from '../experience/copy'
 
 const LINK =
   'inline-flex items-center min-h-[44px] min-w-[44px] text-[14px] text-(--fg-muted) no-underline hover:text-(--fg) hover:underline underline-offset-[0.2em] decoration-1'
@@ -27,7 +29,10 @@ export function Footer() {
   ]
 
   return (
-    <footer className="mt-24 border-t border-(--rule-strong) bg-(--bg-sunk)">
+    <footer className="experience-footer">
+      <Link to={localize('/docs#quick-install')} className="footer-statement">
+        <span>{experienceCopy[lang].footerTitle}</span><ArrowUpRight aria-hidden="true" />
+      </Link>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:px-8">
         <div>
           <Link
@@ -116,6 +121,7 @@ export function Footer() {
           </Link>
         </div>
       </div>
+      <p className="footer-independent">{experienceCopy[lang].independent}</p>
     </footer>
   )
 }

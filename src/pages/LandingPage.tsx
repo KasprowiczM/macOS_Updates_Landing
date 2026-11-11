@@ -3,14 +3,9 @@ import { Seo } from '../components/Seo'
 import { getFaqItems } from '../lib/faq'
 import { buildPageJsonLd, faqPageNode, howToNode } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
-import { FeatureVisual } from '../components/sections/FeatureVisual'
-import { TerminalPreview } from '../components/sections/TerminalPreview'
-import { Hero } from '../components/sections/Hero'
-import { FlightRules } from '../components/sections/FlightRules'
-import { WallDisplay } from '../components/wall/WallDisplay'
-import { FlightPlan } from '../components/sections/FlightPlan'
-import { CoverageRoster } from '../components/sections/CoverageRoster'
-import { MissionLog } from '../components/sections/MissionLog'
+import { MacBookJourney } from '../components/experience/MacBookJourney'
+import { ProductStory } from '../components/experience/ProductStory'
+import { AppCoverage } from '../components/experience/AppCoverage'
 import { FaqSection } from '../components/sections/FaqSection'
 import { InstallClose } from '../components/sections/InstallClose'
 
@@ -35,16 +30,11 @@ export function LandingPage() {
         lang={lang}
         jsonLd={jsonLd}
       />
-      <main id="main">
-        <Hero />
-        <FeatureVisual />
-        <FlightRules />
-        <WallDisplay />
-        <FlightPlan />
-        <CoverageRoster />
-        <MissionLog />
+      <main id="main" className="mac-experience">
+        <MacBookJourney />
+        <ProductStory />
+        <AppCoverage />
         <FaqSection />
-        <TerminalPreview />
         <InstallClose />
       </main>
     </>

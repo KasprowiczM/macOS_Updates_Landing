@@ -1,78 +1,56 @@
 ---
 name: macOS Updates
-description: Precision editorial software maintenance
-colors:
-  primary: "#165EE5"
-  surface: "#FAFAF8"
-  elevated: "#FFFFFF"
-  ink: "#202321"
-  muted: "#59605D"
-  rule: "#E0E3DE"
+description: A time-saving update toolkit with a cinematic MacBook journey
 typography:
-  display:
-    fontFamily: "Manrope Variable"
-    fontWeight: 500
-    fontSize: "clamp(3.2rem, 6.5vw, 6rem)"
-    lineHeight: 1.07
-    letterSpacing: "-0.04em"
-  body:
-    fontFamily: "Manrope Variable"
-    fontWeight: 400
-    fontSize: "17px"
-    lineHeight: 1.6
+  display: Native system sans serif
+  reading: Native system sans serif
+  technical: IBM Plex Mono
 rounded:
-  default: "2px"
-spacing:
-  sm: "8px"
-  md: "16px"
-  lg: "32px"
-  section: "112px"
+  default: 2px
 ---
 
 # macOS Updates design system
 
-Current visual identity, November 2026. The implementation tokens in `src/index.css` govern every route.
+Current visual direction, 2026-11-11. All implementation tokens live in `src/index.css`.
 
-## Direction
+## Product message
 
-Precision editorial. A calm, readable interface for people trusting a maintenance tool with their Mac. The product speaks before the interface: a short promise, a visible command, clear safeguards and an illustrative walkthrough. URL structure and section anchors remain stable.
+The product is a Terminal application, not a graphical updater. It is an automation toolkit that saves manual checking and updating. The primary promise is “Aktualizacje z głowy. Więcej czasu dla ciebie.” Historical hardware supports keeping software current. It does not imply that the toolkit upgrades historical Macs or changes their hardware.
+
+## Journey
+
+The full-height hero progresses through four representative MacBook eras: white polycarbonate, aluminum Air, Retina and contemporary Apple silicon design. Local generated images share a front-facing camera and neutral lighting. Each screen contains a Terminal window with source-derived CLI output. The final glass desktop keeps that same Terminal workflow; it never becomes a graphical updater. These are illustrations, not product screenshots or recorded installations.
+
+The rest of the page explains the toolkit: source-backed counts, a seven-language Terminal replay, open-app protection, an optional silent film, a searchable application registry, FAQ and installation. The ending uses oversized type and a single directional link. The primary objective remains starting with a preview of the update workflow.
 
 ## Type and composition
 
-Self-hosted Manrope Variable for all prose, display and navigation. IBM Plex Mono regular for commands and versions. Headings use medium weight with tracking no tighter than -0.04em. Shared 1280px container, 16px mobile gutters, 24px tablet gutters, 32px desktop gutters. Generous vertical rhythm separates sections. Content remains in document order when the hero collapses below 768px.
+Native system sans serif gives the entire site familiar macOS typography. IBM Plex Mono identifies commands, Terminal output, dates and registry methods. Large headings use restrained weight, tight tracking and short lines. Equal outer edges frame changing section compositions. The phone layout uses its own heading sizes and product framing.
 
 ## Color and shape
 
-Warm near-white and graphite neutrals, a single cobalt accent. Dark mode uses neutral green-grey surfaces, with the same hierarchy and accent role. Amber means a real warning only. All surface colors come from semantic CSS tokens. Corners are 2px. No shadows or decorative grids. Code and demonstrations inherit the page theme.
-
-## Identity and imagery
-
-Three ascending open chevrons represent software layers receiving an update. The live wordmark preserves the product name. Public SVG and raster icons use the same mark. The generated hero depicts stacked aluminum software layers above a compact computer base, with one blue upward arrow. It is an abstract illustration, not a screenshot or evidence of a user's system.
-
-The asset `public/images/update-layers.webp` was generated using the built-in imagegen tool on 2026-11-10 and compressed to WebP. Prompt: premium industrial product photograph, seven thin aluminum plates floating above a silver compact computer base, a cobalt upward arrow, white seamless studio, no text or interface. No external artwork was used as input.
+Warm near-white and deep graphite surfaces, one blue action accent. The generated wallpaper uses blue optical glass. Light and dark modes follow system preference initially and persist explicit choices. Amber remains reserved for HOLD. All colors, fonts and shapes are CSS tokens. Site controls retain 2px corners and no ornamental shadows. Native Mac window reproductions use a separate token family: rounded frames, subtle rim highlights, soft system-style shadows and circular red/yellow/green controls. This owner-requested exception applies to Terminal and code windows, including the rendered film. Historical laptop scenes use Aqua (2006), Snow Leopard (2010) and Yosemite (2015) chrome; every contemporary window uses the latest Liquid Glass-inspired treatment. Glass stays translucent while terminal text remains on a high-contrast dark surface. Decorative window controls are hidden from assistive technology.
 
 ## Motion
 
-The hero illustration moves 75px and rotates four degrees as the visitor scrolls through its section. This explains a stack rising toward its updated state. The existing lazy Remotion walkthrough maps scroll progress to update stages; it does not run automatically or loop. Supporting safeguards settle into view once through IntersectionObserver. Reduced-motion users receive a static hero and semantic walkthrough list. Rendered content remains visible without animation support.
+Native scrolling drives Motion values for photograph opacity, scale, the era ruler and progress bars. The MacBook section spans 350svh on desktop and 320svh on phones, with a persistent viewport stage. Header copy stays readable through the photo sequence, then gives way to a contemporary result. Supporting motion settles once. Buttons and links respond briefly to hover and press.
 
-## Reference principles
+Reduced motion removes long pinning and photo transitions. A static semantic page and contemporary desktop remain. The 12.6-second Terminal film is silent, has native controls, loads on demand and never autoplays or loops. Main copy and catalog controls are prerendered.
 
-Reviewed online on 2026-11-10: Linear (`https://linear.app`) for concise hierarchy and product demonstrations, Motion (`https://motion.dev`) for spatial transforms linked to interaction and clear accessible fallbacks. Their branding, layouts and assets are not copied.
+## Interface and accessibility
 
-## Accessibility and performance
+Controls have at least 44px targets and visible accent focus outlines. Copy controls use icons, an accessible name and a live success announcement. The catalog has labeled search and method controls, an honest result count, an empty state, reset and an expandable list. The default eight rows keep the landing compact. Search and method filters reveal all matching rows. Native FAQ disclosures keep their answers in the DOM.
 
-Minimum 44px interactive targets, visible accent focus outlines, native headings and landmarks, bilingual routes, and readable measures. Decorative hero image has empty alternative text. Hero is an optimized local WebP with explicit dimensions. Route chunks and the Remotion player stay lazy. Fonts are local. Light, dark and reduced-motion states share one system.
+All product claims have English and Polish counterparts. Source facts continue to come from `src/lib/site.ts`. The historical laptop artwork is hidden from assistive technology; adjacent text explains the narrative and Apple silicon compatibility.
 
-## Feature and installation extensions
+## Performance and references
 
-A matching triptych illustrates coverage, verification and the preview-update-verify process. Its seven tiles mean the pipeline layers and do not count update methods. Images are decorative; adjacent real text explains capabilities. `FeatureVisual` shares the artwork with the detailed features route. Both light and dark variants were generated from the hero material language with imagegen, without external source art. Feature art moves 48px over its viewport passage; no continuous loops run.
+Route lazy loading and exact package vendor chunks remain. The landing does not load Remotion. Laptop artwork uses compressed local WebP, the wallpaper uses local JPEG, and the film is H.264 with fast start and dense keyframes. Explicit image and video dimensions reserve space.
 
-`TerminalPreview` is explicitly an illustrative dry run. Lines reveal once when viewed and remain readable for reduced-motion users. It executes nothing. Copyable preview commands include the default install directory. The installation section states the alternative `MAC_UPDATE_DIR` path requirement. Documentation command blocks reuse the same `CopyButton` primitive.
+References reviewed for this direction include [Apple macOS](https://www.apple.com/os/macos/) and [Apple window anatomy](https://developer.apple.com/design/human-interface-guidelines/windows), the 84-24 restoration story and Elena Gonci’s portfolio. Their visual principles inform pacing, typography and desktop metaphors; their assets are not copied. Asset prompts and provenance are in `design_system/assets/desktop-journey-prompts.md`.
 
-## Update workflow review
+## Terminal truth and reading surfaces
 
-The recorded update section uses the same editorial type and silver/cobalt artwork as the landing page. The desktop composition presents an ordered step list and a single current-step detail view. It has no countdown, flight vocabulary, plotter, expanded capitals or console bezels. Actual recorded versions remain visible in each relevant step. A vendor-feed warning stays visible after its step and macOS is explicitly marked as not run in this replay.
+The canonical replay dataset is `src/components/experience/terminalData.ts`. Introductory text and all 49 localized stage titles were compared directly with upstream shell language catalogs; all seven dry-run action records were matched to upstream calls. Dry-run lines remain English in every locale, as in the actual program. No live host scan or update is executed by the website or its media renderer.
 
-Below 768px the section becomes a native vertical HTML sequence rather than a scaled-down animation canvas. This preserves 21px step titles and 15px descriptions on narrow screens. Reduced-motion visitors receive the same semantic sequence at every viewport. The desktop Remotion player stays in a lazy chunk and follows scroll position without automatic playback.
-
-The hero artwork is clipped by a separate boundary. Its animated transform cannot overlap the proof row below it.
+The same Terminal component appears on the historical laptop screens, the contemporary desktop, the workflow section and the features page. A language selector exposes EN, PL, ES, FR, DE, IT and PT. Output follows scrolling or a visitor-started finite replay, with pause and restart controls. Reading pages share system typography, neutral surfaces, a common page header and a quiet contents panel. Mobile contents expand in normal flow. The site menu uses a native modal dialog portaled to the document body; the header's backdrop blur can no longer clip it.

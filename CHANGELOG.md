@@ -8,6 +8,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Changed
+- Added circular red/yellow/green Mac window controls, historical Aqua/Snow Leopard/Yosemite chrome in the laptop journey and a shared contemporary glass Terminal treatment across the site and film.
+- Replaced invented updater GUI mockups with Terminal windows containing verified upstream dry-run messages in all seven CLI languages. Added scroll-linked output and finite playback controls.
+- Rebuilt the optional film as a Terminal workflow preview and exported a matching source-derived still.
+- Unified features, documentation, security, changelog, contribution and 404 pages with the landing typography and light/dark surfaces. Kept all public routes and section anchors.
+- Fixed clipped mobile navigation by rendering a native modal dialog outside the blurred header, with Escape handling and keyboard focus containment.
+- Rebuilt the landing around time saved by one update toolkit, with a scroll-linked journey through four MacBook eras and a contemporary glass desktop finale.
+- Added original local laptop graphics, a blue glass wallpaper and an optional silent film, with responsive and reduced-motion presentations.
+- Added application search, update-method filtering, expandable registry results and a seven-language Terminal workflow preview.
+- Added an oversized typographic footer and changed command copy controls to icons with accessible labels.
 - Rebuilt the recorded workflow with editorial typography, a current-step view and persistent warning status. Mobile uses a native readable sequence; reduced-motion behavior and recorded example dates are preserved.
 - Contained the moving hero artwork so it cannot cover the mobile facts row. Synced v1.6.0 source documentation and the 47-app coverage roster, while keeping the latest tagged release distinct.
 - Split command blocks into individual actions and removed Copy from illustrative references, file trees and placeholder scaffolds.

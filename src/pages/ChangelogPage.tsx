@@ -860,25 +860,22 @@ export function ChangelogPage() {
         toc={RELEASES.map((r) => ({ id: releaseId(r.version), label: r.version, detail: r.date }))}
       >
         {RELEASES.map((r, idx) => (
-          <section key={r.version} id={releaseId(r.version)} className="scroll-mt-24">
+          <section key={r.version} id={releaseId(r.version)} className="reading-release scroll-mt-24">
             <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <h2 className="readout m-0 text-[1.75rem] font-bold tracking-normal text-(--fg)">{r.version}</h2>
+              <h2 className="m-0 text-[1.75rem] font-semibold tracking-normal text-(--fg)">{r.version}</h2>
               <time dateTime={r.date} className="readout text-[14px] text-(--fg-muted)">{r.date}</time>
               {r.sourceSnapshot && (
-                <span className="placard inline-flex items-center gap-2 text-(--fg)">
-                  <span className="lamp lamp-go" aria-hidden="true" />
+                <span className="inline-flex items-center text-[13px] font-medium text-(--fg-muted)">
                   {t('chrome.changelog.currentSource')}
                 </span>
               )}
               {!r.sourceSnapshot && idx === 1 && (
-                <span className="placard inline-flex items-center gap-2 text-(--fg)">
-                  <span className="lamp lamp-hold" aria-hidden="true" />
+                <span className="inline-flex items-center text-[13px] font-medium text-(--fg-muted)">
                   {t('chrome.changelog.latestTagged')}
                 </span>
               )}
               {r.rc && (
-                <span className="placard inline-flex items-center gap-2 text-(--fg)">
-                  <span className="lamp lamp-hold" aria-hidden="true" />
+                <span className="inline-flex items-center text-[13px] font-medium text-(--fg-muted)">
                   {t('chrome.changelog.candidate')}
                 </span>
               )}
@@ -890,7 +887,7 @@ export function ChangelogPage() {
               if (!items?.length) return null
               return (
                 <div key={g.key} className="mb-5 last:mb-0">
-                  <h3 className="placard mb-2 mt-0 text-(--fg)">{g.label}</h3>
+                  <h3 className="mb-2 mt-0 text-[15px] font-semibold text-(--fg)">{g.label}</h3>
                   <ul>
                     {items.map((item, i) => (
                       <li key={i} className="[overflow-wrap:anywhere]">{pl ? item.pl : item.en}</li>

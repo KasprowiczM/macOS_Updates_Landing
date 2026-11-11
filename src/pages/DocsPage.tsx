@@ -106,7 +106,7 @@ export function DocsPage() {
         lang={lang}
         jsonLd={jsonLd}
       />
-      <WikiLayout title={pl ? 'Dokumentacja' : 'Documentation'} sections={sections}>
+      <WikiLayout title={pl ? 'Dokumentacja' : 'Documentation'} lead={t('seo.docsDesc')} sections={sections}>
         {groups.map((group) => (
           <section key={group.key} aria-labelledby={`${group.key}-title`}>
             <h2 id={`${group.key}-title`} className="mb-6">{group.title}</h2>

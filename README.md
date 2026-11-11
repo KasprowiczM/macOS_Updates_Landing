@@ -14,16 +14,15 @@ The site is static: no backend and no secrets. Every page is prerendered at buil
 
 The landing page explains how macOS Updates checks and updates software already installed on Apple Silicon Macs. Sections on the home page, in order:
 
-- `#poll`: hero with the generated software-layer illustration and copyable install command
-- Feature illustrations: coverage, verified direct installs and preview workflow
-- `#rules`: four update safeguards
-- `#wall`: recorded update workflow with a lazy scroll-driven desktop view and a readable native sequence on mobile
-- `#stations`: ordered pipeline reference
-- `#coverage`: coverage roster, 47 internet apps and 11 update methods
-- `#log`: dated release and live-run evidence
-- `#faq`: FAQ, shared with the `FAQPage` JSON-LD
-- Illustrative terminal preview with an animated dry run
-- `#install`: three copyable installation and update commands
+- Scroll-linked journey through four illustrated MacBook eras, ending in a contemporary desktop with the actual Terminal workflow
+- Product overview and source-backed registry facts
+- `#wall`: scroll-linked Terminal preview with seven CLI languages, finite playback controls and upstream dry-run messages
+- Open-app protection with a source-derived Terminal composition
+- Era-specific Mac window chrome in the historical journey, followed by consistent Liquid Glass-inspired Terminal windows across all pages
+- Optional silent Terminal workflow film, played on demand
+- `#coverage`: searchable application registry with update-method filter and expandable results
+- `#faq`: native disclosures, shared with the `FAQPage` JSON-LD
+- `#install`: separate installation, preview and update commands with icon-only copy controls
 
 Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributing`. Every page also exists in Polish under `/pl`.
 
@@ -35,8 +34,8 @@ Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributi
 - Motion (`motion/react`) for animation; respects `prefers-reduced-motion`
 - react-router-dom 7 with `StaticRouter` for prerender; react-helmet-async 3 for head tags
 - i18next and react-i18next for English and Polish
-- Self-hosted fonts: Manrope Variable and IBM Plex Mono (`@fontsource`)
-- Remotion 4.0.530 (`remotion`, `@remotion/player`) for the wall display. It is loaded as a lazy chunk and never in the main entry bundle. Remotion is free for individuals and small teams (see remotion.dev/license); this is an individual open-source project.
+- Native system typography across the landing and reading routes; self-hosted IBM Plex Mono for commands and terminal output
+- The previous Remotion wall components remain available in source. The current landing uses lightweight Motion and an optional H.264 film; Remotion is absent from its entry bundle.
 
 ---
 
@@ -152,3 +151,17 @@ Contributor and agent rules are in `AGENTS.md`.
 ## License
 
 Released under the MIT License. Copyright (c) 2026 macOS Updates Contributors.
+
+## Desktop film
+
+The laptop illustrations frame real Terminal-style output. The replay uses exact source-derived dry-run messages, not a graphical updater interface or a recording of this Mac. Historical laptops are visual context. The tool supports Apple silicon Macs.
+
+Regenerate the silent 12.6-second film with ImageMagick and FFmpeg installed:
+
+```bash
+python3 scripts/render-desktop-film.py --wallpaper public/images/glass-wave.jpg --output public/images/desktop-film.mp4
+```
+
+The script also writes the poster. Playback is optional and never loops. Reduced-motion visitors get a static contemporary desktop and ordinary document flow.
+
+All routes share the same system typography, theme tokens and reading layout. The mobile navigation uses a native modal dialog rendered outside the blurred header, so its fixed geometry covers the viewport and keyboard focus stays inside the menu.

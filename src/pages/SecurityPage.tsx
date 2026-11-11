@@ -44,10 +44,8 @@ export function SecurityPage() {
         <section id="reporting">
           <h2>{pl ? 'Zgłaszanie podatności' : 'Reporting a Vulnerability'}</h2>
           <div className="mb-5 flex max-w-[68ch] items-start gap-3 rounded-sm border border-(--nogo) bg-(--nogo-soft) p-4">
-            <span className="lamp lamp-nogo mt-[7px]" aria-hidden="true" />
             <div>
               <p className="m-0 font-semibold text-(--fg)">
-                <span className="placard mr-2 text-(--nogo)">NO-GO</span>
                 {pl ? 'Nie zgłaszaj podatności jako publicznych Issues.' : 'Do not file public GitHub Issues for security vulnerabilities.'}
               </p>
               <p className="m-0 mt-1.5 text-[15px]">

@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import type { RefObject } from 'react'
 import { CopyButton } from '../ui/CopyButton'
+import { MacWindowChrome } from '../ui/MacWindowChrome'
 import { cn } from '../../lib/utils'
 
 interface CommandReadoutProps {
@@ -19,13 +20,9 @@ interface CommandReadoutProps {
 export function CommandReadout({ command, label, className, codeRef }: CommandReadoutProps) {
   const id = useId()
   return (
-    <div className={cn('screen flex items-stretch', className)}>
+    <div className={cn('screen mac-window overflow-hidden', className)} data-window-era="latest">
+      <MacWindowChrome title={label ? <span id={id}>{label}</span> : 'Terminal'} action={<CopyButton text={command} />} />
       <div className="min-w-0 flex-1 px-4 py-3">
-        {label ? (
-          <p id={id} className="placard m-0 mb-1.5">
-            {label}
-          </p>
-        ) : null}
         <p className="readout m-0 flex gap-2.5 text-[12.5px] leading-[1.65] text-(--screen-fg)">
           <span aria-hidden="true" className="select-none text-(--screen-go)">
             $
@@ -40,9 +37,7 @@ export function CommandReadout({ command, label, className, codeRef }: CommandRe
           </code>
         </p>
       </div>
-      <div className="flex shrink-0 items-start border-l border-(--screen-rule)">
-        <CopyButton text={command} />
-      </div>
+
     </div>
   )
 }

@@ -1,9 +1,9 @@
+import { TerminalWindow } from '../components/experience/TerminalWindow'
 import { useTranslation } from 'react-i18next'
 import { Seo } from '../components/Seo'
 import { DocLayout } from '../components/layout/DocLayout'
 import { Button } from '../components/ui/Button'
-import { FeatureArtwork } from '../components/sections/FeatureVisual'
-import { SectionReveal } from '../components/ui/SectionReveal'
+import { CodeBlock } from '../components/docs/WikiSection'
 import { buildPageJsonLd } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
 import { INTERNET_APP_COUNT, UPDATE_METHOD_COUNT, TEST_COUNT } from '../lib/site'
@@ -169,11 +169,10 @@ export function FeaturesPage() {
       />
       <DocLayout title={t('chrome.features.title')} lead={t('seo.featuresDesc')} toc={toc}>
         {groups.map((group, gi) => (
-          <SectionReveal key={group.id} delay={0.04 * gi}>
-            <section id={group.id} className="scroll-mt-24">
-              <div className="feature-doc-art"><FeatureArtwork index={[2,1,0][gi]} /></div>
+            <section key={group.id} id={group.id} className="feature-section scroll-mt-24">
               <h2 className="mb-4">{group.title}</h2>
-              <dl className="m-0 border-b border-(--rule-strong)">
+              {gi === 0 && <div className="feature-terminal"><TerminalWindow language={lang} /><CodeBlock title="Terminal">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock></div>}
+              <dl className="feature-list m-0 border-b border-(--rule-strong)">
                 {group.items.map((item) => (
                   <div
                     key={item.title}
@@ -185,42 +184,36 @@ export function FeaturesPage() {
                 ))}
               </dl>
             </section>
-          </SectionReveal>
         ))}
 
-        <SectionReveal>
-          <section id="roadmap" className="scroll-mt-24">
+          <section id="roadmap" className="feature-roadmap scroll-mt-24">
             <h2 className="mb-3">{t('roadmap.title')}</h2>
             <p className="mb-8">{t('roadmap.subtitle')}</p>
 
-            <div className="grid items-start gap-6 xl:grid-cols-2">
-              <div className="rounded-sm border border-(--rule-strong) bg-(--bg-elev)">
-                <div className="flex items-center gap-2.5 border-b border-(--rule-strong) bg-(--bg-sunk) px-4 py-2.5">
-                  <span className="lamp lamp-go" aria-hidden="true" />
-                  <h3 className="placard m-0 text-(--fg)">{t('roadmap.statusNow')}</h3>
+            <div className="feature-roadmap-grid grid items-start gap-10 xl:grid-cols-2">
+              <div className="border-t border-(--rule-strong)">
+                <div className="border-b border-(--rule) py-4">
+                  <h3 className="m-0 text-(--fg)">{t('roadmap.statusNow')}</h3>
                 </div>
                 <ul className="m-0 list-none p-0">
                   {shippingToday.map((label) => (
                     <li
                       key={label}
-                      className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) px-4 py-3 text-[15px] leading-[1.5] last:border-b-0"
+                      className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) py-3 text-[15px] leading-[1.5] last:border-b-0"
                     >
-                      <span className="lamp lamp-go mt-[5px]" aria-hidden="true" />
                       <span className="min-w-0 [overflow-wrap:anywhere]">{label}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="rounded-sm border border-(--rule-strong) bg-(--bg-elev)">
-                <div className="flex items-center gap-2.5 border-b border-(--rule-strong) bg-(--bg-sunk) px-4 py-2.5">
-                  <span className="lamp lamp-standby" aria-hidden="true" />
-                  <h3 className="placard m-0 text-(--fg)">{t('roadmap.statusNext')}</h3>
+              <div className="border-t border-(--rule-strong)">
+                <div className="border-b border-(--rule) py-4">
+                  <h3 className="m-0 text-(--fg)">{t('roadmap.statusNext')}</h3>
                 </div>
                 <ul className="m-0 list-none p-0">
                   {roadmapItems.map((key) => (
-                    <li key={key} className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) px-4 py-3 last:border-b-0">
-                      <span className="lamp lamp-standby mt-[5px]" aria-hidden="true" />
+                    <li key={key} className="m-0 flex max-w-none items-start gap-3 border-b border-(--rule) py-3 last:border-b-0">
                       <div className="min-w-0">
                         <div className="font-semibold leading-snug text-(--fg)">{t(`roadmap.items.${key}.title`)}</div>
                         <div className="mt-0.5 text-[15px] leading-[1.5]">{t(`roadmap.items.${key}.desc`)}</div>
@@ -231,7 +224,6 @@ export function FeaturesPage() {
               </div>
             </div>
           </section>
-        </SectionReveal>
 
         <div className="flex flex-wrap items-center gap-3">
           <Button href="/docs#quick-install">{t('chrome.features.getStarted')}</Button>

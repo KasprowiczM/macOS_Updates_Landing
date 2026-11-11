@@ -6,7 +6,7 @@
       "primary": "Główna",
       "features": "Funkcje",
       "howItWorks": "Jak działa",
-      "coverage": "Pokrycie",
+      "coverage": "Aplikacje",
       "install": "Instalacja",
       "docs": "Dokumentacja",
       "github": "GitHub",
@@ -34,7 +34,7 @@
       "copiedAria": "Skopiowano do schowka"
     },
     "footer": {
-      "blurb": "Jedno polecenie aktualizuje każdą warstwę Maca. Każda warstwa zgłasza GO dopiero wtedy, gdy potwierdzi to działający Mac.",
+      "blurb": "Jeden automat dla systemu i aplikacji. Mniej ręcznego aktualizowania, więcej czasu na twoją pracę.",
       "explore": "Serwis",
       "project": "Projekt",
       "language": "Język",

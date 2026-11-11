@@ -6,7 +6,7 @@
       "primary": "Primary",
       "features": "Features",
       "howItWorks": "How it works",
-      "coverage": "Coverage",
+      "coverage": "Apps",
       "install": "Install",
       "docs": "Docs",
       "github": "GitHub",
@@ -34,7 +34,7 @@
       "copiedAria": "Copied to clipboard"
     },
     "footer": {
-      "blurb": "One command updates every layer of your Mac. Each layer reports GO only after the live Mac confirms it.",
+      "blurb": "One toolkit for your system and apps. Less manual updating, more time for your work.",
       "explore": "Explore",
       "project": "Project",
       "language": "Language",

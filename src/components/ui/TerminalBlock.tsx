@@ -1,5 +1,6 @@
 import { cn } from '../../lib/utils'
 import { CopyButton } from './CopyButton'
+import { MacWindowChrome } from './MacWindowChrome'
 
 interface TerminalBlockProps {
   lines: { text: string; className?: string }[]
@@ -11,7 +12,7 @@ interface TerminalBlockProps {
 }
 
 /**
- * A dark instrument readout (.screen) for commands. Lines without a custom className are
+ * A contemporary Mac Terminal window for commands. Lines without a custom className are
  * commands and get a prompt glyph; lines with one (or starting with #) are output/comments.
  * The prompt is not selectable, so a manual selection copies only the command text.
  */
@@ -19,10 +20,8 @@ export function TerminalBlock({ lines, showCopy = true, copyText, className, tit
   const text = copyText ?? lines.map((l) => l.text).join('\n')
 
   return (
-    <div className={cn('screen overflow-hidden', className)}>
-      {title && (
-        <div className="px-4 py-2 border-b border-(--screen-rule) placard text-(--screen-dim)">{title}</div>
-      )}
+    <div className={cn('screen mac-window overflow-hidden', className)} data-window-era="latest">
+      <MacWindowChrome title={title ?? 'Terminal'} action={showCopy ? <CopyButton text={text} /> : undefined} />
       <div className="flex items-stretch">
         <pre
           tabIndex={0}
@@ -42,11 +41,7 @@ export function TerminalBlock({ lines, showCopy = true, copyText, className, tit
             )
           })}
         </pre>
-        {showCopy && (
-          <div className="shrink-0 flex items-start border-l border-(--screen-rule)">
-            <CopyButton text={text} />
-          </div>
-        )}
+
       </div>
     </div>
   )
