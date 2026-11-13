@@ -13,6 +13,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added a finite update-ring brand mark, replay control, and matching favicon and social artwork.
 
 ### Changed
+- Updated the brand logo animation to repeat its 2.8-second ring, arrow, and check sequence followed by a 10-second still end-state. It pauses offscreen and when the tab is hidden; reduced-motion users see a static mark.
 - Matched the installation block to the Cleanup Terminal window, with native window controls and separate install/preview copy actions.
 - Replaced the support currency dropdown with currency and provider buttons, native brand marks and a provider-specific payment-method list.
 - Reframed the home page as a technical workshop with a reversible modern and historical scene switch, a source-based Terminal demonstration, a three-stage workflow, the searchable app registry, and an office installation close.

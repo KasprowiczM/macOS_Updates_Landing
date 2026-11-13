@@ -27,7 +27,7 @@ Graphite, silver, and neutral surfaces support a single GO blue accent. Amber is
 
 ## Motion and accessibility
 
-The era switch uses a short, user-triggered screen transition and remains reversible. Terminal playback is finite, can be played, paused, and replayed, and pauses when it leaves the viewport or the document is hidden. The mark animation runs once when visible and can be replayed from its control. No animation loops. Reduced-motion preferences remove transitions and leave readable static content.
+The era switch uses a short, user-triggered screen transition and remains reversible. Terminal playback is finite, can be played, paused, and replayed, and pauses when it leaves the viewport or the document is hidden. The brand mark loops its 2.8-second ring, arrow, and check sequence, then holds its still end-state for 10 seconds before repeating, for a 12.8-second cycle. This owner-approved loop applies to compact header/footer marks and large marks, pauses offscreen and when the document is hidden, and is static with reduced motion. Other animation remains finite. Reduced-motion preferences remove transitions and leave readable static content.
 
 Interactive targets are at least 44px with visible focus treatment. Era selection exposes pressed state and a live caption; stage controls expose the selected step. Photos have localized descriptions, while decorative graphics stay out of the accessibility tree. English and Polish copy share equivalent product claims.
 

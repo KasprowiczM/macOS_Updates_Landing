@@ -151,7 +151,7 @@ Released under the MIT License. Copyright (c) 2026 macOS Updates Contributors.
 
 ## Workshop and demonstrations
 
-The Terminal showcase uses source-derived `--dry-run` messages. It does not scan a visitor's Mac or run updates. Historical computer artwork is design context only. The toolkit supports modern Apple Silicon Macs running macOS 13 to 27. The workshop era switch and logo animation are finite, and reduced-motion preferences keep the content static.
+The Terminal showcase uses source-derived `--dry-run` messages. It does not scan a visitor's Mac or run updates. Historical computer artwork is design context only. The toolkit supports modern Apple Silicon Macs running macOS 13 to 27. The workshop era switch and Terminal playback are finite. The brand logo repeats a 2.8-second ring, arrow, and check sequence followed by a 10-second still end-state, pausing offscreen and when the tab is hidden. Reduced-motion preferences keep animated content static.
 
 Optional support is a one-time contribution. The toolkit remains free under the MIT License, and contributions do not unlock features. Hosted payment providers handle payment details and display their status. A site return is not treated as proof of payment.
 

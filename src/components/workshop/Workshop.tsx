@@ -60,7 +60,7 @@ export function WorkshopWorkflow() {
     <div className="workshop-workflow-grid">
       <div className="workshop-step-list" role="group" aria-label={c.workflow.replace('\n', ' ')}>{c.steps.map((item, index) => <button type="button" key={item.title} aria-pressed={active === index} aria-controls="workflow-detail" onClick={() => setActive(index)}><span className="workshop-step-number">0{index + 1}</span><span>{item.title}</span><ArrowUpRight size={20} aria-hidden="true" /></button>)}</div>
       <div id="workflow-detail" className="workshop-step-detail" aria-live="polite"><h3>{step.title}</h3><p>{step.body}</p><code>{step.command}</code><small>{c.sequenceNote}</small></div>
-      <div className="workshop-mark-stage"><UpdateMark key={replay} animated width="100%" height="100%" /><div><p>{c.markCaption}</p><button type="button" onClick={() => setReplay(value => value + 1)} aria-label={c.replayLogo}><RotateCcw size={18} aria-hidden="true" /></button></div></div>
+      <div className="workshop-mark-stage"><UpdateMark key={replay} animated loop width="100%" height="100%" /><div><p>{c.markCaption}</p><button type="button" onClick={() => setReplay(value => value + 1)} aria-label={c.replayLogo}><RotateCcw size={18} aria-hidden="true" /></button></div></div>
     </div>
   </section>
 }

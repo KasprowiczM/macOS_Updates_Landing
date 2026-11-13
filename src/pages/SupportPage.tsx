@@ -73,7 +73,7 @@ function SupportPageContent({ lang }: { lang: 'en' | 'pl' }) {
     <main id="main" className="support-layout" lang={lang}>
       <section className="support-layout__hero" aria-labelledby="support-title">
         <div className="support-layout__intro">
-          <UpdateMark animated replay label={copy.title} className="support-layout__mark" />
+          <UpdateMark animated loop replay label={copy.title} className="support-layout__mark" />
           <h1 id="support-title">{copy.title}</h1>
           <p className="support-layout__lead">{copy.lead}</p>
           <p className="support-layout__note"><Heart size={18} aria-hidden="true" />{copy.note}</p>

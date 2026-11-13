@@ -1012,10 +1012,17 @@ body { font-family: var(--exp-font); }
 .update-mark-played .update-mark__ring { animation: update-ring-turn 2.8s var(--ease-out) both; }
 .update-mark-played .update-mark__arrow { animation: update-arrow-resolve 2.8s var(--ease-out) both; }
 .update-mark-played .update-mark__check { animation: update-check-resolve 2.8s var(--ease-out) both; }
+.update-mark-loop.update-mark-played .update-mark__ring { animation: update-ring-loop 12.8s var(--ease-out) infinite both; }
+.update-mark-loop.update-mark-played .update-mark__arrow { animation: update-arrow-loop 12.8s var(--ease-out) infinite both; }
+.update-mark-loop.update-mark-played .update-mark__check { animation: update-check-loop 12.8s var(--ease-out) infinite both; }
+.update-mark-paused > * { animation-play-state: paused !important; }
 .support-page__mark { width: 120px; height: 120px; }
 @keyframes update-ring-turn { from { transform: rotate(-150deg); } to { transform: rotate(0); } }
 @keyframes update-arrow-resolve { 0%, 50% { opacity: 1; transform: translateY(3px); } 65%, 100% { opacity: 0; transform: translateY(-3px); } }
 @keyframes update-check-resolve { 0%, 60% { opacity: 0; } 85%, 100% { opacity: 1; } }
+@keyframes update-ring-loop { 0% { transform: rotate(-150deg); } 21.875%, 100% { transform: rotate(0); } }
+@keyframes update-arrow-loop { 0%, 10.9375% { opacity: 1; transform: translateY(3px); } 14.21875%, 100% { opacity: 0; transform: translateY(-3px); } }
+@keyframes update-check-loop { 0%, 13.125% { opacity: 0; } 18.59375%, 100% { opacity: 1; } }
 .workshop .app-catalog { background: var(--bg-sunk); padding-block: 100px; }
 .workshop .app-catalog__intro h2 { max-width: 10ch; }
 .workshop-close { padding: 0 !important; min-height: 0 !important; display: block !important; }
