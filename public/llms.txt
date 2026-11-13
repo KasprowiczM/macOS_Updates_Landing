@@ -87,3 +87,7 @@ Manual setup:
 ## Upstream source status
 
 The repository main branch identifies its current source snapshot as v1.6.0 in VERSION and CHANGELOG, dated 2026-11-10. No v1.6.0 Git tag or GitHub Release exists as of this sync. The source snapshot is v1.6.0; the latest tagged release is v1.5.5. Upstream `run_tests.sh` collects 846 Python unittest cases; collection count is not a claim that this site ran them.
+
+## Optional project support
+
+The toolkit remains free under the MIT License. Optional one-time support is available at https://macos-updates.64bit.site/support and https://macos-updates.64bit.site/pl/support through hosted Stripe links in PLN, EUR and USD, with Revolut as an alternative. The provider displays payment status; a return to this website is not proof of payment. Contributions do not unlock features or affect updates.

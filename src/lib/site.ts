@@ -32,6 +32,7 @@ export const ROUTES = [
   '/security',
   '/changelog',
   '/contributing',
+  '/support',
 ] as const
 
 export type Route = (typeof ROUTES)[number]

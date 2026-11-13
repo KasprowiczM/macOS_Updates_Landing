@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { m, useMotionValue, useReducedMotion, useTransform, type MotionValue } from 'motion/react'
+import { m, useMotionValue, useTransform, type MotionValue } from 'motion/react'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { CopyButton } from '../ui/CopyButton'
 import { MacWindowChrome } from '../ui/MacWindowChrome'
 import { terminalRuns, type TerminalLanguage, type TerminalStage } from './terminalData'
@@ -24,7 +25,7 @@ export function TerminalWindow({ language = 'en', progress, compact = false, cop
   era?: TerminalWindowEra
 }) {
   const run = terminalRuns[language]
-  const reduce = useReducedMotion()
+  const reduce = usePrefersReducedMotion()
   const fallback = useMotionValue(1)
   const value = progress ?? fallback
   const viewport = useRef<HTMLDivElement>(null)

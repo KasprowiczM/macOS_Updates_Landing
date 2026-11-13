@@ -13,7 +13,8 @@
       "githubStars": "GitHub, {{count}} stars",
       "menuOpen": "Open menu",
       "menuClose": "Close menu",
-      "mobileLabel": "Site menu"
+      "mobileLabel": "Site menu",
+      "support": "Support"
     },
     "theme": {
       "light": "Light",
@@ -50,7 +51,8 @@
       "releaseLink": "Current source snapshot",
       "rights": "© 2026 macOS Updates",
       "english": "English",
-      "polish": "Polski"
+      "polish": "Polski",
+      "support": "Support"
     },
     "doc": {
       "backHome": "Back to home",

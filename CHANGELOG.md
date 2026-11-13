@@ -7,7 +7,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Added an English and Polish support route for optional one-time contributions. The toolkit remains free under MIT with no paid features. Hosted Stripe links use currency-specific configuration; Revolut remains an alternative. Suggested amounts are PLN 25, EUR 5, and USD 6. Custom contributions range from PLN 2 or EUR/USD 1 up to 1,000 units, subject to provider limits. The provider displays payment status; returning to the site does not indicate success.
+- Added original responsive workshop artwork for modern, heritage, and office scenes, with prompt notes in `docs/design/ASSETS.md`.
+- Added a finite update-ring brand mark, replay control, and matching favicon and social artwork.
+
 ### Changed
+- Reframed the home page as a technical workshop with a reversible modern and historical scene switch, a source-based Terminal demonstration, a three-stage workflow, the searchable app registry, and an office installation close.
+- Updated the visual system to Manrope and IBM Plex Mono, graphite and silver surfaces, and one GO blue accent. Amber remains reserved for HOLD. Reduced-motion behavior removes transitions and leaves static content.
+- Fixed reduced-motion hydration by keeping the first browser render consistent with prerendered Terminal markup.
+- Added `/support` to the localized English and Polish route manifest for prerendering and sitemap generation.
 - Added circular red/yellow/green Mac window controls, historical Aqua/Snow Leopard/Yosemite chrome in the laptop journey and a shared contemporary glass Terminal treatment across the site and film.
 - Replaced invented updater GUI mockups with Terminal windows containing verified upstream dry-run messages in all seven CLI languages. Added scroll-linked output and finite playback controls.
 - Rebuilt the optional film as a Terminal workflow preview and exported a matching source-derived still.

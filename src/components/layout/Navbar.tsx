@@ -70,7 +70,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
     }
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    const mql = window.matchMedia('(min-width: 1024px)')
+    const mql = window.matchMedia('(min-width: 1200px)')
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) setOpenAt(null)
     }
@@ -93,6 +93,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
     { key: 'coverage', label: t('chrome.nav.coverage'), href: hash('coverage'), isHash: true },
     { key: 'install', label: t('chrome.nav.install'), href: hash('install'), isHash: true },
     { key: 'docs', label: t('chrome.nav.docs'), href: localize('/docs'), isHash: false, path: '/docs' },
+    { key: 'support', label: t('chrome.nav.support'), href: localize('/support'), isHash: false, path: '/support' },
   ]
 
   const githubLabel = stars > 0 ? t('chrome.nav.githubStars', { count: stars }) : t('chrome.nav.github')

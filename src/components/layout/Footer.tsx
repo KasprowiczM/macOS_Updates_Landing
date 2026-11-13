@@ -21,6 +21,7 @@ export function Footer() {
     { label: t('chrome.footer.security'), href: localize('/security') },
     { label: t('chrome.footer.changelog'), href: localize('/changelog') },
     { label: t('chrome.footer.contributing'), href: localize('/contributing') },
+    { label: t('chrome.footer.support'), href: localize('/support') },
   ]
 
   const languages: { code: Lang; label: string }[] = [

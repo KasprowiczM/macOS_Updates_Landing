@@ -223,3 +223,7 @@ A: No. Apple Silicon and macOS 13 or later only.
 - [Short summary for LLMs](https://macos-updates.64bit.site/llms.txt)
 - [Sitemap](https://macos-updates.64bit.site/sitemap.xml)
 - [Source code and issues](https://github.com/KasprowiczM/macOS_updates)
+
+## Optional project support
+
+The toolkit remains free under the MIT License. Optional one-time support is available at https://macos-updates.64bit.site/support and https://macos-updates.64bit.site/pl/support through hosted Stripe links in PLN, EUR and USD, with Revolut as an alternative. The provider displays payment status; a return to this website is not proof of payment. Contributions do not unlock features or affect updates.

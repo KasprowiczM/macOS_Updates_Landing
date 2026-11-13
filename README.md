@@ -4,7 +4,7 @@
 [![Tests](https://img.shields.io/badge/tests-846%20unit-cases-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The live site is [macos-updates.64bit.site](https://macos-updates.64bit.site).
+The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The production site is [macos-updates.64bit.site](https://macos-updates.64bit.site); this repository describes the current source and does not imply that every local change is published.
 
 The site is static: no backend and no secrets. Every page is prerendered at build time, then hydrated in the browser.
 
@@ -14,27 +14,24 @@ The site is static: no backend and no secrets. Every page is prerendered at buil
 
 The landing page explains how macOS Updates checks and updates software already installed on Apple Silicon Macs. Sections on the home page, in order:
 
-- Scroll-linked journey through four illustrated MacBook eras, ending in a contemporary desktop with the actual Terminal workflow
+- Full-width workshop hero with modern and historical computer scenes, a reversible era switch, and a direct install action
 - Product overview and source-backed registry facts
-- `#wall`: scroll-linked Terminal preview with seven CLI languages, finite playback controls and upstream dry-run messages
-- Open-app protection with a source-derived Terminal composition
-- Era-specific Mac window chrome in the historical journey, followed by consistent Liquid Glass-inspired Terminal windows across all pages
-- Optional silent Terminal workflow film, played on demand
+- `#wall`: finite Terminal preview with seven CLI languages, playback controls, and upstream dry-run messages
+- A three-stage explanation of preview, source verification, and updates
 - `#coverage`: searchable application registry with update-method filter and expandable results
-- `#faq`: native disclosures, shared with the `FAQPage` JSON-LD
-- `#install`: separate installation, preview and update commands with icon-only copy controls
+- A daylight office close with installation instructions and optional support
 
-Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributing`. Every page also exists in Polish under `/pl`.
+Pages: `/` (home), `/features`, `/docs`, `/security`, `/changelog`, `/contributing`, `/support`. Every page also exists in Polish under `/pl`.
 
 ---
 
 ## Stack
 
 - React 19, TypeScript 6, Vite 8, Tailwind CSS 4 (design tokens in `src/index.css`)
-- Motion (`motion/react`) for animation; respects `prefers-reduced-motion`
+- Motion (`motion/react`) for finite animation; respects `prefers-reduced-motion`
 - react-router-dom 7 with `StaticRouter` for prerender; react-helmet-async 3 for head tags
 - i18next and react-i18next for English and Polish
-- Native system typography across the landing and reading routes; self-hosted IBM Plex Mono for commands and terminal output
+- Self-hosted Manrope Variable for display and reading, plus IBM Plex Mono for commands and terminal output
 - The previous Remotion wall components remain available in source. The current landing uses lightweight Motion and an optional H.264 film; Remotion is absent from its entry bundle.
 
 ---
@@ -81,8 +78,8 @@ The prerender step must report every route in both languages. A missing `<!--app
 
 ## Brand assets
 
-- Logo geometry lives in `src/components/ui/Logo.tsx` (40-unit grid). Run `node scripts/og/build-brand.mjs` with ImageMagick to regenerate the shared mark, favicons, PWA icons and logo lockups.
-- Generated illustration variants live in `public/images/`, with prompt provenance in adjacent JSON files. The Open Graph image uses the same generated hero artwork. The old `scripts/og/og.html` is a historical rendering recipe.
+- The interrupted update ring mark is implemented in `src/components/ui/UpdateMark.tsx`; compact instances remain static. SVG and raster brand assets live in `public/`.
+- Original workshop scenes are optimized responsive WebP files in `public/images/workshop/`. Prompts and provenance are documented in `docs/design/ASSETS.md`.
 - The visual specification is `design_system/DESIGN.md`. It is the visual source of truth; token values are in `src/index.css`.
 
 ---
@@ -128,7 +125,7 @@ macOS_updates_landing/
 
 ## Deployment
 
-Production deploys from the `main` branch on Vercel. `vercel.json` controls URL and header behavior. The static output is `dist/`, produced by `npm run build`.
+`npm run build` produces the static output in `dist/`. `vercel.json` contains clean URL, header, and cache configuration. A successful local build does not mean the changes have been published.
 
 ---
 
@@ -152,16 +149,10 @@ Contributor and agent rules are in `AGENTS.md`.
 
 Released under the MIT License. Copyright (c) 2026 macOS Updates Contributors.
 
-## Desktop film
+## Workshop and demonstrations
 
-The laptop illustrations frame real Terminal-style output. The replay uses exact source-derived dry-run messages, not a graphical updater interface or a recording of this Mac. Historical laptops are visual context. The tool supports Apple silicon Macs.
+The Terminal showcase uses source-derived `--dry-run` messages. It does not scan a visitor's Mac or run updates. Historical computer artwork is design context only. The toolkit supports modern Apple Silicon Macs running macOS 13 to 27. The workshop era switch and logo animation are finite, and reduced-motion preferences keep the content static.
 
-Regenerate the silent 12.6-second film with ImageMagick and FFmpeg installed:
-
-```bash
-python3 scripts/render-desktop-film.py --wallpaper public/images/glass-wave.jpg --output public/images/desktop-film.mp4
-```
-
-The script also writes the poster. Playback is optional and never loops. Reduced-motion visitors get a static contemporary desktop and ordinary document flow.
+Optional support is a one-time contribution. The toolkit remains free under the MIT License, and contributions do not unlock features. Hosted payment providers handle payment details and display their status. A site return is not treated as proof of payment.
 
 All routes share the same system typography, theme tokens and reading layout. The mobile navigation uses a native modal dialog rendered outside the blurred header, so its fixed geometry covers the viewport and keyboard focus stays inside the menu.

@@ -12,6 +12,7 @@ export const pageLoaders = {
   '/security': () => import('../pages/SecurityPage').then((m) => ({ default: m.SecurityPage })),
   '/changelog': () => import('../pages/ChangelogPage').then((m) => ({ default: m.ChangelogPage })),
   '/contributing': () => import('../pages/ContributingPage').then((m) => ({ default: m.ContributingPage })),
+  '/support': () => import('../pages/SupportPage').then((m) => ({ default: m.SupportPage })),
 } as const
 
 export type PagePath = keyof typeof pageLoaders
