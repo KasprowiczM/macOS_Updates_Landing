@@ -42,3 +42,5 @@ The toolkit remains free under MIT, with no paid features. Optional support is a
 ## Technical constraints
 
 Keep route-level lazy loading, bilingual prerendering, canonical metadata, and sitemap generation. Source version and registry facts come from `src/lib/site.ts`. Do not claim that a collected test count means the suite ran. Do not present the Terminal demonstration as an execution or a successful update.
+
+The installation commands share a dark native Terminal window with circular window controls, a centered title, a titlebar copy action and a separate preview command copy action. The support page uses symbol/code currency controls, Stripe and Revolut brand marks, and method lists that follow the selected provider and currency. Methods reflect the configured account; the provider determines customer eligibility. Revolut handles its own currency and amount.

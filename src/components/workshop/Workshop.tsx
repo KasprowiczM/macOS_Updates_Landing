@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useLang, useLocalizedPath } from '../../lib/routes'
 import { INSTALL_NIX, INTERNET_APP_COUNT, REPO_URL, TEST_COUNT, UPDATE_METHOD_COUNT } from '../../lib/site'
 import { UpdateMark } from '../ui/UpdateMark'
+import { MacWindowChrome } from '../ui/MacWindowChrome'
 import { useCopy } from '../sections/useCopy'
 import { workshopCopy } from './copy'
 
@@ -70,9 +71,29 @@ export function WorkshopClose() {
   const localize = useLocalizedPath()
   const command = useRef<HTMLElement>(null)
   const { copy, status } = useCopy(INSTALL_NIX, command)
+  const previewCommand = 'cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y'
+  const previewNode = useRef<HTMLElement>(null)
+  const { copy: copyPreview, status: previewStatus } = useCopy(previewCommand, previewNode)
+  const feedback = status === 'failed' || previewStatus === 'failed'
+    ? (lang === 'pl' ? 'Zaznacz polecenie i skopiuj ręcznie.' : 'Select and copy the command manually.')
+    : status === 'copied' || previewStatus === 'copied'
+      ? (lang === 'pl' ? 'Skopiowano.' : 'Copied.') : ''
   return <section id="install" className="workshop-close" aria-labelledby="workshop-close-title">
     <div className="workshop-office"><Photograph name="office" alt={c.officeAlt} /><div className="workshop-close-copy"><h2 id="workshop-close-title">{c.close}</h2><p>{c.closeLead}</p></div></div>
-    <div className="workshop-install workshop-width"><div><h3>{c.commandTitle}</h3><Link to={localize('/docs#quick-install')} className="workshop-text-link">{c.docs}<ArrowUpRight size={17} aria-hidden="true" /></Link></div><div className="workshop-install-commands"><div><code ref={command}>{INSTALL_NIX}</code><button type="button" onClick={() => void copy()} aria-label={status === 'copied' ? (lang === 'pl' ? 'Skopiowano polecenie' : 'Command copied') : (lang === 'pl' ? 'Kopiuj instalację' : 'Copy install command')}>{status === 'copied' ? <Check size={18} /> : <Copy size={18} />}</button></div><p role="status">{status === 'copied' ? (lang === 'pl' ? 'Skopiowano.' : 'Copied.') : status === 'failed' ? (lang === 'pl' ? 'Zaznacz polecenie i skopiuj ręcznie.' : 'Select and copy the command manually.') : c.previewHint}</p><code>cd ~/Dev_Env/macOS_updates &amp;&amp; bash update_all.sh --dry-run -y</code></div></div>
+    <div className="workshop-install workshop-width">
+      <div><h3>{c.commandTitle}</h3><Link to={localize('/docs#quick-install')} className="workshop-text-link">{c.docs}<ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <div className="workshop-install-commands">
+        <div className="workshop-install-terminal mac-window">
+          <MacWindowChrome title="Terminal" subtitle="bash" action={<button type="button" onClick={() => void copy()} aria-label={status === 'copied' ? (lang === 'pl' ? 'Skopiowano instalację' : 'Install command copied') : (lang === 'pl' ? 'Kopiuj instalację' : 'Copy install command')}>{status === 'copied' ? <Check size={18} /> : <Copy size={18} />}</button>} />
+          <div className="workshop-install-terminal-body">
+            <div className="workshop-install-prompt"><span aria-hidden="true">$</span><code ref={command}>{INSTALL_NIX}</code></div>
+            <p>{c.previewHint}</p>
+            <div className="workshop-install-prompt"><span aria-hidden="true">$</span><code ref={previewNode}>{previewCommand}</code><button type="button" onClick={() => void copyPreview()} aria-label={previewStatus === 'copied' ? (lang === 'pl' ? 'Skopiowano podgląd' : 'Preview command copied') : (lang === 'pl' ? 'Kopiuj podgląd' : 'Copy preview command')}>{previewStatus === 'copied' ? <Check size={17} /> : <Copy size={17} />}</button></div>
+          </div>
+        </div>
+        <p className="workshop-install-feedback" role="status">{feedback}</p>
+      </div>
+    </div>
     <div className="workshop-support workshop-width"><p>{c.supportNote}</p><Link to={localize('/support')} className="workshop-text-link">{c.support}<ArrowUpRight size={18} aria-hidden="true" /></Link></div>
   </section>
 }

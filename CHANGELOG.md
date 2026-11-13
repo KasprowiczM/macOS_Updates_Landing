@@ -13,6 +13,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added a finite update-ring brand mark, replay control, and matching favicon and social artwork.
 
 ### Changed
+- Matched the installation block to the Cleanup Terminal window, with native window controls and separate install/preview copy actions.
+- Replaced the support currency dropdown with currency and provider buttons, native brand marks and a provider-specific payment-method list.
 - Reframed the home page as a technical workshop with a reversible modern and historical scene switch, a source-based Terminal demonstration, a three-stage workflow, the searchable app registry, and an office installation close.
 - Updated the visual system to Manrope and IBM Plex Mono, graphite and silver surfaces, and one GO blue accent. Amber remains reserved for HOLD. Reduced-motion behavior removes transitions and leaves static content.
 - Fixed reduced-motion hydration by keeping the first browser render consistent with prerendered Terminal markup.

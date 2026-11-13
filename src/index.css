@@ -938,6 +938,13 @@ body { font-family: var(--exp-font); }
   --workshop-office-ink: #172330;
   --workshop-office-muted: #3b4956;
   --workshop-blackout: #070b10;
+  --install-terminal-bg: #171715;
+  --install-terminal-fg: #eee9df;
+  --install-terminal-muted: #b9b6af;
+  --install-terminal-rule: #514b43;
+  --install-terminal-bar: linear-gradient(#3b3a38, #30302f);
+  --install-terminal-radius: 12px;
+  --install-terminal-shadow: 0 18px 50px rgb(0 0 0 / .25), inset 0 1px 1px rgb(255 255 255 / .09);
 }
 .workshop-width { width: min(1440px, 100%); margin-inline: auto; padding-inline: var(--page-gutter); }
 .workshop h1, .workshop h2 { white-space: pre-line; text-wrap: balance; }
@@ -1019,11 +1026,18 @@ body { font-family: var(--exp-font); }
 .workshop-close-copy p { max-width: 33ch; font-size: 17px; color: var(--workshop-office-muted); margin: 25px 0 0; }
 .workshop-install { display: grid; grid-template-columns: .7fr 1.3fr; padding-block: 64px; gap: 8%; }
 .workshop-install h3 { font-size: 24px; font-weight: 550; letter-spacing: -.03em; margin: 0 0 10px; }
-.workshop-install-commands > div { display: flex; align-items: start; gap: 12px; border-bottom: 1px solid var(--rule-strong); padding-bottom: 16px; }
-.workshop-install-commands code { font-size: 11px; line-height: 1.9; overflow-wrap: anywhere; }
-.workshop-install-commands > div code { flex: 1; padding-top: 10px; }
-.workshop-install-commands button { display: grid; place-items: center; min-width: 44px; min-height: 44px; background: none; border: 1px solid var(--rule); color: var(--fg); border-radius: var(--exp-radius); cursor: pointer; }
-.workshop-install-commands p { font-size: 12px; color: var(--fg-muted); margin: 20px 0 8px; }
+.workshop-install-commands { min-width: 0; }
+.workshop-install-terminal { --window-bar: var(--install-terminal-bar); --window-radius: var(--install-terminal-radius); --mac-title-ink: var(--install-terminal-fg); overflow: hidden; border-color: var(--install-terminal-rule); background: var(--install-terminal-bg); color: var(--install-terminal-fg); box-shadow: var(--install-terminal-shadow); backdrop-filter: none; }
+.workshop-install-terminal .mac-window-titlebar { border-bottom-color: var(--install-terminal-rule); }
+.workshop-install-terminal-body { padding: 24px; }
+.workshop-install-prompt { display: flex; align-items: start; gap: 12px; }
+.workshop-install-prompt > span { color: var(--terminal-accent); font: 13px/1.9 var(--font-mono); }
+.workshop-install-prompt code { flex: 1; min-width: 0; font: 12px/1.9 var(--font-mono); overflow-wrap: anywhere; }
+.workshop-install-terminal-body > p { margin: 28px 0 12px; color: var(--install-terminal-muted); font-size: 12px; line-height: 1.7; }
+.workshop-install-terminal button { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; background: none; border: 0; color: var(--install-terminal-fg); border-radius: var(--exp-radius); cursor: pointer; }
+.workshop-install-terminal button:hover { background: var(--install-terminal-rule); }
+.workshop-install-feedback { min-height: 20px; margin: 8px 0 0; font-size: 12px !important; color: var(--fg-muted); }
+@media (max-width: 600px) { .workshop-install-terminal-body { padding: 18px 14px; } .workshop-install-prompt { gap: 8px; } .workshop-install-prompt code { font-size: 11px; } }
 .workshop-support { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--rule); padding-block: 20px; }
 .workshop-support p { font-size: 12px; color: var(--fg-muted); }
 .experience-footer .footer-statement { padding-block: 38px; }
