@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useGitHubStats } from '../../hooks/useGitHubStats'
 import { useLocalizedPath } from '../../lib/routes'
-import { REPO_URL, TEST_COUNT } from '../../lib/site'
+import { APP_VERSION_DATE, REPO_URL, TEST_COUNT } from '../../lib/site'
 import { CONTAINER, SECTION_PAD } from './layout'
 
 interface Readout {
@@ -21,7 +21,7 @@ interface Entry {
 
 /** Real, dated entries only. Dates and versions come from the toolkit's own history. */
 const ENTRIES: readonly Entry[] = [
-  { id: 'release', date: '2026-10-30' },
+  { id: 'release', date: APP_VERSION_DATE },
   {
     id: 'live',
     date: '2026-10-11',

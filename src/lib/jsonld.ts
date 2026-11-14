@@ -51,7 +51,7 @@ const COPY = {
       steps: [
         {
           name: 'Install',
-          text: `Run the one-line installer in Terminal. It inspects setup and builds a local inventory. Dependency installation requires separate consent; the optional catalog starts unselected: ${INSTALL_NIX}`,
+          text: `Run the one-line installer in Terminal. It inspects setup and, if Python is available, builds a local inventory. Dependency installation requires separate consent; the optional catalog starts unselected: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {
@@ -94,7 +94,7 @@ const COPY = {
       steps: [
         {
           name: 'Instalacja',
-          text: `Uruchom jednoliniowy instalator w Terminalu. Sprawdza konfigurację i buduje lokalny inwentarz. Instalacja zależności wymaga osobnej zgody; opcjonalny katalog jest niewybrany: ${INSTALL_NIX}`,
+          text: `Uruchom jednoliniowy instalator w Terminalu. Sprawdza konfigurację i, jeśli Python jest dostępny, buduje lokalny inwentarz. Instalacja zależności wymaga osobnej zgody; opcjonalny katalog jest niewybrany: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {

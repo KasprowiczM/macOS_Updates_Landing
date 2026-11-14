@@ -4,17 +4,21 @@ Current upstream main source snapshot: {{APP_VERSION}}, dated {{APP_VERSION_DATE
 
 ## Inventory and plans
 
-The toolkit targets Apple Silicon Macs running macOS 13 to 27. Its inventory tracks individual application instances and package identities, source availability, conflicts, policies, migration and unknown origins. Partial or unavailable observations remain explicit. `--plan` and `--dry-run` are observational. An eligible existing-manager update requires explicit consent and fresh checks. Unknown or conflicting sources need a manual decision. Automatic yes, EOF and unattended execution do not grant new installation permission.
+The toolkit targets Apple Silicon Macs running macOS 13 to 27. Its inventory tracks individual application instances and package identities, source availability, conflicts, policies, migration and unknown origins. Partial or unavailable observations remain explicit. `--plan` and `--dry-run` are observational. Plain `--dry-run` renders a readable preview of up to {{PREVIEW_TARGET_LIMIT}} targets, with the number omitted. `--plan` and `--dry-run --json-summary` retain the full JSON plan. Unicode output and closed output pipes are handled safely. An eligible existing-manager update requires explicit consent and fresh checks. Unknown or conflicting sources need a manual decision. Automatic yes, EOF and unattended execution do not grant new installation permission.
 
 The registry has {{INTERNET_APP_COUNT}} rows representing {{PRODUCT_COUNT}} products and {{UPDATE_METHOD_COUNT}} legacy capability categories. These are catalog records, not {{INTERNET_APP_COUNT}} enabled automatic updates or {{UPDATE_METHOD_COUNT}} active execution paths. Generic native and vendor paths remain manual. Native CLI, Node, Bun and missing CLI bootstrap are not automatically executed by the current policy. npm effects involving scripts, dependencies or new global commands are deferred. The legacy App Store Track 2 GUI is inactive behind the plan gate.
 
 Latest-stable advice uses reviewed sources and distinguishes available evidence from unknowns. It does not automatically migrate software. The optional application catalog begins unselected. Installation has a separate digest-bound InstallPlan and consent; no public automatic installation recipes are approved.
 
+## Source checkpoints and activation
+
+Source checkpoints T1 through T5b add monotonic evidence timing, exact recipe and candidate bindings, consent-bound ZIP execution infrastructure, native-session supervision, per-action receipts and durable two-slot scheduling with shared recovery barriers. Production parallelism remains disabled pending live product effect acceptance. macOS is the final exclusive mutation. Active vendor, native and first-install recipes: {{ACTIVE_RECIPE_COUNT}}. Production native drivers: {{PRODUCTION_NATIVE_DRIVER_COUNT}}. These source changes have fixture evidence only; T6 live acceptance is deferred and no recipe activation is implied.
+
 ## Setup and verification
 
 The installer clones the repository and inspects setup. Dependency installation and shell configuration require separate consent. Preview using `bash update_all.sh --dry-run -y` from the toolkit directory; `-y` grants no new permission.
 
-On {{VERIFICATION_DATE}} the upstream suite collected {{TEST_COUNT}} Python unittest cases: {{TEST_PASSED}} passed and {{TEST_SKIPPED}} expected skip, with no host-tool or network guard hits. Static and secret checks are separate. This site did not run the upstream suite.
+On {{VERIFICATION_DATE}} the upstream suite collected {{TEST_COUNT}} Python unittest cases: {{TEST_PASSED}} passed, {{TEST_SKIPPED}} skipped, with no host-tool or network guard hits. Static and secret checks are separate. This site did not run the upstream suite.
 
 ## Links
 

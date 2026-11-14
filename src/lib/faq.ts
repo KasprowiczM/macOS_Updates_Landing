@@ -1,5 +1,5 @@
 import type { TFunction } from 'i18next'
-import { INTERNET_APP_COUNT, PRODUCT_COUNT } from './site'
+import { INTERNET_APP_COUNT, PREVIEW_TARGET_LIMIT, PRODUCT_COUNT } from './site'
 
 export interface FaqItem {
   id: string
@@ -19,7 +19,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q11',
     q: 'Does macOS Updates close my open apps?',
-    a: "No. Apps you have open are never closed. The toolkit only quits what it launched itself, and running apps are protected at the bundle swap.",
+    a: "Apps you already have open are protected. Native lifecycle infrastructure can control only an observed process it owns, with separate explicit lifecycle consent. No production native drivers are active.",
   },
   {
     id: 'q12',
@@ -54,7 +54,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q4',
     q: 'Can I preview before updating?',
-    a: 'Yes. Run bash update_all.sh --dry-run -y or bash scripts/report_update_coverage.sh to inspect coverage first.',
+    a: `Yes. bash update_all.sh --dry-run -y shows up to ${PREVIEW_TARGET_LIMIT} targets in a readable preview. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps.`,
   },
   {
     id: 'q5',
@@ -74,12 +74,12 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q8',
     q: 'How do I add a new internet app?',
-    a: 'Use scripts/scaffold_internet_app.sh, register the method and dispatch order, add i18n strings, then run bash run_tests.sh.',
+    a: 'Use scripts/scaffold_internet_app.sh /path/Observed.app --json for a review-only proposal. Recipe evidence and acceptance remain separate; then run bash run_tests.sh.',
   },
   {
     id: 'q9',
     q: 'How do I know an update actually landed?',
-    a: 'A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists.',
+    a: 'Updates need fresh identity, source and installed-version evidence. Inventory field changes, elapsed time and a successful command exit alone do not prove an update. Incomplete observations remain unknown.',
   },
 ]
 

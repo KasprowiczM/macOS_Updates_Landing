@@ -24,12 +24,12 @@ update_system.sh               # macOS system update`}</CodeBlock>
         <DocTable
           headers={[pl ? 'Krok' : 'Step', pl ? 'Skrypt' : 'Script', pl ? 'Cel' : 'Purpose']}
           rows={[
-            ['0', 'prescan.py', pl ? 'Lokalny inwentarz i obserwacja źródeł.' : 'Local inventory and source observation.'],
+            ['0', 'plan_orchestration.py (prepare)', pl ? 'Lokalny inwentarz i obserwacja źródeł.' : 'Local inventory and source observation.'],
             ['1', 'update_appstore.sh', pl ? 'Plan i zgoda dla dopuszczonych działań menedżera; dawny Track 2 GUI jest nieaktywny.' : 'Plan and consent gate eligible manager actions; legacy Track 2 GUI is inactive.'],
             ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI, Node i Bun pozostają ręczne; ryzykowne efekty npm są odraczane.' : 'Native CLI, Node and Bun remain manual; npm side effects are deferred.'],
             ['3', 'update_brew.sh', pl ? 'Dopuszczone aktualizacje Homebrew podlegają planowi, kontroli i zgodzie.' : 'Eligible Homebrew updates require a plan, checks and consent.'],
             ['4', 'update_internet_apps.sh', pl ? 'Rejestr opisuje dawne możliwości; ogólne ścieżki producentów pozostają ręczne.' : 'The registry describes legacy capabilities; generic vendor paths remain manual.'],
-            ['5', 'postupdate.py', pl ? 'Zapis inwentarza i historii na podstawie obserwacji.' : 'Records inventory and history from observations.'],
+            ['5', 'plan_orchestration.py (refresh)', pl ? 'Zapis inwentarza i historii na podstawie obserwacji.' : 'Records inventory and history from observations.'],
             ['6', 'update_system.sh', pl ? 'Aktualizacja macOS na końcu; restart wymaga decyzji użytkownika.' : 'macOS system update last; restart requires the user’s decision.'],
           ]}
         />

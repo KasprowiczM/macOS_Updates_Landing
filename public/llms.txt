@@ -1,12 +1,14 @@
 # macOS Updates
 
-> macOS Updates is an open-source toolkit for Apple Silicon Macs. The upstream main source snapshot is v1.7.0, dated 2026-11-14. The latest tagged release is v1.5.5; no v1.7.0 tag or GitHub Release exists.
+> macOS Updates is an open-source toolkit for Apple Silicon Macs. The upstream main source snapshot is v1.7.7, dated 2026-11-14. The latest tagged release is v1.5.5; no v1.7.7 tag or GitHub Release exists.
 
-The source-aware inventory records separate instances, sources, conflicts and unknowns. Plans and dry runs are observational. Eligible existing-manager updates require explicit consent and fresh checks. Unresolved sources, generic vendor paths, native CLI, Node and Bun remain manual. npm effects involving scripts, dependencies or new commands are deferred. The legacy App Store Track 2 GUI is inactive under the current plan gate.
+The source-aware inventory records separate instances, sources, conflicts and unknowns. Plans and dry runs are observational. Plain --dry-run shows up to 25 targets in readable form; --plan and --dry-run --json-summary retain the full JSON plan. Unicode names and closed output pipes are handled safely. Eligible existing-manager updates require explicit consent and fresh checks. Unresolved sources, generic vendor paths, native CLI, Node and Bun remain manual. npm effects involving scripts, dependencies or new commands are deferred. The legacy App Store Track 2 GUI is inactive under the current plan gate.
 
 The registry has 47 rows covering 48 products and 11 legacy capability categories; these are not 11 enabled execution paths or 47 automatic updates. Latest-stable advice does not automatically migrate software. The optional application catalog starts unselected and uses a separate consent-bound InstallPlan. No public automatic installation recipes are approved.
 
-The 2026-11-13 upstream test run collected 1178 Python unittest cases: 1177 passed and one expected skip, with no host-tool or network guard hits. This site did not run that suite.
+Source checkpoints T1 through T5b add evidence timing, exact recipe bindings, execution infrastructure, native-session supervision and durable scheduling. Production parallelism remains disabled pending live acceptance. Active vendor, native and first-install recipes: 0. Production native drivers: 0. T6 live acceptance is deferred; no new recipe is activated.
+
+The 2026-11-14 upstream test run collected 1350 Python unittest cases: 1350 passed and none skipped, with no host-tool or network guard hits. This site did not run that suite.
 
 Source and documentation: https://github.com/KasprowiczM/macOS_updates
 Site: https://macos-updates.64bit.site/ and https://macos-updates.64bit.site/pl

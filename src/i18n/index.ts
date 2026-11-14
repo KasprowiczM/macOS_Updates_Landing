@@ -5,7 +5,7 @@ import pl from './locales/pl.json'
 import chromeEn from './locales/chrome.en.json'
 import chromePl from './locales/chrome.pl.json'
 import type { Lang } from '../lib/routes'
-import { APP_VERSION, LATEST_TAGGED_VERSION, TEST_COUNT } from '../lib/site'
+import { APP_VERSION, LATEST_TAGGED_VERSION, PREVIEW_TARGET_LIMIT, TEST_COUNT } from '../lib/site'
 
 /**
  * i18n bootstrap.
@@ -27,7 +27,7 @@ i18n.use(initReactI18next).init({
   lng: 'en',
   fallbackLng: 'en',
   supportedLngs: ['en', 'pl'],
-  interpolation: { escapeValue: false, defaultVariables: { version: APP_VERSION, latestTag: LATEST_TAGGED_VERSION, tests: TEST_COUNT } },
+  interpolation: { escapeValue: false, defaultVariables: { version: APP_VERSION, latestTag: LATEST_TAGGED_VERSION, tests: TEST_COUNT, previewLimit: PREVIEW_TARGET_LIMIT } },
   react: { useSuspense: false },
 })
 

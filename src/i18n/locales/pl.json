@@ -10,15 +10,15 @@
     },
     "frontends": {
       "title": "Instalacja od inwentarza",
-      "desc": "Instalator sprawdza konfigurację i buduje lokalny inwentarz; zmiana zależności wymaga osobnej zgody."
+      "desc": "Instalator sprawdza konfigurację i buduje lokalny inwentarz, gdy dostępny jest Python; zmiany zależności wymagają osobnej zgody."
     },
     "scheduler": {
       "title": "Gotowość i zaplanowane przebiegi",
-      "desc": "Użyj --doctor, aby odczytać raport gotowości bez zmian. LaunchAgent sprawdza, czy zadanie jest załadowane, i korzysta z jawnego PATH."
+      "desc": "--doctor pokazuje gotowość bez zmian. Etapy kodu dodają trwałe harmonogramowanie, potwierdzenia działań, anulowanie i wyłączny nadzór nad macOS; akceptacja na żywo jest odroczona."
     },
     "aiTools": {
       "title": "Handlery przyjazne agentom",
-      "desc": "Niezweryfikowane ścieżki natywne i producentów pozostają ręczne; wpis rejestru nie włącza wykonania."
+      "desc": "Etapy kodu T1 do T5b dodają walidację receptur i infrastrukturę wykonania. Brak aktywnych receptur producentów, natywnych i pierwszej instalacji oraz produkcyjnych sterowników natywnych."
     },
     "suggestionsAi": {
       "title": "Prywatny dev_sync",
@@ -103,7 +103,7 @@
       },
       "q4": {
         "q": "Czy mogę podejrzeć przebieg przed aktualizacją?",
-        "a": "Tak. Uruchom bash update_all.sh --dry-run -y albo bash scripts/report_update_coverage.sh."
+        "a": "Tak. bash update_all.sh --dry-run -y pokazuje czytelny podgląd do {{previewLimit}} celów. --dry-run --json-summary albo --plan zwraca pełny plan JSON. Żaden z tych trybów nie udziela zgody ani nie zmienia aplikacji."
       },
       "q5": {
         "q": "Do czego służy dev_sync?",
@@ -119,11 +119,11 @@
       },
       "q8": {
         "q": "Jak dodać nową aplikację internetową?",
-        "a": "Użyj scripts/scaffold_internet_app.sh, zarejestruj metodę i dispatch, dodaj i18n, potem uruchom bash run_tests.sh."
+        "a": "Użyj scripts/scaffold_internet_app.sh /path/Observed.app --json, aby uzyskać propozycję do przeglądu. Dowody i akceptacja receptury pozostają osobne; potem uruchom bash run_tests.sh."
       },
       "q9": {
         "q": "Skąd wiem, że aktualizacja naprawdę weszła?",
-        "a": "Mutacja jest raportowana dopiero po potwierdzeniu przez żywy Mac. Postupdate rozdziela edycje pól inwentarza od zaobserwowanych zmian pakietów i CLI. Nieznane pending zostaje nieznane, nie zero. CLI vendora liczy się jako zaktualizowane tylko gdy istnieje działające --version."
+        "a": "Aktualizacje wymagają świeżych dowodów tożsamości, źródła i zainstalowanej wersji. Zmiany pól inwentarza, upływ czasu i sam poprawny kod wyjścia nie dowodzą aktualizacji. Niepełne obserwacje pozostają nieznane."
       },
       "q10": {
         "q": "Jak zaktualizować wszystkie aplikacje na Macu naraz?",
@@ -131,7 +131,7 @@
       },
       "q11": {
         "q": "Czy macOS Updates zamyka moje otwarte aplikacje?",
-        "a": "Nie. Aplikacje, które masz otwarte, nigdy nie są zamykane. Toolkit zamyka tylko to, co sam uruchomił, a działające aplikacje są chronione przy podmianie pakietu."
+        "a": "Aplikacje, które masz już otwarte, są chronione. Infrastruktura natywnego cyklu życia może sterować tylko zaobserwowanym własnym procesem, za osobną jawną zgodą na cykl życia. Brak aktywnych produkcyjnych sterowników natywnych."
       },
       "q12": {
         "q": "Czy bezpiecznie uruchamiać to z sudo?",
@@ -359,7 +359,7 @@
     "entries": {
       "release": {
         "title": "Bieżący snapshot kodu {{version}}",
-        "body": "Snapshot dodaje inwentarz zależny od źródła, rozstrzyganie konfliktów i osobny plan instalacji. Katalog jest domyślnie niewybrany, a żadna publiczna receptura automatycznej instalacji nie jest zatwierdzona. Nie ma taga ani GitHub Release {{version}}; najnowszy tag to {{latestTag}}."
+        "body": "Etapy kodu T1 do T5b dodają pomiar czasu dowodów, wiązania receptur, infrastrukturę wykonania i trwałe harmonogramowanie. Zwykły dry-run pokazuje do {{previewLimit}} celów; --plan i --dry-run --json-summary zachowują pełny JSON. Brak aktywnych receptur producentów, natywnych i pierwszej instalacji oraz produkcyjnych sterowników natywnych. Akceptacja na żywo jest odroczona. Najnowszy tag to {{latestTag}}; {{version}} nie ma taga."
       },
       "live": {
         "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",

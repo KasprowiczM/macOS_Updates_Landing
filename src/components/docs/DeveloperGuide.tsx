@@ -63,9 +63,9 @@ Xcode licence check:
       </WikiSection>
 
       <WikiSection id="contributing-plugins" title={pl ? 'Dodawanie aplikacji internetowej' : 'Adding an Internet App'}>
-        <p>{pl ? 'Zastąp „App Name” nazwą aplikacji. To polecenie tworzy pliki do dalszej edycji.' : 'Replace “App Name” with the app name. This command creates files for further editing.'}</p>
-        <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh "App Name" silent_launch`}</CodeBlock>
-        <p>{pl ? 'Po uzupełnieniu rejestru i handlera uruchom testy.' : 'After completing the registry and handler, run the tests.'}</p>
+        <p>{pl ? 'Podaj dokładną ścieżkę zaobserwowanej aplikacji. Polecenie zwraca propozycję do przeglądu; nie tworzy wykonywalnego handlera ani nie zatwierdza receptury.' : 'Supply the exact path of an observed app. The command returns a review-only proposal; it creates no executable handler and approves no recipe.'}</p>
+        <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh /path/Observed.app --json`}</CodeBlock>
+        <p>{pl ? 'Po przeglądzie źródła, tożsamości i zakresu receptury uruchom testy. Akceptacja aktualizacji, pierwszej instalacji i cyklu życia pozostaje osobna.' : 'Run tests after reviewing the recipe source, identity and scope. Update, first-install and lifecycle acceptance remain separate.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
       </WikiSection>
 

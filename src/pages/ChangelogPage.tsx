@@ -3,7 +3,7 @@ import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
 import { buildPageJsonLd } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
-import { APP_VERSION, APP_VERSION_DATE, LATEST_TAGGED_VERSION, SYNC_DATE } from '../lib/site'
+import { ACTIVE_RECIPE_COUNT, APP_VERSION, APP_VERSION_DATE, LATEST_TAGGED_VERSION, PREVIEW_TARGET_LIMIT, PRODUCTION_NATIVE_DRIVER_COUNT, SYNC_DATE } from '../lib/site'
 
 interface Release {
   version: string
@@ -22,9 +22,15 @@ const RELEASES: Release[] = [
     date: APP_VERSION_DATE,
     sourceSnapshot: true,
     summary: {
-      en: `Source snapshot synchronized on ${SYNC_DATE}. The latest tagged release remains ${LATEST_TAGGED_VERSION}; no ${APP_VERSION} tag or GitHub Release exists. Source-aware inventory records separate instances and source conflicts, with explicit policies, migration and unknown-source handling. Latest-stable advice is separate from execution. The optional catalog starts unselected and uses a separate install plan; no public automatic installation recipes are approved.`,
-      pl: `Snapshot kodu zsynchronizowany ${SYNC_DATE}. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; nie ma taga ani GitHub Release ${APP_VERSION}. Inwentarz rozpoznaje osobne instancje i konflikty źródeł, zasady, migrację i nieznane źródła. Porady o najnowszej stabilnej wersji są oddzielone od wykonania. Opcjonalny katalog jest niewybrany i używa osobnego planu instalacji; nie ma zatwierdzonych publicznych receptur automatycznej instalacji.`,
+      en: `Source snapshot synchronized on ${SYNC_DATE}. The latest tagged release remains ${LATEST_TAGGED_VERSION}; no ${APP_VERSION} tag or GitHub Release exists. Checkpoints T1 through T5b add evidence timing, exact recipe bindings, consent-bound execution infrastructure, native-session supervision and durable scheduling. Active vendor, native and first-install recipes: ${ACTIVE_RECIPE_COUNT}; production native drivers: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Live acceptance remains deferred.`,
+      pl: `Snapshot kodu zsynchronizowany ${SYNC_DATE}. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; nie ma taga ani GitHub Release ${APP_VERSION}. Etapy T1 do T5b dodają pomiar czasu dowodów, dokładne wiązania receptur, infrastrukturę wykonania zależną od zgody, nadzór sesji natywnych i trwałe harmonogramowanie. Aktywne receptury producentów, natywne i pierwszej instalacji: ${ACTIVE_RECIPE_COUNT}; produkcyjne sterowniki natywne: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Akceptacja na żywo pozostaje odroczona.`,
     },
+    fixed: [
+      {
+        en: `Plain --dry-run now shows a readable preview of up to ${PREVIEW_TARGET_LIMIT} targets. --plan and --dry-run --json-summary retain the full JSON plan. Unicode output and closed output pipes are handled without a shutdown traceback; previews remain observational.`,
+        pl: `Zwykły --dry-run pokazuje teraz czytelny podgląd do ${PREVIEW_TARGET_LIMIT} celów. --plan i --dry-run --json-summary zachowują pełny plan JSON. Obsługa Unicode i zamkniętego potoku wyjściowego zapobiega tracebackowi przy kończeniu; podgląd pozostaje obserwacyjny.`,
+      },
+    ],
   },
   {
     version: 'v1.6.0',

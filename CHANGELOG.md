@@ -5,7 +5,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
-## 2026-11-14 source sync
+## 2026-11-14 source sync, v1.7.7
+
+- Synchronized source checkpoints T1 through T5b and the v1.7.7 dry-run fix. The latest tagged release remains v1.5.5; v1.7.7 has no tag or GitHub Release.
+- Documented the readable 25-target preview, explicit full-JSON flags, Unicode output handling and clean closed-pipe shutdown.
+- Documented recipe validation and execution infrastructure, native-session supervision, per-action receipts and durable scheduling. Production parallelism remains disabled pending live product acceptance. Active vendor, native and first-install recipes and production native drivers remain zero; T6 live acceptance is deferred.
+- Updated current verification facts to 1350 collected cases, all passed with no skips on 2026-11-14; registry facts remain 47 rows, 48 products and 11 legacy capability categories.
+- Corrected installation guidance and the review-only observed-app proposal command in English and Polish.
+
+## 2026-11-14 source sync, v1.7.0
 
 - Synchronized the 2026-11-14 v1.7.0 source snapshot while retaining v1.5.5 as the latest tagged release. No v1.7.0 tag or GitHub Release exists.
 - Documented source-aware inventory, policies, conflicts, migration, stable-version advice and the optional unselected catalog with its separate InstallPlan. No public automatic installation recipes are approved.

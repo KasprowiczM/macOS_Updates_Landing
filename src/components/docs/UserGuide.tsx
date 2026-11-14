@@ -10,6 +10,8 @@ export function UserGuide({ pl }: { pl: boolean }) {
         }</p>
         <p>{pl ? 'Najpierw podejrzyj plan. Ta komenda nie wprowadza zmian.' : 'Preview the plan first. This command makes no changes.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
+        <p>{pl ? 'Zwykły dry-run pokazuje skrócony, czytelny podgląd. --plan oraz --dry-run --json-summary zachowują pełny JSON, bez zmian plików i bez nowych zgód.' : 'Plain dry-run shows a bounded, readable preview. --plan and --dry-run --json-summary retain full JSON, without file changes or new consent.'}</p>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --plan`}</CodeBlock>
         <p>{pl ? 'Po przejrzeniu planu osobno zdecyduj o dopuszczonych działaniach.' : 'After reviewing the plan, decide separately on eligible actions.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh`}</CodeBlock>
         <p>{pl
@@ -58,6 +60,10 @@ export function UserGuide({ pl }: { pl: boolean }) {
       </WikiSection>
 
       <WikiSection id="scheduling" title={pl ? 'Tryby, flagi i automatyzacja' : 'Modes, Flags & Automation'}>
+        <p>{pl
+          ? 'Etapy kodu T1 do T5b dodają trwałe harmonogramowanie dwóch równoległych działań, potwierdzenia poszczególnych działań, anulowanie i bariery odzyskiwania. Aktualizacja macOS ma wyłączny nadzór. Równoległość produkcyjna pozostaje wyłączona do akceptacji zakresu efektów produktu. Są to funkcje sprawdzone na izolowanych danych testowych; nie oznaczają nowej akceptacji na żywo ani aktywacji receptur.'
+          : 'Source checkpoints T1 through T5b add durable scheduling for two concurrent actions, per-action receipts, cancellation and recovery barriers. macOS updates have exclusive supervision. Production parallelism remains disabled until product effect contracts pass live acceptance. These features were checked with isolated fixtures; they imply no new live acceptance or recipe activation.'
+        }</p>
         <p>{pl
           ? 'Przed aktualizacją użyj --doctor, aby odczytać gotowość systemu bez zmian. Rzeczywisty przebieg dodaje kontrole miejsca, zasilania i sieci. Pytania w trakcie przebiegu mają limit czasu, a brak odpowiedzi jest bezpiecznym „nie”.'
           : 'Use --doctor before updating for a read-only readiness report. Real runs add disk, power, and network checks. Mid-run prompts have a timeout, and no answer defaults safely to no.'

@@ -8,7 +8,7 @@ export const SITE_URL = 'https://macos-updates.64bit.site'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.7.0'
+export const APP_VERSION = 'v1.7.7'
 
 export const LATEST_TAGGED_VERSION = 'v1.5.5'
 
@@ -16,15 +16,21 @@ export const SYNC_DATE = '2026-11-14'
 
 export const PRODUCT_COUNT = 48
 
+export const PREVIEW_TARGET_LIMIT = 25
+
+export const ACTIVE_RECIPE_COUNT = 0
+
+export const PRODUCTION_NATIVE_DRIVER_COUNT = 0
+
 export const APP_VERSION_DATE = '2026-11-14'
 
-export const TEST_COUNT = 1178
+export const TEST_COUNT = 1350
 
-export const TEST_PASSED = 1177
+export const TEST_PASSED = 1350
 
-export const TEST_SKIPPED = 1
+export const TEST_SKIPPED = 0
 
-export const VERIFICATION_DATE = '2026-11-13'
+export const VERIFICATION_DATE = '2026-11-14'
 
 /** Canonical internet-app registry size (`config/internet_apps.txt`). */
 export const INTERNET_APP_COUNT = 47

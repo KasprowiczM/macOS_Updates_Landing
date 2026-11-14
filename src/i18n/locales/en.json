@@ -10,15 +10,15 @@
     },
     "frontends": {
       "title": "Inventory-first install",
-      "desc": "The installer inspects setup and builds a local inventory; dependency changes require separate consent."
+      "desc": "The installer inspects setup and builds a local inventory when Python is available; dependency changes require separate consent."
     },
     "scheduler": {
       "title": "Readiness and scheduled runs",
-      "desc": "Use --doctor for a read-only readiness report. LaunchAgent checks confirm the job is loaded and use an explicit PATH."
+      "desc": "Use --doctor for a read-only readiness report. Source checkpoints add durable scheduling, per-action receipts, cancellation and exclusive macOS supervision; live acceptance is deferred."
     },
     "aiTools": {
       "title": "Agent-friendly handlers",
-      "desc": "Unreviewed native and vendor paths remain manual; a registry entry does not enable execution."
+      "desc": "Source checkpoints T1 through T5b add recipe validation and execution infrastructure. No vendor, native or first-install recipes or production native drivers are active."
     },
     "suggestionsAi": {
       "title": "Private dev_sync overlay",
@@ -103,7 +103,7 @@
       },
       "q4": {
         "q": "Can I preview before updating?",
-        "a": "Yes. Run bash update_all.sh --dry-run -y or bash scripts/report_update_coverage.sh to inspect coverage first."
+        "a": "Yes. bash update_all.sh --dry-run -y shows up to {{previewLimit}} targets in a readable preview. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps."
       },
       "q5": {
         "q": "What does dev_sync do?",
@@ -119,11 +119,11 @@
       },
       "q8": {
         "q": "How do I add a new internet app?",
-        "a": "Use scripts/scaffold_internet_app.sh, register the method and dispatch order, add i18n strings, then run bash run_tests.sh."
+        "a": "Use scripts/scaffold_internet_app.sh /path/Observed.app --json for a review-only proposal. Recipe evidence and acceptance remain separate; then run bash run_tests.sh."
       },
       "q9": {
         "q": "How do I know an update actually landed?",
-        "a": "A mutation is reported only after the live Mac confirms it. Postupdate splits inventory field edits from observed package and CLI changes. Unknown pending stays unknown, not zero. A vendor CLI counts as updated only when a working --version exists."
+        "a": "Updates need fresh identity, source and installed-version evidence. Inventory field changes, elapsed time and a successful command exit alone do not prove an update. Incomplete observations remain unknown."
       },
       "q10": {
         "q": "How do I update all apps on a Mac at once?",
@@ -131,7 +131,7 @@
       },
       "q11": {
         "q": "Does macOS Updates close my open apps?",
-        "a": "No. Apps you have open are never closed. The toolkit only quits what it launched itself, and running apps are protected at the bundle swap."
+        "a": "Apps you already have open are protected. Native lifecycle infrastructure can control only an observed process it owns, with separate explicit lifecycle consent. No production native drivers are active."
       },
       "q12": {
         "q": "Is it safe to run with sudo?",
@@ -359,7 +359,7 @@
     "entries": {
       "release": {
         "title": "{{version}} current source snapshot",
-        "body": "The snapshot adds source-aware inventory, conflict handling and a separate install plan. The catalog starts unselected and no public automatic installation recipes are approved. There is no {{version}} tag or GitHub Release; the latest tag is {{latestTag}}."
+        "body": "Source checkpoints T1 through T5b add evidence timing, recipe bindings, execution infrastructure and durable scheduling. Plain dry-run shows up to {{previewLimit}} targets; --plan and --dry-run --json-summary retain full JSON. No vendor, native or first-install recipes or production native drivers are active. Live acceptance remains deferred. The latest tag is {{latestTag}}; {{version}} is untagged."
       },
       "live": {
         "title": "Live run: two updates verified",

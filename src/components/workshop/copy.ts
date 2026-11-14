@@ -14,7 +14,7 @@ export const workshopCopy = {
     workflow: 'Najpierw zobacz.\nPotem zdecyduj.',
     workflowLead: 'Podgląd nie instaluje aktualizacji. Rzeczywisty przebieg pyta o zgodę, a macOS zostawia na koniec.',
     steps: [
-      { title: 'Sprawdź zakres', body: 'Spis aplikacji powstaje lokalnie. Dopuszczone aktualizacje menedżerów wymagają planu i zgody.', command: 'bash update_all.sh --dry-run -y' },
+      { title: 'Sprawdź zakres', body: 'Czytelny podgląd pokazuje lokalne cele. Pełny JSON: --dry-run --json-summary lub --plan. Podgląd nie udziela zgody.', command: 'bash update_all.sh --dry-run -y' },
       { title: 'Zweryfikuj źródła', body: 'Plan uwzględnia źródło i tożsamość. Nieznane ścieżki pozostają ręczne.', command: 'bash update_all.sh --doctor' },
       { title: 'Uruchom aktualizacje', body: 'Otwarte aplikacje pozostają otwarte. Restart wymaga Twojej decyzji. Historia przebiegu zostaje na Twoim Macu.', command: 'bash update_all.sh' },
     ],
@@ -40,7 +40,7 @@ export const workshopCopy = {
     workflow: 'See the scope.\nMake the call.',
     workflowLead: 'The preview installs no updates. A real run asks for permission, and macOS comes last.',
     steps: [
-      { title: 'Check the scope', body: 'Your application inventory is built locally. Eligible manager updates require a plan and consent.', command: 'bash update_all.sh --dry-run -y' },
+      { title: 'Check the scope', body: 'A readable preview shows local targets. Full JSON: --dry-run --json-summary or --plan. Preview grants no consent.', command: 'bash update_all.sh --dry-run -y' },
       { title: 'Verify the sources', body: 'The plan checks source and identity. Unknown paths remain manual.', command: 'bash update_all.sh --doctor' },
       { title: 'Run your updates', body: 'Your open apps stay open. Restarting is your decision. The run history stays on your Mac.', command: 'bash update_all.sh' },
     ],

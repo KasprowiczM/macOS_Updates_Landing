@@ -1,5 +1,5 @@
 import { WikiSection, CodeBlock, InfoCard } from './WikiSection'
-import { APP_VERSION, INTERNET_APP_COUNT, LATEST_TAGGED_VERSION } from '../../lib/site'
+import { APP_VERSION, INTERNET_APP_COUNT, LATEST_TAGGED_VERSION, PREVIEW_TARGET_LIMIT } from '../../lib/site'
 
 export function GettingStarted({ pl }: { pl: boolean }) {
   return (
@@ -29,19 +29,24 @@ export function GettingStarted({ pl }: { pl: boolean }) {
 
       <WikiSection id="quick-install" title={pl ? 'Instalacja' : 'Installation'}>
         <p>{pl
-          ? 'Uruchom instalator. Przygotuje zależności, sklonuje repozytorium i zbuduje APPLICATIONS.md z tego Maca. Po zakończeniu sprawdź podgląd i dopiero potem uruchom aktualizacje.'
-          : 'Run the installer. It prepares dependencies, clones the repository, and builds APPLICATIONS.md from this Mac. When it finishes, preview the updates before running them.'
+          ? 'Uruchom instalator. Sklonuje repozytorium i sprawdzi konfigurację. Jeśli dostępny jest Python, zbuduje lokalny inwentarz i raport pokrycia. Brakujące zależności wymagają osobnej zgody. Następnie przejrzyj podgląd.'
+          : 'Run the installer. It clones the repository and inspects setup. If Python is available, it builds a local inventory and coverage report. Missing dependencies require separate consent. Then review the preview.'
         }</p>
         <CodeBlock title={pl ? 'Krok 1. Instalacja' : 'Step 1. Install'}>{`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasprowiczM/macOS_updates/main/install.sh)"`}</CodeBlock>
         <InfoCard title={pl ? 'Co przygotowuje instalator' : 'What setup changes'}>
           <p>{pl
-            ? 'Sprawdza konfigurację i buduje lokalny inwentarz. Instalacja zależności oraz konfiguracja powłoki wymagają osobnej zgody. Opcjonalny katalog jest niewybrany i ma osobny plan instalacji; brak zatwierdzonych publicznych receptur automatycznej instalacji.'
-            : 'It inspects setup and builds a local inventory. Dependency installation and shell configuration require separate consent. The optional catalog starts unselected and has a separate install plan; no public automatic installation recipes are approved.'
+            ? 'Sprawdza konfigurację i buduje lokalny inwentarz, gdy dostępny jest Python. Instalacja zależności oraz konfiguracja powłoki wymagają osobnej zgody. Opcjonalny katalog jest niewybrany i ma osobny plan instalacji; brak zatwierdzonych publicznych receptur automatycznej instalacji.'
+            : 'It inspects setup and builds a local inventory when Python is available. Dependency installation and shell configuration require separate consent. The optional catalog starts unselected and has a separate install plan; no public automatic installation recipes are approved.'
           }</p>
         </InfoCard>
         <h3>{pl ? 'Krok 2. Podejrzyj zmiany' : 'Step 2. Preview the changes'}</h3>
-        <p>{pl ? 'Uruchom podgląd z katalogu instalacji. To polecenie nie stosuje aktualizacji.' : 'Run the preview from the install folder. This command does not apply updates.'}</p>
+        <p>{pl
+          ? `Uruchom podgląd z katalogu instalacji. Pokazuje do ${PREVIEW_TARGET_LIMIT} celów i liczbę pozostałych. Nie stosuje aktualizacji ani nie zapisuje nowych zgód.`
+          : `Run the preview from the install folder. It shows up to ${PREVIEW_TARGET_LIMIT} targets and the number remaining. It applies no updates and records no new consent.`
+        }</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
+        <p>{pl ? 'Pełny plan w JSON jest dostępny przez --dry-run --json-summary albo --plan.' : 'The full JSON plan is available with --dry-run --json-summary or --plan.'}</p>
+        <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run --json-summary`}</CodeBlock>
         <h3>{pl ? 'Krok 3. Uruchom aktualizacje' : 'Step 3. Run the updates'}</h3>
         <p>{pl ? 'Po sprawdzeniu podglądu uruchom aktualizacje. macOS jest przetwarzany na końcu i może wymagać restartu.' : 'After reviewing the preview, run the updates. macOS runs last and may require a restart.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh`}</CodeBlock>

@@ -64,8 +64,8 @@ export function ContributingPage() {
               ? 'Nowa aplikacja wymaga wpisu w publicznym registry, metody, funkcji handlera, dispatch order, i18n w siedmiu językach i testów.'
               : 'A new app needs a public registry entry, method, handler function, dispatch order, seven-language i18n, and tests.'}
           </p>
-          <p>{pl ? 'Zastąp „App Name” nazwą aplikacji. Polecenie tworzy pliki do dalszej edycji.' : 'Replace “App Name” with the app name. The command creates files for further editing.'}</p>
-          <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh "App Name" silent_launch`}</CodeBlock>
+          <p>{pl ? 'Podaj dokładną ścieżkę zaobserwowanej aplikacji. Polecenie tworzy propozycję do przeglądu, bez wykonywalnego handlera i bez zgody na aktualizację.' : 'Supply the exact path of an observed app. The command returns a review-only proposal, with no executable handler or update permission.'}</p>
+          <CodeBlock title="bash" copyable={false}>{`cd ~/Dev_Env/macOS_updates && bash scripts/scaffold_internet_app.sh /path/Observed.app --json`}</CodeBlock>
           <p>{pl ? 'Po ukończeniu zmian w rejestrze, handlerze i tłumaczeniach uruchom testy.' : 'After completing the registry, handler, and translations, run the tests.'}</p>
           <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash run_tests.sh`}</CodeBlock>
         </section>
