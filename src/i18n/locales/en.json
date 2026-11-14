@@ -10,7 +10,7 @@
     },
     "frontends": {
       "title": "Inventory-first install",
-      "desc": "install.sh builds APPLICATIONS.md from this Mac and updates only already-installed software."
+      "desc": "The installer inspects setup and builds a local inventory; dependency changes require separate consent."
     },
     "scheduler": {
       "title": "Readiness and scheduled runs",
@@ -18,7 +18,7 @@
     },
     "aiTools": {
       "title": "Agent-friendly handlers",
-      "desc": "Scaffold internet app handlers, and update Claude, Codex, OpenCode, and agy through their own native installers."
+      "desc": "Unreviewed native and vendor paths remain manual; a registry entry does not enable execution."
     },
     "suggestionsAi": {
       "title": "Private dev_sync overlay",
@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Run tests and secret scans",
-      "desc": "The upstream runner collects 846 Python unittest cases, plus shell syntax, registry, static safety, and secret checks."
+      "desc": "The upstream runner collects {{tests}} Python unittest cases, plus shell syntax, registry, static safety, and secret checks."
     },
     "multihost": {
       "title": "Seven-language UI",
@@ -75,15 +75,15 @@
   },
   "seo": {
     "homeTitle": "macOS Updates: one-command Mac updater for Apple Silicon",
-    "homeDesc": "Open-source updater for Apple Silicon Macs: macOS, App Store, Homebrew, command-line tools, npm packages, and 47 supported apps. Reports only changes your Mac confirms.",
+    "homeDesc": "Open-source toolkit for Apple Silicon: source-aware inventory, update plans, explicit consent and eligible manager updates.",
     "featuresTitle": "macOS Updates features: Update coverage and local inventory",
-    "featuresDesc": "See how macOS Updates previews seven ordered steps, checks vendor feeds, protects running apps and schedules verified runs on Apple Silicon.",
+    "featuresDesc": "Explore source-aware inventory, plans, consent, manager updates and manual paths.",
     "docsTitle": "macOS Updates docs: Install, preview, and run",
     "docsDesc": "Install on Apple Silicon, preview updates, check readiness with --doctor, configure LaunchAgent scheduling, and understand feed and cask safety.",
     "securityTitle": "macOS Updates security policy",
-    "securityDesc": "How macOS Updates handles sudo, verified vendor downloads, Gatekeeper and Team ID checks, and keeps your inventory and overlay files private.",
+    "securityDesc": "Source and identity checks, explicit consent and private local inventory.",
     "changelogTitle": "macOS Updates changelog",
-    "changelogDesc": "macOS Updates source snapshot v1.6.0 and tagged release history through v1.5.5 for Apple Silicon Macs.",
+    "changelogDesc": "macOS Updates source snapshot {{version}} and tagged release history through {{latestTag}} for Apple Silicon Macs.",
     "contributingTitle": "Contributing to macOS Updates",
     "contributingDesc": "Contribute to macOS Updates: add an internet app handler, improve the docs and keep Bash 3.2 compatible update scripts covered by tests."
   },
@@ -95,7 +95,7 @@
       },
       "q2": {
         "q": "Will it install apps I do not already have?",
-        "a": "No. The updater only updates software already installed on the Mac. Supported missing apps are reported, not installed."
+        "a": "The optional catalog starts unselected and has a separate install plan. No public automatic installation recipes are approved."
       },
       "q3": {
         "q": "Why is Apple Silicon required?",
@@ -115,7 +115,7 @@
       },
       "q7": {
         "q": "How many apps are supported?",
-        "a": "The current registry covers 47 internet-downloaded apps plus macOS, App Store, Homebrew, and CLI/npm tooling."
+        "a": "Registry entries describe legacy capabilities, not guaranteed automatic updates."
       },
       "q8": {
         "q": "How do I add a new internet app?",
@@ -127,7 +127,7 @@
       },
       "q10": {
         "q": "How do I update all apps on a Mac at once?",
-        "a": "Run bash update_all.sh. It updates the App Store, native CLIs and npm, Homebrew, 47 internet-downloaded apps and macOS in one ordered run. Preview it first with bash update_all.sh --dry-run -y."
+        "a": "Preview with bash update_all.sh --dry-run -y. Eligible manager updates require consent; unresolved sources stay manual."
       },
       "q11": {
         "q": "Does macOS Updates close my open apps?",
@@ -143,7 +143,7 @@
       },
       "q14": {
         "q": "How is it different from Homebrew or the App Store alone?",
-        "a": "Homebrew and the App Store each cover one layer. macOS Updates runs both, plus native CLIs, npm globals, 47 internet-downloaded apps and macOS, in a fixed order. It checks each vendor's feed first and reports only what the Mac confirms."
+        "a": "The toolkit combines a local inventory with source information, makes conflicts visible and prepares a plan. Eligible manager updates require explicit consent, while unresolved sources remain manual."
       }
     },
     "title": "Questions before you run it.",
@@ -153,8 +153,8 @@
     "titleA": "Your Mac.",
     "titleGo": "Up to date.",
     "titleB": "",
-    "sub": "Update macOS, App Store apps, Homebrew, command-line tools and {{apps}} supported apps in one careful run. Preview every change. Keep control of your Mac.",
-    "proofApps": "supported apps",
+    "sub": "Inspect this Mac, review source-aware plans and approve eligible manager updates. Unknown sources stay manual.",
+    "proofApps": "registry rows",
     "proofTests": "unit test cases",
     "proofOpen": "open source",
     "copy": "Copy install command",
@@ -165,10 +165,10 @@
     "console": {
       "detail": {
         "prescan": "Inventory of this Mac",
-        "appstore": "sudo mas, then Track 2",
-        "cli": "Native CLIs, then npm",
+        "appstore": "Manager plan and consent",
+        "cli": "Native paths remain manual",
         "brew": "brew upgrade --greedy",
-        "internet": "{{apps}} apps, {{methods}} methods",
+        "internet": "{{apps}} apps, {{methods}} legacy capability categories",
         "post": "Inventory and history",
         "macos": "softwareupdate -R"
       },
@@ -197,8 +197,8 @@
         "body": "Review App Store, Homebrew, command-line tools, vendor apps, and macOS in one ordered workflow."
       },
       "safety": {
-        "title": "Verified direct installs",
-        "body": "Direct vendor downloads can use checksums, code-signing checks, staged replacement, and rollback."
+        "title": "Plan and consent",
+        "body": "Eligible manager updates require a source-aware plan and explicit consent. Generic vendor installs remain manual."
       },
       "process": {
         "title": "Preview before you update",
@@ -220,8 +220,8 @@
     "lead": "Updating by hand means System Settings, the App Store, brew, npm globals, vendor updaters and DMGs. These rules hold on every layer.",
     "items": {
       "vendor": {
-        "title": "Vendor truth before action.",
-        "body": "Each app's installed version is checked against its vendor's own feed first. Apps that are up to date are left alone."
+        "title": "Source before action.",
+        "body": "Source and identity inform the plan. Unknowns and conflicts remain explicit."
       },
       "open": {
         "title": "Open apps are never closed.",
@@ -229,7 +229,7 @@
       },
       "installed": {
         "title": "Only what is installed.",
-        "body": "Supported apps that are missing are reported, not installed. Apps you removed by hand are never reinstalled."
+        "body": "The update plan concerns existing software. The separate optional catalog starts unselected and has no approved public automatic recipes."
       },
       "confirmed": {
         "title": "Reported only when confirmed.",
@@ -253,20 +253,20 @@
         "guard": "Local inventory only. Another user's list is never imported."
       },
       "appstore": {
-        "what": "Track 1: sudo mas upgrade on measured IDs. Track 2: AppleScript for iPad apps such as UniFi.",
-        "guard": "sudo at most once per run, never without a terminal."
+        "what": "Source-aware plan checks identity and eligibility.",
+        "guard": "Only eligible manager updates can execute with consent; unresolved paths stay manual."
       },
       "cli": {
-        "what": "Native vendor CLIs first (claude, codex, opencode, agy), then Node, Bun and npm globals.",
-        "guard": "A vendor CLI counts as updated only when a working --version exists."
+        "what": "Source-aware plan checks identity and eligibility.",
+        "guard": "Only eligible manager updates can execute with consent; unresolved paths stay manual."
       },
       "brew": {
         "what": "Formulae and casks with --greedy, then cleanup and brew doctor.",
         "guard": "Orphan casks are skipped and cask downgrades are blocked."
       },
       "internet": {
-        "what": "{{apps}} apps through {{methods}} update methods, each checked against the vendor's own feed.",
-        "guard": "Verified downloads: Gatekeeper, bundle ID and Apple Team ID checks, then a staged swap with rollback."
+        "what": "Source-aware plan checks identity and eligibility.",
+        "guard": "Only eligible manager updates can execute with consent; unresolved paths stay manual."
       },
       "post": {
         "what": "Refreshes APPLICATIONS.md and appends UPDATES.md atomically.",
@@ -279,71 +279,71 @@
     }
   },
   "coverage": {
-    "title": "{{apps}} internet apps, {{methods}} update methods.",
-    "lead": "Only apps already installed are updated. The registry below is grouped by how each one gets its update.",
+    "title": "{{apps}} registry rows, {{methods}} legacy capability categories.",
+    "lead": "These are legacy catalog categories, not enabled execution paths. Generic vendor and native paths remain manual.",
     "methods": {
       "brew_cask": {
         "name": "Homebrew cask",
-        "note": "Upgraded through Homebrew, with downgrade protection."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "silent_launch": {
         "name": "Silent launch",
-        "note": "Opens the app so its own updater runs. Checked against the vendor feed when one exists, otherwise reported as launched (unverified)."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "github_dmg": {
         "name": "GitHub DMG",
-        "note": "Release DMG from GitHub, verified, then a staged swap with rollback."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "mozilla_dmg": {
         "name": "Mozilla DMG",
-        "note": "Firefox Developer Edition release downloaded from Mozilla and verified before replacement."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "msupdate": {
         "name": "Microsoft AutoUpdate",
-        "note": "Office apps updated through msupdate."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "keystone": {
         "name": "Google Keystone",
-        "note": "Google's own update agent. Used for Google products only."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "appstore_gui": {
         "name": "App Store Track 2",
-        "note": "iPad apps updated by driving the App Store with AppleScript."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "manual": {
         "name": "Manual",
-        "note": "No automatic path. Reported so you can update them by hand."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "sparkle_appcast": {
         "name": "Sparkle appcast",
-        "note": "Version read from the app's Sparkle appcast feed."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "docker_cli": {
         "name": "Docker CLI",
-        "note": "Handled through the Docker CLI path."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "mau_fallback_self_update": {
         "name": "Self-update with MAU fallback",
-        "note": "Teams updates itself, with a verified Microsoft AutoUpdate fallback when Microsoft offers one."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       },
       "chromium_updater": {
         "name": "Chromium updater",
-        "note": "Handled through the Chromium updater path."
+        "note": "Legacy registry category. An entry does not authorize an automatic update."
       }
     },
     "other": {
       "title": "Beyond internet apps",
       "appstore": {
         "name": "App Store",
-        "note": "Measured IDs through sudo mas, plus Track 2 for iPad apps."
+        "note": "Eligibility depends on source, plan and consent; unresolved paths stay manual."
       },
       "brew": {
         "name": "Homebrew",
-        "note": "Formulae and casks, cleanup and brew doctor."
+        "note": "Eligibility depends on source, plan and consent; unresolved paths stay manual."
       },
       "cli": {
         "name": "CLIs and npm",
-        "note": "claude, codex, opencode and agy, then Node, Bun and npm globals."
+        "note": "Eligibility depends on source, plan and consent; unresolved paths stay manual."
       },
       "macos": {
         "name": "macOS",
@@ -358,8 +358,8 @@
     "lead": "Every entry is a real release or a real run. Nothing here is a benchmark.",
     "entries": {
       "release": {
-        "title": "v1.6.0 current source snapshot",
-        "body": "Upstream main adds a read-only --doctor report, safer LaunchAgent scheduling, prompt timeouts, running-cask deferrals, persistent vendor-feed statuses, and new app handlers. No v1.6.0 Git tag or GitHub Release is published yet; v1.5.5 is the latest tag."
+        "title": "{{version}} current source snapshot",
+        "body": "The snapshot adds source-aware inventory, conflict handling and a separate install plan. The catalog starts unselected and no public automatic installation recipes are approved. There is no {{version}} tag or GitHub Release; the latest tag is {{latestTag}}."
       },
       "live": {
         "title": "Live run: two updates verified",
@@ -391,13 +391,13 @@
     "stepInstall": "Install",
     "stepPreview": "Preview without changes",
     "stepRun": "Run updates",
-    "note": "The installer clones the repo, asks for your language, checks or installs setup dependencies, may configure Touch ID for sudo, and builds APPLICATIONS.md from this Mac. It does not install the supported apps. After installation, run each update command from ~/Dev_Env/macOS_updates.",
+    "note": "The installer clones the repository and inspects setup. Dependency installation and shell configuration require separate consent. The optional catalog starts unselected; its separate install plan does not approve apps automatically. There are currently no approved public automatic installation recipes.",
     "docs": "Read the docs",
     "github": "View on GitHub"
   },
   "wall": {
     "heading": "Example update results.",
-    "intro": "This replay combines records from two real runs. Each row shows an example step and its reported status.",
+    "intro": "Historical replay from 2026, before source-aware policy. It does not describe current execution paths.",
     "caption": "Examples based on real runs from 2026-10-05 and 2026-10-11.",
     "listLabel": "Update stations in run order",
     "screen": {
@@ -434,11 +434,11 @@
       },
       "appstore": {
         "name": "App Store",
-        "desc": "sudo mas with measured IDs, then AppleScript Track 2."
+        "desc": "Historical example: legacy App Store Track 2."
       },
       "cli": {
         "name": "Command line + npm",
-        "desc": "Native vendor CLIs first (claude update, codex, opencode, agy), then Node/npm globals."
+        "desc": "Historical example: native CLI and npm."
       },
       "brew": {
         "name": "Homebrew",
@@ -446,7 +446,7 @@
       },
       "internet": {
         "name": "Internet apps",
-        "desc": "{{apps}} supported apps across {{methods}} update methods. Installed versions are checked against vendor feeds first."
+        "desc": "Historical registry illustration; categories do not imply enabled paths."
       },
       "post": {
         "name": "Run records",

@@ -7,10 +7,10 @@ import { METHOD_GROUPS } from '../sections/coverageData'
 const copy = {
   en: {
     title: 'Find your apps.',
-    lead: `${INTERNET_APP_COUNT} internet apps are in the registry. Search the list to see how each one is handled.`,
+    lead: `${INTERNET_APP_COUNT} registry rows describe legacy capabilities. Entries do not guarantee an enabled update path.`,
     search: 'Search apps or update methods',
     placeholder: 'Try Firefox or Homebrew',
-    method: 'Update method',
+    method: 'Legacy category',
     all: 'All methods',
     reset: 'Clear filters',
     results: (count: number) => `${count} ${count === 1 ? 'app' : 'apps'} found`,
@@ -20,14 +20,14 @@ const copy = {
     empty: 'No apps match these filters.',
     emptyHint: 'Try another search or clear the filters to see the full list.',
     appColumn: 'Application',
-    methodColumn: 'Update method',
+    methodColumn: 'Legacy category',
   },
   pl: {
     title: 'Znajdź swoje aplikacje.',
-    lead: `Rejestr obejmuje ${INTERNET_APP_COUNT} aplikacji internetowych. Przeszukaj listę, aby sprawdzić sposób aktualizacji każdej z nich.`,
+    lead: `Rejestr obejmuje ${INTERNET_APP_COUNT} wpisów dawnych możliwości. Wpis nie gwarantuje aktywnej ścieżki aktualizacji.`,
     search: 'Szukaj aplikacji lub sposobu aktualizacji',
     placeholder: 'Wpisz Firefox lub Homebrew',
-    method: 'Sposób aktualizacji',
+    method: 'Dawna kategoria',
     all: 'Wszystkie sposoby',
     reset: 'Wyczyść filtry',
     results: (count: number) => `Znaleziono aplikacji: ${count}`,
@@ -37,7 +37,7 @@ const copy = {
     empty: 'Brak aplikacji pasujących do filtrów.',
     emptyHint: 'Zmień wyszukiwanie lub wyczyść filtry, aby zobaczyć całą listę.',
     appColumn: 'Aplikacja',
-    methodColumn: 'Sposób aktualizacji',
+    methodColumn: 'Dawna kategoria',
   },
 } satisfies Record<Lang, {
   title: string

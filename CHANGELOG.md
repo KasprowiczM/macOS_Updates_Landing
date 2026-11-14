@@ -5,6 +5,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## 2026-11-14 source sync
+
+- Synchronized the 2026-11-14 v1.7.0 source snapshot while retaining v1.5.5 as the latest tagged release. No v1.7.0 tag or GitHub Release exists.
+- Documented source-aware inventory, policies, conflicts, migration, stable-version advice and the optional unselected catalog with its separate InstallPlan. No public automatic installation recipes are approved.
+- Updated the registry and verification facts: 47 rows, 48 products, 11 legacy capability categories, and 1178 collected tests (1177 passed, one expected skip).
+
 ## [Unreleased]
 
 ### Added

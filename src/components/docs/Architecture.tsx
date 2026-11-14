@@ -1,5 +1,5 @@
 import { WikiSection, CodeBlock, DocTable } from './WikiSection'
-import { INTERNET_APP_COUNT, TEST_COUNT } from '../../lib/site'
+import { TEST_COUNT } from '../../lib/site'
 
 export function Architecture({ pl }: { pl: boolean }) {
   return (
@@ -9,54 +9,36 @@ export function Architecture({ pl }: { pl: boolean }) {
           ? 'Rdzeń to Bash 3.2 z pomocniczym Pythonem inline/heredoc tam, gdzie trzeba parsować dane strukturalne. Publiczny registry aplikacji internetowych mieszka w config/, a wspólne funkcje w lib/.'
           : 'The core is Bash 3.2 with inline/heredoc Python where structured parsing is needed. The public internet-app registry lives in config/, and shared behavior lives in lib/.'
         }</p>
-        <CodeBlock title="macOS_updates/" copyable={false}>{`update_all.sh                  # ${pl ? 'główny orkiestrator (kroki 0 do 6)' : 'main orchestrator (steps 0 to 6)'}
-update_appstore.sh             # step 1: sudo mas (Track 1) + AppleScript Track 2 for iPad apps
-update_npm_cli.sh              # step 2: native vendor CLIs + stable Node/Bun/npm
-update_brew.sh                 # step 3: brew upgrade + cleanup + doctor
-update_internet_apps.sh        # step 4: ${INTERNET_APP_COUNT} internet app handlers
-build_inventory.sh / postupdate # step 0 & 5: APPLICATIONS.md & UPDATES.md
-update_system.sh               # step 6: softwareupdate -i <label> -R (declined restart exits 10)
-config/internet_apps.txt       # public registry (${INTERNET_APP_COUNT} apps)
-config/vendor_feeds.txt        # official vendor feeds (Sparkle RSS, JSON, YAML, KV)
-config/vendor_appcasts.txt     # rollout channels for vendor truth (Proton Drive)
-config/vendor_direct_first.txt # direct-download-first apps (ChatGPT, Cursor, OpenCode)
-config/inventory_exclusions.txt # discovery exclusions (Ascendo)
-lib/brew.sh                    # resilient Homebrew query layer
-lib/proc.sh                    # process-group timeout + SIGKILL
-lib/native_installers.sh       # vendor CLI download-then-exec
-lib/vendor_direct.sh           # Gatekeeper & Team ID verified atomic app swap
-lib/python/node_releases.py    # stable Node.js release selector
-lib/python/vendor_feeds.py     # multi-format vendor feed parsing & Omaha history proof
-lib/python/cli_duplicates.py   # native vs npm duplicate binary detector
-lib/run_lock.sh                # per-repo run lock
-lib/version.sh                 # shared version comparison logic
-dev_sync/overlay_import.py     # overlay import boundaries + recovery
-docs/agents/critical_rules.md  # ${pl ? 'reguły nienegocjowalne' : 'non-negotiable rules'}`}</CodeBlock>
+        <CodeBlock title="macOS_updates/" copyable={false}>{`update_all.sh                  # orchestrator and plan
+build_inventory.sh             # source-aware inventory
+config/internet_apps.txt       # legacy catalog registry
+lib/python/policy_runtime.py   # source-bound action policy
+update_system.sh               # macOS system update`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="four-phase" title={pl ? '7-krokowy pipeline' : '7-Step Pipeline'}>
         <p>{pl
-          ? 'update_all.sh wykonuje warstwy w stałej kolejności (0 do 6). Aktualizacja systemu macOS wykonuje się na końcu, a miękkie błędy aplikacji nie blokują aktualizacji macOS.'
-          : 'update_all.sh runs layers in a fixed order (0 to 6). macOS system updates run last, and soft app failures do not block macOS system updates.'
+          ? 'Plan ogranicza wykonanie do dopuszczonych działań menedżera. Nieznane ścieżki pozostają ręczne.'
+          : 'The plan limits execution to eligible manager actions. Unknown paths remain manual.'
         }</p>
         <DocTable
           headers={[pl ? 'Krok' : 'Step', pl ? 'Skrypt' : 'Script', pl ? 'Cel' : 'Purpose']}
           rows={[
-            ['0', 'prescan', pl ? 'Odświeża APPLICATIONS.md z tej maszyny.' : 'Refresh APPLICATIONS.md from this machine.'],
-            ['1', 'update_appstore.sh', pl ? 'Track 1: sudo mas ze zmierzonymi ID; Track 2: AppleScript dla aplikacji iPada (polling 30 s, product pages, soft warning exit 10).' : 'Track 1: sudo mas with measured IDs; Track 2: AppleScript for iPad apps (30 s polling, product pages, exit 10 soft warning).'],
-            ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI vendorów (claude, Codex, OpenCode, agy) oraz stabilny Node/Bun/npm (izolacja od wydań alpha).' : 'Native vendor CLIs (claude, Codex, OpenCode, agy) plus stable Node/Bun/npm (alpha releases excluded).'],
-            ['3', 'update_brew.sh', pl ? 'Homebrew upgrade (selektywne caski, pomijanie orphan casks), cleanup i doctor przez lib/brew.sh.' : 'Homebrew upgrade (selective cask targets, skips orphan casks), cleanup, and doctor via lib/brew.sh.'],
-            ['4', 'update_internet_apps.sh', pl ? `${INTERNET_APP_COUNT} obsługiwane aplikacje internetowe (keystone, dmg, mau, sparkle, etc.).` : `${INTERNET_APP_COUNT} supported internet apps (keystone, dmg, mau, sparkle, etc.).`],
-            ['5', 'postupdate', pl ? 'Rozdziela edycje inwentarza od zaobserwowanych zmian pakietów; zapis UPDATES.md.' : 'Splits inventory field edits from observed package changes; writes UPDATES.md.'],
-            ['6', 'update_system.sh', pl ? 'softwareupdate -i <label> -R (końcowy krok bezpieczny dla restartu; odrzucony restart instaluje pakiety bez restartu i kończy kodem 10).' : 'softwareupdate -i <label> -R (final restart-safe step; declined restart installs no-restart labels and exits 10).'],
+            ['0', 'prescan.py', pl ? 'Lokalny inwentarz i obserwacja źródeł.' : 'Local inventory and source observation.'],
+            ['1', 'update_appstore.sh', pl ? 'Plan i zgoda dla dopuszczonych działań menedżera; dawny Track 2 GUI jest nieaktywny.' : 'Plan and consent gate eligible manager actions; legacy Track 2 GUI is inactive.'],
+            ['2', 'update_npm_cli.sh', pl ? 'Natywne CLI, Node i Bun pozostają ręczne; ryzykowne efekty npm są odraczane.' : 'Native CLI, Node and Bun remain manual; npm side effects are deferred.'],
+            ['3', 'update_brew.sh', pl ? 'Dopuszczone aktualizacje Homebrew podlegają planowi, kontroli i zgodzie.' : 'Eligible Homebrew updates require a plan, checks and consent.'],
+            ['4', 'update_internet_apps.sh', pl ? 'Rejestr opisuje dawne możliwości; ogólne ścieżki producentów pozostają ręczne.' : 'The registry describes legacy capabilities; generic vendor paths remain manual.'],
+            ['5', 'postupdate.py', pl ? 'Zapis inwentarza i historii na podstawie obserwacji.' : 'Records inventory and history from observations.'],
+            ['6', 'update_system.sh', pl ? 'Aktualizacja macOS na końcu; restart wymaga decyzji użytkownika.' : 'macOS system update last; restart requires the user’s decision.'],
           ]}
         />
       </WikiSection>
 
       <WikiSection id="native-bash" title={pl ? 'Ograniczenia runtime' : 'Runtime Constraints'}>
         <p>{pl
-          ? `Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Wszystkie zmiany przechodzą ${TEST_COUNT} testów statycznych i unit.`
-          : `The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. All changes pass ${TEST_COUNT} static and unit tests.`
+          ? `Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Zebrano ${TEST_COUNT} przypadków unittest; kontrole statyczne są osobne.`
+          : `The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. The suite collected ${TEST_COUNT} unittest cases; static checks are separate.`
         }</p>
       </WikiSection>
     </>

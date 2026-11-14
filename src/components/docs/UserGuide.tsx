@@ -5,13 +5,28 @@ export function UserGuide({ pl }: { pl: boolean }) {
     <>
       <WikiSection id="daily-usage" title={pl ? 'Codzienne użycie' : 'Daily Usage'}>
         <p>{pl
-          ? 'Najczęstszy workflow to prescan, raport pokrycia, dry-run i dopiero pełna aktualizacja.'
-          : 'The common workflow is prescan, coverage report, dry-run, then the full update.'
+          ? 'Najczęstszy workflow to prescan, raport pokrycia, dry-run, plan i decyzja o dopuszczonych działaniach.'
+          : 'The common workflow is prescan, coverage report, dry-run, plan and a decision on eligible actions.'
         }</p>
         <p>{pl ? 'Najpierw podejrzyj plan. Ta komenda nie wprowadza zmian.' : 'Preview the plan first. This command makes no changes.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
-        <p>{pl ? 'Po przejrzeniu planu uruchom pełną aktualizację osobno.' : 'After reviewing the plan, run the full update separately.'}</p>
+        <p>{pl ? 'Po przejrzeniu planu osobno zdecyduj o dopuszczonych działaniach.' : 'After reviewing the plan, decide separately on eligible actions.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh`}</CodeBlock>
+        <p>{pl
+          ? 'Aby przejrzeć lub zmienić zasady dla aplikacji, otwórz ustawienia aktualizacji. Konflikt App Store i Homebrew wymaga decyzji o źródle; nie powoduje automatycznej migracji.'
+          : 'Open update preferences to review or change application policies. An App Store and Homebrew conflict needs a source decision; it does not cause automatic migration.'
+        }</p>
+        <CodeBlock title="bash">{`bash update_all.sh --preferences`}</CodeBlock>
+        <p>{pl
+          ? 'Opcjonalny katalog rozpoczyna się bez zaznaczonych aplikacji. Pokazuje wymagania i osobny plan instalacji. Obecnie wszystkie publiczne pozycje wymagają ręcznego pozyskania lub dalszej weryfikacji receptury; wybranie pozycji nie instaluje jej automatycznie.'
+          : 'The optional catalog starts with no applications selected. It shows requirements and a separate installation plan. All public entries currently require manual acquisition or further recipe review; selecting an entry does not install it automatically.'
+        }</p>
+        <CodeBlock title="bash">{`bash setup.sh --catalog`}</CodeBlock>
+        <p>{pl
+          ? 'Przeniesienie starego raportu Markdown do nowego inwentarza ma osobny podgląd i wymaga akceptacji wyświetlonej propozycji. Nieznane aplikacje pozostają w inwentarzu bez wymuszania źródła.'
+          : 'Migrating an older Markdown report to the new inventory has a separate preview and requires acceptance of the displayed proposal. Unknown applications remain in the inventory without a forced source choice.'
+        }</p>
+        <CodeBlock title="bash">{`bash build_inventory.sh --migration --preview`}</CodeBlock>
       </WikiSection>
 
       <WikiSection id="risk-taxonomy" title={pl ? 'Zasady aktualizacji' : 'Update Rules'}>
@@ -20,8 +35,8 @@ export function UserGuide({ pl }: { pl: boolean }) {
           rows={[
             [pl ? 'Tylko zainstalowane' : 'Installed only', pl ? 'Brakujące obsługiwane aplikacje są raportowane, nie instalowane.' : 'Supported missing apps are reported, not installed.'],
             ['softwareupdate -R', pl ? 'Aktualizacje macOS wymagają -R; odrzucenie restartu instaluje pakiety bez restartu, pomija pakiety z restartem i kończy kodem 10 (skipped by user).' : 'macOS updates require -R; declining a restart installs no-restart labels, skips restart labels, and exits 10 (skipped by user).'],
-            ['App Store Track 1 & 2', pl ? 'Track 1 działa przez sudo ze zmierzonymi ID; Track 2 odpytuje GUI do 30 s z fallbackiem na product page i kodem 10 dla nieoferowanych aplikacji.' : 'Track 1 runs through sudo with measured IDs; Track 2 polls the GUI up to 30 s with product-page fallback and exit 10 for unoffered apps.'],
-            [pl ? 'Stabilny Node.js' : 'Stable Node.js', pl ? 'Managed Node.js wybiera najnowsze wydanie stabilne vX.Y.Z z nodejs.org/dist/index.json, eliminując wersje alpha.' : 'Managed Node.js selects the newest stable vX.Y.Z release from nodejs.org/dist/index.json, eliminating alpha builds.'],
+            [pl ? 'Plan i zgoda' : 'Plan and consent', pl ? 'Dopuszczone aktualizacje menedżera wymagają jawnej zgody. Track 2 GUI nie jest aktywny.' : 'Eligible manager updates require explicit consent. Track 2 GUI is inactive.'],
+            [pl ? 'Ścieżki ręczne' : 'Manual paths', pl ? 'Natywne CLI, Node, Bun i ogólne ścieżki producentów pozostają ręczne.' : 'Native CLIs, Node, Bun and generic vendor paths remain manual.'],
             [pl ? 'Prywatny overlay' : 'Private overlay', pl ? 'APPLICATIONS.md, UPDATES.md i sekrety pozostają poza publicznym Git.' : 'APPLICATIONS.md, UPDATES.md, and secrets stay outside public Git.'],
           ]}
         />

@@ -74,7 +74,7 @@ const EN = {
     'brew upgrade --greedy, orphan casks skipped, cleanup, doctor.',
   'wall.station.internet.name': 'Internet apps',
   'wall.station.internet.desc':
-    '{{apps}} apps, {{methods}} update methods. Each version is checked against the vendor’s own feed first.',
+    '{{apps}} registry entries, {{methods}} legacy capability categories. Eligible actions require source and identity checks.',
   'wall.station.post.name': 'Run records',
   'wall.station.post.desc':
     'APPLICATIONS.md and UPDATES.md history written only after the step succeeded.',

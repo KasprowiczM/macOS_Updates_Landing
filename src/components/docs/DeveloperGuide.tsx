@@ -19,8 +19,7 @@ export function DeveloperGuide({ pl }: { pl: boolean }) {
             ['Bash', 'Bash 3.2 only; no declare -A, mapfile, readarray'],
             ['Paths', 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"'],
             ['macOS update', 'softwareupdate must keep -R; declined restart installs no-restart labels and exits 10'],
-            ['App Store', 'Track 1: sudo mas upgrade; Track 2: AppleScript polls up to 30s with product-page fallback and exit 10 for unoffered apps'],
-            ['Node.js', 'Managed Node.js selects newest stable vX.Y.Z from nodejs.org/dist/index.json (never alpha or pre-release)'],
+            ['Source policy', 'Only eligible manager updates execute through the plan and consent gate; generic vendor/native paths remain manual.'],
             ['macOS 27 & Locale', 'Locale overrides must use env LANG=C LC_ALL=C to avoid bash setlocale segfault'],
             ['Xcode gate', 'xcodebuild -license check (not -checkFirstLaunchStatus, which returns 69 on licensed Xcode 27.2)'],
             ['Release versioning', 'macOS_updates and Ascendo releases are intended to use matching versions. An explicitly approved upstream release may precede parity; report the latest tag separately from the source version.'],
@@ -57,7 +56,7 @@ One system-update example (requires restart approval):
   sudo softwareupdate -i "$label" -R --verbose
 
 One App Store CLI example (use only measured app IDs):
-  sudo env MAS_NO_AUTO_INDEX=1 mas upgrade <id...>
+  Review the source-aware plan and explicit consent before any manager update
 
 Xcode licence check:
   xcodebuild -license check`}</CodeBlock>

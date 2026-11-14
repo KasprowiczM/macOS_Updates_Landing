@@ -10,7 +10,7 @@
     },
     "frontends": {
       "title": "Instalacja od inwentarza",
-      "desc": "install.sh buduje APPLICATIONS.md z tego Maca i aktualizuje tylko już zainstalowane programy."
+      "desc": "Instalator sprawdza konfigurację i buduje lokalny inwentarz; zmiana zależności wymaga osobnej zgody."
     },
     "scheduler": {
       "title": "Gotowość i zaplanowane przebiegi",
@@ -18,7 +18,7 @@
     },
     "aiTools": {
       "title": "Handlery przyjazne agentom",
-      "desc": "Szkieletuj handlery aplikacji internetowych i aktualizuj Claude, Codex, OpenCode i agy ich własnymi natywnymi instalatorami."
+      "desc": "Niezweryfikowane ścieżki natywne i producentów pozostają ręczne; wpis rejestru nie włącza wykonania."
     },
     "suggestionsAi": {
       "title": "Prywatny dev_sync",
@@ -26,7 +26,7 @@
     },
     "plugins": {
       "title": "Testy i scan sekretów",
-      "desc": "Upstreamowy runner zbiera 846 przypadków unittest w Pythonie oraz sprawdza składnię, rejestr, zabezpieczenia statyczne i sekrety."
+      "desc": "Upstreamowy runner zbiera {{tests}} przypadków unittest w Pythonie oraz sprawdza składnię, rejestr, zabezpieczenia statyczne i sekrety."
     },
     "multihost": {
       "title": "UI w 7 językach",
@@ -75,15 +75,15 @@
   },
   "seo": {
     "homeTitle": "macOS Updates: aktualizator Maca z Apple Silicon jedną komendą",
-    "homeDesc": "Aktualizator Maców z Apple Silicon: macOS, App Store, Homebrew, narzędzia wiersza poleceń, pakiety npm i 47 obsługiwanych aplikacji. Raportuje tylko zmiany potwierdzone przez Maca.",
+    "homeDesc": "Otwarty toolkit Apple Silicon: inwentarz źródeł, plany aktualizacji, jawna zgoda i dopuszczone aktualizacje menedżerów.",
     "featuresTitle": "Funkcje macOS Updates: Pokrycie i inwentarz",
-    "featuresDesc": "Poznaj siedem kroków aktualizacji, sprawdzanie kanałów producentów, ochronę działających aplikacji i weryfikowane harmonogramy na Apple Silicon.",
+    "featuresDesc": "Poznaj inwentarz źródeł, plany, zgodę, aktualizacje menedżerów i ścieżki ręczne.",
     "docsTitle": "Dokumentacja macOS Updates: Instalacja i uruchomienie",
     "docsDesc": "Zainstaluj na Apple Silicon, podejrzyj aktualizacje, sprawdź gotowość przez --doctor, skonfiguruj LaunchAgent i poznaj zabezpieczenia kanałów oraz casków.",
     "securityTitle": "Polityka bezpieczeństwa macOS Updates",
-    "securityDesc": "Jak macOS Updates obsługuje sudo, zweryfikowane pobrania, kontrole Gatekeeper i Team ID oraz chroni prywatny inwentarz i pliki overlay.",
+    "securityDesc": "Kontrole źródła i tożsamości, jawna zgoda i prywatny lokalny inwentarz.",
     "changelogTitle": "Historia zmian macOS Updates",
-    "changelogDesc": "Bieżący snapshot kodu macOS Updates v1.6.0 i historia oznaczonych wydań do v1.5.5 dla Maców z Apple Silicon.",
+    "changelogDesc": "Bieżący snapshot kodu macOS Updates {{version}} i historia oznaczonych wydań do {{latestTag}} dla Maców z Apple Silicon.",
     "contributingTitle": "Współtwórz macOS Updates",
     "contributingDesc": "Współtwórz macOS Updates: dodaj handler aplikacji internetowej, popraw dokumentację i utrzymuj testowane skrypty zgodne z Bash 3.2."
   },
@@ -95,7 +95,7 @@
       },
       "q2": {
         "q": "Czy zainstaluje aplikacje, których nie mam?",
-        "a": "Nie. Updater aktualizuje tylko programy już zainstalowane na Macu. Obsługiwane brakujące aplikacje są tylko raportowane."
+        "a": "Opcjonalny katalog jest niewybrany i ma osobny plan instalacji. Brak zatwierdzonych publicznych receptur automatycznej instalacji."
       },
       "q3": {
         "q": "Dlaczego wymagany jest Apple Silicon?",
@@ -115,7 +115,7 @@
       },
       "q7": {
         "q": "Ile aplikacji jest obsługiwanych?",
-        "a": "Obecny rejestr obejmuje 47 aplikacji pobieranych z internetu oraz macOS, App Store, Homebrew i CLI/npm."
+        "a": "Wpisy rejestru opisują dawne możliwości, a nie gwarantowane automatyczne aktualizacje."
       },
       "q8": {
         "q": "Jak dodać nową aplikację internetową?",
@@ -127,7 +127,7 @@
       },
       "q10": {
         "q": "Jak zaktualizować wszystkie aplikacje na Macu naraz?",
-        "a": "Uruchom bash update_all.sh. Aktualizuje App Store, natywne CLI i npm, Homebrew, 47 aplikacji pobranych z internetu oraz macOS w jednym uporządkowanym przebiegu. Najpierw podejrzyj go poleceniem bash update_all.sh --dry-run -y."
+        "a": "Podgląd: bash update_all.sh --dry-run -y. Dopuszczone aktualizacje menedżerów wymagają zgody; nierozstrzygnięte źródła pozostają ręczne."
       },
       "q11": {
         "q": "Czy macOS Updates zamyka moje otwarte aplikacje?",
@@ -143,7 +143,7 @@
       },
       "q14": {
         "q": "Czym różni się od samego Homebrew albo App Store?",
-        "a": "Homebrew i App Store obejmują po jednej warstwie. macOS Updates uruchamia oba, a do tego natywne CLI, globalne pakiety npm, 47 aplikacji z internetu i macOS, w stałej kolejności. Najpierw sprawdza kanał każdego producenta i raportuje tylko to, co potwierdzi Mac."
+        "a": "Toolkit łączy lokalny inwentarz z informacjami o źródłach, ujawnia konflikty między nimi i przygotowuje plan. Dopuszczone aktualizacje menedżerów wymagają jawnej zgody, a nierozstrzygnięte źródła pozostają ręczne."
       }
     },
     "title": "Pytania przed uruchomieniem.",
@@ -153,8 +153,8 @@
     "titleA": "Twój Mac.",
     "titleGo": "Na bieżąco.",
     "titleB": "",
-    "sub": "Aktualizuj macOS, App Store, Homebrew, narzędzia CLI i {{apps}} obsługiwanych aplikacji w jednym ostrożnym przebiegu. Najpierw sprawdź podgląd. Ty decydujesz.",
-    "proofApps": "obsługiwanych aplikacji",
+    "sub": "Sprawdź tego Maca, przejrzyj plany uwzględniające źródła i zatwierdź dopuszczone aktualizacje menedżerów. Nieznane źródła pozostają ręczne.",
+    "proofApps": "wpisów rejestru",
     "proofTests": "przypadków testowych unit",
     "proofOpen": "otwarty kod",
     "copy": "Skopiuj polecenie instalacji",
@@ -165,10 +165,10 @@
     "console": {
       "detail": {
         "prescan": "Inwentarz tego Maca",
-        "appstore": "sudo mas, potem Track 2",
-        "cli": "Natywne CLI, potem npm",
+        "appstore": "Plan menedżera i zgoda",
+        "cli": "Natywne ścieżki ręczne",
         "brew": "brew upgrade --greedy",
-        "internet": "{{apps}} aplikacji, {{methods}} metod",
+        "internet": "{{apps}} aplikacji, {{methods}} kategorii dawnych możliwości",
         "post": "Inwentarz i historia",
         "macos": "softwareupdate -R"
       },
@@ -197,8 +197,8 @@
         "body": "Przejrzyj App Store, Homebrew, narzędzia CLI, aplikacje producentów i macOS w jednym uporządkowanym przebiegu."
       },
       "safety": {
-        "title": "Zweryfikowane instalacje bezpośrednie",
-        "body": "Bezpośrednie pobrania od producentów mogą korzystać z sum kontrolnych, weryfikacji podpisu, etapowej podmiany i przywrócenia poprzedniej wersji."
+        "title": "Plan i zgoda",
+        "body": "Dopuszczone aktualizacje menedżera wymagają planu uwzględniającego źródło i jawnej zgody. Ogólne instalacje producentów pozostają ręczne."
       },
       "process": {
         "title": "Najpierw podgląd",
@@ -220,8 +220,8 @@
     "lead": "Ręczna aktualizacja to Ustawienia systemowe, App Store, brew, globalne pakiety npm, własne updatery producentów i obrazy DMG. Te zasady obowiązują na każdej warstwie.",
     "items": {
       "vendor": {
-        "title": "Najpierw prawda od producenta.",
-        "body": "Zainstalowana wersja każdej aplikacji jest najpierw sprawdzana w kanale jej producenta. Aplikacje, które są aktualne, zostają nietknięte."
+        "title": "Źródło przed działaniem.",
+        "body": "Źródło i tożsamość wpływają na plan. Nieznane dane i konflikty pozostają jawne."
       },
       "open": {
         "title": "Otwarte aplikacje nigdy nie są zamykane.",
@@ -229,7 +229,7 @@
       },
       "installed": {
         "title": "Tylko to, co zainstalowane.",
-        "body": "Brakujące obsługiwane aplikacje są raportowane, nie instalowane. Aplikacji usuniętych ręcznie nigdy nie instaluje ponownie."
+        "body": "Plan aktualizacji dotyczy istniejącego oprogramowania. Osobny opcjonalny katalog jest niewybrany i nie ma zatwierdzonych publicznych receptur automatycznych."
       },
       "confirmed": {
         "title": "Raport dopiero po potwierdzeniu.",
@@ -253,20 +253,20 @@
         "guard": "Tylko lokalny inwentarz. Cudza lista nigdy nie jest importowana."
       },
       "appstore": {
-        "what": "Track 1: sudo mas upgrade dla zmierzonych ID. Track 2: AppleScript dla aplikacji iPada, np. UniFi.",
-        "guard": "sudo najwyżej raz na przebieg i nigdy bez terminala."
+        "what": "Plan uwzględnia źródło, tożsamość i dopuszczalność.",
+        "guard": "Wykonać można tylko dopuszczone aktualizacje menedżerów za zgodą; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "cli": {
-        "what": "Najpierw natywne CLI producentów (claude, codex, opencode, agy), potem Node, Bun i globalne pakiety npm.",
-        "guard": "CLI producenta liczy się jako zaktualizowane tylko wtedy, gdy działa --version."
+        "what": "Plan uwzględnia źródło, tożsamość i dopuszczalność.",
+        "guard": "Wykonać można tylko dopuszczone aktualizacje menedżerów za zgodą; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "brew": {
         "what": "Formuły i caski z --greedy, potem cleanup i brew doctor.",
         "guard": "Osierocone caski są pomijane, a obniżanie wersji casków jest blokowane."
       },
       "internet": {
-        "what": "{{apps}} aplikacji w {{methods}} metodach aktualizacji, każda sprawdzana w kanale samego producenta.",
-        "guard": "Zweryfikowane pobrania: Gatekeeper, bundle ID i Apple Team ID, potem podmiana etapowa z rollbackiem."
+        "what": "Plan uwzględnia źródło, tożsamość i dopuszczalność.",
+        "guard": "Wykonać można tylko dopuszczone aktualizacje menedżerów za zgodą; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "post": {
         "what": "Odświeża APPLICATIONS.md i atomowo dopisuje UPDATES.md.",
@@ -279,71 +279,71 @@
     }
   },
   "coverage": {
-    "title": "{{apps}} aplikacji internetowych, {{methods}} metod aktualizacji.",
-    "lead": "Aktualizowane są tylko aplikacje już zainstalowane. Rejestr poniżej jest pogrupowany według tego, jak każda z nich dostaje aktualizację.",
+    "title": "{{apps}} wpisów rejestru, {{methods}} kategorii dawnych możliwości.",
+    "lead": "To dawne kategorie katalogu, a nie aktywne ścieżki wykonania. Ogólne ścieżki producentów i natywne pozostają ręczne.",
     "methods": {
       "brew_cask": {
         "name": "Cask Homebrew",
-        "note": "Aktualizowane przez Homebrew, z ochroną przed obniżeniem wersji."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "silent_launch": {
         "name": "Ciche uruchomienie",
-        "note": "Otwiera aplikację, żeby zadziałał jej własny updater. Sprawdza kanał producenta, jeśli istnieje, a w przeciwnym razie raportuje uruchomienie jako niezweryfikowane."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "github_dmg": {
         "name": "GitHub DMG",
-        "note": "Obraz DMG z GitHuba, zweryfikowany, potem podmiana etapowa z rollbackiem."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "mozilla_dmg": {
         "name": "Mozilla DMG",
-        "note": "Wydanie Firefox Developer Edition pobierane z Mozilla i weryfikowane przed podmianą."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "msupdate": {
         "name": "Microsoft AutoUpdate",
-        "note": "Aplikacje Office aktualizowane przez msupdate."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "keystone": {
         "name": "Google Keystone",
-        "note": "Własny agent aktualizacji Google. Tylko dla produktów Google."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "appstore_gui": {
         "name": "App Store Track 2",
-        "note": "Aplikacje iPada aktualizowane przez sterowanie App Store z AppleScript."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "manual": {
         "name": "Ręcznie",
-        "note": "Brak automatycznej ścieżki. Raportowane, żebyś zaktualizował je sam."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "sparkle_appcast": {
         "name": "Sparkle appcast",
-        "note": "Wersja odczytywana z kanału Sparkle appcast aplikacji."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "docker_cli": {
         "name": "Docker CLI",
-        "note": "Obsługiwane przez ścieżkę Docker CLI."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "mau_fallback_self_update": {
         "name": "Samoaktualizacja z MAU",
-        "note": "Teams aktualizuje się sam, ze zweryfikowanym zapasowym torem Microsoft AutoUpdate, gdy Microsoft go oferuje."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       },
       "chromium_updater": {
         "name": "Updater Chromium",
-        "note": "Obsługiwane przez ścieżkę updatera Chromium."
+        "note": "Dawna kategoria rejestru. Wpis nie uprawnia do automatycznej aktualizacji."
       }
     },
     "other": {
       "title": "Poza aplikacjami internetowymi",
       "appstore": {
         "name": "App Store",
-        "note": "Zmierzone ID przez sudo mas oraz Track 2 dla aplikacji iPada."
+        "note": "Dopuszczalność zależy od źródła, planu i zgody; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "brew": {
         "name": "Homebrew",
-        "note": "Formuły i caski, cleanup i brew doctor."
+        "note": "Dopuszczalność zależy od źródła, planu i zgody; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "cli": {
         "name": "CLI i npm",
-        "note": "claude, codex, opencode i agy, potem Node, Bun i globalne pakiety npm."
+        "note": "Dopuszczalność zależy od źródła, planu i zgody; nierozstrzygnięte ścieżki pozostają ręczne."
       },
       "macos": {
         "name": "macOS",
@@ -358,8 +358,8 @@
     "lead": "Każdy wpis to prawdziwe wydanie albo prawdziwy przebieg. Nic tu nie jest benchmarkiem.",
     "entries": {
       "release": {
-        "title": "Bieżący snapshot kodu v1.6.0",
-        "body": "Upstream main dodaje raport --doctor tylko do odczytu, bezpieczniejszy harmonogram LaunchAgent, limity czasu pytań, odraczanie działających casków, trwałe statusy kanałów producentów i nowe handlery. Nie ma jeszcze taga Git ani GitHub Release v1.6.0; najnowszym tagiem jest v1.5.5."
+        "title": "Bieżący snapshot kodu {{version}}",
+        "body": "Snapshot dodaje inwentarz zależny od źródła, rozstrzyganie konfliktów i osobny plan instalacji. Katalog jest domyślnie niewybrany, a żadna publiczna receptura automatycznej instalacji nie jest zatwierdzona. Nie ma taga ani GitHub Release {{version}}; najnowszy tag to {{latestTag}}."
       },
       "live": {
         "title": "Przebieg na żywo: dwie zweryfikowane aktualizacje",
@@ -391,13 +391,13 @@
     "stepInstall": "Instalacja",
     "stepPreview": "Podgląd bez zmian",
     "stepRun": "Uruchom aktualizacje",
-    "note": "Instalator klonuje repozytorium, pyta o język, sprawdza lub instaluje zależności, może skonfigurować Touch ID dla sudo i buduje APPLICATIONS.md na podstawie tego Maca. Nie instaluje obsługiwanych aplikacji. Po instalacji uruchamiaj polecenia z katalogu ~/Dev_Env/macOS_updates.",
+    "note": "Instalator klonuje repozytorium i sprawdza konfigurację. Instalacja zależności i konfiguracja powłoki wymagają osobnej zgody. Opcjonalny katalog jest początkowo niewybrany; osobny plan instalacji nie zatwierdza automatycznie aplikacji. Obecnie nie ma zatwierdzonych publicznych receptur automatycznej instalacji.",
     "docs": "Przeczytaj dokumentację",
     "github": "Zobacz na GitHubie"
   },
   "wall": {
     "heading": "Przykładowe wyniki aktualizacji.",
-    "intro": "Ta powtórka łączy zapisy z dwóch rzeczywistych przebiegów. Każdy wiersz pokazuje przykładowy krok i zgłoszony status.",
+    "intro": "Historyczna powtórka z 2026 roku sprzed zasad zależnych od źródła. Nie opisuje bieżących ścieżek wykonania.",
     "caption": "Przykłady na podstawie przebiegów z 2026-10-05 i 2026-10-11.",
     "listLabel": "Stacje aktualizacji w kolejności uruchamiania",
     "screen": {
@@ -434,11 +434,11 @@
       },
       "appstore": {
         "name": "App Store",
-        "desc": "sudo mas ze zmierzonymi identyfikatorami, potem AppleScript Track 2."
+        "desc": "Przykład historyczny: dawny App Store Track 2."
       },
       "cli": {
         "name": "Wiersz poleceń + npm",
-        "desc": "Najpierw natywne CLI producentów (claude update, codex, opencode, agy), potem globalne pakiety Node/npm."
+        "desc": "Przykład historyczny: natywne CLI i npm."
       },
       "brew": {
         "name": "Homebrew",
@@ -446,7 +446,7 @@
       },
       "internet": {
         "name": "Aplikacje internetowe",
-        "desc": "{{apps}} obsługiwanych aplikacji w {{methods}} metodach aktualizacji. Zainstalowane wersje są najpierw sprawdzane w kanałach producentów."
+        "desc": "Historyczna ilustracja rejestru; kategorie nie oznaczają aktywnych ścieżek."
       },
       "post": {
         "name": "Zapis przebiegu",

@@ -63,7 +63,7 @@
     },
     "changelog": {
       "title": "Historia zmian",
-      "intro": "Gałąź upstream main jest oznaczona jako snapshot kodu v1.6.0, bez odpowiadającego taga ani GitHub Release. Poniżej znajdują się oznaczone wydania, od najnowszego.",
+      "intro": "Gałąź upstream main jest oznaczona jako snapshot kodu {{version}}, bez odpowiadającego taga ani GitHub Release. Poniżej znajdują się oznaczone wydania, od najnowszego.",
       "added": "Dodane",
       "changed": "Zmienione",
       "fixed": "Naprawione",

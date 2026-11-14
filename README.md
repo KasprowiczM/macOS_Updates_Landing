@@ -1,7 +1,7 @@
 # macOS Updates Landing
 
-[![Source snapshot](https://img.shields.io/badge/source-v1.6.0-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-846%20unit-cases-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Source snapshot](https://img.shields.io/badge/source-v1.7.0-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Tests](https://img.shields.io/badge/tests-1178%20unit-cases-success.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The production site is [macos-updates.64bit.site](https://macos-updates.64bit.site); this repository describes the current source and does not imply that every local change is published.
@@ -9,6 +9,10 @@ The landing page and documentation site for [**macOS Updates**](https://github.c
 The site is static: no backend and no secrets. Every page is prerendered at build time, then hydrated in the browser.
 
 ---
+
+Source snapshot v1.7.0 is dated 2026-11-14 and this site sync is dated 2026-11-14. The latest tagged release remains v1.5.5; no v1.7.0 tag or GitHub Release exists. The registry has 47 rows covering 48 products. Upstream verification on 2026-11-13 collected 1178 unittest cases: 1177 passed and one expected skip, with no host-tool or network guard hits.
+
+The source-aware inventory records source conflicts and unknowns, applies explicit policies and supports migration; latest-stable advice does not automatically migrate software. The optional catalog starts unselected and has a separate consent-bound InstallPlan. No public automatic installation recipes are approved, and generic vendor/native paths remain manual.
 
 ## What the site is
 
@@ -133,11 +137,11 @@ macOS_updates_landing/
 
 Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
 
-- `APP_VERSION` (current upstream source snapshot: `v1.6.0`; latest tagged release: `v1.5.5`)
-- `APP_VERSION_DATE` (currently `2026-11-10`)
-- `TEST_COUNT` (currently `846` collected Python unittest cases)
+- `APP_VERSION` (current upstream source snapshot: `v1.7.0`; latest tagged release: `v1.5.5`)
+- `APP_VERSION_DATE` (currently `2026-11-14`)
+- `TEST_COUNT` (currently `1178` collected Python unittest cases)
 - `INTERNET_APP_COUNT` (currently `47`)
-- `UPDATE_METHOD_COUNT` (currently `11`)
+- `UPDATE_METHOD_COUNT` (currently `11` legacy capability categories, not enabled execution paths)
 
 JSON-LD, the sitemap and the `llms-full.txt` tokens follow automatically on the next build. Update these by hand so they match the release: the version badge above, `CHANGELOG.md`, the version and test count in `public/llms.txt` (a static file), and the copy in `src/i18n/locales/en.json`. Every English claim and test count in `en.json` needs a Polish counterpart in `pl.json`, and the same for `chrome.en.json` and `chrome.pl.json`. Then run `npm run build` and confirm the prerender reports all routes.
 

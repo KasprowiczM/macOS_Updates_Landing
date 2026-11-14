@@ -63,7 +63,7 @@
     },
     "changelog": {
       "title": "Changelog",
-      "intro": "Upstream main is identified as source snapshot v1.6.0, with no matching tag or GitHub Release. Tagged release notes follow below, newest first.",
+      "intro": "Upstream main is identified as source snapshot {{version}}, with no matching tag or GitHub Release. Tagged release notes follow below, newest first.",
       "added": "Added",
       "changed": "Changed",
       "fixed": "Fixed",

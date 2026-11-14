@@ -1,21 +1,21 @@
 import { WikiSection, CodeBlock, InfoCard } from './WikiSection'
-import { APP_VERSION, INTERNET_APP_COUNT } from '../../lib/site'
+import { APP_VERSION, INTERNET_APP_COUNT, LATEST_TAGGED_VERSION } from '../../lib/site'
 
 export function GettingStarted({ pl }: { pl: boolean }) {
   return (
     <>
       <WikiSection id="overview" title={pl ? 'Przegląd' : 'Overview'}>
         <p>{pl
-          ? `macOS Updates ${APP_VERSION} to jednopoleceniowy aktualizator dla Maców Apple Silicon. Obejmuje macOS, App Store, Homebrew, narzędzia CLI i ${INTERNET_APP_COUNT} obsługiwanych aplikacji. Zmiany są raportowane dopiero po ich potwierdzeniu przez Maca.`
-          : `macOS Updates ${APP_VERSION} is a one-command updater for Apple Silicon Macs. It covers macOS, the App Store, Homebrew, command-line tools, and ${INTERNET_APP_COUNT} supported apps. Changes are reported only after the Mac confirms them.`
+          ? `macOS Updates ${APP_VERSION} to toolkit dla Maców Apple Silicon z inwentarzem zależnym od źródła. Rejestr ma ${INTERNET_APP_COUNT} wpisów dawnych możliwości, nie gwarantowanych automatycznych ścieżek.`
+          : `macOS Updates ${APP_VERSION} is a toolkit for Apple Silicon Macs with source-aware inventory. Its ${INTERNET_APP_COUNT} registry rows describe legacy capabilities, not guaranteed automatic paths.`
         }</p>
         <p>{pl
-          ? `Witryna opisuje bieżący snapshot kodu upstream ${APP_VERSION}. Najnowszy tag wydania w Git to v1.5.5; dla ${APP_VERSION} nie ma taga ani GitHub Release.`
-          : `The site describes the current upstream source snapshot ${APP_VERSION}. The latest Git release tag is v1.5.5; ${APP_VERSION} has no tag or GitHub Release.`
+          ? `Witryna opisuje bieżący snapshot kodu upstream ${APP_VERSION}. Najnowszy tag wydania w Git to ${LATEST_TAGGED_VERSION}; dla ${APP_VERSION} nie ma taga ani GitHub Release.`
+          : `The site describes the current upstream source snapshot ${APP_VERSION}. The latest Git release tag is ${LATEST_TAGGED_VERSION}; ${APP_VERSION} has no tag or GitHub Release.`
         }</p>
         <p>{pl
-          ? 'Aktualizowane jest wyłącznie oprogramowanie już zainstalowane na tym Macu. Instalator tworzy lokalny inwentarz i nie instaluje obsługiwanych aplikacji.'
-          : 'Only software already installed on this Mac is updated. The installer builds a local inventory and does not install the supported apps.'
+          ? 'Plan dotyczy istniejącego oprogramowania. Osobny katalog jest niewybrany i nie ma zatwierdzonych publicznych receptur automatycznej instalacji.'
+          : 'The update plan concerns existing software. The separate catalog starts unselected and has no approved public automatic installation recipes.'
         }</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <InfoCard title={pl ? 'Wymagania' : 'Requirements'}>
@@ -35,8 +35,8 @@ export function GettingStarted({ pl }: { pl: boolean }) {
         <CodeBlock title={pl ? 'Krok 1. Instalacja' : 'Step 1. Install'}>{`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KasprowiczM/macOS_updates/main/install.sh)"`}</CodeBlock>
         <InfoCard title={pl ? 'Co przygotowuje instalator' : 'What setup changes'}>
           <p>{pl
-            ? 'Sprawdza lub instaluje Xcode Command Line Tools, Homebrew i mas, zapisuje preferencje języka i buduje lokalny inwentarz oraz raport pokrycia. Może skonfigurować Touch ID dla sudo w ustawieniach PAM macOS. Nie importuje prywatnych plików ani nie instaluje obsługiwanych aplikacji.'
-            : 'It checks or installs Xcode Command Line Tools, Homebrew, and mas, saves the language preference, and builds a local inventory and coverage report. It may configure Touch ID for sudo in macOS PAM settings. It does not import private files or install the supported apps.'
+            ? 'Sprawdza konfigurację i buduje lokalny inwentarz. Instalacja zależności oraz konfiguracja powłoki wymagają osobnej zgody. Opcjonalny katalog jest niewybrany i ma osobny plan instalacji; brak zatwierdzonych publicznych receptur automatycznej instalacji.'
+            : 'It inspects setup and builds a local inventory. Dependency installation and shell configuration require separate consent. The optional catalog starts unselected and has a separate install plan; no public automatic installation recipes are approved.'
           }</p>
         </InfoCard>
         <h3>{pl ? 'Krok 2. Podejrzyj zmiany' : 'Step 2. Preview the changes'}</h3>

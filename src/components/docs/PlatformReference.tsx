@@ -23,12 +23,10 @@ export function PlatformReference({ pl }: { pl: boolean }) {
         <DocTable
           headers={[pl ? 'Kategoria' : 'Category', pl ? 'Metoda / Narzędzie' : 'Method / Tool']}
           rows={[
-            ['macOS (Step 6)', 'softwareupdate -i <label> -R (per-label + batch restart; exit 10 if restart declined)'],
-            ['App Store (Step 1)', 'Track 1: sudo mas upgrade; Track 2: AppleScript GUI for iPad apps (30 s polling, product-page fallback, exit 10 if unoffered)'],
-            ['Native CLI/npm (Step 2)', 'Stable Node (via node_releases.py), Bun, npm globals, claude, Codex, opencode, agy'],
-            ['Homebrew (Step 3)', pl ? 'brew upgrade (formuły + wyznaczone caski, pomijanie sierot) + cleanup + doctor' : 'brew upgrade (formulae + designated casks, orphan skip) + cleanup + doctor'],
-            [pl ? 'Aplikacje internetowe (Step 4)' : 'Internet apps (Step 4)', 'keystone, github_dmg, mozilla_dmg, silent_launch, msupdate, mau_fallback_self_update, docker_cli, brew_cask, sparkle_appcast, chromium_updater, appstore_gui'],
-            ['dev_sync', pl ? 'Prywatny overlay dla inwentarza i historii.' : 'Private overlay for inventory and history.'],
+            [pl ? 'Menedżery' : 'Managers', pl ? 'Dopuszczone aktualizacje istniejącego menedżera wymagają planu i zgody.' : 'Eligible existing-manager updates require a plan and consent.'],
+            ['App Store', pl ? 'Działania podlegają bramce planu; dawny interfejs Track 2 nie jest aktywny.' : 'Actions pass the plan gate; the legacy Track 2 GUI is inactive.'],
+            ['CLI / npm', pl ? 'Natywne CLI, Node i Bun pozostają ręczne; efekty npm związane ze skryptami, zależnościami i nowymi poleceniami są odraczane.' : 'Native CLI, Node and Bun remain manual; npm effects involving scripts, dependencies and new commands are deferred.'],
+            [pl ? 'Rejestr' : 'Registry', pl ? `${INTERNET_APP_COUNT} wpisów opisuje dawne możliwości, nie aktywne ścieżki.` : `${INTERNET_APP_COUNT} rows describe legacy capabilities, not enabled paths.`],
           ]}
         />
       </WikiSection>

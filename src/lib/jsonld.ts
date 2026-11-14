@@ -1,12 +1,10 @@
 import {
   APP_VERSION,
   APP_VERSION_DATE,
+  LATEST_TAGGED_VERSION,
   INSTALL_NIX,
-  INTERNET_APP_COUNT,
   REPO_URL,
   SITE_URL,
-  TEST_COUNT,
-  UPDATE_METHOD_COUNT,
 } from './site'
 import { localizedPath, type Lang } from './routes'
 import type { FaqItem } from './faq'
@@ -35,24 +33,15 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`
 const COPY = {
   en: {
     siteName: 'macOS Updates',
-    siteDesc:
-      'Open-source, one-command updater for Apple Silicon Macs: macOS, App Store, Homebrew, native CLIs, npm and internet-downloaded apps, updated only when the live Mac confirms it.',
-    appDesc: `macOS Updates is an open-source Bash and Python toolkit that keeps macOS, App Store apps, Homebrew, native CLI tools, npm globals and ${INTERNET_APP_COUNT} internet-downloaded apps current on Apple Silicon Macs. It updates only software already installed, never closes apps you have open, checks each vendor's own feed before acting, and reports a result only after the live Mac confirms it.`,
-    sourceDesc: 'Public source snapshot of macOS Updates on upstream main, currently identified as v1.6.0. The latest tagged release is v1.5.5; no v1.6.0 Git tag or GitHub Release exists.',
+    siteDesc: 'Open-source macOS update toolkit for Apple Silicon, with source-aware planning and explicit consent.',
+    appDesc: 'macOS Updates is an open-source Bash and Python toolkit for managing updates on Apple Silicon Macs.',
+    sourceDesc: `Public upstream main source snapshot ${APP_VERSION}, dated ${APP_VERSION_DATE}. Latest tagged release: ${LATEST_TAGGED_VERSION}. No tag or GitHub Release exists for ${APP_VERSION}.`,
     category: 'System update utility',
     os: 'macOS 13 or later (Apple Silicon)',
     home: 'Home',
     features: [
-      'Seven ordered steps: prescan, App Store, native CLIs and npm, Homebrew, internet apps, postupdate history, macOS system update last',
-      'Updates only software already installed on the Mac; supported missing apps are reported, never installed',
-      'Open apps are never closed: the toolkit only quits apps it launched itself',
-      `${INTERNET_APP_COUNT} internet-downloaded apps checked against the vendor's own feed through ${UPDATE_METHOD_COUNT} update methods`,
-      'Verified vendor downloads: Gatekeeper assessment, bundle ID and Apple Team ID checks, staged swap with automatic rollback',
-      'Results reported only when the live Mac confirms them; unknown stays unknown',
-      'Dry-run mode and read-only update coverage report before anything is changed',
-      'macOS softwareupdate with mandatory -R runs last because it can restart the Mac',
-      'Optional private dev_sync overlay for inventory, history and preferences',
-      `Seven terminal UI languages (EN, PL, DE, FR, ES, IT, PT) and ${TEST_COUNT} collected Python unittest cases`,
+      'Open-source toolkit for Apple Silicon Macs',
+      'Local inventory and update workflow',
     ],
     howTo: {
       name: 'Install and run macOS Updates on an Apple Silicon Mac',
@@ -62,7 +51,7 @@ const COPY = {
       steps: [
         {
           name: 'Install',
-          text: `Run the one-line installer in Terminal. It checks or installs setup dependencies, builds a local inventory, and may configure Touch ID for sudo. It does not install supported apps: ${INSTALL_NIX}`,
+          text: `Run the one-line installer in Terminal. It inspects setup and builds a local inventory. Dependency installation requires separate consent; the optional catalog starts unselected: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {
@@ -72,7 +61,7 @@ const COPY = {
         },
         {
           name: 'Run the update',
-          text: 'Run from the install folder: cd ~/Dev_Env/macOS_updates && bash update_all.sh. The seven steps run in order and the macOS system update runs last because it can restart the Mac.',
+          text: 'Run from the install folder: cd ~/Dev_Env/macOS_updates && bash update_all.sh. Review the plan and consent to eligible actions; unresolved sources remain manual.',
           anchor: '#quick-install',
         },
       ],
@@ -87,24 +76,15 @@ const COPY = {
   },
   pl: {
     siteName: 'macOS Updates',
-    siteDesc:
-      'Open-source’owy aktualizator Apple Silicon jedną komendą: macOS, App Store, Homebrew, natywne CLI, npm i aplikacje pobrane z internetu, aktualizowane tylko wtedy, gdy potwierdzi to żywy Mac.',
-    appDesc: `macOS Updates to open-source’owy zestaw skryptów Bash i Python, który utrzymuje aktualne macOS, aplikacje z App Store, Homebrew, natywne narzędzia CLI, globalne pakiety npm i ${INTERNET_APP_COUNT} aplikacji pobranych z internetu na Macach z Apple Silicon. Aktualizuje tylko oprogramowanie już zainstalowane, nigdy nie zamyka otwartych aplikacji, sprawdza wersję w feedzie producenta przed działaniem i raportuje wynik dopiero po potwierdzeniu przez żywego Maca.`,
-    sourceDesc: 'Publiczny snapshot kodu macOS Updates w gałęzi upstream main, obecnie oznaczony jako v1.6.0. Najnowszy tag wydania to v1.5.5; nie ma taga v1.6.0 ani GitHub Release.',
+    siteDesc: 'Otwarty toolkit aktualizacji macOS dla Apple Silicon, z planowaniem według źródła i jawną zgodą.',
+    appDesc: 'macOS Updates to otwarty toolkit Bash i Python do zarządzania aktualizacjami na Macach Apple Silicon.',
+    sourceDesc: `Publiczny snapshot kodu upstream main ${APP_VERSION} z dnia ${APP_VERSION_DATE}. Najnowszy tag wydania: ${LATEST_TAGGED_VERSION}. Nie ma taga ani GitHub Release dla ${APP_VERSION}.`,
     category: 'Narzędzie do aktualizacji systemu',
     os: 'macOS 13 lub nowszy (Apple Silicon)',
     home: 'Strona główna',
     features: [
-      'Siedem uporządkowanych kroków: prescan, App Store, natywne CLI i npm, Homebrew, aplikacje internetowe, historia postupdate, aktualizacja macOS na końcu',
-      'Aktualizuje tylko oprogramowanie już zainstalowane na Macu; obsługiwane brakujące aplikacje są raportowane, nigdy instalowane',
-      'Otwarte aplikacje nigdy nie są zamykane: zestaw zamyka tylko aplikacje, które sam uruchomił',
-      `${INTERNET_APP_COUNT} aplikacji z internetu sprawdzanych w feedzie producenta przez ${UPDATE_METHOD_COUNT} metod aktualizacji`,
-      'Weryfikowane pobrania od producenta: Gatekeeper, bundle ID i Apple Team ID, etapowa podmiana z automatycznym rollbackiem',
-      'Wyniki raportowane tylko po potwierdzeniu przez żywego Maca; nieznane pozostaje nieznane',
-      'Tryb dry-run i raport pokrycia tylko do odczytu przed jakąkolwiek zmianą',
-      'macOS softwareupdate z obowiązkowym -R działa na końcu, bo może zrestartować Maca',
-      'Opcjonalny prywatny overlay dev_sync dla inwentarza, historii i preferencji',
-      `Siedem języków interfejsu terminala (EN, PL, DE, FR, ES, IT, PT) i ${TEST_COUNT} zebranych przypadków unittest w Pythonie`,
+      'Otwarty toolkit dla Maców Apple Silicon',
+      'Lokalny inwentarz i proces aktualizacji',
     ],
     howTo: {
       name: 'Instalacja i uruchomienie macOS Updates na Macu z Apple Silicon',
@@ -114,7 +94,7 @@ const COPY = {
       steps: [
         {
           name: 'Instalacja',
-          text: `Uruchom jednoliniowy instalator w Terminalu. Sprawdza lub instaluje zależności, buduje lokalny inwentarz i może skonfigurować Touch ID dla sudo. Nie instaluje obsługiwanych aplikacji: ${INSTALL_NIX}`,
+          text: `Uruchom jednoliniowy instalator w Terminalu. Sprawdza konfigurację i buduje lokalny inwentarz. Instalacja zależności wymaga osobnej zgody; opcjonalny katalog jest niewybrany: ${INSTALL_NIX}`,
           anchor: '#quick-install',
         },
         {
@@ -124,7 +104,7 @@ const COPY = {
         },
         {
           name: 'Uruchom aktualizację',
-          text: 'Uruchom z katalogu instalacji: cd ~/Dev_Env/macOS_updates && bash update_all.sh. Siedem kroków działa po kolei, a aktualizacja systemu macOS na końcu, bo może zrestartować Maca.',
+          text: 'Uruchom z katalogu instalacji: cd ~/Dev_Env/macOS_updates && bash update_all.sh. Przejrzyj plan i wyraź zgodę na dopuszczone działania; nierozstrzygnięte źródła pozostają ręczne.',
           anchor: '#quick-install',
         },
       ],
@@ -181,7 +161,7 @@ function softwareNode(lang: Lang) {
     description: c.appDesc,
     url: homeUrl(lang),
     inLanguage: lang,
-    softwareVersion: VERSION_NUMBER,
+    softwareVersion: LATEST_TAGGED_VERSION.replace(/^v/i, ''),
     dateModified: APP_VERSION_DATE,
     operatingSystem: c.os,
     processorRequirements: 'Apple Silicon (arm64)',

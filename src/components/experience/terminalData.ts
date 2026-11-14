@@ -1,3 +1,4 @@
+// Historical pre-1.7 illustration; current source-aware policy has different execution gates.
 // Source: i18n/lang_{en,pl,es,fr,de,it,pt}.sh, L_UPDATE_ALL_INTRO and L_UPDATE_ALL_STEPS (lines 120-140).
 // Actions: update_all.sh:812,1509,1558,1598,1645,1694,2268; format: lib/cli.sh:75-82.
 // The action text is English in every upstream language. These are previews, not completed updates.

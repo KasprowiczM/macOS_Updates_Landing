@@ -3,6 +3,7 @@ import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
 import { buildPageJsonLd } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
+import { APP_VERSION, APP_VERSION_DATE, LATEST_TAGGED_VERSION, SYNC_DATE } from '../lib/site'
 
 interface Release {
   version: string
@@ -17,12 +18,21 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: APP_VERSION,
+    date: APP_VERSION_DATE,
+    sourceSnapshot: true,
+    summary: {
+      en: `Source snapshot synchronized on ${SYNC_DATE}. The latest tagged release remains ${LATEST_TAGGED_VERSION}; no ${APP_VERSION} tag or GitHub Release exists. Source-aware inventory records separate instances and source conflicts, with explicit policies, migration and unknown-source handling. Latest-stable advice is separate from execution. The optional catalog starts unselected and uses a separate install plan; no public automatic installation recipes are approved.`,
+      pl: `Snapshot kodu zsynchronizowany ${SYNC_DATE}. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; nie ma taga ani GitHub Release ${APP_VERSION}. Inwentarz rozpoznaje osobne instancje i konflikty źródeł, zasady, migrację i nieznane źródła. Porady o najnowszej stabilnej wersji są oddzielone od wykonania. Opcjonalny katalog jest niewybrany i używa osobnego planu instalacji; nie ma zatwierdzonych publicznych receptur automatycznej instalacji.`,
+    },
+  },
+  {
     version: 'v1.6.0',
     date: '2026-11-10',
     sourceSnapshot: true,
     summary: {
-      en: 'Current upstream source snapshot identified as v1.6.0. No v1.6.0 Git tag or GitHub Release is published; v1.5.5 remains the latest tag. This source adds safer scheduled runs, a read-only readiness doctor, pre-flight checks, safer cask handling, persistent vendor-feed state, and new app handlers.',
-      pl: 'Bieżący snapshot kodu upstream oznaczony jako v1.6.0. Nie opublikowano taga Git ani GitHub Release v1.6.0; najnowszym tagiem pozostaje v1.5.5. Ten kod dodaje bezpieczniejsze harmonogramy, raport gotowości tylko do odczytu, kontrole wstępne, bezpieczniejszą obsługę casków, pamięć statusów kanałów producentów i nowe handlery aplikacji.',
+      en: 'Earlier upstream source snapshot identified as v1.6.0. No v1.6.0 Git tag or GitHub Release is published; v1.5.5 remains the latest tag. This source adds safer scheduled runs, a read-only readiness doctor, pre-flight checks, safer cask handling, persistent vendor-feed state, and new app handlers.',
+      pl: 'Wcześniejszy snapshot kodu upstream oznaczony jako v1.6.0. Nie opublikowano taga Git ani GitHub Release v1.6.0; najnowszym tagiem pozostaje v1.5.5. Ten kod dodaje bezpieczniejsze harmonogramy, raport gotowości tylko do odczytu, kontrole wstępne, bezpieczniejszą obsługę casków, pamięć statusów kanałów producentów i nowe handlery aplikacji.',
     },
     added: [
       {
