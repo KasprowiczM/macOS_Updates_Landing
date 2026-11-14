@@ -43,6 +43,7 @@ export function DocsPage() {
       id: 'daily-usage',
       label: pl ? 'Przewodnik użytkownika' : 'User Guide',
       children: [
+        { id: 'terminal-workspace', label: pl ? 'Środowisko terminalowe' : 'Terminal workspace' },
         { id: 'daily-usage', label: pl ? 'Codzienne użycie' : 'Daily Usage' },
         { id: 'risk-taxonomy', label: pl ? 'Zasady aktualizacji' : 'Update Rules' },
         { id: 'private-overlay', label: pl ? 'Prywatny overlay' : 'Private Overlay' },
@@ -71,6 +72,7 @@ export function DocsPage() {
       label: pl ? 'Przewodnik dewelopera' : 'Developer Guide',
       children: [
         { id: 'dev-setup', label: pl ? 'Konfiguracja' : 'Setup' },
+        { id: 'terminal-development', label: pl ? 'Terminal i testy' : 'Terminal and tests' },
         { id: 'code-style', label: pl ? 'Styl kodu' : 'Code Style' },
         { id: 'testing', label: pl ? 'Testowanie' : 'Testing' },
         { id: 'pr-workflow', label: pl ? 'Pull Request' : 'PR Workflow' },

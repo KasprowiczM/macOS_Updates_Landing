@@ -26,8 +26,8 @@ export const experienceCopy = {
     demoLabel: 'Interaktywny przykład, nie wynik skanowania twojego Maca.',
     promiseTitle: 'Twoja praca\nzostaje otwarta.', promiseLead: 'Narzędzie nie zamyka aplikacji, których używasz. Kończy tylko procesy, które samo uruchomiło.',
     promiseLink: 'Poznaj zasady bezpieczeństwa',
-    facts: ['aplikacji w rejestrze', 'kategorii możliwości', 'zebranych testów unittest'],
-    factNote: 'Liczba testów opisuje kolekcję przypadków, nie wynik uruchomienia zestawu.',
+    facts: ['aplikacji w rejestrze', 'kategorii możliwości', 'zaliczonych testów unittest'],
+    factNote: 'Bieżący zestaw kontrolowany zaliczył wszystkie testy bez pominięć; sprawdzono też zabezpieczenia dostępu do hosta i sieci.',
     closeA: 'Dobry moment', closeB: 'na aktualizację.', footerTitle: 'Do przodu.', independent: 'Niezależny projekt open source. Nie jest produktem Apple.',
   },
   en: {
@@ -57,8 +57,8 @@ export const experienceCopy = {
     demoLabel: 'Interactive illustration, not a scan of your Mac.',
     promiseTitle: 'Keep your\nwork open.', promiseLead: 'The toolkit never closes apps you are using. It only quits processes it launched itself.',
     promiseLink: 'Explore the safety rules',
-    facts: ['apps in the registry', 'legacy capability categories', 'collected unittest cases'],
-    factNote: 'The test count describes collected cases, not a passing suite run.',
+    facts: ['apps in the registry', 'legacy capability categories', 'passed unittest cases'],
+    factNote: 'The current guarded suite passed all cases with no skips; host and network access guards were also checked.',
     closeA: 'A good time', closeB: 'to update.', footerTitle: 'Onward.', independent: 'An independent open-source project. Not an Apple product.',
   },
 }

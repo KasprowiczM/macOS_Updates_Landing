@@ -1,5 +1,5 @@
 import { WikiSection, DocTable } from './WikiSection'
-import { APP_VERSION, INTERNET_APP_COUNT, TEST_COUNT } from '../../lib/site'
+import { APP_VERSION, INTERNET_APP_COUNT, TEST_COUNT, TEST_PASSED } from '../../lib/site'
 
 export function PlatformReference({ pl }: { pl: boolean }) {
   return (
@@ -43,7 +43,7 @@ export function PlatformReference({ pl }: { pl: boolean }) {
             ['bash scripts/report_update_coverage.sh', pl ? `Pełny raport pokrycia metod dla ${INTERNET_APP_COUNT} aplikacji.` : `Full method coverage report for ${INTERNET_APP_COUNT} apps.`],
             ['bash update_all.sh --verify-only', pl ? 'Weryfikacja wersji aplikacji bez modyfikacji systemu.' : 'Verify app versions without system mutations.'],
             ['bash scripts/scaffold_internet_app.sh /path/Observed.app --json', pl ? 'Propozycja do przeglądu dla dokładnej ścieżki aplikacji, bez zgody na wykonanie.' : 'Review-only proposal for an exact app path, with no execution permission.'],
-            ['bash run_tests.sh', pl ? `${TEST_COUNT} zebranych przypadków unittest w Pythonie, plus składnia, registry i gitleaks.` : `${TEST_COUNT} collected Python unittest cases, plus syntax, registry, and gitleaks checks.`],
+            ['bash run_tests.sh', pl ? `${TEST_PASSED} z ${TEST_COUNT} przypadków unittest zaliczonych w bieżącym zweryfikowanym snapshocie źródeł, plus składnia, registry i gitleaks.` : `${TEST_PASSED} of ${TEST_COUNT} Python unittest cases passed in the current verified source snapshot, plus syntax, registry, and gitleaks checks.`],
           ]}
         />
       </WikiSection>

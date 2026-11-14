@@ -9,8 +9,8 @@ export const workshopCopy = {
     oldCaption: 'Historia wyglądu Maca. Ten komputer nie jest wspieranym urządzeniem.',
     statement: 'Każda aplikacja\nma swój sposób.',
     statementLead: 'Ty możesz mieć jeden. macOS Updates zbiera różne źródła aktualizacji w uporządkowany proces, bez zamykania aplikacji, których używasz.',
-    facts: ['aplikacji w rejestrze', 'kategorii możliwości', 'zebranych testów unittest'],
-    factNote: 'Liczba testów opisuje kolekcję przypadków. Nie jest wynikiem uruchomienia zestawu w tej sesji.',
+    facts: ['aplikacji w rejestrze', 'kategorii możliwości', 'zaliczonych testów unittest'],
+    factNote: 'Bieżący zestaw kontrolowany zaliczył wszystkie testy bez pominięć; sprawdzono też zabezpieczenia dostępu do hosta i sieci.',
     workflow: 'Najpierw zobacz.\nPotem zdecyduj.',
     workflowLead: 'Podgląd nie instaluje aktualizacji. Rzeczywisty przebieg pyta o zgodę, a macOS zostawia na koniec.',
     steps: [
@@ -35,8 +35,8 @@ export const workshopCopy = {
     oldCaption: 'A chapter of Mac design history. This computer is not a supported device.',
     statement: 'Every app has\nits own way.',
     statementLead: 'You can have one. macOS Updates brings different update sources into an ordered workflow, keeping the apps you use open.',
-    facts: ['apps in the registry', 'legacy capability categories', 'collected unittest cases'],
-    factNote: 'The test count describes collected cases. It is not a passing suite run from this session.',
+    facts: ['apps in the registry', 'legacy capability categories', 'passed unittest cases'],
+    factNote: 'The current guarded suite passed all cases with no skips; host and network access guards were also checked.',
     workflow: 'See the scope.\nMake the call.',
     workflowLead: 'The preview installs no updates. A real run asks for permission, and macOS comes last.',
     steps: [

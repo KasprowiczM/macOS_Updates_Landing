@@ -2,9 +2,17 @@
 
 Current upstream main source snapshot: {{APP_VERSION}}, dated {{APP_VERSION_DATE}}. Latest tagged release: {{LATEST_TAGGED_VERSION}}. No corresponding tag or GitHub Release exists for {{APP_VERSION}}. This site sync is dated {{SYNC_DATE}}. Source: https://github.com/KasprowiczM/macOS_updates
 
+## Terminal workspace
+
+A bare interactive `bash update_all.sh` opens the workspace and shows the wizard on first launch. Navigation is on the left, actions and live output in the center, with contextual details on the right when space permits. Choose groups before starting a job. One job runs at a time. Settings and wizard completion persist. Help and interface text support seven languages. `?` opens help, Ctrl+P opens the action palette, `c` copies the focused command, output or summary and Ctrl+V pastes into the input field. Secret input is masked when echo is disabled. `--cli` selects the legacy interface and explicit flags such as `--dry-run` retain CLI behavior. Bare interactive `setup.sh` opens the wizard and `build_inventory.sh` opens inventory.
+
 ## Inventory and plans
 
-The toolkit targets Apple Silicon Macs running macOS 13 to 27. Its inventory tracks individual application instances and package identities, source availability, conflicts, policies, migration and unknown origins. Partial or unavailable observations remain explicit. `--plan` and `--dry-run` are observational. Plain `--dry-run` renders a readable preview of up to {{PREVIEW_TARGET_LIMIT}} targets, with the number omitted. `--plan` and `--dry-run --json-summary` retain the full JSON plan. Unicode output and closed output pipes are handled safely. An eligible existing-manager update requires explicit consent and fresh checks. Unknown or conflicting sources need a manual decision. Automatic yes, EOF and unattended execution do not grant new installation permission.
+The toolkit targets Apple Silicon Macs running macOS 13 to 27. Its inventory tracks individual application instances and package identities, source availability, conflicts, policies, migration and unknown origins. Partial or unavailable observations remain explicit. `--plan` and `--dry-run` are observational. Plain `--dry-run` shows up to {{PREVIEW_TARGET_LIMIT}} names with source and status, the number omitted, and four totals: already allowed, needing a decision, blocked, and manual or skipped. `--plan` and `--dry-run --json-summary` retain the full JSON plan. Unicode output and closed output pipes are handled safely. An eligible existing-manager update requires explicit consent and fresh checks. Unknown or conflicting sources need a manual decision. Automatic yes, EOF and unattended execution do not grant new installation permission.
+
+Normal consent review shows only eligible actions, {{CONSENT_PAGE_SIZE}} per page. Enter 1,3 to approve only those displayed scopes; n/p changes pages. The explained {{CONSENT_TIMEOUT_SECONDS}}-second overall timeout continues without granting new consent, while saved permissions remain in effect. Enter or q also continues without new consent. All seven toolkit languages provide these messages. Real-run logging starts before consent review.
+
+Complete, validated Cellar coverage keeps Homebrew formula evidence fresh despite invalid cask metadata. Incomplete Cellar coverage still blocks actions; formula updates require consent and fresh checks. Aggregate diagnostics remain visible and host metadata is not repaired.
 
 The registry has {{INTERNET_APP_COUNT}} rows representing {{PRODUCT_COUNT}} products and {{UPDATE_METHOD_COUNT}} legacy capability categories. These are catalog records, not {{INTERNET_APP_COUNT}} enabled automatic updates or {{UPDATE_METHOD_COUNT}} active execution paths. Generic native and vendor paths remain manual. Native CLI, Node, Bun and missing CLI bootstrap are not automatically executed by the current policy. npm effects involving scripts, dependencies or new global commands are deferred. The legacy App Store Track 2 GUI is inactive behind the plan gate.
 
@@ -18,7 +26,7 @@ Source checkpoints T1 through T5b add monotonic evidence timing, exact recipe an
 
 The installer clones the repository and inspects setup. Dependency installation and shell configuration require separate consent. Preview using `bash update_all.sh --dry-run -y` from the toolkit directory; `-y` grants no new permission.
 
-On {{VERIFICATION_DATE}} the upstream suite collected {{TEST_COUNT}} Python unittest cases: {{TEST_PASSED}} passed, {{TEST_SKIPPED}} skipped, with no host-tool or network guard hits. Static and secret checks are separate. This site did not run the upstream suite.
+The current verified source snapshot passed {{TEST_PASSED}} of {{TEST_COUNT}} Python unittest cases with {{TEST_SKIPPED}} skips in 280.859 seconds on {{VERIFICATION_DATE}}. Guarded host-tool and network checks, shell validation and secret scans also passed.
 
 ## Links
 

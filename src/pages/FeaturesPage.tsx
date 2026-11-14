@@ -102,7 +102,7 @@ export function FeaturesPage() {
         'Porady o najnowszej stabilnej wersji nie wykonują automatycznej migracji',
         'Opcjonalny katalog jest niewybrany, a instalacja ma osobny plan. Brak zatwierdzonych publicznych receptur automatycznej instalacji',
         'Raport gotowości --doctor tylko do odczytu, lokalna historia i siedem języków interfejsu terminala',
-        `${TEST_COUNT} zebranych przypadków unittest w Pythonie`,
+        `${TEST_COUNT} przypadków unittest w snapshot 1.7.7`,
       ]
     : [
         'Inventory identifies separate instances, sources, conflicts and unknown origins; policies and migration require explicit decisions',
@@ -112,7 +112,7 @@ export function FeaturesPage() {
         'Latest-stable advice does not automatically migrate software',
         'The optional catalog starts unselected and installation has a separate plan. No public automatic installation recipes are approved',
         'Read-only --doctor readiness report, local history and seven terminal UI languages',
-        `${TEST_COUNT} collected Python unittest cases`,
+        `${TEST_COUNT} Python unittest cases in snapshot 1.7.7`,
       ]
 
   const lang = useLang()

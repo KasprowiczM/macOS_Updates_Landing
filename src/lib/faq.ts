@@ -54,7 +54,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'q4',
     q: 'Can I preview before updating?',
-    a: `Yes. bash update_all.sh --dry-run -y shows up to ${PREVIEW_TARGET_LIMIT} targets in a readable preview. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps.`,
+    a: `Yes. bash update_all.sh --dry-run -y shows up to ${PREVIEW_TARGET_LIMIT} names with source and status, plus totals for already allowed, needing a decision, blocked, and manual or skipped. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps.`,
   },
   {
     id: 'q5',

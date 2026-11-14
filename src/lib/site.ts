@@ -8,7 +8,7 @@ export const SITE_URL = 'https://macos-updates.64bit.site'
 
 export const REPO_URL = 'https://github.com/KasprowiczM/macOS_updates'
 
-export const APP_VERSION = 'v1.7.7'
+export const APP_VERSION = 'v1.8.0'
 
 export const LATEST_TAGGED_VERSION = 'v1.5.5'
 
@@ -16,7 +16,11 @@ export const SYNC_DATE = '2026-11-14'
 
 export const PRODUCT_COUNT = 48
 
-export const PREVIEW_TARGET_LIMIT = 25
+export const PREVIEW_TARGET_LIMIT = 10
+
+export const CONSENT_PAGE_SIZE = 10
+
+export const CONSENT_TIMEOUT_SECONDS = 120
 
 export const ACTIVE_RECIPE_COUNT = 0
 
@@ -24,9 +28,9 @@ export const PRODUCTION_NATIVE_DRIVER_COUNT = 0
 
 export const APP_VERSION_DATE = '2026-11-14'
 
-export const TEST_COUNT = 1350
+export const TEST_COUNT = 1441
 
-export const TEST_PASSED = 1350
+export const TEST_PASSED = 1441
 
 export const TEST_SKIPPED = 0
 

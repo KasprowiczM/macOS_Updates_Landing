@@ -3,7 +3,7 @@ import { DocLayout } from '../components/layout/DocLayout'
 import { Seo } from '../components/Seo'
 import { buildPageJsonLd } from '../lib/jsonld'
 import { useLang } from '../lib/routes'
-import { ACTIVE_RECIPE_COUNT, APP_VERSION, APP_VERSION_DATE, LATEST_TAGGED_VERSION, PREVIEW_TARGET_LIMIT, PRODUCTION_NATIVE_DRIVER_COUNT, SYNC_DATE } from '../lib/site'
+import { ACTIVE_RECIPE_COUNT, APP_VERSION, APP_VERSION_DATE, CONSENT_PAGE_SIZE, CONSENT_TIMEOUT_SECONDS, LATEST_TAGGED_VERSION, PREVIEW_TARGET_LIMIT, PRODUCTION_NATIVE_DRIVER_COUNT } from '../lib/site'
 
 interface Release {
   version: string
@@ -22,13 +22,53 @@ const RELEASES: Release[] = [
     date: APP_VERSION_DATE,
     sourceSnapshot: true,
     summary: {
-      en: `Source snapshot synchronized on ${SYNC_DATE}. The latest tagged release remains ${LATEST_TAGGED_VERSION}; no ${APP_VERSION} tag or GitHub Release exists. Checkpoints T1 through T5b add evidence timing, exact recipe bindings, consent-bound execution infrastructure, native-session supervision and durable scheduling. Active vendor, native and first-install recipes: ${ACTIVE_RECIPE_COUNT}; production native drivers: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Live acceptance remains deferred.`,
-      pl: `Snapshot kodu zsynchronizowany ${SYNC_DATE}. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; nie ma taga ani GitHub Release ${APP_VERSION}. Etapy T1 do T5b dodają pomiar czasu dowodów, dokładne wiązania receptur, infrastrukturę wykonania zależną od zgody, nadzór sesji natywnych i trwałe harmonogramowanie. Aktywne receptury producentów, natywne i pierwszej instalacji: ${ACTIVE_RECIPE_COUNT}; produkcyjne sterowniki natywne: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Akceptacja na żywo pozostaje odroczona.`,
+      en: `Source snapshot ${APP_VERSION} introduces a terminal workspace. The latest tagged release remains ${LATEST_TAGGED_VERSION}; ${APP_VERSION} has no Git tag or GitHub Release.`,
+      pl: `Snapshot kodu ${APP_VERSION} wprowadza środowisko terminalowe. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; ${APP_VERSION} nie ma taga Git ani GitHub Release.`,
+    },
+    added: [{
+      en: 'Interactive launches open a terminal workspace with a setup wizard, group selection, live output, context details, settings and help in seven languages. One supervised job runs at a time.',
+      pl: 'Interaktywne uruchomienie otwiera środowisko terminalowe z kreatorem, wyborem grup, bieżącym wyjściem, szczegółami, ustawieniami i pomocą w siedmiu językach. Jednocześnie działa jedno nadzorowane zadanie.',
+    }],
+    changed: [{
+      en: 'Use --cli for the legacy text interface. Explicit flags such as --dry-run keep their CLI behavior. Setup and inventory open their respective views on bare interactive launches.',
+      pl: 'Opcja --cli wybiera dotychczasowy interfejs tekstowy. Jawne opcje, takie jak --dry-run, zachowują działanie CLI. Interaktywne uruchomienie setup i inventory otwiera odpowiednie widoki.',
+    }],
+  },
+  {
+    version: 'v1.7.8',
+    date: '2026-11-14',
+    sourceSnapshot: true,
+    summary: {
+      en: `Local checkpoint v1.7.8 is included in ${APP_VERSION}; it was not published separately. The latest tagged release remains ${LATEST_TAGGED_VERSION}; no v1.7.8 tag or GitHub Release exists. This update makes previews and consent easier to review and separates validated formula coverage from unrelated cask errors. Active vendor, native and first-install recipes: ${ACTIVE_RECIPE_COUNT}; production native drivers: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Live acceptance remains deferred.`,
+      pl: `Lokalny etap v1.7.8 jest częścią ${APP_VERSION}; nie był publikowany osobno. Najnowszy tag wydania to ${LATEST_TAGGED_VERSION}; nie ma taga ani GitHub Release v1.7.8. Ta zmiana ułatwia przegląd podglądu i zgód oraz oddziela zweryfikowane pokrycie formuł od niezwiązanych błędów casków. Aktywne receptury producentów, natywne i pierwszej instalacji: ${ACTIVE_RECIPE_COUNT}; produkcyjne sterowniki natywne: ${PRODUCTION_NATIVE_DRIVER_COUNT}. Akceptacja na żywo pozostaje odroczona.`,
     },
     fixed: [
       {
-        en: `Plain --dry-run now shows a readable preview of up to ${PREVIEW_TARGET_LIMIT} targets. --plan and --dry-run --json-summary retain the full JSON plan. Unicode output and closed output pipes are handled without a shutdown traceback; previews remain observational.`,
-        pl: `Zwykły --dry-run pokazuje teraz czytelny podgląd do ${PREVIEW_TARGET_LIMIT} celów. --plan i --dry-run --json-summary zachowują pełny plan JSON. Obsługa Unicode i zamkniętego potoku wyjściowego zapobiega tracebackowi przy kończeniu; podgląd pozostaje obserwacyjny.`,
+        en: `Plain --dry-run shows up to ${PREVIEW_TARGET_LIMIT} readable names with source and status, plus four totals: already allowed, needing a decision, blocked, and manual or skipped. --plan and --dry-run --json-summary retain the full JSON plan.`,
+        pl: `Zwykły --dry-run pokazuje do ${PREVIEW_TARGET_LIMIT} czytelnych nazw ze źródłem i statusem oraz cztery sumy: już dozwolone, wymagające decyzji, zablokowane oraz ręczne lub pominięte. --plan i --dry-run --json-summary zachowują pełny plan JSON.`,
+      },
+      {
+        en: `Normal consent review lists only eligible actions, ${CONSENT_PAGE_SIZE} per page. Enter 1,3 to approve only those displayed scopes; n/p navigates. The explained ${CONSENT_TIMEOUT_SECONDS}-second overall timeout continues without new consent. Real-run logging starts before review. Messages are localized in all seven toolkit languages.`,
+        pl: `Zwykły przegląd zgód pokazuje tylko dopuszczone działania, po ${CONSENT_PAGE_SIZE} na stronę. Wpisz 1,3, aby zatwierdzić tylko pokazane zakresy tych pozycji; n/p zmienia stronę. Wyjaśniony limit ${CONSENT_TIMEOUT_SECONDS} sekund na cały przegląd oznacza dalszy przebieg bez nowej zgody. Log rzeczywistego przebiegu zaczyna się przed przeglądem. Komunikaty są dostępne w siedmiu językach toolkita.`,
+      },
+      {
+        en: 'A complete, validated Cellar scan keeps Homebrew formula evidence fresh despite invalid cask metadata. Incomplete Cellar remains blocked, aggregate diagnostics remain visible, and formula updates still require consent and fresh checks. Host metadata is not repaired.',
+        pl: 'Pełny, zweryfikowany skan Cellar zachowuje świeże dowody formuł Homebrew mimo błędnych metadanych casków. Niepełny Cellar nadal blokuje działania, zbiorcza diagnostyka pozostaje widoczna, a aktualizacje formuł nadal wymagają zgody i świeżych kontroli. Metadane hosta nie są naprawiane.',
+      },
+    ],
+  },
+  {
+    version: 'v1.7.7',
+    date: '2026-11-14',
+    sourceSnapshot: true,
+    summary: {
+      en: `Source snapshot synchronized on 2026-11-14. The latest tagged release remains v1.5.5; no v1.7.7 tag or GitHub Release exists. Checkpoints T1 through T5b add evidence timing, exact recipe bindings, consent-bound execution infrastructure, native-session supervision and durable scheduling. Active vendor, native and first-install recipes: 0; production native drivers: 0. Live acceptance remains deferred.`,
+      pl: `Snapshot kodu zsynchronizowany 2026-11-14. Najnowszy tag wydania to v1.5.5; nie ma taga ani GitHub Release v1.7.7. Etapy T1 do T5b dodają pomiar czasu dowodów, dokładne wiązania receptur, infrastrukturę wykonania zależną od zgody, nadzór sesji natywnych i trwałe harmonogramowanie. Aktywne receptury producentów, natywne i pierwszej instalacji: 0; produkcyjne sterowniki natywne: 0. Akceptacja na żywo pozostaje odroczona.`,
+    },
+    fixed: [
+      {
+        en: `Plain --dry-run now shows a readable preview of up to 25 targets. --plan and --dry-run --json-summary retain the full JSON plan. Unicode output and closed output pipes are handled without a shutdown traceback; previews remain observational.`,
+        pl: `Zwykły --dry-run pokazuje teraz czytelny podgląd do 25 celów. --plan i --dry-run --json-summary zachowują pełny plan JSON. Obsługa Unicode i zamkniętego potoku wyjściowego zapobiega tracebackowi przy kończeniu; podgląd pozostaje obserwacyjny.`,
       },
     ],
   },

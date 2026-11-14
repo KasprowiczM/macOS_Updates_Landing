@@ -9,8 +9,8 @@
       "desc": "Report supported, missing, and unknown apps, plus pending-after-run counts and chronic step-warning streaks."
     },
     "frontends": {
-      "title": "Inventory-first install",
-      "desc": "The installer inspects setup and builds a local inventory when Python is available; dependency changes require separate consent."
+      "title": "Terminal workspace",
+      "desc": "Navigate actions, choose groups and follow live output with contextual details. A first-run wizard guides setup."
     },
     "scheduler": {
       "title": "Readiness and scheduled runs",
@@ -26,11 +26,11 @@
     },
     "plugins": {
       "title": "Run tests and secret scans",
-      "desc": "The upstream runner collects {{tests}} Python unittest cases, plus shell syntax, registry, static safety, and secret checks."
+      "desc": "The current verified source snapshot passed {{tests}} Python unittest cases with no skips. Guarded host-tool and network checks, shell validation and secret scans also passed."
     },
     "multihost": {
       "title": "Seven-language UI",
-      "desc": "English, Polish, German, French, Spanish, Italian, and Portuguese shell messages."
+      "desc": "Terminal workspace and messages in English, Polish, German, French, Spanish, Italian and Portuguese."
     },
     "editions": {
       "title": "Apple Silicon focus",
@@ -103,7 +103,7 @@
       },
       "q4": {
         "q": "Can I preview before updating?",
-        "a": "Yes. bash update_all.sh --dry-run -y shows up to {{previewLimit}} targets in a readable preview. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps."
+        "a": "Yes. bash update_all.sh --dry-run -y shows up to {{previewLimit}} names with source and status, plus totals for already allowed, needing a decision, blocked, and manual or skipped. Use --dry-run --json-summary or --plan for the full JSON plan. Neither grants consent or changes apps."
       },
       "q5": {
         "q": "What does dev_sync do?",
@@ -127,7 +127,7 @@
       },
       "q10": {
         "q": "How do I update all apps on a Mac at once?",
-        "a": "Preview with bash update_all.sh --dry-run -y. Eligible manager updates require consent; unresolved sources stay manual."
+        "a": "Preview with bash update_all.sh --dry-run -y. In an interactive terminal, bash update_all.sh opens the workspace; use --cli for the legacy interface. Eligible updates require consent."
       },
       "q11": {
         "q": "Does macOS Updates close my open apps?",
@@ -153,9 +153,9 @@
     "titleA": "Your Mac.",
     "titleGo": "Up to date.",
     "titleB": "",
-    "sub": "Inspect this Mac, review source-aware plans and approve eligible manager updates. Unknown sources stay manual.",
+    "sub": "Review source-aware plans and choose eligible updates in a terminal workspace. Unknown sources stay manual.",
     "proofApps": "registry rows",
-    "proofTests": "unit test cases",
+    "proofTests": "verified Python unittest cases in the current source snapshot",
     "proofOpen": "open source",
     "copy": "Copy install command",
     "copied": "Copied",
@@ -359,7 +359,7 @@
     "entries": {
       "release": {
         "title": "{{version}} current source snapshot",
-        "body": "Source checkpoints T1 through T5b add evidence timing, recipe bindings, execution infrastructure and durable scheduling. Plain dry-run shows up to {{previewLimit}} targets; --plan and --dry-run --json-summary retain full JSON. No vendor, native or first-install recipes or production native drivers are active. Live acceptance remains deferred. The latest tag is {{latestTag}}; {{version}} is untagged."
+        "body": "The terminal workspace adds a first-run wizard, group selection, live output, contextual details, saved settings and help in seven languages. One job runs at a time. Use --cli for the legacy interface; --dry-run stays in the CLI. {{version}} is an untagged source snapshot; the latest tag is {{latestTag}}."
       },
       "live": {
         "title": "Live run: two updates verified",

@@ -5,6 +5,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## 2026-11-14 source sync, v1.8.0
+
+- Documented the terminal workspace, first-run wizard, group selection, live output, contextual details, saved settings and seven-language help. One job runs at a time.
+- Documented bare interactive entry points, `--cli` and CLI preview behavior. The latest tag remains v1.5.5; v1.8.0 is an untagged source snapshot.
+- Kept the last verified test count tied to the earlier v1.7.7 snapshot while v1.8.0 verification is pending.
+
+## 2026-11-14 local checkpoint, v1.7.8 included in v1.8.0
+
+- Included the local v1.7.8 checkpoint in v1.8.0, without a separate publication. The latest tagged release remains v1.5.5; v1.7.8 has no tag or GitHub Release. Historical v1.7.7 entries remain intact.
+- Documented the 10-name dry-run preview with source, status and four category totals; explicit JSON flags retain the complete plan.
+- Documented eligible-only consent pages of 10 entries, plain-number choices, n/p navigation, the explained 120-second overall timeout and continuation without new consent. These messages are localized in all seven toolkit languages.
+- Documented logging before consent review and complete Cellar observations that keep valid formula evidence independent of invalid cask metadata. Aggregate diagnostics remain visible, incomplete Cellar stays blocked, and updates still require consent; host metadata is not repaired.
+- Preserved deferred live acceptance and zero active production recipes or native drivers.
+- Registry facts remain 47 rows, 48 products and 11 legacy capability categories. Verification for this checkpoint was not confirmed.
+
 ## 2026-11-14 source sync, v1.7.7
 
 - Synchronized source checkpoints T1 through T5b and the v1.7.7 dry-run fix. The latest tagged release remains v1.5.5; v1.7.7 has no tag or GitHub Release.

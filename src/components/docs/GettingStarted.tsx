@@ -41,15 +41,16 @@ export function GettingStarted({ pl }: { pl: boolean }) {
         </InfoCard>
         <h3>{pl ? 'Krok 2. Podejrzyj zmiany' : 'Step 2. Preview the changes'}</h3>
         <p>{pl
-          ? `Uruchom podgląd z katalogu instalacji. Pokazuje do ${PREVIEW_TARGET_LIMIT} celów i liczbę pozostałych. Nie stosuje aktualizacji ani nie zapisuje nowych zgód.`
-          : `Run the preview from the install folder. It shows up to ${PREVIEW_TARGET_LIMIT} targets and the number remaining. It applies no updates and records no new consent.`
+          ? `Uruchom podgląd z katalogu instalacji. Pokazuje do ${PREVIEW_TARGET_LIMIT} nazw ze źródłem i statusem, liczbę pozostałych oraz sumy czterech kategorii: już dozwolone, wymagające decyzji, zablokowane oraz ręczne lub pominięte. Nie stosuje aktualizacji ani nie zapisuje nowych zgód.`
+          : `Run the preview from the install folder. It shows up to ${PREVIEW_TARGET_LIMIT} names with source and status, the number remaining, and four category totals: already allowed, needing a decision, blocked, and manual or skipped. It applies no updates and records no new consent.`
         }</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
         <p>{pl ? 'Pełny plan w JSON jest dostępny przez --dry-run --json-summary albo --plan.' : 'The full JSON plan is available with --dry-run --json-summary or --plan.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run --json-summary`}</CodeBlock>
         <h3>{pl ? 'Krok 3. Uruchom aktualizacje' : 'Step 3. Run the updates'}</h3>
-        <p>{pl ? 'Po sprawdzeniu podglądu uruchom aktualizacje. macOS jest przetwarzany na końcu i może wymagać restartu.' : 'After reviewing the preview, run the updates. macOS runs last and may require a restart.'}</p>
+        <p>{pl ? 'Po sprawdzeniu podglądu otwórz środowisko terminalowe i wybierz działanie. Przy pierwszym uruchomieniu pojawi się kreator. macOS jest przetwarzany na końcu i może wymagać restartu.' : 'After reviewing the preview, open the terminal workspace and choose an action. The first launch opens a setup wizard. macOS runs last and may require a restart.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh`}</CodeBlock>
+        <p>{pl ? 'W interaktywnym terminalu setup.sh otwiera kreator, a build_inventory.sh widok inwentarza. Dodaj --cli, aby użyć dotychczasowego trybu tekstowego. --dry-run pozostaje podglądem CLI.' : 'In an interactive terminal, setup.sh opens the wizard and build_inventory.sh opens inventory. Add --cli for the legacy text interface. --dry-run remains a CLI preview.'}</p>
       </WikiSection>
 
       <WikiSection id="update" title={pl ? 'Kolejne aktualizacje' : 'Later updates'}>

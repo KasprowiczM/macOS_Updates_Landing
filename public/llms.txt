@@ -1,14 +1,18 @@
 # macOS Updates
 
-> macOS Updates is an open-source toolkit for Apple Silicon Macs. The upstream main source snapshot is v1.7.7, dated 2026-11-14. The latest tagged release is v1.5.5; no v1.7.7 tag or GitHub Release exists.
+> macOS Updates is an open-source toolkit for Apple Silicon Macs. The upstream main source snapshot is v1.8.0, dated 2026-11-14. The latest tagged release is v1.5.5; no v1.8.0 tag or GitHub Release exists.
 
-The source-aware inventory records separate instances, sources, conflicts and unknowns. Plans and dry runs are observational. Plain --dry-run shows up to 25 targets in readable form; --plan and --dry-run --json-summary retain the full JSON plan. Unicode names and closed output pipes are handled safely. Eligible existing-manager updates require explicit consent and fresh checks. Unresolved sources, generic vendor paths, native CLI, Node and Bun remain manual. npm effects involving scripts, dependencies or new commands are deferred. The legacy App Store Track 2 GUI is inactive under the current plan gate.
+In an interactive terminal, bare bash update_all.sh opens the terminal workspace, with a wizard on first launch. It offers group selection, live output, details, saved settings and help in seven languages; one job runs at a time. Use --cli for the legacy text interface. Explicit --dry-run stays in the CLI. Bare interactive setup.sh opens the wizard and build_inventory.sh opens inventory.
+
+The source-aware inventory records separate instances, sources, conflicts and unknowns. Plans and dry runs are observational. Plain --dry-run shows up to 10 names with source and status, plus four totals for already allowed, needing a decision, blocked, and manual or skipped; --plan and --dry-run --json-summary retain the full JSON plan. Unicode names and closed output pipes are handled safely. Eligible existing-manager updates require explicit consent and fresh checks. Unresolved sources, generic vendor paths, native CLI, Node and Bun remain manual. npm effects involving scripts, dependencies or new commands are deferred. The legacy App Store Track 2 GUI is inactive under the current plan gate.
+
+Normal consent review shows only eligible actions, 10 per page. Enter 1,3 to approve those displayed scopes; n/p changes pages. The explained 120-second overall review limit continues without new consent on timeout; saved permissions remain valid. Messages are localized in all seven toolkit languages. Real-run logging starts before consent review. Complete, validated Cellar coverage keeps Homebrew formula evidence fresh despite invalid cask metadata. Incomplete Cellar stays blocked; formula updates still require consent and fresh checks. Host metadata is not repaired.
 
 The registry has 47 rows covering 48 products and 11 legacy capability categories; these are not 11 enabled execution paths or 47 automatic updates. Latest-stable advice does not automatically migrate software. The optional application catalog starts unselected and uses a separate consent-bound InstallPlan. No public automatic installation recipes are approved.
 
 Source checkpoints T1 through T5b add evidence timing, exact recipe bindings, execution infrastructure, native-session supervision and durable scheduling. Production parallelism remains disabled pending live acceptance. Active vendor, native and first-install recipes: 0. Production native drivers: 0. T6 live acceptance is deferred; no new recipe is activated.
 
-The 2026-11-14 upstream test run collected 1350 Python unittest cases: 1350 passed and none skipped, with no host-tool or network guard hits. This site did not run that suite.
+The current verified source snapshot passed 1441 Python unittest cases with no skips in 280.859 seconds on 2026-11-14. Guarded host-tool and network checks, shell validation and secret scans also passed.
 
 Source and documentation: https://github.com/KasprowiczM/macOS_updates
 Site: https://macos-updates.64bit.site/ and https://macos-updates.64bit.site/pl

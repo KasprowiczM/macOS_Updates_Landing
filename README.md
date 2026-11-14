@@ -1,7 +1,6 @@
 # macOS Updates Landing
 
-[![Source snapshot](https://img.shields.io/badge/source-v1.7.7-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
-[![Tests](https://img.shields.io/badge/tests-1350%20unit-cases-success.svg)](https://github.com/KasprowiczM/macOS_updates)
+[![Source snapshot](https://img.shields.io/badge/source-v1.8.0-blue.svg)](https://github.com/KasprowiczM/macOS_updates)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 The landing page and documentation site for [**macOS Updates**](https://github.com/KasprowiczM/macOS_updates), a one-command updater for Apple Silicon Macs running macOS 13 to 27. The production site is [macos-updates.64bit.site](https://macos-updates.64bit.site); this repository describes the current source and does not imply that every local change is published.
@@ -10,11 +9,17 @@ The site is static: no backend and no secrets. Every page is prerendered at buil
 
 ---
 
-Source snapshot v1.7.7 is dated 2026-11-14 and this site sync is dated 2026-11-14. The latest tagged release remains v1.5.5; no v1.7.7 tag or GitHub Release exists. The registry has 47 rows covering 48 products. Upstream verification on 2026-11-14 collected 1350 unittest cases: 1350 passed and none skipped, with no host-tool or network guard hits.
+Source snapshot v1.8.0 is dated 2026-11-14 and this site sync is dated 2026-11-14. The latest tagged release remains v1.5.5; no v1.8.0 tag or GitHub Release exists. The registry has 47 rows covering 48 products. The source snapshot passed 1441 Python unittest cases with no skips; guarded host-tool and network checks, shell validation and secret scans also passed on 2026-11-14.
+
+The interactive terminal workspace opens with `bash update_all.sh`; the first launch presents a setup wizard. It provides group selection, live output, contextual details, persistent settings and help in seven languages. One supervised job runs at a time. Use `--cli` for the legacy interface; `--dry-run` remains a CLI preview. Bare interactive `setup.sh` opens the wizard and `build_inventory.sh` opens inventory.
 
 The source-aware inventory records source conflicts and unknowns, applies explicit policies and supports migration; latest-stable advice does not automatically migrate software. The optional catalog starts unselected and has a separate consent-bound InstallPlan. No public automatic installation recipes are approved, and generic vendor/native paths remain manual.
 
-Plain `--dry-run` shows a readable preview of up to 25 targets and reports the number remaining. `--plan` and `--dry-run --json-summary` retain the full JSON plan. Unicode output and closed pipes are handled without a shutdown traceback. Preview remains observational.
+Plain `--dry-run` shows up to 10 names with source and status, the number remaining, and four totals: already allowed, needing a decision, blocked, and manual or skipped. `--plan` and `--dry-run --json-summary` retain the full JSON plan. Unicode output and closed pipes are handled without a shutdown traceback. Preview remains observational.
+
+The initial confirmation starts checks and permission review. The normal consent menu shows only eligible actions, 10 per page. Enter `1,3` to approve those displayed scopes and use `n`/`p` to navigate. The explained 120-second review timeout continues without granting new consent; saved permissions remain in effect. These messages are localized in all seven toolkit languages. Real-run logging begins before consent review.
+
+A complete, validated Cellar scan keeps Homebrew formula evidence fresh when separate cask metadata is invalid. Incomplete Cellar coverage still blocks actions. Formula updates still need consent and fresh checks; host metadata is not repaired.
 
 Source checkpoints T1 through T5b add evidence timing, recipe and candidate bindings, execution infrastructure, native-session supervision and durable scheduling with per-action receipts and recovery barriers. Production parallelism remains disabled pending live product acceptance; macOS stays the final exclusive mutation. There are zero active vendor, native or first-install recipes and zero production native drivers. T6 live acceptance is deferred.
 
@@ -141,9 +146,10 @@ macOS_updates_landing/
 
 Sync with every upstream macOS Updates release. Update `src/lib/site.ts`:
 
-- `APP_VERSION` (current upstream source snapshot: `v1.7.7`; latest tagged release: `v1.5.5`)
+- `APP_VERSION` (current upstream source snapshot: `v1.8.0`; latest tagged release: `v1.5.5`)
 - `APP_VERSION_DATE` (currently `2026-11-14`)
-- `TEST_COUNT` (currently `1350` collected Python unittest cases)
+- `CONSENT_PAGE_SIZE` and `CONSENT_TIMEOUT_SECONDS` (current consent review: `10` entries per page, `120` seconds overall)
+- `TEST_COUNT` (`1441` passed Python unittest cases in the current verified source snapshot)
 - `INTERNET_APP_COUNT` (currently `47`)
 - `UPDATE_METHOD_COUNT` (currently `11` legacy capability categories, not enabled execution paths)
 

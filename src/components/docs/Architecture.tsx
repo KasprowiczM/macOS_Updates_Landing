@@ -1,5 +1,5 @@
 import { WikiSection, CodeBlock, DocTable } from './WikiSection'
-import { TEST_COUNT } from '../../lib/site'
+import { TEST_COUNT, TEST_PASSED } from '../../lib/site'
 
 export function Architecture({ pl }: { pl: boolean }) {
   return (
@@ -37,8 +37,8 @@ update_system.sh               # macOS system update`}</CodeBlock>
 
       <WikiSection id="native-bash" title={pl ? 'Ograniczenia runtime' : 'Runtime Constraints'}>
         <p>{pl
-          ? `Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Zebrano ${TEST_COUNT} przypadków unittest; kontrole statyczne są osobne.`
-          : `The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. The suite collected ${TEST_COUNT} unittest cases; static checks are separate.`
+          ? `Projekt musi działać na Bashu 3.2 dostarczanym przez macOS. Nie używa declare -A, mapfile ani readarray. Ścieżki opierają się na SCRIPT_DIR zamiast hardcodowanych katalogów. Bieżący zweryfikowany snapshot źródeł zaliczył ${TEST_PASSED} z ${TEST_COUNT} przypadków unittest; kontrole statyczne i skan sekretów również przeszły.`
+          : `The project must run on macOS-provided Bash 3.2. It avoids declare -A, mapfile, and readarray. Paths are based on SCRIPT_DIR instead of hardcoded directories. The current verified source snapshot passed ${TEST_PASSED} of ${TEST_COUNT} unittest cases; static checks and secret scans also passed.`
         }</p>
       </WikiSection>
     </>

@@ -12,6 +12,10 @@ export function DeveloperGuide({ pl }: { pl: boolean }) {
         }</p>
       </WikiSection>
 
+      <WikiSection id="terminal-development" title={pl ? 'Terminal i testy' : 'Terminal and tests'}>
+        <p>{pl ? 'Interfejs korzysta z modułów Python i uruchamia wyłącznie przypisane działania jako procesy potomne. Testuj na izolowanych danych bez uruchamiania narzędzi systemowych. --cli wymusza dotychczasową ścieżkę, a --preferences-only otwiera przegląd zapisanych decyzji bez przebiegu aktualizacji.' : 'The interface uses Python modules and launches fixed child actions. Test with isolated fixtures without running host tools. --cli forces the legacy path, and --preferences-only reviews saved decisions without running updates.'}</p>
+      </WikiSection>
+
       <WikiSection id="code-style" title={pl ? 'Styl kodu' : 'Code Style'}>
         <DocTable
           headers={[pl ? 'Obszar' : 'Area', pl ? 'Reguła' : 'Rule']}

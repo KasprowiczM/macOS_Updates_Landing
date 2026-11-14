@@ -1,8 +1,29 @@
 import { WikiSection, CodeBlock, DocTable } from './WikiSection'
+import { CONSENT_PAGE_SIZE, CONSENT_TIMEOUT_SECONDS, PREVIEW_TARGET_LIMIT } from '../../lib/site'
 
 export function UserGuide({ pl }: { pl: boolean }) {
   return (
     <>
+      <WikiSection id="terminal-workspace" title={pl ? 'Środowisko terminalowe' : 'Terminal workspace'}>
+        <p>{pl ? 'Uruchomienie bash update_all.sh bez opcji w interaktywnym terminalu otwiera środowisko, a przy pierwszym uruchomieniu kreator. Lewy panel służy do nawigacji, środek pokazuje działania i bieżące wyjście, a prawy panel szczegóły. Wybierz grupy przed uruchomieniem. Jednocześnie działa jedno zadanie.' : 'In an interactive terminal, bash update_all.sh opens the workspace, with a wizard on first launch. The left panel provides navigation, the center shows actions and live output, and the right panel shows details. Choose groups before starting. One job runs at a time.'}</p>
+        <figure className="space-y-2">
+          <img
+            src="/terminal-workspace-demo.svg"
+            width={1440}
+            height={800}
+            loading="lazy"
+            alt={pl ? 'Ilustracyjny, przykładowy widok środowiska terminalowego z fikcyjnymi nazwami. Nie przedstawia rzeczywistych aplikacji ani wykonanych aktualizacji.' : 'Illustrative terminal workspace mockup with synthetic names. It does not show real applications or completed updates.'}
+            className="w-full rounded-sm border border-(--rule-strong)"
+          />
+          <figcaption className="text-sm leading-relaxed text-(--fg-muted)">
+            {pl ? 'Ilustracja interfejsu z fikcyjnymi nazwami; nie pokazuje rzeczywistych aktualizacji.' : 'Illustration of the interface using synthetic names; it does not show real updates.'}
+          </figcaption>
+        </figure>
+        <p>{pl ? 'Ustawienia i ukończenie kreatora są zapisywane. Pomoc otwiera ?, a Ctrl+P paletę działań. Klawisz c kopiuje aktywne polecenie, wyjście lub podsumowanie; Ctrl+V wkleja tylko do pola odpowiedzi. Wprowadzane sekrety są maskowane, gdy program wyłączy echo.' : 'Settings and wizard completion are saved. Press ? for help or Ctrl+P for the action palette. Press c to copy the focused command, output or summary; Ctrl+V pastes only into an input field. Secret input is masked when the running program disables echo.'}</p>
+        <p>{pl ? 'Opcjonalne automatyczne dopasowanie może poprosić terminal o rozmiar 140×38; terminal może zignorować tę prośbę. Przy wyjściu aplikacja prosi o przywrócenie poprzedniego rozmiaru. Do operacji zmieniających stan wymagane jest co najmniej 80×24.' : 'Optional automatic resizing can request a 140×38 terminal; the terminal may ignore the request. The previous size is requested on exit. State-changing operations require at least 80×24.'}</p>
+        <p>{pl ? 'Użyj --cli dla dotychczasowego interfejsu. Opcje takie jak --dry-run pozostają w CLI. setup.sh otwiera kreator, a build_inventory.sh widok inwentarza przy interaktywnym uruchomieniu bez opcji.' : 'Use --cli for the legacy interface. Flags such as --dry-run stay in the CLI. Bare interactive setup.sh opens the wizard and build_inventory.sh opens inventory.'}</p>
+      </WikiSection>
+
       <WikiSection id="daily-usage" title={pl ? 'Codzienne użycie' : 'Daily Usage'}>
         <p>{pl
           ? 'Najczęstszy workflow to prescan, raport pokrycia, dry-run, plan i decyzja o dopuszczonych działaniach.'
@@ -10,10 +31,18 @@ export function UserGuide({ pl }: { pl: boolean }) {
         }</p>
         <p>{pl ? 'Najpierw podejrzyj plan. Ta komenda nie wprowadza zmian.' : 'Preview the plan first. This command makes no changes.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --dry-run -y`}</CodeBlock>
-        <p>{pl ? 'Zwykły dry-run pokazuje skrócony, czytelny podgląd. --plan oraz --dry-run --json-summary zachowują pełny JSON, bez zmian plików i bez nowych zgód.' : 'Plain dry-run shows a bounded, readable preview. --plan and --dry-run --json-summary retain full JSON, without file changes or new consent.'}</p>
+        <p>{pl ? `Zwykły dry-run pokazuje do ${PREVIEW_TARGET_LIMIT} nazw ze źródłem i statusem oraz cztery liczby: już dozwolone, wymagające decyzji, zablokowane oraz ręczne lub pominięte. --plan oraz --dry-run --json-summary zachowują pełny JSON, bez zmian plików i bez nowych zgód.` : `Plain dry-run shows up to ${PREVIEW_TARGET_LIMIT} names with source and status, plus four totals: already allowed, needing a decision, blocked, and manual or skipped. --plan and --dry-run --json-summary retain full JSON, without file changes or new consent.`}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh --plan`}</CodeBlock>
         <p>{pl ? 'Po przejrzeniu planu osobno zdecyduj o dopuszczonych działaniach.' : 'After reviewing the plan, decide separately on eligible actions.'}</p>
         <CodeBlock title="bash">{`cd ~/Dev_Env/macOS_updates && bash update_all.sh`}</CodeBlock>
+        <p>{pl
+          ? `Menu zwykłego przebiegu pokazuje tylko działania możliwe do zatwierdzenia, po ${CONSENT_PAGE_SIZE} na stronę. Wpisz 1,3, aby zatwierdzić wyłącznie pokazane zakresy tych pozycji; n i p zmieniają stronę. Początkowe potwierdzenie rozpoczyna kontrole i przegląd uprawnień; zgodę na zakres nadaje dopiero wybór w menu. Cały przegląd ma wyjaśniony limit ${CONSENT_TIMEOUT_SECONDS} sekund. Brak odpowiedzi, Enter lub q oznacza dalszy przebieg bez nowej zgody; zapisane zgody nadal obowiązują. Komunikaty są dostępne we wszystkich siedmiu językach toolkita.`
+          : `The normal-run menu shows only actions eligible for approval, ${CONSENT_PAGE_SIZE} per page. Enter 1,3 to approve only those entries' displayed scopes; n and p change pages. The initial confirmation starts checks and permission review; choosing entries in the menu grants scope approval. The whole review has an explained ${CONSENT_TIMEOUT_SECONDS}-second limit. No answer, Enter or q continues without new consent; saved permissions remain in effect. Messages are available in all seven toolkit languages.`
+        }</p>
+        <p>{pl
+          ? 'Log rzeczywistego przebiegu rozpoczyna się przed przeglądem zgód, więc oczekiwanie jest widoczne w diagnostyce. Pełny, zweryfikowany skan Cellar zachowuje świeże dowody formuł Homebrew mimo błędnych metadanych casków. Niepełny Cellar nadal blokuje działania; aktualizacje formuł wymagają zgody i świeżych kontroli. Metadane hosta nie są automatycznie naprawiane.'
+          : 'The real-run log starts before consent review, so the wait is visible in diagnostics. A complete, validated Cellar scan keeps Homebrew formula evidence fresh despite invalid cask metadata. An incomplete Cellar still blocks actions; formula updates require consent and fresh checks. Host metadata is not repaired automatically.'
+        }</p>
         <p>{pl
           ? 'Aby przejrzeć lub zmienić zasady dla aplikacji, otwórz ustawienia aktualizacji. Konflikt App Store i Homebrew wymaga decyzji o źródle; nie powoduje automatycznej migracji.'
           : 'Open update preferences to review or change application policies. An App Store and Homebrew conflict needs a source decision; it does not cause automatic migration.'
